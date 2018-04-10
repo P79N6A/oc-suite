@@ -31,7 +31,7 @@ Talk is cheap, show me the code.
   s.ios.deployment_target = '8.0'
 
   #s.source_files = 'test3-pod/foundation/**/*'
-  s.source_files = "foundation/*.{h,m}", "foundation/foundation/*.{h,m}", "foundation/macros/*.{h,m}", "foundation/system/**/*.{h,m}"
+  s.source_files = "foundation/*.{h,m}", "foundation/foundation/**/*.{h,m}", "foundation/macros/*.{h,m}", "foundation/system/**/*.{h,m,c}"
   
   # s.resource_bundles = {
   #   'test3-pod' => ['test3-pod/Assets/*.png']
