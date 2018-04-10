@@ -1,0 +1,5 @@
+target 'startup' do
+
+    pod 'oc-foundation', :path => '../'
+
+end
