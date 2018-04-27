@@ -16,6 +16,8 @@ target 'startup' do
     
     pod 'Masonry'
     
+    pod 'YYModel'
+    
     
     ######################################
     # UI 组件
