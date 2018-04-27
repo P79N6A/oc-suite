@@ -1,5 +1,31 @@
 target 'startup' do
 
-    pod 'oc-foundation', :path => '../'
+    ######################################
+    # 主框架
+    #  * 外部引用
+    #    - pod 'oc-foundation', :git => 'https://github.com/fallending/oc-suite.git'
+    ######################################
+    
+    pod 'oc-foundation', :path => '../' # pod 'oc-foundation', :git => 'https://github.com/fallending/oc-suite.git'
+    pod 'oc-ui', :path => '../'
+    
+    
+    ######################################
+    # 其他依赖
+    ######################################
+    
+    pod 'Masonry'
+    
+    
+    ######################################
+    # UI 组件
+    ######################################
+    
+    # 抽屉
+    #pod "JVFloatingDrawer"
+    
+    # 类似网易新闻、今日头条、虎扑看球等app做的一个顶部菜单栏，每栏中有独立的控制器，可自己定制。
+    # pod 'NinaPagerView'
+    # pod 'MXSegmentedPager'
 
 end
