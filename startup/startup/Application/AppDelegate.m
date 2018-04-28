@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "AppDelegate+Usage.h"
 #import "MainViewController.h"
 //#import "_greats.h"
 //#import "_building.h"
@@ -29,6 +30,12 @@
     self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:mainView];
     
     [self.window makeKeyAndVisible];
+    
+    //////////////////////////////
+    
+    [self usageOfReachability];
+    
+    //////////////////////////////
     
     return YES;
 }

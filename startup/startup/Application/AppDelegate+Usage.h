@@ -10,4 +10,6 @@
 
 @interface AppDelegate (Usage)
 
+- (void)usageOfReachability;
+
 @end
