@@ -14,12 +14,14 @@ Pod::Spec.new do |s|
                    iOS 开发包 之 UI 库[Objective-C]
                    DESC
 
-  s.homepage         = 'https://github.com/fallending'
-  s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { '7' => 'fengzilijie@qq.com' }
-  s.source           = { :git => 'https://github.com/fallending/oc-suite.git', :tag => s.version.to_s }
+  s.homepage     = 'https://github.com/fallending'
+  s.license      = { :type => 'MIT', :file => 'LICENSE' }
+  s.author       = { '7' => 'fengzilijie@qq.com' }
+  s.source       = { :git => 'https://github.com/fallending/oc-suite.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '8.0'
+
+  s.frameworks = 'UIKit'
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
