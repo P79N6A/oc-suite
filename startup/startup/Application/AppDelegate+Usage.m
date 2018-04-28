@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate+Usage.h"
+#import "Reachability.h"
 
 @implementation AppDelegate (Usage)
 

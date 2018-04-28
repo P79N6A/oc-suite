@@ -1,3 +1,5 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
 target 'startup' do
 
     ######################################
@@ -10,6 +12,9 @@ target 'startup' do
     pod 'oc-ui', :path => '../'
     
     
+    pod 'oc-tool/network-lit', :path => '../'
+    pod 'oc-tool/network/reachability', :path => '../'
+    
     ######################################
     # 其他依赖
     ######################################
@@ -18,6 +23,10 @@ target 'startup' do
     
     pod 'YYModel'
     
+    #    pod 'RealReachability' # 非网络连接状态，而是网络到达状态，比如：Wi-Fi 并 能否连接到www.baidu.com
+    
+    # pod 'TransitionKit', '~> 2.0.0' # 状态机
+
     
     ######################################
     # UI 组件
