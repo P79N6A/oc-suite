@@ -3,11 +3,6 @@
 
 @interface _Timer : NSObject
 
-/**---------------------------------------------------------------------------------------
- @name Creating a Timer
- -----------------------------------------------------------------------------------------
- */
-
 /** Creates and returns a new repeating RNTimer object and starts running it
  After `seconds` seconds have elapsed, the timer fires, executing the block.
  You will generally need to use a weakSelf pointer to avoid a retain loop.
@@ -18,25 +13,16 @@
  */
 + (_Timer *)repeatingTimerWithTimeInterval:(NSTimeInterval)seconds block:(dispatch_block_t)block;
 
-
-/**---------------------------------------------------------------------------------------
- @name Firing a Timer
- -----------------------------------------------------------------------------------------
- */
-
-/** Causes the block to be executed.
- This does not modify the timer. It will still fire on schedule.
+/**
+ * @brief Firing a Timer
+ * Causes the block to be executed.
+ * This does not modify the timer. It will still fire on schedule.
  */
 - (void)fire;
 
-
-/**---------------------------------------------------------------------------------------
- @name Stopping a Timer
- -----------------------------------------------------------------------------------------
- */
-
-/** Stops the receiver from ever firing again
- Once invalidated, a timer cannot be reused.
+/**
+ * @brief Stops the receiver from ever firing again
+ * Once invalidated, a timer cannot be reused.
  */
 - (void)invalidate;
 

@@ -305,3 +305,67 @@
 #define global_queue [_Queue global]
 #endif
 
+
+////////////////////////
+#define CURRENT_THREAD [NSThread currentThread]
+
+#define MAIN_THREAD [NSThread mainThread]
+
+@interface _Thread : NSObject
+
++ (BOOL)isMainThread;
+
+@end
+
+@interface NSThread (MCSMAdditions)
+
++ (void)performBlockOnMainThread:(void (^)())block;
++ (void)performBlockInBackground:(void (^)())block;
+
+- (void)performBlock:(void (^)())block waitUntilDone:(BOOL)wait;
+- (void)performBlock:(void (^)())block afterDelay:(NSTimeInterval)delay;
+
+
+/**
+ * Use thread without do clear work.
+ */
++ (void)detachNewThreadBlock:(void(^)())aBlock;
+
+@end
+/**
+ *  NSThread+LagDetection.h
+ *
+ * Created by Florian Agsteiner
+ *
+ *
+ * This Category adds lag detection that can be used to generate Crashreports when a method blocks the main thread for too long.
+ *
+ * When the main thread timeouts the app will be killed, generating a Crashreport at the current state of the app.
+ * Hopefully this crash will point you to a deadlock, wait or sleeping part of the code.
+ *
+ * Call the methods early (e.g. in IBActions oder other user events) and before your logic, e.g.:
+ *
+ * - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+ *    [NSThread killIfMainThreadIsBlocked];
+ *
+ *    [self createAndPushViewController];
+ * }
+ */
+
+
+/**
+ * Adds the method to NSThread
+ */
+@interface NSThread (LagDetection)
+
+/**
+ * Force quits the App when the main thread is blocked for the given duration in seconds.
+ */
++ (void)killIfMainThreadIsBlockedForDuration:(NSTimeInterval)duration;
+
+/**
+ * Force quits the App when the main thread is blocked for 1 second.
+ */
++ (void)killIfMainThreadIsBlocked;
+
+@end

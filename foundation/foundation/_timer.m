@@ -28,8 +28,6 @@
     NSParameterAssert(seconds);
     NSParameterAssert(block);
     
-//    TODO("未测试")
-    
     _Timer *timer = [[self alloc] init];
     timer.block = block;
     timer.source = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER,
