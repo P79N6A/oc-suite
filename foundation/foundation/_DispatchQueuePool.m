@@ -11,7 +11,7 @@
 #import "_DispatchQueuePool.h"
 #import <UIKit/UIKit.h>
 #import <libkern/OSAtomic.h>
-#import "_PragmaPush.h"
+#import "_pragma_push.h"
 
 #define MAX_QUEUE_COUNT 32
 
@@ -238,4 +238,4 @@ dispatch_queue_t _DispatchQueueGetForQOS(NSQualityOfService qos) {
     return _DispatchContextGetQueue(_DispatchContextGetForQOS(qos));
 }
 
-#import "_PragmaPop.h"
+#import "_pragma_pop.h"

@@ -193,18 +193,18 @@
 
 #pragma mark -
 
-@interface _Queue : NSObject
+@interface GCDQueue : NSObject
 
-@singleton( _Queue )
+@singleton( GCDQueue )
 
 @prop_readonly( dispatch_queue_t,	serial );
 @prop_readonly( dispatch_queue_t,	concurrent );
 
-+ (_Queue *)main;
-+ (_Queue *)global;
-+ (_Queue *)highPriorityGlobal;
-+ (_Queue *)lowPriorityGlobal;
-+ (_Queue *)backgroundPriorityGlobal;
++ (GCDQueue *)main;
++ (GCDQueue *)global;
++ (GCDQueue *)highPriorityGlobal;
++ (GCDQueue *)lowPriorityGlobal;
++ (GCDQueue *)backgroundPriorityGlobal;
 
 /**
  *  Submits a block for asynchronous execution on the queue.

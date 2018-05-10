@@ -90,32 +90,32 @@
 
 #pragma mark -
 
-static _Queue *mainQueue;
-static _Queue *globalQueue;
-static _Queue *highPriorityGlobalQueue;
-static _Queue *lowPriorityGlobalQueue;
-static _Queue *backgroundPriorityGlobalQueue;
+static GCDQueue *mainQueue;
+static GCDQueue *globalQueue;
+static GCDQueue *highPriorityGlobalQueue;
+static GCDQueue *lowPriorityGlobalQueue;
+static GCDQueue *backgroundPriorityGlobalQueue;
 
-@interface _Queue ()
+@interface GCDQueue ()
 
 @property (nonatomic, strong) dispatch_queue_t dispatchQueue;
 
 @end
 
-@implementation _Queue
+@implementation GCDQueue
 
-@def_singleton( _Queue )
+@def_singleton( GCDQueue )
 
 @def_prop_strong( dispatch_queue_t,	serial );
 @def_prop_strong( dispatch_queue_t,	concurrent );
 
 + (void)initialize {
-    if (self == [_Queue class]) {
-        mainQueue = [[_Queue alloc] initWithDispatchQueue:dispatch_get_main_queue()];
-        globalQueue = [[_Queue alloc] initWithDispatchQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
-        highPriorityGlobalQueue = [[_Queue alloc] initWithDispatchQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)];
-        lowPriorityGlobalQueue = [[_Queue alloc] initWithDispatchQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0)];
-        backgroundPriorityGlobalQueue = [[_Queue alloc] initWithDispatchQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)];
+    if (self == [GCDQueue class]) {
+        mainQueue = [[GCDQueue alloc] initWithDispatchQueue:dispatch_get_main_queue()];
+        globalQueue = [[GCDQueue alloc] initWithDispatchQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
+        highPriorityGlobalQueue = [[GCDQueue alloc] initWithDispatchQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)];
+        lowPriorityGlobalQueue = [[GCDQueue alloc] initWithDispatchQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0)];
+        backgroundPriorityGlobalQueue = [[GCDQueue alloc] initWithDispatchQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)];
     }
 }
 
@@ -145,23 +145,23 @@ static _Queue *backgroundPriorityGlobalQueue;
 
 #pragma mark -
 
-+ (_Queue *)main {
++ (GCDQueue *)main {
     return mainQueue;
 }
 
-+ (_Queue *)global {
++ (GCDQueue *)global {
     return globalQueue;
 }
 
-+ (_Queue *)highPriorityGlobal {
++ (GCDQueue *)highPriorityGlobal {
     return highPriorityGlobalQueue;
 }
 
-+ (_Queue *)lowPriorityGlobal {
++ (GCDQueue *)lowPriorityGlobal {
     return lowPriorityGlobalQueue;
 }
 
-+ (_Queue *)backgroundPriorityGlobal {
++ (GCDQueue *)backgroundPriorityGlobal {
     return backgroundPriorityGlobalQueue;
 }
 
