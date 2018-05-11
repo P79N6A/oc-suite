@@ -1,8 +1,8 @@
 
 #import "_pragma_push.h"
-#import "_precompile.h"
-#import "_notification.h"
-#import "_runtime.h"
+#import "_Precompile.h"
+#import "_Notification.h"
+#import "_Runtime.h"
 
 // ----------------------------------
 // MARK: -

@@ -31,7 +31,7 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files = "ui/*.{h,m}", "ui/core/**/*.{h,m}", "ui/util/**/*.{h,m}"
+  s.source_files = "_UI/*.{h,m}", "_UI/Core/**/*.{h,m}", "_UI/Template/**/*.{h,m}"
   # s.exclude_files = "Classes/Exclude"
 
 end

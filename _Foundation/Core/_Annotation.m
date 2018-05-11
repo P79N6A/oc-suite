@@ -1,12 +1,12 @@
-
-#import "_annotation.h"
-#import "_thread.h"
 #include <mach-o/getsect.h>
 #include <mach-o/loader.h>
 #include <mach-o/dyld.h>
 #include <dlfcn.h>
 #import <objc/runtime.h>
 #import <objc/message.h>
+
+#import "_Annotation.h"
+#import "_Thread.h"
 
 // ----------------------------------
 // MARK: C code

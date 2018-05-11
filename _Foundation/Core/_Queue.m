@@ -1,9 +1,3 @@
-//
-//  _Queue.m
-//  oc-foundation
-//
-//  Created by 7 on 2018/5/10.
-//
 
 #import "_Queue.h"
 #import "_Group.h"

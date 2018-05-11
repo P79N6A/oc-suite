@@ -1,21 +1,3 @@
-//
-//     ____              _____    _____    _____
-//    / ___\   /\ /\     \_   \   \_  _\  /\  __\
-//    \ \     / / \ \     / /\/    / /    \ \  _\_
-//  /\_\ \    \ \_/ /  /\/ /_     / /      \ \____\
-//  \____/     \___/   \____/    /__|       \/____/
-//
-//	Copyright BinaryArtists development team and other contributors
-//
-//	https://github.com/BinaryArtists/suite.great
-//
-//	Free to use, prefer to discuss!
-//
-//  Welcome!
-//
-
-#ifndef _coderdef_h
-#define _coderdef_h
 
 /**
  *  为了避免冲突，则加上前缀下划线
@@ -33,5 +15,3 @@
 
 #define _decode_object(_decoder_, _object_) _object_ = [_decoder_ decodeObjectForKey:stringify(_object_)]
 #define _decode_bool(_decoder_, _value_)    _value_ = [_decoder_ decodeBoolForKey:stringify(_value_)]
-
-#endif /* _coderdef_h */

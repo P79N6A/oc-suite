@@ -1,8 +1,8 @@
 
 #import <objc/runtime.h>
 
-#import "_class.h"
-#import "_encoding.h"
+#import "_Class.h"
+#import "_Encoding.h"
 
 @implementation _ClassIvarInfo
 

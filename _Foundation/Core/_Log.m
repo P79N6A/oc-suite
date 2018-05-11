@@ -1,24 +1,9 @@
-//
-//     ____              _____    _____    _____
-//    / ___\   /\ /\     \_   \   \_  _\  /\  __\
-//    \ \     / / \ \     / /\/    / /    \ \  _\_
-//  /\_\ \    \ \_/ /  /\/ /_     / /      \ \____\
-//  \____/     \___/   \____/    /__|       \/____/
-//
-//	Copyright BinaryArtists development team and other contributors
-//
-//	https://github.com/BinaryArtists/suite.great
-//
-//	Free to use, prefer to discuss!
-//
-//  Welcome!
-//
 
-#import "_preconfigs.h"
-#import "_log.h"
+#import "_Preconfigs.h"
+#import "_Log.h"
 
 #if __DEBUG__
-#import "fishhook.h"
+#import "Fishhook.h"
 #endif	// #if __DEBUG__
 
 #undef	MAX_BACKLOG

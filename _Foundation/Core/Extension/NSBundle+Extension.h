@@ -1,5 +1,5 @@
 
-#import "_property.h"
+#import "_Property.h"
 
 #define main_bundle [NSBundle mainBundle]
 

@@ -1,7 +1,7 @@
 
 #import <objc/runtime.h>
-#import "_encoding.h"
-#import "_foundation.h"
+#import "_Encoding.h"
+#import "_Foundation.h"
 
 // ----------------------------------
 // MARK: C functions

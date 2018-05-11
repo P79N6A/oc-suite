@@ -18,7 +18,7 @@
         @prop_readonly( _Namespace_##_parent *, _parent ); \
         @end
 
-/** 当参数为 2 个，在根命名空间greats上，追加服务对象，但不建立新的命名空间 */
+/** 当参数为 2 个，在根命名空间namespace_root上，追加服务对象，但不建立新的命名空间 */
 #define namespace_2( _clild, _class, ... ) \
         interface _Namespace (_class) \
         @prop_readonly( _class *, _clild ); \
@@ -110,4 +110,4 @@
 // 2. 从任意命名空间出发，能够树状访问所有内部单例或对象
 // ----------------------------------
 
-extern _Namespace * greats;
+extern _Namespace * namespace_root;

@@ -1,5 +1,5 @@
 
-#import "_swizzler.h"
+#import "_Swizzler.h"
 
 #if TARGET_OS_IPHONE
 	#import <objc/runtime.h>

@@ -1,12 +1,4 @@
-//
-//  xxx.m
-//  student
-//
-//  Created by fallen.ink on 22/05/2017.
-//  Copyright © 2017 alliance. All rights reserved.
-//
-
-#import "_frame.h"
+#import "_Frame.h"
 
 @implementation UIView ( Frame )
 

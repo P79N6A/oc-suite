@@ -1,12 +1,4 @@
-//
-//  _keychain.m
-//  component
-//
-//  Created by fallen.ink on 4/18/16.
-//  Copyright © 2016 OpenTeam. All rights reserved.
-//
-
-#import "_keychain.h"
+#import "_Keychain.h"
 
 NSString *const KeychainErrorDomain = @"com.samsoffes.sskeychain";
 NSString *const KeychainAccountKey = @"acct";

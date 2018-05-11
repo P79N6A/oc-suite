@@ -1,7 +1,7 @@
 
-#import "_precompile.h"
-#import "_property.h"
-#import "_singleton.h"
+#import "_Precompile.h"
+#import "_Property.h"
+#import "_Singleton.h"
 
 // ----------------------------------
 // MARK: Macros

@@ -3,7 +3,7 @@
 #import <Foundation/Foundation.h>
 #import <objc/runtime.h>
 
-#import "_encoding.h"
+#import "_Encoding.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

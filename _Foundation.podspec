@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = "_Foundation/*.{h,m}", "_Foundation/Core/**/*.{h,m}", "_Foundation/Macros/*.{h,m}"
+  s.source_files = "_Foundation/*.{h,m}", "_Foundation/Core/**/*.{h,m,c}", "_Foundation/Macros/*.{h,m,c}"
   
   # s.resource_bundles = {
   #   'test3-pod' => ['test3-pod/Assets/*.png']

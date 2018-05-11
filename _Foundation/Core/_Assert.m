@@ -1,23 +1,7 @@
-//
-//     ____              _____    _____    _____
-//    / ___\   /\ /\     \_   \   \_  _\  /\  __\
-//    \ \     / / \ \     / /\/    / /    \ \  _\_
-//  /\_\ \    \ \_/ /  /\/ /_     / /      \ \____\
-//  \____/     \___/   \____/    /__|       \/____/
-//
-//	Copyright BinaryArtists development team and other contributors
-//
-//	https://github.com/BinaryArtists/suite.great
-//
-//	Free to use, prefer to discuss!
-//
-//  Welcome!
-//
-
-#import "_precompile.h"
-#import "_preconfigs.h"
-#import "_unitest.h"
-#import "_assert.h"
+#import "_Precompile.h"
+#import "_Preconfigs.h"
+#import "_Unitest.h"
+#import "_Assert.h"
 
 // ----------------------------------
 // Source code

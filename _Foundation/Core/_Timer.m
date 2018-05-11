@@ -6,8 +6,8 @@
  *  加密: http://robnapier.net/rncryptor-v4
  */
 
-#import "_timer.h"
-#import "_foundation.h"
+#import "_Timer.h"
+#import "_Foundation.h"
 #import <libkern/OSAtomic.h>
 
 // ----------------------------------

@@ -1,7 +1,7 @@
 
-#import "_precompile.h"
-#import "_instance.h"
-#import "_encoding.h"
+#import "_Precompile.h"
+#import "_Instance.h"
+#import "_Encoding.h"
 
 // ----------------------------------
 // MARK: Source code

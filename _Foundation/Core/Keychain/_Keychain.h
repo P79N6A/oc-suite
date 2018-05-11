@@ -1,15 +1,8 @@
-//
-//  _keychain.h
-//  component
-//
-//  Created by fallen.ink on 4/18/16.
-//  Copyright © 2016 OpenTeam. All rights reserved.
-//
 //  inspired by [soffes/SSKeychain](https://github.com/soffes/SSKeychain)
 
 #import <Foundation/Foundation.h>
 
-#import "_keychain_query.h"
+#import "_KeychainQuery.h"
 
 /**
  Error code specific to SSKeychain that can be returned in NSError objects.

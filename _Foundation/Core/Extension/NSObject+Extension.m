@@ -1,22 +1,7 @@
-//
-//     ____              _____    _____    _____
-//    / ___\   /\ /\     \_   \   \_  _\  /\  __\
-//    \ \     / / \ \     / /\/    / /    \ \  _\_
-//  /\_\ \    \ \_/ /  /\/ /_     / /      \ \____\
-//  \____/     \___/   \____/    /__|       \/____/
-//
-//	Copyright BinaryArtists development team and other contributors
-//
-//	https://github.com/BinaryArtists/suite.great
-//
-//	Free to use, prefer to discuss!
-//
-//  Welcome!
-//
 
 #import <objc/runtime.h>
-#import "_property.h"
-#import "_encoding.h"
+#import "_Property.h"
+#import "_Encoding.h"
 #import "NSObject+Extension.h"
 #import "NSDictionary+Extension.h"
 #import "NSMutableDictionary+Extension.h"

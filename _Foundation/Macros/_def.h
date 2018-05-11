@@ -44,16 +44,16 @@
 
 // UIViewController中，variable as 代码View，property as xib view
 
-#import "_uidef.h"
-#import "_systemdef.h"
-#import "_constdef.h"
-#import "_typedef.h"
-#import "_coderdef.h"
-#import "_stringdef.h"
 #import "_appdef.h"
+#import "_coderdef.h"
 #import "_configdef.h"
+#import "_uidef.h"
+#import "_constdef.h"
 #import "_ocdef.h"
-#import "_threaddef.h"
+#import "_stringdef.h"
+#import "_systemdef.h"
+#import "_typedef.h"
+
 
 #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
 #ifndef __IPHONE_7_0

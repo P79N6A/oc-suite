@@ -1,6 +1,6 @@
 
 #import <Foundation/Foundation.h>
-#import "_singleton.h"
+#import "_Singleton.h"
 
 #pragma mark -
 

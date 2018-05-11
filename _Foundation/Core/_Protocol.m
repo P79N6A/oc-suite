@@ -2,7 +2,7 @@
 #import <Foundation/Foundation.h>
 #import <pthread.h>
 
-#import "_protocol.h"
+#import "_Protocol.h"
 
 typedef struct {
     Protocol *__unsafe_unretained protocol;

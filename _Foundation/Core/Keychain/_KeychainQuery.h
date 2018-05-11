@@ -1,10 +1,3 @@
-//
-//  _keychain_query.h
-//  consumer
-//
-//  Created by fallen.ink on 6/23/16.
-//
-//
 
 #import <Foundation/Foundation.h>
 #import <Security/Security.h>

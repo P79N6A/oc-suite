@@ -1,5 +1,5 @@
 
-#import "_thread.h"
+#import "_Thread.h"
 
 // ----------------------------------
 // MARK: Source code

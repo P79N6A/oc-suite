@@ -1,7 +1,4 @@
 
-#ifndef _stringdef_h
-#define _stringdef_h
-
 // inspired by https://github.com/ObornJung/OBFoundationLib/blob/master/OBFoundationLib/Macro/OBEncodeMacro.h
 #define stringify(string)                @#string
 
@@ -55,5 +52,3 @@
 #define __FILENAME__    [[string_from_charPtr(__FILE__) lastPathComponent] split:@"."][0]
 #define __CMD_SEL__     _cmd
 #define __CMD_NAME__    string_from_selector(_cmd)
-
-#endif /* _stringdef_h */

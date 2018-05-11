@@ -1,12 +1,4 @@
-//
-//  _pair.m
-//  student
-//
-//  Created by fallen.ink on 18/10/2017.
-//  Copyright © 2017 alliance. All rights reserved.
-//
-
-#import "_pair.h"
+#import "_Pair.h"
 
 @implementation _Pair
 

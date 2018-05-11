@@ -1,11 +1,11 @@
 
-#import "_namespace.h"
+#import "_Namespace.h"
 
 // ----------------------------------
 // MARK: Extern
 // ----------------------------------
 
-__strong _Namespace * greats = nil;
+__strong _Namespace * namespace_root = nil;
 
 // ----------------------------------
 // MARK: Source - _Namespace
@@ -14,7 +14,7 @@ __strong _Namespace * greats = nil;
 @implementation _Namespace
 
 + (void)load {
-    greats = [[_Namespace alloc] init];
+    namespace_root = [[_Namespace alloc] init];
 }
 
 @end

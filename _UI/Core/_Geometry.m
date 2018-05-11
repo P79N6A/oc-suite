@@ -1,11 +1,3 @@
-//
-//  Geometry.m
-//  component
-//
-//  Created by fallen.ink on 4/8/16.
-//  Copyright © 2016 OpenTeam. All rights reserved.
-//
-
 #import "_geometry.h"
 
 #define MT_EPS      1e-4

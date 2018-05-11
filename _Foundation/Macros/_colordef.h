@@ -1,21 +1,3 @@
-//
-//     ____              _____    _____    _____
-//    / ___\   /\ /\     \_   \   \_  _\  /\  __\
-//    \ \     / / \ \     / /\/    / /    \ \  _\_
-//  /\_\ \    \ \_/ /  /\/ /_     / /      \ \____\
-//  \____/     \___/   \____/    /__|       \/____/
-//
-//	Copyright BinaryArtists development team and other contributors
-//
-//	https://github.com/BinaryArtists/suite.great
-//
-//	Free to use, prefer to discuss!
-//
-//  Welcome!
-//
-
-#ifndef _colordef_h
-#define _colordef_h
 
 #define color_with_rgb_value( _valud_ ) [UIColor \
         colorWithRed:((float)((_valud_ & 0xFF0000) >> 16))/255.0 \
@@ -56,5 +38,3 @@
 #define gray_6     [UIColor colorWithRGBHex:0x666666]
 #define gray_7     [UIColor colorWithRGBHex:0x333333]
 #define gray_8     [UIColor colorWithHexString:@"979797"]
-
-#endif /* _colordef_h */

@@ -1,23 +1,3 @@
-//
-//     ____              _____    _____    _____
-//    / ___\   /\ /\     \_   \   \_  _\  /\  __\
-//    \ \     / / \ \     / /\/    / /    \ \  _\_
-//  /\_\ \    \ \_/ /  /\/ /_     / /      \ \____\
-//  \____/     \___/   \____/    /__|       \/____/
-//
-//	Copyright BinaryArtists development team and other contributors
-//
-//	https://github.com/BinaryArtists/suite.great
-//
-//	Free to use, prefer to discuss!
-//
-//  Welcome!
-//
-//  oc语言级，便于使用的宏控
-
-#ifndef _ocdef_h
-#define _ocdef_h
-
 // weak, 自动变量为 '_'
 #define weakly( _val_ ) __unused __weak typeof(_val_) _ = _val_;
 
@@ -111,4 +91,5 @@ static inline BOOL is_empty(id thing) {
 #undef  dictionarytype
 #define dictionarytype( _val_ ) ((NSDictionary *)_val_)
 
-#endif /* _ocdef_h */
+#undef  is_main_thread
+#define is_main_thread          [NSThread isMainThread]

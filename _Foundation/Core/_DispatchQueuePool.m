@@ -1,17 +1,10 @@
-//
-//  _DispatchQueueManager.m
-//
-//  Created by ibireme on 15/7/18.
-//  Copyright (c) 2015 ibireme.
-//
-//  This source code is licensed under the MIT-style license found in the
-//  LICENSE file in the root directory of this source tree.
-//
 
-#import "_DispatchQueuePool.h"
+
 #import <UIKit/UIKit.h>
 #import <libkern/OSAtomic.h>
+
 #import "_pragma_push.h"
+#import "_DispatchQueuePool.h"
 
 #define MAX_QUEUE_COUNT 32
 

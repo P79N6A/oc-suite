@@ -1,10 +1,3 @@
-//
-//  Geometry.h
-//  component
-//
-//  Created by fallen.ink on 4/8/16.
-//  Copyright © 2016 OpenTeam. All rights reserved.
-//
 // inspired by https://github.com/mysterioustrousers/MTGeometry/blob/master/MTGeometry/MTGeometry.c
 
 #import <math.h>

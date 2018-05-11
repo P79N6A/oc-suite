@@ -1,13 +1,6 @@
-//
-//  _keychain_query.m
-//  consumer
-//
-//  Created by fallen.ink on 6/23/16.
-//
-//
 
-#import "_keychain.h"
-#import "_keychain_query.h"
+#import "_Keychain.h"
+#import "_KeychainQuery.h"
 
 @implementation _KeychainQuery
 @synthesize account = _account;

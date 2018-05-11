@@ -1,24 +1,9 @@
-//
-//     ____              _____    _____    _____
-//    / ___\   /\ /\     \_   \   \_  _\  /\  __\
-//    \ \     / / \ \     / /\/    / /    \ \  _\_
-//  /\_\ \    \ \_/ /  /\/ /_     / /      \ \____\
-//  \____/     \___/   \____/    /__|       \/____/
-//
-//	Copyright BinaryArtists development team and other contributors
-//
-//	https://github.com/BinaryArtists/suite.great
-//
-//	Free to use, prefer to discuss!
-//
-//  Welcome!
-//
 
 #if ! __has_feature(objc_arc)
 #error This file requires ARC to be enabled. Either enable ARC for the entire project or use -fobjc-arc flag.
 #endif
 
-#import "_stack.h"
+#import "_Stack.h"
 
 @interface _Stack ()
 @property (nonatomic, strong) NSMutableArray *objects;

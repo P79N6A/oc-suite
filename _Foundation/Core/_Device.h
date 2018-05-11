@@ -1,6 +1,6 @@
-#import "_configdef.h"
-#import "_singleton.h"
-#import "_property.h"
+#import "_Macros.h"
+#import "_Singleton.h"
+#import "_Property.h"
 
 #pragma mark -
 

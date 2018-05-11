@@ -1,14 +1,6 @@
-//
-//  _pair.h
-//  student
-//
-//  Created by fallen.ink on 18/10/2017.
-//  Copyright © 2017 alliance. All rights reserved.
-//
-
-#import "_precompile.h"
-#import "_singleton.h"
-#import "_instance.h"
+#import "_Precompile.h"
+#import "_Singleton.h"
+#import "_Instance.h"
 
 // ----------------------------------
 // MARK: Interface CFPair

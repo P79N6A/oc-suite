@@ -1,10 +1,4 @@
-//
-//  _directive.h
-//  student
-//
-//  Created by fallen.ink on 12/12/2017.
-//  Copyright © 2017 alliance. All rights reserved.
-//
+
 //  refer to http://www.nshipster.com/at-compile-directives/
 
 #import <Foundation/Foundation.h>

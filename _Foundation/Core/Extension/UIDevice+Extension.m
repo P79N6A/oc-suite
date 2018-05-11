@@ -1,10 +1,3 @@
-//
-//  UIDevice+Extension.m
-//  student
-//
-//  Created by fallen.ink on 28/09/2017.
-//  Copyright © 2017 alliance. All rights reserved.
-//
 //  https://github.com/fahrulazmi/UIDeviceHardware/blob/master/UIDeviceHardware.m
 
 #include <sys/types.h>
