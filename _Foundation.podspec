@@ -7,8 +7,8 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = 'oc-foundation'
-  s.version          = '0.1.0'
+  s.name             = '_Foundation'
+  s.version          = '0.2.0'
   s.summary          = 'iOS 开发包 之 基础库[Objective-C]'
   s.description      = <<-DESC
                        iOS 开发包 之 基础库[Objective-C]
@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = "foundation/*.{h,m}", "foundation/foundation/**/*.{h,m}", "foundation/macros/*.{h,m}", "foundation/system/**/*.{h,m,c}"
+  s.source_files = "_Foundation/*.{h,m}", "_Foundation/Core/**/*.{h,m}", "_Foundation/Macros/*.{h,m}"
   
   # s.resource_bundles = {
   #   'test3-pod' => ['test3-pod/Assets/*.png']

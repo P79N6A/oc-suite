@@ -7,7 +7,7 @@
 #
 
 Pod::Spec.new do |s|
-  s.name         = "oc-tool"
+  s.name         = "_Tool"
   s.version      = "0.1.0"
   s.summary      = "iOS 开发包 之 工具 库[Objective-C]"
   s.description  = <<-DESC
@@ -24,16 +24,16 @@ Pod::Spec.new do |s|
 
   # s.requires_arc = true
 
-  s.subspec 'network-lit' do |networklit|
-    networklit.source_files = "tool/network-lit/**/*.{h,m}"
+  s.subspec 'NetworkLit' do |networklit|
+    networklit.source_files = "_Tool/NetworkLit/**/*.{h,m}"
   end
 
   # [tonymillion/Reachability](https://github.com/tonymillion/Reachability)
-  s.subspec 'network' do |network|
+  s.subspec 'Network' do |network|
     # network.source_files = "tool/network/reachability/*.{h,m}"
-    network.subspec 'reachability' do |reachability|
+    network.subspec 'Reachability' do |reachability|
 
-      reachability.source_files = "tool/network/reachability/*.{h,m}"
+      reachability.source_files = "_Tool/Network/Reachability/*.{h,m}"
 
     end
 

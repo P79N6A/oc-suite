@@ -7,7 +7,7 @@
 #
 
 Pod::Spec.new do |s|
-  s.name         = "oc-ui"
+  s.name         = "_UI"
   s.version      = "0.1.0"
   s.summary      = "iOS 开发包 之 UI 库[Objective-C]"
   s.description  = <<-DESC

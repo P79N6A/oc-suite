@@ -8,12 +8,12 @@ target 'startup' do
     #    - pod 'oc-foundation', :git => 'https://github.com/fallending/oc-suite.git'
     ######################################
     
-    pod 'oc-foundation', :path => '../' # pod 'oc-foundation', :git => 'https://github.com/fallending/oc-suite.git'
-    pod 'oc-ui', :path => '../'
+    pod '_Foundation', :path => '../' # pod '_Foundation', :git => 'https://github.com/fallending/oc-suite.git'
+    pod '_UI', :path => '../'
     
     
-    pod 'oc-tool/network-lit', :path => '../'
-    pod 'oc-tool/network/reachability', :path => '../'
+    pod '_Tool/NetworkLit', :path => '../'
+    pod '_Tool/Network/Reachability', :path => '../'
     
     ######################################
     # 其他依赖
