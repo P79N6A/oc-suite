@@ -1,13 +1,5 @@
-//
-//  _disk_cache.h
-//  consumer
-//
-//  Created by fallen.ink on 6/20/16.
-//
-//
-
-#import "_greats.h"
-#import "_cache_object_subscripting.h"
+#import "_Foundation.h"
+#import "_CacheObjectSubscripting.h"
 
 @class _DiskCache;
 

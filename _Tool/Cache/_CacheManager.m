@@ -1,14 +1,6 @@
-//
-//  _cache_manager.m
-//  consumer
-//
-//  Created by fallen.ink on 6/20/16.
-//
-//
-
-#import "_cache_manager.h"
-#import "_memory_cache.h"
-#import "_disk_cache.h"
+#import "_CacheManager.h"
+#import "_MemoryCache.h"
+#import "_DiskCache.h"
 
 @implementation _CacheManager
 @def_singleton( _CacheManager )

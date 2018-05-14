@@ -8,7 +8,7 @@ static _HttpMock *sharedInstance = nil;
 
 @implementation _HttpMock
 
-@DEF_SINGLETON(_HttpMock)
+@def_singleton(_HttpMock)
 
 - (id)init {
     self = [super init];

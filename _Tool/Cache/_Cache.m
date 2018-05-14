@@ -1,12 +1,4 @@
-//
-//  _cache.m
-//  component
-//
-//  Created by fallen.ink on 4/18/16.
-//  Copyright © 2016 OpenTeam. All rights reserved.
-//
-
-#import "_cache.h"
+#import "_Cache.h"
 
 static NSString * const CachePrefix = @"com.fallenink.Cache";
 static NSString * const CacheSharedName = @"CacheShared";

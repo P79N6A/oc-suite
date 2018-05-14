@@ -1,12 +1,4 @@
-//
-//  _memory_cache.m
-//  consumer
-//
-//  Created by fallen.ink on 6/20/16.
-//
-//
-
-#import "_memory_cache.h"
+#import "_MemoryCache.h"
 
 NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
 

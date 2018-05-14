@@ -1,18 +1,10 @@
-//
-//  _cache.h
-//  component
-//
-//  Created by fallen.ink on 4/18/16.
-//  Copyright © 2016 OpenTeam. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
 
-#import "_greats.h"
-#import "_cache_object_subscripting.h"
-#import "_cache_manager.h"
-#import "_memory_cache.h"
-#import "_disk_cache.h"
+#import "_Foundation.h"
+#import "_CacheObjectSubscripting.h"
+#import "_CacheManager.h"
+#import "_MemoryCache.h"
+#import "_DiskCache.h"
 
 /// TODO: 对特定的字段，事件通知，CacheEventValueChanged
 

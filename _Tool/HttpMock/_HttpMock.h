@@ -26,7 +26,7 @@
  */
 @property (nonatomic, copy) void (^logBlock)(NSString *logStr);
 
-@SINGLETON(_HttpMock)
+@singleton(_HttpMock)
 
 - (void)startMock;
 - (void)stopMock;

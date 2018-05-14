@@ -1,12 +1,4 @@
-//
-//  _cache_manager.h
-//  consumer
-//
-//  Created by fallen.ink on 6/20/16.
-//
-//
-
-#import "_greats.h"
+#import "_Foundation.h"
 
 @interface _CacheManager : NSObject
 

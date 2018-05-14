@@ -1,8 +1,8 @@
-#import "_Macro.h"
+#import "_Macros.h"
 #import "_MockURLProtocol.h"
 #import "_HttpMock.h"
 #import "_MockResponse.h"
-#import "_PragmaPush.h"
+#import "_pragma_push.h"
 
 @interface NSHTTPURLResponse (UndocumentedInitializer)
 
@@ -137,4 +137,4 @@
 
 @end
 
-#import "_PragmaPop.h"
+#import "_pragma_pop.h"

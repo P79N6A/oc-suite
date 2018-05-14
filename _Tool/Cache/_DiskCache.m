@@ -1,13 +1,5 @@
-//
-//  _disk_cache.m
-//  consumer
-//
-//  Created by fallen.ink on 6/20/16.
-//
-//
-
-#import "_disk_cache.h"
-#import "_cache_manager.h"
+#import "_DiskCache.h"
+#import "_CacheManager.h"
 
 static NSString * const DiskCachePrefix = @"com.fallenink.DiskCache";
 static NSString * const DiskCacheSharedName = @"DiskCacheShared";
