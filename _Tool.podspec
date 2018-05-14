@@ -24,6 +24,14 @@ Pod::Spec.new do |s|
 
   # s.requires_arc = true
 
+  s.subspec 'Cache' do |cache|
+    cache.source_files = "_Tool/Cache/**/*.{h,m}"
+  end
+
+  s.subspec 'HttpMock' do |httpmock|
+    httpmock.source_files = '_Tool/HttpMock/**/*.{h,m}'
+  end
+
   s.subspec 'NetworkLit' do |networklit|
     networklit.source_files = "_Tool/NetworkLit/**/*.{h,m}"
   end

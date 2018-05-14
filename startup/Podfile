@@ -14,6 +14,8 @@ target 'startup' do
     
     pod '_Tool/NetworkLit', :path => '../'
     pod '_Tool/Network/Reachability', :path => '../'
+    pod '_Tool/Cache', :path => '../'
+    pod '_Tool/HttpMock', :path => '../'
     
     ######################################
     # 其他依赖
