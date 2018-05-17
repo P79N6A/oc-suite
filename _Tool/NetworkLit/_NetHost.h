@@ -1,6 +1,5 @@
 #import <Foundation/Foundation.h>
-#import "_net_request.h"
-#import "NSString+Net.h"
+#import "_NetRequest.h"
 
 @class _NetHost;
 

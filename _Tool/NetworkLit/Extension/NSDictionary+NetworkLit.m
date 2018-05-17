@@ -1,6 +1,7 @@
-#import "NSString+Net.h"
+#import "NSString+NetworkLit.h"
+#import "NSDictionary+NetworkLit.h"
 
-@implementation NSDictionary (Net)
+@implementation NSDictionary (NetworkLit)
 
 - (NSString *)urlEncodedKeyValueString {
     NSMutableString *string = [NSMutableString string];

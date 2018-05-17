@@ -1,14 +1,6 @@
-//
-//  _net_restful.m
-//  startup
-//
-//  Created by 7 on 2018/4/27.
-//  Copyright © 2018 7. All rights reserved.
-//
-
-#import "_net_host.h"
-#import "_net_request.h"
-#import "_net_restful.h"
+#import "_NetHost.h"
+#import "_NetRequest.h"
+#import "_NetRestful.h"
 
 @interface _NetRestful ()
 
@@ -85,7 +77,7 @@
 - (void)POST:(NSString *)path
   parameters:(NSDictionary *)param
      headers:(NSDictionary *)headers
-successHandler:(void (^)(id data))successHandler
+     success:(void (^)(id data))successHandler
      failure:(void (^)(NSError *error))failureHandler {
     
     // 是否有统一添加的参数

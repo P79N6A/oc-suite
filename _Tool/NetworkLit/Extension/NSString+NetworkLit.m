@@ -1,7 +1,7 @@
-#import "NSString+Net.h"
+#import "NSString+NetworkLit.h"
 #import <CommonCrypto/CommonDigest.h>
 
-@implementation NSString (MKNKAdditions)
+@implementation NSString (NetworkLit)
 
 + (NSString *)netMD5StringFromData:(NSData *)data {
     const char *cStr = data.bytes;

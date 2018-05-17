@@ -1,4 +1,5 @@
-#import "_net_host.h"
+#import "_NetHost.h"
+#import "NSString+NetworkLit.h"
 
 @interface _NetRequest ()
 

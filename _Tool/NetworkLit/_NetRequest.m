@@ -1,5 +1,5 @@
-#import "_net_request.h"
-#import "NSDictionary+Net.h"
+#import "_NetRequest.h"
+#import "NSDictionary+NetworkLit.h"
 
 static NSInteger numberOfRunningOperations;
 static NSString * kBoundary = @"0xKhTmLbOuNdArY";
