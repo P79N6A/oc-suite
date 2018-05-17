@@ -1,7 +1,7 @@
 
-#import "_net_host.h"
-#import "_net_request.h"
-#import "_net_restful.h"
+#import "_NetHost.h"
+#import "_NetRequest.h"
+#import "_NetRestful.h"
 
 #ifdef __OBJC_GC__
 #error Does not support Objective-C Garbage Collection
