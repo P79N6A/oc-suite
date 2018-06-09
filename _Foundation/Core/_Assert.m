@@ -2,6 +2,7 @@
 #import "_Preconfigs.h"
 #import "_Unitest.h"
 #import "_Assert.h"
+#import "_Macros.h"
 
 // ----------------------------------
 // Source code

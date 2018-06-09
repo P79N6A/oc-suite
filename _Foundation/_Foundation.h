@@ -5,6 +5,14 @@
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 
+
+// ----------------------------------
+// Framework System headers
+// ----------------------------------
+
+#import "_Precompile.h"
+#import "_Macros.h"
+
 // ----------------------------------
 // Framework headers
 // ----------------------------------

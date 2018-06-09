@@ -1,6 +1,7 @@
 
 #import "_Precompile.h"
 #import "_ContainerSafe.h"
+#import "_Macros.h"
 
 // ----------------------------------
 // MARK: NSObject SafeValueWithJSON

@@ -7,6 +7,8 @@
 
 #import "_Annotation.h"
 #import "_Thread.h"
+#import "_Log.h"
+#import "_Macros.h"
 
 // ----------------------------------
 // MARK: C code

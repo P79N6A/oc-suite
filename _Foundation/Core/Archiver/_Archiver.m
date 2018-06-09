@@ -1,6 +1,7 @@
 #import <objc/runtime.h>
 #import "_Precompile.h"
 #import "_Archiver.h"
+#import "_Macros.h"
 
 #pragma clang diagnostic ignored "-Wgnu"
 #pragma clang diagnostic ignored "-Wpartial-availability"

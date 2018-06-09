@@ -2,6 +2,7 @@
 #import <execinfo.h>
 #import "_Precompile.h"
 #import "_Debug.h"
+#import "_Macros.h"
 
 #pragma mark -
 

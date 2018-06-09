@@ -2,6 +2,7 @@
 #import "_Precompile.h"
 #import "_Property.h"
 #import "_Singleton.h"
+#import "_Macros.h"
 
 // ----------------------------------
 // MARK: Macros
