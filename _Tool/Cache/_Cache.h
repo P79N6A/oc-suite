@@ -185,6 +185,7 @@ NS_ASSUME_NONNULL_END
 // ----------------------------------
 // 同步方法，推荐用下标 cache['']
 // ----------------------------------
-#define _cache_ [_Cache sharedInstance] // Specially
-#define memory_cache [_MemoryCache sharedInstance]
-#define disk_cache [_DiskCache sharedInstance]
+
+#define cacheInst [_Cache sharedInstance] // Specially
+#define memoryCacheInst [_MemoryCache sharedInstance]
+#define diskCacheInst [_DiskCache sharedInstance]
