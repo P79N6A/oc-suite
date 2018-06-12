@@ -6,7 +6,7 @@
 //  Copyright © 2016 OpenTeam. All rights reserved.
 //
 
-#import "_precompile.h"
+#import "_Precompile.h"
 #import "UIButton+Extension.h"
 #import "UIView+Extension.h"
 #import "UIColor+Extension.h"

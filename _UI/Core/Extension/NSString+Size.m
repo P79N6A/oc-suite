@@ -6,6 +6,7 @@
 //
 //
 
+#import "_Macros.h"
 #import "NSString+Size.h"
 
 @implementation NSString (Size)

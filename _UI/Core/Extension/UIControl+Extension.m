@@ -7,7 +7,7 @@
 //
 
 #import "UIControl+Extension.h"
-#import "_precompile.h"
+#import "_Precompile.h"
 
 @implementation UIControl ( Target_Action )
 
