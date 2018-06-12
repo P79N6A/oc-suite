@@ -1,7 +1,7 @@
 # 工具
 
 
-## 网络
+## Network
 
 ### [MugunthKumar/MKNetworkKit](https://github.com/MugunthKumar/MKNetworkKit)
 
@@ -21,3 +21,23 @@
 * OAuth/client certificate support
 * Add local notification support
 * MKObject data transformers
+
+### 特性
+
+* NSDictionary 与 Model 映射
+* 用户登录、登出
+* 权限验证
+* Archive/UnArchive
+* Copy
+* AccessToken 处理
+* ???
+
+## NetworkLit
+
+
+### 特性
+
+* HTTP 基本操作：GET、POST、
+* HTTP, HTTPS
+* 序列化、反序列化
+* 上传、下载
