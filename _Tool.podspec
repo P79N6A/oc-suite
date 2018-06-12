@@ -56,7 +56,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'Processor' do |processor|
-    nosql.source_files = "_Tool/Processor/**/*.{h,m}"
+    processor.source_files = "_Tool/Processor/**/*.{h,m}"
   end
 
   s.subspec 'Image' do |image|
@@ -64,7 +64,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'Log' do |log|
-    image.source_files = "_Tool/Log/**/*.{h,m}"
+    log.source_files = "_Tool/Log/**/*.{h,m}"
   end
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
