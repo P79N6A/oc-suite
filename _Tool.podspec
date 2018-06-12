@@ -47,6 +47,26 @@ Pod::Spec.new do |s|
 
   end
 
+  s.subspec 'Database' do |database|
+    database.source_files = "_Tool/Database/**/*.{h,m}"
+  end
+
+  s.subspec 'NoSQL' do |nosql|
+    nosql.source_files = "_Tool/NoSQL/**/*.{h,m}"
+  end
+
+  s.subspec 'Processor' do |processor|
+    nosql.source_files = "_Tool/Processor/**/*.{h,m}"
+  end
+
+  s.subspec 'Image' do |image|
+    image.source_files = "_Tool/Image/**/*.{h,m}"
+  end
+
+  s.subspec 'Log' do |log|
+    image.source_files = "_Tool/Log/**/*.{h,m}"
+  end
+
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
   #  A list of resources included with the Pod. These are copied into the

@@ -17,6 +17,11 @@ target 'startup' do
     pod '_Tool/Cache', :path => '../'
     pod '_Tool/HttpMock', :path => '../'
     
+    pod '_Tool/Database', :path => '../'
+    pod '_Tool/NoSQL', :path => '../'
+    
+    pod '_Tool/Processor', :path => '../'
+    
     ######################################
     # 其他依赖
     ######################################

@@ -8,6 +8,7 @@
 
 #import "AppDelegate+Usage.h"
 #import "_Reachability.h"
+#import "_Cache.h"
 
 @implementation AppDelegate (Usage)
 
@@ -32,6 +33,12 @@
     
     // Start the notifier, which will cause the reachability object to retain itself!
     [reach startNotifier];
+}
+
+- (void)usageOfCache {
+    cacheInst[@"key"] = @(10);
+    
+    LOG(@"cache[key] = %@", cacheInst[@"key"]);
 }
 
 @end

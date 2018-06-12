@@ -12,4 +12,6 @@
 
 - (void)usageOfReachability;
 
+- (void)usageOfCache;
+
 @end
