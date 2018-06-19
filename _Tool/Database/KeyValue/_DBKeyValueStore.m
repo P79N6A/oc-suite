@@ -7,7 +7,7 @@
 //
 
 #import "FMDB.h"
-#import "_db_kv_store.h"
+#import "_DBKeyValueStore.h"
 #import <sqlite3.h>
 
 #define DEFAULT_TABLE   @"_table_"
