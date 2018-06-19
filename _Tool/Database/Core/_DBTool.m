@@ -1,19 +1,10 @@
-//
-//  BGTool.m
-//  BGDB
-//
-//  Created by huangzhibiao on 17/2/16.
-//  Copyright © 2017年 Biao. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-#import "_building_precompile.h"
-#import "_db_tool.h"
-#import "_database.h"
-#import "_db_entity_info.h"
-#import "_db_cache.h"
-#import "_json.h"
+#import "_DBTool.h"
+#import "_DBCore.h"
+#import "_EntityInfo.h"
+#import "_DBCache.h"
+#import "_JSON.h"
 
 #define SqlText @"text" //数据库的字符类型
 #define SqlReal @"real" //数据库的浮点类型
@@ -38,7 +29,7 @@
 typedef void (^BGClassesEnumeration)(Class c, BOOL *stop);
 static NSSet *foundationClasses_;
 
-@implementation _DatabaseTool
+@implementation _DBTool
 
 // ----------------------------------
 // MARK: 静态 外部方法
@@ -60,7 +51,7 @@ NSString *bg_sqlValue(id value) {
  根据keyPath和Value的数组, 封装成数据库语句，来操作库.
  */
 NSString* bg_keyPathValues(NSArray* keyPathValues) {
-    return [_DatabaseTool getLikeWithKeyPathAndValues:keyPathValues where:NO];
+    return [_DBTool getLikeWithKeyPathAndValues:keyPathValues where:NO];
 }
 
 /**

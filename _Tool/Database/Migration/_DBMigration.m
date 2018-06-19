@@ -1,5 +1,5 @@
 
-#import "_db_migration.h"
+#import "_DBMigration.h"
 #import <objc/runtime.h>
 
 // Public Constants

@@ -1,7 +1,5 @@
-
-#import <Foundation/Foundation.h>
-#import "_building_precompile.h"
-#import "_db_config.h"
+#import "_Foundation.h"
+#import "_DBConfig.h"
 #import "FMDB.h"
 
 NS_ASSUME_NONNULL_BEGIN

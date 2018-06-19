@@ -11,7 +11,7 @@
 
 #define bg_completeBlock(obj) !complete?:complete(obj);
 
-@interface _DatabaseTool : NSObject
+@interface _DBTool : NSObject
 
 /**
  根据类获取变量名列表

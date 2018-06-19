@@ -1,5 +1,4 @@
-
-#import "_db_encryption.h"
+#import "_DBEncrypt.h"
 #import <objc/runtime.h>
 #import <sqlite3.h>
 #import <UIKit/UIKit.h>

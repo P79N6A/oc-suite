@@ -1,11 +1,3 @@
-//
-//  NSObject+DB.m
-//  Baitu
-//
-//  Created by MaSong on 2016/12/17.
-//  Copyright © 2016年 MaSong. All rights reserved.
-//
-
 #import "NSObject+DB.h"
 #import "NSObject+DBCallback.h"
 

@@ -1,4 +1,3 @@
-
 #import <Foundation/Foundation.h>
 
 // ----------------------------------
@@ -87,6 +86,6 @@ extern void bg_cleanCache();
 // MARK: 数据库 配置
 // ----------------------------------
 
-@interface _DatabaseConfig : NSObject
+@interface _DBConfig : NSObject
 
 @end

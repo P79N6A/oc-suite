@@ -1,91 +1,61 @@
-//
-//  NSObject+DB.h
-//  Baitu
-//
-//  Created by MaSong on 2016/12/17.
-//  Copyright © 2016年 MaSong. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
-#import "DBAssistant.h"
+#import "_DBAssist.h"
 
 @interface NSObject (DB)
 
 @property (assign,nonatomic) NSUInteger row_id;
 @property (strong,nonatomic) NSString *table_name;
 
-//dbPath
-+(NSString*)dbPath;
++ (NSString *)dbPath;
 
-//tableName
-+(NSString*)tableName;
++ (NSString *)tableName;
++ (NSArray *)primaryKeys;
++ (NSArray *)onlyPropertiesToMapColumns;
++ (NSArray *)exceptPropertiesToMapColumns;
++ (NSDictionary *)propertyToColumnMappings;
++ (NSDictionary *)defaultValues;
++ (NSDictionary *)checkValues;
++ (NSDictionary *)lengthValues;
++ (NSArray *)uniqueValues;
++ (NSArray *)notNullValues;
 
-//primarykeys
-+(NSArray*)primaryKeys;
++ (NSString *)dateFormatterString;
++ (NSString *)imagePathForImage:(NSString *)imgName ;
++ (NSString *)dataPathForData:(NSString *)dataName;
 
-//only properties to map table columns
-+(NSArray *)onlyPropertiesToMapColumns;
++ (BOOL)shouldMapAllParentPropertiesToTable; //default is YES
++ (BOOL)shouldMapAllSelfPropertiesToTable; //default is YES
 
-//except properties to map table columns
-+(NSArray *)exceptPropertiesToMapColumns;
++ (BOOL)createTable;
++ (BOOL)dropTable;
 
-//property to  column Mappings
-+(NSDictionary *)propertyToColumnMappings;
++ (BOOL)insertModel:(NSObject *)model;
++ (BOOL)insertModelIfNotExists:(NSObject *)model;
 
-//properties default values
-+(NSDictionary *)defaultValues;
++ (BOOL)deleteModel:(NSObject *)model;
++ (BOOL)deleteModelsWhere:(NSObject *)where;
 
-//properties value check values
-+(NSDictionary *)checkValues;
++ (BOOL)updateModelsWithModel:(NSObject *)model where:(NSObject *)where;
++ (BOOL)updateModelsWithDictionary:(NSDictionary *)dic where:(NSObject *)where;
 
-//properties value length
-+(NSDictionary *)lengthValues;
++ (BOOL)modelExists:(NSObject *)model;
 
-//properties value those should be unique
-+(NSArray *)uniqueValues;
++ (NSArray *)allModels;
 
-//properties value those should be not null
-+(NSArray *)notNullValues;
++ (NSArray *)findModelsBySQL:(NSString *)sql;
++ (NSArray *)findModelsWhere:(NSObject *)where;
++ (NSArray *)findModelsWhere:(NSObject *)where
+                     orderBy:(NSString *)orderBy;
++ (NSArray *)findModelsWhere:(NSObject *)where
+                     groupBy:(NSString *)groupBy
+                     orderBy:(NSString*)orderBy
+                       limit:(int)limit
+                      offset:(int)offset;
 
-+(NSString *)dateFormatterString;
-+(NSString *)imagePathForImage:(NSString *)imgName ;
-+(NSString *)dataPathForData:(NSString *)dataName;
++ (id)firstModelWhere:(NSObject *)where;
++ (id)firstModelWhere:(NSObject *)where orderBy:(NSString*)orderBy ;
 
-//default is YES
-+(BOOL)shouldMapAllParentPropertiesToTable;
-//default is YES
-+(BOOL)shouldMapAllSelfPropertiesToTable;
-
-
-+(BOOL)createTable;
-+(BOOL)dropTable;
-
-
-+(BOOL)insertModel:(NSObject *)model;
-+(BOOL)insertModelIfNotExists:(NSObject *)model;
-
-
-+(BOOL)deleteModel:(NSObject *)model;
-+(BOOL)deleteModelsWhere:(NSObject *)where;
-
-
-+(BOOL)updateModelsWithModel:(NSObject *)model where:(NSObject *)where;
-+(BOOL)updateModelsWithDictionary:(NSDictionary *)dic where:(NSObject *)where;
-
-
-+(BOOL)modelExists:(NSObject *)model;
-
-+(NSArray *)allModels;
-
-+(NSArray *)findModelsBySQL:(NSString *)sql;
-+(NSArray *)findModelsWhere:(NSObject *)where;
-+(NSArray *)findModelsWhere:(NSObject *)where orderBy:(NSString *)orderBy;
-+(NSArray *)findModelsWhere:(NSObject *)where groupBy:(NSString *)groupBy orderBy:(NSString*)orderBy limit:(int)limit offset:(int)offset;
-
-+(id)firstModelWhere:(NSObject *)where;
-+(id)firstModelWhere:(NSObject *)where orderBy:(NSString*)orderBy ;
-
-+(id)lastModel;
++ (id)lastModel;
 
 + (NSInteger)rowCountWhere:(NSObject *)where;
 
@@ -93,12 +63,11 @@
 - (BOOL)deleteModel;
 - (BOOL)updateModel:(id)value;
 
++ (void)beginTransaction;
++ (void)commit;
++ (void)rollback;
 
-+(void)beginTransaction;
-+(void)commit;
-+(void)rollback;
-
-+(DBAssistant *)currentDBAssistant;
++ (DBAssistant *)currentDBAssistant;
 
 @end
 

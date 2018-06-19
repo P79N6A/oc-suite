@@ -1,11 +1,3 @@
-//
-//  NSObject+DBCallback.h
-//  Note
-//
-//  Created by MaSong on 2017/5/25.
-//  Copyright © 2017年 MaSong. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
 
 @interface NSObject (DBCallback)

@@ -1,10 +1,9 @@
 
 #import <objc/message.h>
 #import <UIKit/UIKit.h>
-#import "_building_precompile.h"
-#import "_db_entity.h"
-#import "_database.h"
-#import "_db_tool.h"
+#import "_Entity.h"
+#import "_DBCore.h"
+#import "_DBTool.h"
 
 // ----------------------------------
 // MARK: 数据库 实体 实现
@@ -309,7 +308,7 @@
     NSString* tableName = NSStringFromClass([self class]);
     __block NSArray* results;
     [[_Database sharedInstance] queryWithTableName:tableName conditions:conditions complete:^(NSArray * _Nullable array) {
-        results = [_DatabaseTool tansformDataFromSqlDataWithTableName:tableName array:array];
+        results = [_DBTool tansformDataFromSqlDataWithTableName:tableName array:array];
     }];
     //关闭数据库
     [[_Database sharedInstance] closeDB];
@@ -379,7 +378,7 @@
     NSString *conditions = [[NSString alloc] initWithFormat:format arguments:ap];
     va_end (ap);
     NSAssert([conditions hasPrefix:@"set"],@"更新条件要以set开头!");
-    NSString* setAppend = [NSString stringWithFormat:@"set %@=%@,",bg_sqlKey(stringify(updateTime)),bg_sqlValue([_DatabaseTool stringWithDate:[NSDate new]])];
+    NSString* setAppend = [NSString stringWithFormat:@"set %@=%@,",bg_sqlKey(stringify(updateTime)),bg_sqlValue([_DBTool stringWithDate:[NSDate new]])];
     conditions = [conditions stringByReplacingOccurrencesOfString:@"set" withString:setAppend];
     NSString* tableName = NSStringFromClass([self class]);
     //加入更新时间字段值.
@@ -398,7 +397,7 @@
     NSString *conditions = [[NSString alloc] initWithFormat:format arguments:ap];
     va_end (ap);
     NSString* tableName = NSStringFromClass([self class]);
-    NSDictionary* valueDict = [_DatabaseTool getDictWithObject:self ignoredKeys:nil isUpdate:YES];
+    NSDictionary* valueDict = [_DBTool getDictWithObject:self ignoredKeys:nil isUpdate:YES];
     __block BOOL result;
     [[_Database sharedInstance] updateWithTableName:tableName valueDict:valueDict conditions:conditions complete:^(BOOL isSuccess) {
         result = isSuccess;
@@ -577,16 +576,16 @@
 }
 
 + (NSInteger)version {
-    return [_DatabaseTool getIntegerWithKey:NSStringFromClass([self class])];
+    return [_DBTool getIntegerWithKey:NSStringFromClass([self class])];
 }
 
 + (DatabaseDealState)updateVersion:(NSInteger)version{
     NSString* tableName = NSStringFromClass([self class]);
-    NSInteger oldVersion = [_DatabaseTool getIntegerWithKey:tableName];
+    NSInteger oldVersion = [_DBTool getIntegerWithKey:tableName];
     if(version > oldVersion){
-        [_DatabaseTool setIntegerWithKey:tableName value:version];
+        [_DBTool setIntegerWithKey:tableName value:version];
         __block DatabaseDealState state;
-        [[_Database sharedInstance] refreshTable:tableName keys:[_DatabaseTool getClassIvarList:[self class] onlyKey:NO] complete:^(DatabaseDealState result) {
+        [[_Database sharedInstance] refreshTable:tableName keys:[_DBTool getClassIvarList:[self class] onlyKey:NO] complete:^(DatabaseDealState result) {
             state = result;
         }];
         //关闭数据库
@@ -599,9 +598,9 @@
 
 + (void)updateVersionAsync:(NSInteger)version complete:(DatabaseDealStateBlock)complete{
         NSString* tableName = NSStringFromClass([self class]);
-        NSInteger oldVersion = [_DatabaseTool getIntegerWithKey:tableName];
+        NSInteger oldVersion = [_DBTool getIntegerWithKey:tableName];
         if(version > oldVersion){
-            [_DatabaseTool setIntegerWithKey:tableName value:version];
+            [_DBTool setIntegerWithKey:tableName value:version];
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), ^{
                 DatabaseDealState state = [self updateVersion:version];
                 bg_completeBlock(state);
@@ -613,9 +612,9 @@
 
 + (DatabaseDealState)updateVersion:(NSInteger)version keyDict:(NSDictionary* const _Nonnull)keydict{
     NSString* tableName = NSStringFromClass([self class]);
-    NSInteger oldVersion = [_DatabaseTool getIntegerWithKey:tableName];
+    NSInteger oldVersion = [_DBTool getIntegerWithKey:tableName];
     if(version > oldVersion){
-        [_DatabaseTool setIntegerWithKey:tableName value:version];
+        [_DBTool setIntegerWithKey:tableName value:version];
         __block DatabaseDealState state;
         [[_Database sharedInstance] refreshTable:tableName keyDict:keydict complete:^(DatabaseDealState result) {
             state = result;
@@ -631,9 +630,9 @@
 
 + (void)updateVersionAsync:(NSInteger)version keyDict:(NSDictionary* const _Nonnull)keydict complete:(DatabaseDealStateBlock)complete{
     NSString* tableName = NSStringFromClass([self class]);
-    NSInteger oldVersion = [_DatabaseTool getIntegerWithKey:tableName];
+    NSInteger oldVersion = [_DBTool getIntegerWithKey:tableName];
     if(version > oldVersion){
-        [_DatabaseTool setIntegerWithKey:tableName value:version];
+        [_DBTool setIntegerWithKey:tableName value:version];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), ^{
             DatabaseDealState state = [self updateVersion:version keyDict:keydict];
             bg_completeBlock(state);
@@ -674,11 +673,11 @@ id _executeSql(NSString* _Nonnull sql,NSString* _Nullable className) {
  说明:如果模型中有数组且存放的是自定义的类(NSString等系统自带的类型就不必要了),那就实现objectClassInArray这个函数返回一个字典,key是数组名称,value是自定的类Class,用法跟MJExtension一样.
  */
 + (id)objectWithKeyValues:(id)keyValues {
-    return [_DatabaseTool bg_objectWithClass:[self class] value:keyValues];
+    return [_DBTool bg_objectWithClass:[self class] value:keyValues];
 }
 
 + (id)objectWithDictionary:(NSDictionary *)dictionary {
-    return [_DatabaseTool bg_objectWithClass:[self class] value:dictionary];
+    return [_DBTool bg_objectWithClass:[self class] value:dictionary];
 }
 /**
  直接传数组批量处理;
@@ -687,7 +686,7 @@ id _executeSql(NSString* _Nonnull sql,NSString* _Nullable className) {
 + (NSArray *)objectArrayWithKeyValuesArray:(NSArray* const _Nonnull)array {
     NSMutableArray* results = [NSMutableArray array];
     for (id value in array) {
-        id obj = [_DatabaseTool bg_objectWithClass:[self class] value:value];
+        id obj = [_DBTool bg_objectWithClass:[self class] value:value];
         [results addObject:obj];
     }
     return results;
@@ -698,7 +697,7 @@ id _executeSql(NSString* _Nonnull sql,NSString* _Nullable className) {
  @ignoredKeys 忽略掉模型中的哪些key(即模型变量)不要转,nil时全部转成字典.
  */
 - (NSMutableDictionary *)keyValuesIgnoredKeys:(NSArray *)ignoredKeys {
-    return [_DatabaseTool bg_keyValuesWithObject:self ignoredKeys:ignoredKeys];
+    return [_DBTool bg_keyValuesWithObject:self ignoredKeys:ignoredKeys];
 }
 
 @end

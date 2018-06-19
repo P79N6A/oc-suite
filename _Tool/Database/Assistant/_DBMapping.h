@@ -1,11 +1,3 @@
-//
-//  DBMapping.h
-//  Database
-//
-//  Created by MaSong on 15/8/20.
-//  Copyright (c) 2015年 MaSong. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
 
 @interface PropertyToColumnMapping : NSObject

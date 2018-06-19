@@ -1,12 +1,4 @@
-//
-//  _db_entity_batch.h
-//  student
-//
-//  Created by fallen.ink on 12/11/2017.
-//  Copyright © 2017 alliance. All rights reserved.
-//
-
-#import "_db_entity.h"
+#import "_Entity.h"
 
 @interface _Entity ( Batch )
 

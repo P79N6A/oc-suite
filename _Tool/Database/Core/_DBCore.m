@@ -1,9 +1,6 @@
-
-#import "_building_precompile.h"
-
-#import "_database.h"
-#import "_db_entity_info.h"
-#import "_db_tool.h"
+#import "_DBCore.h"
+#import "_EntityInfo.h"
+#import "_DBTool.h"
 #import "_pragma_push.h"
 
 #define SQLITE_NAME @"BGFMDB.db"
@@ -229,19 +226,19 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
         for (int i = 0; i < keys.count; i++) {
             
             if (uniqueKey) {
-                if([_DatabaseTool isUniqueKey:uniqueKey with:keys[i]]) {
+                if([_DBTool isUniqueKey:uniqueKey with:keys[i]]) {
                     uniqueKeyFlag = YES;
-                    [sql appendFormat:@"%@ unique",[_DatabaseTool keyAndType:keys[i]]];
+                    [sql appendFormat:@"%@ unique",[_DBTool keyAndType:keys[i]]];
                 } else if ([[keys[i] componentsSeparatedByString:@"*"][0] isEqualToString:stringify(id)]) {
-                    [sql appendFormat:@"%@ primary key autoincrement",[_DatabaseTool keyAndType:keys[i]]];
+                    [sql appendFormat:@"%@ primary key autoincrement",[_DBTool keyAndType:keys[i]]];
                 } else {
-                    [sql appendString:[_DatabaseTool keyAndType:keys[i]]];
+                    [sql appendString:[_DBTool keyAndType:keys[i]]];
                 }
             } else {
                 if ([[keys[i] componentsSeparatedByString:@"*"][0] isEqualToString:stringify(id)]) {
-                    [sql appendFormat:@"%@ primary key autoincrement",[_DatabaseTool keyAndType:keys[i]]];
+                    [sql appendFormat:@"%@ primary key autoincrement",[_DBTool keyAndType:keys[i]]];
                 } else {
-                    [sql appendString:[_DatabaseTool keyAndType:keys[i]]];
+                    [sql appendString:[_DBTool keyAndType:keys[i]]];
                 }
             }
             
@@ -441,7 +438,7 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
         [SQL appendFormat:@" from %@",name];
         
         if(where && (where.count>0)){
-            NSArray* results = [_DatabaseTool where:where];
+            NSArray* results = [_DBTool where:where];
             [SQL appendString:results[0]];
             arguments = results[1];
         }
@@ -480,7 +477,7 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
         [SQL appendFormat:@"select * from %@",name];
         
         if(where && (where.count>0)){
-            NSArray* results = [_DatabaseTool where:where];
+            NSArray* results = [_DBTool where:where];
             [SQL appendString:results[0]];
             arguments = results[1];
         }
@@ -512,7 +509,7 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
 
 -(void)queryWithTableName:(NSString* _Nonnull)name forKeyPathAndValues:(NSArray* _Nonnull)keyPathValues complete:(DatabaseCompleteBlcok)complete{
     NSMutableArray* arrM = [NSMutableArray array];
-    NSString* like = [_DatabaseTool getLikeWithKeyPathAndValues:keyPathValues where:YES];
+    NSString* like = [_DBTool getLikeWithKeyPathAndValues:keyPathValues where:YES];
     [self executeDB:^(FMDatabase * _Nonnull db) {
         NSString* SQL = [NSString stringWithFormat:@"select * from %@%@",name,like];
         LOG(@"%@", SQL);
@@ -556,7 +553,7 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
         }
         
         if(where && (where.count>0)){
-            NSArray* results = [_DatabaseTool where:where];
+            NSArray* results = [_DBTool where:where];
             [SQL appendString:results[0]];
             [arguments addObjectsFromArray:results[1]];
         }
@@ -623,7 +620,7 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
         NSString* tableName = NSStringFromClass([object class]);
         //自动判断是否有字段改变,自动刷新数据库.
         [self ifIvarChangeForClass:NSClassFromString(tableName) ignoredKeys:ignoreKeys];
-        NSDictionary* valueDict = [_DatabaseTool getDictWithObject:self ignoredKeys:ignoreKeys isUpdate:YES];
+        NSDictionary* valueDict = [_DBTool getDictWithObject:self ignoredKeys:ignoreKeys isUpdate:YES];
         [self updateQueueWithTableName:tableName valueDict:valueDict conditions:conditions complete:complete];
     }
     dispatch_semaphore_signal(self.semaphore);
@@ -632,7 +629,7 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
  根据keypath更新数据
  */
 -(void)updateWithTableName:(NSString* _Nonnull)name forKeyPathAndValues:(NSArray* _Nonnull)keyPathValues valueDict:(NSDictionary* _Nonnull)valueDict complete:(DatabaseSuccessBlock)complete{
-    NSString* like = [_DatabaseTool getLikeWithKeyPathAndValues:keyPathValues where:YES];
+    NSString* like = [_DBTool getLikeWithKeyPathAndValues:keyPathValues where:YES];
     NSMutableArray* arguments = [NSMutableArray array];
     __block BOOL result;
     [self executeDB:^(FMDatabase * _Nonnull db){
@@ -667,7 +664,7 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
         [SQL appendFormat:@"delete from %@",name];
         
         if(where && (where.count>0)){
-            NSArray* results = [_DatabaseTool where:where];
+            NSArray* results = [_DBTool where:where];
             [SQL appendString:results[0]];
             [arguments addObjectsFromArray:results[1]];
         }
@@ -705,7 +702,7 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
 
 -(void)deleteQueueWithTableName:(NSString* _Nonnull)name forKeyPathAndValues:(NSArray* _Nonnull)keyPathValues complete:(DatabaseSuccessBlock)complete{
     NSAssert(name,@"表名不能为空!");
-    NSString* like = [_DatabaseTool getLikeWithKeyPathAndValues:keyPathValues where:YES];
+    NSString* like = [_DBTool getLikeWithKeyPathAndValues:keyPathValues where:YES];
     __block BOOL result;
     [self executeDB:^(FMDatabase * _Nonnull db) {
         NSMutableString* SQL = [[NSMutableString alloc] init];
@@ -774,7 +771,7 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
     NSAssert(name,@"表名不能为空!");
     __block BOOL result;
     [self executeDB:^(FMDatabase * _Nonnull db) {
-        NSString* SQL = [NSString stringWithFormat:@"alter table %@ add %@;",name,[_DatabaseTool keyAndType:key]];
+        NSString* SQL = [NSString stringWithFormat:@"alter table %@ add %@;",name,[_DBTool keyAndType:key]];
         LOG(@"%@", SQL);
         result = [db executeUpdate:SQL];
     }];
@@ -914,7 +911,7 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
  keyPath查询数据条数.
  */
 -(NSInteger)countQueueForTable:(NSString* _Nonnull)name forKeyPathAndValues:(NSArray* _Nonnull)keyPathValues{
-    NSString* like = [_DatabaseTool getLikeWithKeyPathAndValues:keyPathValues where:YES];
+    NSString* like = [_DBTool getLikeWithKeyPathAndValues:keyPathValues where:YES];
     __block NSUInteger count=0;
     [self executeDB:^(FMDatabase * _Nonnull db) {
         NSString* SQL = [NSString stringWithFormat:@"select count(*) from %@%@",name,like];
@@ -1063,7 +1060,7 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
 -(void)copyA:(NSString* _Nonnull)A toB:(NSString* _Nonnull)B keyDict:(NSDictionary* const _Nullable)keyDict complete:(DatabaseDealStateBlock)complete{
     //获取"唯一约束"字段名
     NSString* uniqueKey = [classof(A) touchSelector:selectorify(_uniqueKey)];
-    __block NSArray* keys = [_DatabaseTool getClassIvarList:NSClassFromString(A) onlyKey:NO];
+    __block NSArray* keys = [_DBTool getClassIvarList:NSClassFromString(A) onlyKey:NO];
     NSArray* newKeys = keyDict.allKeys;
     NSArray* oldKeys = keyDict.allValues;
     //建立一张临时表
@@ -1148,7 +1145,7 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
             return;
         }
     }];
-    __block NSArray* keys = [_DatabaseTool getClassIvarList:NSClassFromString(name) onlyKey:YES];
+    __block NSArray* keys = [_DBTool getClassIvarList:NSClassFromString(name) onlyKey:YES];
     NSArray* newKeys = keyDict.allKeys;
     NSArray* oldKeys =keyDict.allValues;
     for(int i=0;i<newKeys.count;i++){
@@ -1184,7 +1181,7 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
         [self dropTable:name complete:^(BOOL isSuccess) {
             if(isSuccess)recordFailCount++;
         }];
-        [self copyA:BGTempTable toB:name keys:[_DatabaseTool getClassIvarList:NSClassFromString(name) onlyKey:NO] complete:^(DatabaseDealState result) {
+        [self copyA:BGTempTable toB:name keys:[_DBTool getClassIvarList:NSClassFromString(name) onlyKey:NO] complete:^(DatabaseDealState result) {
             if(result == DatabaseDealStateComplete){
                 recordFailCount++;
             }
@@ -1236,7 +1233,7 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
                     [tempArrayM addObject:[rs columnNameForIndex:columnIdx]];
                 }
                 NSArray* columNames = tempArrayM.count?tempArrayM:nil;
-                NSArray* keyAndtypes = [_DatabaseTool getClassIvarList:cla onlyKey:NO];
+                NSArray* keyAndtypes = [_DBTool getClassIvarList:cla onlyKey:NO];
                 for(NSString* keyAndtype in keyAndtypes){
                     NSString* key = [[keyAndtype componentsSeparatedByString:@"*"] firstObject];
                     if(ignoredkeys && [ignoredkeys containsObject:key])continue;
@@ -1247,7 +1244,7 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
                     }
                 }
                 
-                NSMutableArray* keys = [NSMutableArray arrayWithArray:[_DatabaseTool getClassIvarList:cla onlyKey:YES]];
+                NSMutableArray* keys = [NSMutableArray arrayWithArray:[_DBTool getClassIvarList:cla onlyKey:YES]];
                 if (ignoredkeys) {
                     [keys removeObjectsInArray:ignoredkeys];
                 }
@@ -1274,7 +1271,7 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
             
             //字段发生改变,减少或名称变化,实行刷新数据库.
             
-            [self refreshQueueTable:tableName keys:[_DatabaseTool getClassIvarList:cla onlyKey:NO] complete:nil];
+            [self refreshQueueTable:tableName keys:[_DBTool getClassIvarList:cla onlyKey:NO] complete:nil];
         } else ;
     }
 }
@@ -1307,7 +1304,7 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
 -(NSArray*)getArray:(NSArray*)array ignoredKeys:(NSArray* const _Nullable)ignoredKeys isUpdate:(BOOL)update{
     NSMutableArray* dictArray = [NSMutableArray array];
     [array enumerateObjectsUsingBlock:^(id  _Nonnull object, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSDictionary* dict = [_DatabaseTool getDictWithObject:object ignoredKeys:ignoredKeys isUpdate:update];
+        NSDictionary* dict = [_DBTool getDictWithObject:object ignoredKeys:ignoredKeys isUpdate:update];
         [dictArray addObject:dict];
     }];
     return dictArray;
@@ -1343,7 +1340,7 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
 - (void)saveObjects:(NSArray* _Nonnull)array ignoredKeys:(NSArray* const _Nullable)ignoredKeys complete:(DatabaseSuccessBlock)complete{
     dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
     @autoreleasepool {
-        [_DatabaseTool ifNotExistWillCreateTableWithObject:array.firstObject ignoredKeys:ignoredKeys];
+        [_DBTool ifNotExistWillCreateTableWithObject:array.firstObject ignoredKeys:ignoredKeys];
         [self insertWithObjects:array ignoredKeys:ignoredKeys complete:complete];
     }
     dispatch_semaphore_signal(self.semaphore);
@@ -1386,7 +1383,7 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
 - (void)saveObject:(nonnull id)object ignoredKeys:(nullable NSArray * const)ignoredKeys complete:(DatabaseSuccessBlock)complete {
     dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
     @autoreleasepool {
-        [_DatabaseTool ifNotExistWillCreateTableWithObject:object ignoredKeys:ignoredKeys];
+        [_DBTool ifNotExistWillCreateTableWithObject:object ignoredKeys:ignoredKeys];
         [self saveQueueObject:object ignoredKeys:ignoredKeys complete:complete];
     }
     dispatch_semaphore_signal(self.semaphore);
@@ -1402,7 +1399,7 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
             bg_completeBlock(nil);
         }else{
             [strongSelf queryWithTableName:tableName param:param where:where complete:^(NSArray * _Nullable array) {
-                NSArray* resultArray = [_DatabaseTool tansformDataFromSqlDataWithTableName:tableName array:array];
+                NSArray* resultArray = [_DBTool tansformDataFromSqlDataWithTableName:tableName array:array];
                 bg_completeBlock(resultArray);
             }];
         }
@@ -1428,7 +1425,7 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
             bg_completeBlock(nil);
         }else{
             [strongSelf queryWithTableName:tableName keys:keys where:where complete:^(NSArray * _Nullable array) {
-                NSArray* resultArray = [_DatabaseTool tansformDataFromSqlDataWithTableName:tableName array:array];
+                NSArray* resultArray = [_DBTool tansformDataFromSqlDataWithTableName:tableName array:array];
                 bg_completeBlock(resultArray);
             }];
         }
@@ -1455,7 +1452,7 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
             bg_completeBlock(nil);
         }else{
             [strongSelf queryWithTableName:tableName forKeyPathAndValues:keyPathValues complete:^(NSArray * _Nullable array) {
-                NSArray* resultArray = [_DatabaseTool tansformDataFromSqlDataWithTableName:tableName array:array];
+                NSArray* resultArray = [_DBTool tansformDataFromSqlDataWithTableName:tableName array:array];
                 bg_completeBlock(resultArray);
             }];
         }
@@ -1477,7 +1474,7 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
                         where:(NSArray *)where
                    ignoreKeys:(NSArray * const)ignoreKeys
                      complete:(DatabaseSuccessBlock)complete {
-    NSDictionary *valueDict = [_DatabaseTool getDictWithObject:object ignoredKeys:ignoreKeys isUpdate:YES];
+    NSDictionary *valueDict = [_DBTool getDictWithObject:object ignoredKeys:ignoreKeys isUpdate:YES];
     NSString *tableName = NSStringFromClass([object class]);
     
     __block BOOL result = NO;
@@ -1519,7 +1516,7 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
           forKeyPathAndValues:(NSArray *)keyPathValues
                    ignoreKeys:(NSArray * const)ignoreKeys
                      complete:(DatabaseSuccessBlock)complete {
-    NSDictionary* valueDict = [_DatabaseTool getDictWithObject:object ignoredKeys:ignoreKeys isUpdate:YES];
+    NSDictionary* valueDict = [_DBTool getDictWithObject:object ignoredKeys:ignoreKeys isUpdate:YES];
     NSString* tableName = NSStringFromClass([object class]);
     __weak typeof(self) BGSelf = self;
     [self isExistWithTableName:tableName complete:^(BOOL isExist){
@@ -1623,8 +1620,8 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
     NSArray* destKeys = keydict.allValues;
     NSArray* srcKeys = keydict.allKeys;
     //检测用户的key是否写对了,否则抛出异常
-    NSArray* srcOnlyKeys = [_DatabaseTool getClassIvarList:srcCla onlyKey:YES];
-    NSArray* destOnlyKeys = [_DatabaseTool getClassIvarList:destCla onlyKey:YES];
+    NSArray* srcOnlyKeys = [_DBTool getClassIvarList:srcCla onlyKey:YES];
+    NSArray* destOnlyKeys = [_DBTool getClassIvarList:destCla onlyKey:YES];
     for(int i=0;i<srcKeys.count;i++){
         if (![srcOnlyKeys containsObject:srcKeys[i]]){
             NSString* result = [NSString stringWithFormat:@"源类变量名称写错 = %@",srcKeys[i]];
@@ -1643,7 +1640,7 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
     [self isExistWithTableName:destTable complete:^(BOOL isExist) {
         if (!isExist){
             NSMutableArray* destKeyAndTypes = [NSMutableArray array];
-            NSArray* destClassKeys = [_DatabaseTool getClassIvarList:destCla onlyKey:NO];
+            NSArray* destClassKeys = [_DBTool getClassIvarList:destCla onlyKey:NO];
             for(NSString* destKey in destKeys){
                 for(NSString* destClassKey in destClassKeys){
                     if ([destClassKey containsString:destKey]) {
@@ -1757,7 +1754,7 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
             [rs close];
             if(className){
                 //转换结果
-                result = [_DatabaseTool tansformDataFromSqlDataWithTableName:className array:result];
+                result = [_DBTool tansformDataFromSqlDataWithTableName:className array:result];
             }
         }else{
             result = @([db executeUpdate:sql]);
@@ -1789,7 +1786,7 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
         [self inTransaction:^BOOL{
             for(id value in array){
                 NSString* type = [NSString stringWithFormat:@"@\"%@\"",NSStringFromClass([value class])];
-                id sqlValue = [_DatabaseTool getSqlValue:value type:type encode:YES];
+                id sqlValue = [_DBTool getSqlValue:value type:type encode:YES];
                 sqlValue = [NSString stringWithFormat:@"%@$$$%@",sqlValue,type];
                 NSDictionary* dict = @{@"BG_param":sqlValue,@"BG_index":@(sqlCount++)};
                 [self insertIntoTableName:name Dict:dict complete:^(BOOL isSuccess) {
@@ -1820,7 +1817,7 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
                     NSArray* keyAndTypes = [dict[@"BG_param"] componentsSeparatedByString:@"$$$"];
                     id value = [keyAndTypes firstObject];
                     NSString* type = [keyAndTypes lastObject];
-                    value = [_DatabaseTool getSqlValue:value type:type encode:NO];
+                    value = [_DBTool getSqlValue:value type:type encode:NO];
                     [resultM addObject:value];
                 }
             }
@@ -1843,7 +1840,7 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
                 NSArray* keyAndTypes = [dict[@"BG_param"] componentsSeparatedByString:@"$$$"];
                 id value = [keyAndTypes firstObject];
                 NSString* type = [keyAndTypes lastObject];
-                resultValue = [_DatabaseTool getSqlValue:value type:type encode:NO];
+                resultValue = [_DBTool getSqlValue:value type:type encode:NO];
             }
         }];
     }
@@ -1860,7 +1857,7 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
     __block BOOL result;
     @autoreleasepool{
         NSString* type = [NSString stringWithFormat:@"@\"%@\"",NSStringFromClass([object class])];
-        id sqlValue = [_DatabaseTool getSqlValue:object type:type encode:YES];
+        id sqlValue = [_DBTool getSqlValue:object type:type encode:YES];
         sqlValue = [NSString stringWithFormat:@"%@$$$%@",sqlValue,type];
         NSDictionary* dict = @{@"BG_param":sqlValue};
         [self updateWithTableName:name valueDict:dict where:@[@"index",@"=",@(index)] complete:^(BOOL isSuccess) {
@@ -1916,7 +1913,7 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
         [self inTransaction:^BOOL{
             [dictionary enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull value, BOOL * _Nonnull stop){
                 NSString* type = [NSString stringWithFormat:@"@\"%@\"",NSStringFromClass([value class])];
-                id sqlValue = [_DatabaseTool getSqlValue:value type:type encode:YES];
+                id sqlValue = [_DBTool getSqlValue:value type:type encode:YES];
                 sqlValue = [NSString stringWithFormat:@"%@$$$%@",sqlValue,type];
                 NSDictionary* dict = @{@"BG_key":key,@"BG_value":sqlValue};
                 [self insertIntoTableName:tableName Dict:dict complete:^(BOOL isSuccess) {
@@ -1954,7 +1951,7 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
     __block BOOL result;
     @autoreleasepool{
         NSString* type = [NSString stringWithFormat:@"@\"%@\"",NSStringFromClass([value class])];
-        id sqlvalue = [_DatabaseTool getSqlValue:value type:type encode:YES];
+        id sqlvalue = [_DBTool getSqlValue:value type:type encode:YES];
         sqlvalue = [NSString stringWithFormat:@"%@$$$%@",sqlvalue,type];
         NSDictionary* dict = @{@"BG_value":sqlvalue};
         NSString* const tableName = @"BG_Dictionary";
@@ -1980,7 +1977,7 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
                 NSString* key = dict[@"BG_key"];
                 id value = [keyAndTypes firstObject];
                 NSString* type = [keyAndTypes lastObject];
-                value = [_DatabaseTool getSqlValue:value type:type encode:NO];
+                value = [_DBTool getSqlValue:value type:type encode:NO];
                 !block?:block(key,value,&stopFlag);
                 if(stopFlag){
                     break;
@@ -2005,7 +2002,7 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
                 NSArray* keyAndTypes = [dict[@"BG_value"] componentsSeparatedByString:@"$$$"];
                 id value = [keyAndTypes firstObject];
                 NSString* type = [keyAndTypes lastObject];
-                resultValue = [_DatabaseTool getSqlValue:value type:type encode:NO];
+                resultValue = [_DBTool getSqlValue:value type:type encode:NO];
             }
         }];
     }

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "_database.h"
+#import "_DBCore.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

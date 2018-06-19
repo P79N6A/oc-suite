@@ -1,18 +1,10 @@
-//
-//  DBHelpers.h
-//  Database
-//
-//  Created by MaSong on 15/8/20.
-//  Copyright (c) 2015年 MaSong. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
 #import <objc/runtime.h>
 #import <CommonCrypto/CommonDigest.h>
 #import <UIKit/UIKit.h>
 #import <sqlite3.h>
 #import "FMDB.h"
-#import "DBMappings.h"
+#import "_DBMapping.h"
 
 //=============
 @interface FMDatabase (DBHelper)

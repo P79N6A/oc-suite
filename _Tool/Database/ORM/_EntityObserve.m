@@ -1,6 +1,5 @@
-
-#import "_database.h"
-#import "_db_entity_observe.h"
+#import "_DBCore.h"
+#import "_EntityObserve.h"
 
 @implementation _Entity ( Observe )
 

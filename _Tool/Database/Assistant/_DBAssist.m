@@ -1,12 +1,4 @@
-//
-//  DBAssistant.m
-//  Database
-//
-//  Created by MaSong on 15/8/20.
-//  Copyright (c) 2015年 MaSong. All rights reserved.
-//
-
-#import "DBAssistant.h"
+#import "_DBAssist.h"
 #import "NSObject+DB.h"
 #import "NSObject+DBCallback.h"
 

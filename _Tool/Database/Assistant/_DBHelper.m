@@ -1,12 +1,4 @@
-//
-//  DBHelpers.m
-//  Database
-//
-//  Created by MaSong on 15/8/20.
-//  Copyright (c) 2015年 MaSong. All rights reserved.
-//
-
-#import "DBHelpers.h"
+#import "_DBHelper.h"
 #import "NSObject+DB.h"
 
 #pragma mark -
