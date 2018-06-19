@@ -40,6 +40,7 @@
 #import "_Class.h"
 #import "_Queue.h"
 #import "_Geometry.h"
+#import "_Error.h"
 
 #import "_Value.h"
 #import "_Coder.h"
