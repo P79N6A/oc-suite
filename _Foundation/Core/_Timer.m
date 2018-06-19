@@ -266,7 +266,7 @@
 
 @implementation _GCDTimer
 
-- (instancetype)initWithHandler:(void (^)())executor {
+- (instancetype)initWithHandler:(void (^)(void))executor {
     if (self = [super init]) {
         self.executor = executor;
         

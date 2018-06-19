@@ -90,7 +90,7 @@ static const NSUInteger kDefaultCapacity = 5;
     
     LOCK
     [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        CFSetAddValue(_set, (__bridge const void *)obj);
+        CFSetAddValue(self->_set, (__bridge const void *)obj);
     }];
     UNLOCK;
 }

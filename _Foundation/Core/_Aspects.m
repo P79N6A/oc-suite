@@ -979,7 +979,7 @@ static void swizzleDeallocIfNeeded(Class classToSwizzle) {
         __block void (*originalDealloc)(__unsafe_unretained id, SEL) = NULL;
         
         id newDealloc = ^(__unsafe_unretained id self) {
-            void (^ onWillDeallocHandler)() = [self getAssociatedObjectForKey:"onWillDeallocHandler"];
+            void (^ onWillDeallocHandler)(void) = [self getAssociatedObjectForKey:"onWillDeallocHandler"];
             
             if (onWillDeallocHandler) {
                 onWillDeallocHandler();
@@ -1018,7 +1018,7 @@ static void swizzleDeallocIfNeeded(Class classToSwizzle) {
 
 @implementation NSObject ( AspectLifeCycle )
 
-- (void)onWillDealloc:(void (^)())handler {
+- (void)onWillDealloc:(void (^)(void))handler {
     [self retainAssociatedObject:handler forKey:"onWillDeallocHandler"];
     
     swizzleDeallocIfNeeded(self.class);

@@ -239,28 +239,28 @@ static GCDQueue *backgroundPriorityGlobalQueue;
 
 @implementation NSThread (MCSMAdditions)
 
-+ (void)performBlockOnMainThread:(void (^)())block {
++ (void)performBlockOnMainThread:(void (^)(void))block {
     [[NSThread mainThread] _performBlock:block];
 }
 
-+ (void)performBlockInBackground:(void (^)())block {
++ (void)performBlockInBackground:(void (^)(void))block {
     [NSThread performSelectorInBackground:@selector(_runBlock:)
                                withObject:[block copy]];
 }
 
-+ (void)_runBlock:(void (^)())block {
++ (void)_runBlock:(void (^)(void))block {
     block();
 }
 
 
-- (void)_performBlock:(void (^)())block {
+- (void)_performBlock:(void (^)(void))block {
     
     if ([[NSThread currentThread] isEqual:self])
         block();
     else
         [self performBlock:block waitUntilDone:NO];
 }
-- (void)performBlock:(void (^)())block waitUntilDone:(BOOL)wait {
+- (void)performBlock:(void (^)(void))block waitUntilDone:(BOOL)wait {
     
     [NSThread performSelector:@selector(_runBlock:)
                      onThread:self
@@ -268,20 +268,20 @@ static GCDQueue *backgroundPriorityGlobalQueue;
                 waitUntilDone:wait];
 }
 
-- (void)performBlock:(void (^)())block afterDelay:(NSTimeInterval)delay {
+- (void)performBlock:(void (^)(void))block afterDelay:(NSTimeInterval)delay {
     
     [self performSelector:@selector(_performBlock:)
                withObject:[block copy]
                afterDelay:delay];
 }
 
-+ (void)_invokeBlock:(void (^)())aBlock {
++ (void)_invokeBlock:(void (^)(void))aBlock {
     if (aBlock) {
         aBlock();
     }
 }
 
-+ (void)detachNewThreadBlock:(void (^)())aBlock {
++ (void)detachNewThreadBlock:(void (^)(void))aBlock {
     [self detachNewThreadSelector:@selector(_invokeBlock:) toTarget:[NSThread class] withObject:aBlock];
 }
 

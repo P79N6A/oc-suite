@@ -31,7 +31,7 @@
     
     NSObject *__block result;
     dispatch_sync(_tsQueue, ^{
-        result = _internalDictionary[key];
+        result = self->_internalDictionary[key];
     });
     
     return result;
@@ -40,7 +40,7 @@
 - (void)setObject:(id)obj forKeyedSubscript:(id<NSCopying>)key {
     
     dispatch_async(_tsQueue, ^{
-        _internalDictionary[key] = obj;
+        self->_internalDictionary[key] = obj;
     });
 }
 
@@ -48,7 +48,7 @@
     
     NSDictionary *__block result;
     dispatch_sync(_tsQueue, ^{
-        result = _internalDictionary;
+        result = self->_internalDictionary;
     });
     
     return result;
@@ -57,14 +57,14 @@
 - (void)removeObjectForkey:(NSString *)key {
     
     dispatch_async(_tsQueue, ^{
-        [_internalDictionary removeObjectForKey:key];
+        [self->_internalDictionary removeObjectForKey:key];
     });
 }
 
 - (void)removeAllObjects {
     
     dispatch_async(_tsQueue, ^{
-        [_internalDictionary removeAllObjects];
+        [self->_internalDictionary removeAllObjects];
     });
 }
 
@@ -177,7 +177,7 @@ static const NSUInteger kDefaultCapacity = 5;
     
     pthread_mutex_lock(&_lock);
     [copiedDictionary enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-        CFDictionarySetValue(_dictionary, (__bridge const void *)key, (__bridge const void *)obj);
+        CFDictionarySetValue(self->_dictionary, (__bridge const void *)key, (__bridge const void *)obj);
     }];
     pthread_mutex_unlock(&_lock);
 }

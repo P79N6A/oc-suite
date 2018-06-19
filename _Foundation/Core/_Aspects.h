@@ -91,7 +91,7 @@ typedef NS_OPTIONS(NSUInteger, AspectOptions) {
 
 @interface NSObject ( AspectLifeCycle )
 
-- (void)onWillDealloc:(void (^)())handler;
+- (void)onWillDealloc:(void (^)(void))handler;
 
 @end
 

@@ -44,7 +44,7 @@
     if (object == nil) { NSLog(@"Object must be nonnull"); return; }
     
     dispatch_async(_tsQueue, ^{
-        [_internalArray addObject:object];
+        [self->_internalArray addObject:object];
     });
 }
 
@@ -54,7 +54,7 @@
     if ([array count] == 0) { NSLog(@"Array must be not empty"); return; }
 
     dispatch_async(_tsQueue, ^{
-        [_internalArray addObjectsFromArray:array];
+        [self->_internalArray addObjectsFromArray:array];
     });
 }
 
@@ -70,7 +70,7 @@
     }
     
     dispatch_async(_tsQueue, ^{
-        [_internalArray insertObject:object atIndex:index];
+        [self->_internalArray insertObject:object atIndex:index];
     });
 }
 
@@ -79,7 +79,7 @@
     
     // Remove object from array
     dispatch_async(_tsQueue, ^{
-        [_internalArray removeObject:object];
+        [self->_internalArray removeObject:object];
     });
 }
 
@@ -88,7 +88,7 @@
     if (index >= numberOfElements) { NSLog(@"Index is out of range"); return; }
     
     dispatch_async(_tsQueue, ^{
-        [_internalArray removeObjectAtIndex:index];
+        [self->_internalArray removeObjectAtIndex:index];
     });
 }
 
@@ -97,7 +97,7 @@
     if (numberOfElements == 0) { NSLog(@"Array is empty"); return; }
     
     dispatch_async(_tsQueue, ^{
-        [_internalArray removeAllObjects];
+        [self->_internalArray removeAllObjects];
     });
 }
 
@@ -111,7 +111,7 @@
     // Return object at index in array
     id __block object;
     dispatch_sync(_tsQueue, ^{
-        object = [_internalArray objectAtIndex:index];
+        object = [self->_internalArray objectAtIndex:index];
     });
     return object;
 }
@@ -119,7 +119,7 @@
 - (NSUInteger) count {
     NSUInteger __block count;
     dispatch_sync(_tsQueue, ^{
-        count = [_internalArray count];
+        count = [self->_internalArray count];
     });
     return count;
 }
@@ -128,7 +128,7 @@
     
     NSArray __block *result;
     dispatch_sync(_tsQueue, ^{
-        result = [_internalArray filteredArrayUsingPredicate:predicate];
+        result = [self->_internalArray filteredArrayUsingPredicate:predicate];
     });
     return result;
 }
@@ -137,7 +137,7 @@
     
     NSInteger __block result;
     dispatch_sync(_tsQueue, ^{
-        result = [_internalArray indexOfObject:object];
+        result = [self->_internalArray indexOfObject:object];
     });
     return result;
 }
@@ -146,7 +146,7 @@
     
     BOOL __block result;
     dispatch_sync(_tsQueue, ^{
-        result = [_internalArray containsObject:object];
+        result = [self->_internalArray containsObject:object];
     });
     return result;
 }
@@ -155,7 +155,7 @@
     
     NSArray __block *array;
     dispatch_sync(_tsQueue, ^{
-        array = [[NSArray alloc] initWithArray:_internalArray];
+        array = [[NSArray alloc] initWithArray:self->_internalArray];
     });
     return array;
 }
@@ -265,7 +265,7 @@ static const NSUInteger kDefaultCapacity = 5;
     
     LOCK
     [copiedArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        CFArrayAppendValue(_array, (__bridge const void *)obj);
+        CFArrayAppendValue(self->_array, (__bridge const void *)obj);
     }];
     UNLOCK
 }
