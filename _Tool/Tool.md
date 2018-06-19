@@ -41,3 +41,18 @@
 * HTTP, HTTPS
 * 序列化、反序列化
 * 上传、下载
+
+## Date
+
+### 鸣谢
+
+* [MatthewYork/DateTools](https://github.com/MatthewYork/DateTools)
+
+## Pinyin
+
+
+### 鸣谢
+
+* [kimziv/PinYin4Objc](https://github.com/kimziv/PinYin4Objc)
+	- [007lihegong/PinYin4Objc](https://github.com/007lihegong/PinYin4Objc)
+	- [ungacy/YCPinYin](https://github.com/ungacy/YCPinYin)
