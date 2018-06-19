@@ -1,12 +1,4 @@
-//
-//  _xml.m
-//  kata
-//
-//  Created by fallen.ink on 18/02/2017.
-//  Copyright © 2017 fallenink. All rights reserved.
-//
-
-#import "_xml.h"
+#import "_XML.h"
 #import <objc/runtime.h>
 
 // ----------------------------------

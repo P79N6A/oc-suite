@@ -1,4 +1,4 @@
-#import "_Gzip.h"
+#import "_GZIP.h"
 #import <zlib.h>
 #import <dlfcn.h>
 

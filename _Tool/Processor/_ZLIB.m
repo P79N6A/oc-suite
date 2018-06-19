@@ -1,4 +1,4 @@
-#import "_Zlib.h"
+#import "_ZLIB.h"
 #import <zlib.h>
 #import <dlfcn.h>
 
