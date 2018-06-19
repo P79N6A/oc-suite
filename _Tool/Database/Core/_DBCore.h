@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (BOOL)deleteSqlite:(NSString *)sqliteName;
 
 //事务操作
-- (void)inTransaction:(BOOL (^)())block;
+- (void)inTransaction:(BOOL (^)(void))block;
 
 /**
  注册数据变化监听.

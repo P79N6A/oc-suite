@@ -11,16 +11,15 @@ target 'startup' do
     pod '_Foundation', :path => '../' # pod '_Foundation', :git => 'https://github.com/fallending/oc-suite.git'
     pod '_UI', :path => '../'
     
-    
     pod '_Tool/NetworkLit', :path => '../'
     pod '_Tool/Network/Reachability', :path => '../'
     pod '_Tool/Cache', :path => '../'
     pod '_Tool/HttpMock', :path => '../'
-    
     pod '_Tool/Database', :path => '../'
 #    pod '_Tool/NoSQL', :path => '../'
-
     pod '_Tool/Processor', :path => '../'
+    pod '_Tool/Date', :path => '../'
+    pod '_Tool/Validator', :path => '../'
     
     ######################################
     # 其他依赖

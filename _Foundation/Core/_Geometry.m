@@ -1,4 +1,4 @@
-#import "_geometry.h"
+#import "_Geometry.h"
 
 #define MT_EPS      1e-4
 #define MT_MIN(A,B)	({ __typeof__(A) __a = (A); __typeof__(B) __b = (B); __a < __b ? __a : __b; })
@@ -8,24 +8,21 @@
 
 #pragma mark - Points
 
-CGDelta CGDeltaMake(CGFloat deltaX, CGFloat deltaY)
-{
+CGDelta CGDeltaMake(CGFloat deltaX, CGFloat deltaY) {
     CGDelta delta;
     delta.x = deltaX;
     delta.y = deltaY;
     return delta;
 }
 
-CGFloat CGPointDistance(CGPoint p1, CGPoint p2)
-{
+CGFloat CGPointDistance(CGPoint p1, CGPoint p2) {
     CGFloat dx = p1.x - p2.x;
     CGFloat dy = p1.y - p2.y;
     CGFloat dist = sqrt(pow(dx, 2) + pow(dy, 2));
     return dist;
 }
 
-CGPoint CGPointAlongLine(CGLine line, CGFloat distance)
-{
+CGPoint CGPointAlongLine(CGLine line, CGFloat distance) {
     CGPoint start           = line.point1;
     CGPoint end             = line.point2;
     CGFloat totalDistance	= CGPointDistance(start, end);
@@ -35,8 +32,7 @@ CGPoint CGPointAlongLine(CGLine line, CGFloat distance)
     return CGPointMake( start.x + delta.x, start.y + delta.y);
 }
 
-CGPoint CGPointRotatedAroundPoint(CGPoint point, CGPoint pivot, CGFloat degrees)
-{
+CGPoint CGPointRotatedAroundPoint(CGPoint point, CGPoint pivot, CGFloat degrees) {
     CGAffineTransform translation, rotation;
     translation	= CGAffineTransformMakeTranslation(-pivot.x, -pivot.y);
     point		= CGPointApplyAffineTransform(point, translation);
@@ -47,12 +43,9 @@ CGPoint CGPointRotatedAroundPoint(CGPoint point, CGPoint pivot, CGFloat degrees)
     return point;
 }
 
-
-
 #pragma mark - Lines
 
-CGLine CGLineMake(CGPoint point1, CGPoint point2)
-{
+CGLine CGLineMake(CGPoint point1, CGPoint point2) {
     CGLine line;
     line.point1.x = point1.x;
     line.point1.y = point1.y;
@@ -61,21 +54,18 @@ CGLine CGLineMake(CGPoint point1, CGPoint point2)
     return line;
 }
 
-bool CGLineEqualToLine(CGLine line1, CGLine line2)
-{
+bool CGLineEqualToLine(CGLine line1, CGLine line2) {
     return CGPointEqualToPoint(line1.point1, line2.point1) && CGPointEqualToPoint(line1.point2, line2.point2);
 }
 
-CGPoint CGLineMidPoint(CGLine line)
-{
+CGPoint CGLineMidPoint(CGLine line) {
     CGPoint midPoint = CGPointZero;
     midPoint.x = (line.point1.x + line.point2.x) / 2.0;
     midPoint.y = (line.point1.y + line.point2.y) / 2.0;
     return midPoint;
 }
 
-CGPoint CGLinesIntersectAtPoint(CGLine line1, CGLine line2)
-{
+CGPoint CGLinesIntersectAtPoint(CGLine line1, CGLine line2) {
     CGFloat mua,mub;
     CGFloat denom,numera,numerb;
     
@@ -111,21 +101,18 @@ CGPoint CGLinesIntersectAtPoint(CGLine line1, CGLine line2)
     return CGPointMake(x1 + mua * (x2 - x1), y1 + mua * (y2 - y1));
 }
 
-CGFloat CGLineLength(CGLine line)
-{
+CGFloat CGLineLength(CGLine line) {
     return CGPointDistance(line.point1, line.point2);
 }
 
-CGLine CGLineScale(CGLine line, CGFloat scale)
-{
+CGLine CGLineScale(CGLine line, CGFloat scale) {
     CGDelta lineDelta = CGLineDelta(line);
     CGFloat scaledDeltaX = lineDelta.x * scale;
     CGFloat scaledDeltaY = lineDelta.y * scale;
     return CGLineMake( CGPointMake(line.point1.x, line.point1.y), CGPointMake(line.point1.x + scaledDeltaX, line.point1.y + scaledDeltaY) );
 }
 
-CGLine CGLineTranslate(CGLine line, CGDelta delta)
-{
+CGLine CGLineTranslate(CGLine line, CGDelta delta) {
     line.point1.x += delta.x;
     line.point1.y += delta.y;
     line.point2.x += delta.x;
@@ -133,8 +120,7 @@ CGLine CGLineTranslate(CGLine line, CGDelta delta)
     return line;
 }
 
-CGLine CGLineScaleOnMidPoint(CGLine line, CGFloat scale)
-{
+CGLine CGLineScaleOnMidPoint(CGLine line, CGFloat scale) {
     CGPoint midPoint = CGLineMidPoint(line);
     CGLine scaledLine = CGLineScale(line, scale);
     CGPoint midScaled = CGPointMake(((scaledLine.point2.x - line.point2.x) / 2.0) + line.point2.x,
@@ -143,13 +129,11 @@ CGLine CGLineScaleOnMidPoint(CGLine line, CGFloat scale)
     return CGLineMake(newStartPoint, midScaled);
 }
 
-CGDelta CGLineDelta(CGLine line)
-{
+CGDelta CGLineDelta(CGLine line) {
     return CGDeltaMake(line.point2.x - line.point1.x, line.point2.y - line.point1.y);
 }
 
-bool CGLinesAreParallel(CGLine line1, CGLine line2)
-{
+bool CGLinesAreParallel(CGLine line1, CGLine line2) {
     CGFloat denom;
     
     double x1 = line1.point1.x;
@@ -171,40 +155,31 @@ bool CGLinesAreParallel(CGLine line1, CGLine line2)
     }
 }
 
-
-
-
 #pragma mark - Rectangles
 
-CGPoint CGRectTopLeftPoint(CGRect rect)
-{
+CGPoint CGRectTopLeftPoint(CGRect rect) {
     return CGPointMake(CGRectGetMinX(rect), CGRectGetMinY(rect));
 }
 
-CGPoint CGRectTopRightPoint(CGRect rect)
-{
+CGPoint CGRectTopRightPoint(CGRect rect) {
     return CGPointMake(CGRectGetMaxX(rect), CGRectGetMinY(rect));
 }
 
-CGPoint CGRectBottomLeftPoint(CGRect rect)
-{
+CGPoint CGRectBottomLeftPoint(CGRect rect) {
     return CGPointMake(CGRectGetMinX(rect), CGRectGetMaxY(rect));
 }
 
-CGPoint CGRectBottomRightPoint(CGRect rect)
-{
+CGPoint CGRectBottomRightPoint(CGRect rect) {
     return CGPointMake(CGRectGetMaxX(rect), CGRectGetMaxY(rect));
 }
 
-CGRect CGRectResize(CGRect rect, CGSize newSize)
-{
+CGRect CGRectResize(CGRect rect, CGSize newSize) {
     CGFloat dx = (rect.size.width - newSize.width) / 2.0;
     CGFloat dy = (rect.size.height - newSize.height) / 2.0;
     return CGRectInset(rect, dx, dy);
 }
 
-CGRect CGRectInsetEdge(CGRect rect, CGRectEdge edge, CGFloat amount)
-{
+CGRect CGRectInsetEdge(CGRect rect, CGRectEdge edge, CGFloat amount) {
     if (edge == CGRectMinXEdge) {
         rect.origin.x += amount;
         rect.size.width -= amount;
@@ -222,8 +197,7 @@ CGRect CGRectInsetEdge(CGRect rect, CGRectEdge edge, CGFloat amount)
     return rect;
 }
 
-CGRect CGRectStackedWithinRectFromEdge(CGRect rect, CGSize size, int count, CGRectEdge edge, bool reverse)
-{
+CGRect CGRectStackedWithinRectFromEdge(CGRect rect, CGSize size, int count, CGRectEdge edge, bool reverse) {
     int max_columns = floor(rect.size.width / size.width);
     int max_rows = floor(rect.size.height / size.height);
     
@@ -233,8 +207,7 @@ CGRect CGRectStackedWithinRectFromEdge(CGRect rect, CGSize size, int count, CGRe
         if (reverse) current_col = max_columns - (current_col + 1);
         if (current_col > max_columns || current_row > max_rows) {
             return CGRectNull;
-        }
-        else {
+        } else {
             CGFloat x = CGRectGetMinX(rect) + (current_col * size.width);
             CGFloat y = CGRectGetMinY(rect) + (current_row * size.height);
             return CGRectMake(x, y, size.width, size.height);

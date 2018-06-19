@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "_Tool"
-  s.version      = "0.1.0"
+  s.version      = "0.1.15"
   s.summary      = "iOS 开发包 之 工具 库[Objective-C]"
   s.description  = <<-DESC
                    iOS 开发包 之 工具 库[Objective-C]
@@ -36,12 +36,17 @@ Pod::Spec.new do |s|
     networklit.source_files = "_Tool/NetworkLit/**/*.{h,m}"
   end
 
-  # [tonymillion/Reachability](https://github.com/tonymillion/Reachability)
   s.subspec 'Network' do |network|
     # network.source_files = "tool/network/reachability/*.{h,m}"
     network.subspec 'Reachability' do |reachability|
 
       reachability.source_files = "_Tool/Network/Reachability/*.{h,m}"
+
+    end
+
+    network.subspec 'Serializer' do |serializer|
+
+      serializer.source_files = "_Tool/Network/Serializer/*.{h,m}"
 
     end
 
@@ -66,6 +71,16 @@ Pod::Spec.new do |s|
 
   s.subspec 'Log' do |log|
     log.source_files = "_Tool/Log/**/*.{h,m}"
+  end
+
+  s.subspec 'Validator' do |validator|
+    validator.source_files = "_Tool/Validator/**/*.{h,m}"
+    validator.requires_arc = false
+    validator.requires_arc = ['_Tool/Validator/*.{h,m}', '_Tool/Validator/Extension/*.{h,m}']
+  end
+
+  s.subspec 'Date' do |date|
+    date.source_files = "_Tool/Date/**/*.{h,m}"
   end
 
   # ――― Project Linking ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
