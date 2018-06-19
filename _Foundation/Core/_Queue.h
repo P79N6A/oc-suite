@@ -1,17 +1,25 @@
 
 #import <Foundation/Foundation.h>
 
+#ifndef main_queue
+#define main_queue [_Queue  main]
+#endif
+
+#ifndef global_queue
+#define global_queue [_Queue global]
+#endif
+
 @class _Group;
 
 @interface _Queue : NSObject
 
 @property (strong, readonly, nonatomic) dispatch_queue_t dispatchQueue;
 
-+ (_Queue *)mainQueue;
-+ (_Queue *)globalQueue;
-+ (_Queue *)highPriorityGlobalQueue;
-+ (_Queue *)lowPriorityGlobalQueue;
-+ (_Queue *)backgroundPriorityGlobalQueue;
++ (_Queue *)main;
++ (_Queue *)global;
++ (_Queue *)highPriorityGlobal;
++ (_Queue *)lowPriorityGlobal;
++ (_Queue *)backgroundPriorityGlobal;
 
 #pragma mark - 便利的构造方法
 + (void)executeInMainQueue:(dispatch_block_t)block;

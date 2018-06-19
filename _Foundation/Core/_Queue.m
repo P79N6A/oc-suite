@@ -16,27 +16,27 @@ static _Queue *backgroundPriorityGlobalQueue;
 
 @implementation _Queue
 
-+ (_Queue *)mainQueue {
++ (_Queue *)main {
     
     return mainQueue;
 }
 
-+ (_Queue *)globalQueue {
++ (_Queue *)global {
     
     return globalQueue;
 }
 
-+ (_Queue *)highPriorityGlobalQueue {
++ (_Queue *)highPriorityGlobal {
     
     return highPriorityGlobalQueue;
 }
 
-+ (_Queue *)lowPriorityGlobalQueue {
++ (_Queue *)lowPriorityGlobal {
     
     return lowPriorityGlobalQueue;
 }
 
-+ (_Queue *)backgroundPriorityGlobalQueue {
++ (_Queue *)backgroundPriorityGlobal {
     
     return backgroundPriorityGlobalQueue;
 }

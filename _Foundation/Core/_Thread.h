@@ -298,14 +298,6 @@
 
 @end
 
-#ifndef main_queue
-#define main_queue [_Queue  main]
-#endif
-
-#ifndef global_queue
-#define global_queue [_Queue global]
-#endif
-
 
 ////////////////////////
 #define CURRENT_THREAD [NSThread currentThread]
@@ -320,17 +312,17 @@
 
 @interface NSThread (MCSMAdditions)
 
-+ (void)performBlockOnMainThread:(void (^)())block;
-+ (void)performBlockInBackground:(void (^)())block;
++ (void)performBlockOnMainThread:(void (^)(void))block;
++ (void)performBlockInBackground:(void (^)(void))block;
 
-- (void)performBlock:(void (^)())block waitUntilDone:(BOOL)wait;
-- (void)performBlock:(void (^)())block afterDelay:(NSTimeInterval)delay;
+- (void)performBlock:(void (^)(void))block waitUntilDone:(BOOL)wait;
+- (void)performBlock:(void (^)(void))block afterDelay:(NSTimeInterval)delay;
 
 
 /**
  * Use thread without do clear work.
  */
-+ (void)detachNewThreadBlock:(void(^)())aBlock;
++ (void)detachNewThreadBlock:(void(^)(void))aBlock;
 
 @end
 /**

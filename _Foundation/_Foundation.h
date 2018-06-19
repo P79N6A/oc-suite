@@ -5,7 +5,6 @@
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 
-
 // ----------------------------------
 // Framework System headers
 // ----------------------------------
@@ -39,16 +38,26 @@
 #import "_Timer.h"
 #import "_Trigger.h"
 #import "_Class.h"
+#import "_Queue.h"
+#import "_Geometry.h"
 
 #import "_Value.h"
 #import "_Coder.h"
 #import "_Directive.h"
+
+#import "_Archiver.h"
 
 #import "_Pair.h"
 #import "_Stack.h"
 #import "_SortedArray.h"
 #import "_ContainerSafe.h"
 #import "_StringBuilder.h"
+#import "_ThreadSafeArray.h"
+#import "_ThreadSafeDictionary.h"
+#import "_ThreadSafeSet.h"
+
+#import "_Keychain.h"
+#import "_KeychainQuery.h"
 
 // ----------------------------------
 // Extensions
