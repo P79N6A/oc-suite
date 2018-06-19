@@ -56,7 +56,8 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'Processor' do |processor|
-    processor.source_files = "_Tool/Processor/**/*.{h,m}"
+    processor.source_files = "_Tool/Processor/**/*.{h,m,mm,c}"
+    processor.libraries = "c++"
   end
 
   s.subspec 'Image' do |image|
@@ -66,6 +67,18 @@ Pod::Spec.new do |s|
   s.subspec 'Log' do |log|
     log.source_files = "_Tool/Log/**/*.{h,m}"
   end
+
+  # ――― Project Linking ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
+  #
+  #  Link your library with frameworks, or libraries. Libraries do not include
+  #  the lib prefix of their name.
+  #
+
+  # s.framework  = "SomeFramework"
+  # s.frameworks = "SomeFramework", "AnotherFramework"
+
+  # s.library   = "iconv"
+  # s.libraries = "c++"
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #

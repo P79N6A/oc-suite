@@ -18,8 +18,8 @@ target 'startup' do
     pod '_Tool/HttpMock', :path => '../'
     
     pod '_Tool/Database', :path => '../'
-    pod '_Tool/NoSQL', :path => '../'
-    
+#    pod '_Tool/NoSQL', :path => '../'
+
     pod '_Tool/Processor', :path => '../'
     
     ######################################
