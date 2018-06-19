@@ -1,35 +1,19 @@
-//
-//     ____              _____    _____    _____
-//    / ___\   /\ /\     \_   \   \_  _\  /\  __\
-//    \ \     / / \ \     / /\/    / /    \ \  _\_
-//  /\_\ \    \ \_/ /  /\/ /_     / /      \ \____\
-//  \____/     \___/   \____/    /__|       \/____/
-//
-//	Copyright BinaryArtists development team and other contributors
-//
-//	https://github.com/BinaryArtists/suite.great
-//
-//	Free to use, prefer to discuss!
-//
-//  Welcome!
-//
-
-#import "_zlib.h"
+#import "_Zlib.h"
 #import <zlib.h>
 #import <dlfcn.h>
 
 static const uInt CHUNK_SIZE = 65536;
 
-NSString *const JKZlibErrorDomain = @"se.bitba.JKZlibErrorDomain";
-NSString *const JKZlibErrorInfoKey = @"zerror";
+NSString *const _ZlibErrorDomain = @"se.bitba.ZlibErrorDomain";
+NSString *const _ZlibErrorInfoKey = @"zerror";
 
 // ----------------------------------
 // Category source code
 // ----------------------------------
 
-@implementation NSData (JKzlib)
+@implementation NSData ( Zlib )
 
-static void *__zlibOpen() {
+static void *__ZlibOpen() {
     static void *libz;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -59,7 +43,7 @@ static void *__zlibOpen() {
 
 // Adapted from http://www.zlib.net/zpipe.c
 - (BOOL)inflate:(void (^)(NSData *))processBlock error:(NSError *__autoreleasing *)error {
-    void *libz = __zlibOpen();
+    void *libz = __ZlibOpen();
     //    int (*deflateInit2_)(z_streamp, int, int, int, int, int, const char *, int) =
     //    (int (*)(z_streamp, int, int, int, int, int, const char *, int))dlsym(libz, "deflateInit2_");
     //    int (*deflateInit_)(z_streamp, int, const char *, int) =
@@ -82,9 +66,9 @@ static void *__zlibOpen() {
     
     int ret = inflateInit(&stream);
     if (ret != Z_OK) {
-        if (error) *error = [NSError errorWithDomain:JKZlibErrorDomain
-                                                code:JKZlibErrorCodeInflationError
-                                            userInfo:@{JKZlibErrorInfoKey : @(ret)}];
+        if (error) *error = [NSError errorWithDomain:_ZlibErrorDomain
+                                                code:_ZlibErrorCodeInflationError
+                                            userInfo:@{_ZlibErrorInfoKey : @(ret)}];
         return NO;
     }
     Bytef *source = (Bytef *)[self bytes]; // yay
@@ -107,9 +91,9 @@ static void *__zlibOpen() {
                 case Z_MEM_ERROR:
                 case Z_STREAM_ERROR:
                     inflateEnd(&stream);
-                    if (error) *error = [NSError errorWithDomain:JKZlibErrorDomain
-                                                            code:JKZlibErrorCodeInflationError
-                                                        userInfo:@{JKZlibErrorInfoKey : @(ret)}];
+                    if (error) *error = [NSError errorWithDomain:_ZlibErrorDomain
+                                                            code:_ZlibErrorCodeInflationError
+                                                        userInfo:@{_ZlibErrorInfoKey : @(ret)}];
                     return NO;
             }
             processBlock([NSData dataWithBytesNoCopy:out
@@ -124,7 +108,7 @@ static void *__zlibOpen() {
 
 // Adapted from http://www.zlib.net/zpipe.c
 - (BOOL)deflate:(void (^)(NSData *))processBlock error:(NSError *__autoreleasing *)error {
-    void *libz = __zlibOpen();
+    void *libz = __ZlibOpen();
     //    int (*deflateInit2_)(z_streamp, int, int, int, int, int, const char *, int) =
     //    (int (*)(z_streamp, int, int, int, int, int, const char *, int))dlsym(libz, "deflateInit2_");
     int (*deflateInit_)(z_streamp, int, const char *, int) =
@@ -143,9 +127,9 @@ static void *__zlibOpen() {
     int ret = deflateInit(&stream, 9);
     
     if (ret != Z_OK) {
-        if (error) *error = [NSError errorWithDomain:JKZlibErrorDomain
-                                                code:JKZlibErrorCodeDeflationError
-                                            userInfo:@{JKZlibErrorInfoKey : @(ret)}];
+        if (error) *error = [NSError errorWithDomain:_ZlibErrorDomain
+                                                code:_ZlibErrorCodeDeflationError
+                                            userInfo:@{_ZlibErrorInfoKey : @(ret)}];
         return NO;
     }
     Bytef *source = (Bytef *)[self bytes]; // yay
@@ -164,9 +148,9 @@ static void *__zlibOpen() {
             stream.next_out = out;
             ret = deflate(&stream, flush);
             if (ret == Z_STREAM_ERROR) {
-                if (error) *error = [NSError errorWithDomain:JKZlibErrorDomain
-                                                        code:JKZlibErrorCodeDeflationError
-                                                    userInfo:@{JKZlibErrorInfoKey : @(ret)}];
+                if (error) *error = [NSError errorWithDomain:_ZlibErrorDomain
+                                                        code:_ZlibErrorCodeDeflationError
+                                                    userInfo:@{_ZlibErrorInfoKey : @(ret)}];
                 return NO;
             }
             processBlock([NSData dataWithBytesNoCopy:out
@@ -219,8 +203,8 @@ static NSFileHandle *__createOrOpenFileAtPath(NSString *path, NSError *__autorel
                                                                contents:nil
                                                              attributes:nil];
         if (!success) {
-            if (error) *error = [NSError errorWithDomain:JKZlibErrorDomain
-                                                    code:JKZlibErrorCodeCouldNotCreateFileError
+            if (error) *error = [NSError errorWithDomain:_ZlibErrorDomain
+                                                    code:_ZlibErrorCodeCouldNotCreateFileError
                                                 userInfo:nil];
             return nil;
         }
@@ -234,6 +218,6 @@ static NSFileHandle *__createOrOpenFileAtPath(NSString *path, NSError *__autorel
 // Source code
 // ----------------------------------
 
-@implementation _zlib
+@implementation _Zlib
 
 @end

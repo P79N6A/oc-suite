@@ -1,26 +1,10 @@
-//
-//     ____              _____    _____    _____
-//    / ___\   /\ /\     \_   \   \_  _\  /\  __\
-//    \ \     / / \ \     / /\/    / /    \ \  _\_
-//  /\_\ \    \ \_/ /  /\/ /_     / /      \ \____\
-//  \____/     \___/   \____/    /__|       \/____/
-//
-//	Copyright BinaryArtists development team and other contributors
-//
-//	https://github.com/BinaryArtists/suite.great
-//
-//	Free to use, prefer to discuss!
-//
-//  Welcome!
-//
-
-#import "_emoji.h"
+#import "_Emoji.h"
 
 // ----------------------------------
 // Category source code
 // ----------------------------------
 
-@implementation NSString (JKEmoji)
+@implementation NSString (Emoji)
 
 static NSDictionary * __unicodeToCheatCodes = nil;
 static NSDictionary * __cheatCodesToUnicode = nil;
@@ -995,6 +979,6 @@ static NSDictionary * __cheatCodesToUnicode = nil;
 // Source code
 // ----------------------------------
 
-@implementation _emoji
+@implementation _Emoji
 
 @end

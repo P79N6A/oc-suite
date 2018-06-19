@@ -1,18 +1,10 @@
-//
-//  _utf8.m
-//  student
-//
-//  Created by fallen.ink on 01/04/2017.
-//  Copyright © 2017 alliance. All rights reserved.
-//
-
-#import "_utf8.h"
+#import "_UTF8.h"
 
 // ----------------------------------
 // Category source code
 // ----------------------------------
 
-@implementation NSString ( utf8 )
+@implementation NSString ( UTF8 )
 
 - (NSData *)utf8EncodedData {
     return [self dataUsingEncoding:NSUTF8StringEncoding];
@@ -35,6 +27,6 @@
 // Source code
 // ----------------------------------
 
-@implementation _utf8
+@implementation _UTF8
 
 @end

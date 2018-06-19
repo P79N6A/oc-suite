@@ -1,14 +1,6 @@
-//
-//  _math.m
-//  Ben
-//
-//  Created by fallen.ink on 04/07/2017.
-//  Copyright © 2017 fallen.ink. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-#import "_math.h"
+#import "_Math.h"
 #import "_pragma_push.h"
 
 #pragma mark -
@@ -41,7 +33,7 @@ static CGFloat angleForStartPoint(CGPoint startPoint, CGPoint endPoint) {
 
 // [self.layerView.layer containsPoint:point]
 
-@implementation _math
+@implementation _Math
 
 @end
 

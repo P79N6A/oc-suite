@@ -1,20 +1,4 @@
-//
-//     ____              _____    _____    _____
-//    / ___\   /\ /\     \_   \   \_  _\  /\  __\
-//    \ \     / / \ \     / /\/    / /    \ \  _\_
-//  /\_\ \    \ \_/ /  /\/ /_     / /      \ \____\
-//  \____/     \___/   \____/    /__|       \/____/
-//
-//	Copyright BinaryArtists development team and other contributors
-//
-//	https://github.com/BinaryArtists/suite.great
-//
-//	Free to use, prefer to discuss!
-//
-//  Welcome!
-//
-
-#import "_sha.h"
+#import "_SHA.h"
 #import <CommonCrypto/CommonCryptor.h>
 #import <CommonCrypto/CommonDigest.h>
 
@@ -22,7 +6,7 @@
 // Category source code
 // ----------------------------------
 
-@implementation NSData ( Sha)
+@implementation NSData ( SHA )
 
 - (NSString *)sha256Hash {
     unsigned char result[CC_SHA256_DIGEST_LENGTH];
@@ -212,6 +196,6 @@
 // Source code
 // ----------------------------------
 
-@implementation _sha
+@implementation _SHA
 
 @end

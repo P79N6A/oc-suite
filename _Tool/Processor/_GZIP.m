@@ -1,20 +1,4 @@
-//
-//     ____              _____    _____    _____
-//    / ___\   /\ /\     \_   \   \_  _\  /\  __\
-//    \ \     / / \ \     / /\/    / /    \ \  _\_
-//  /\_\ \    \ \_/ /  /\/ /_     / /      \ \____\
-//  \____/     \___/   \____/    /__|       \/____/
-//
-//	Copyright BinaryArtists development team and other contributors
-//
-//	https://github.com/BinaryArtists/suite.great
-//
-//	Free to use, prefer to discuss!
-//
-//  Welcome!
-//
-
-#import "_gzip.h"
+#import "_Gzip.h"
 #import <zlib.h>
 #import <dlfcn.h>
 
@@ -131,7 +115,7 @@ static void *__libzOpen() {
 // Source code
 // ----------------------------------
 
-@implementation _gzip
+@implementation _Gzip
 
 + (NSData *)gzipData:(NSData *)pUncompressedData
 {
@@ -216,8 +200,7 @@ static void *__libzOpen() {
     return compressedData;
 }
 
-
-+(NSData *)uncompressZippedData:(NSData *)compressedData  {
++ (NSData *)uncompressZippedData:(NSData *)compressedData  {
     
     if ([compressedData length] == 0) return compressedData;
     

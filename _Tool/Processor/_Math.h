@@ -1,11 +1,3 @@
-//
-//  _math.h
-//  Ben
-//
-//  Created by fallen.ink on 04/07/2017.
-//  Copyright © 2017 fallen.ink. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
 
 // 两点距离
@@ -23,7 +15,7 @@
 // 点在path内
 
 
-@interface _math : NSObject
+@interface _Math : NSObject
 
 @end
 

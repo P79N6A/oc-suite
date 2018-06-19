@@ -21,7 +21,7 @@
 // Category code
 // ----------------------------------
 
-@interface NSData ( Sha )
+@interface NSData ( SHA )
 
 @property (nonatomic, readonly) NSData *sha1Data;
 @property (nonatomic, readonly) NSData *sha256Data;
@@ -89,6 +89,6 @@
 // Class code
 // ----------------------------------
 
-@interface _sha : NSObject
+@interface _SHA : NSObject
 
 @end

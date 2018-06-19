@@ -1,12 +1,3 @@
-//
-//  _utf8.h
-//  student
-//
-//  Created by fallen.ink on 01/04/2017.
-//  Copyright © 2017 alliance. All rights reserved.
-//
-//  utf8 & unicode
-
 #import <Foundation/Foundation.h>
 
 // ----------------------------------
@@ -15,7 +6,7 @@
 
 #pragma mark -
 
-@interface NSString ( utf8 )
+@interface NSString ( UTF8 )
 
 - (NSData *)utf8EncodedData;
 
@@ -27,6 +18,6 @@
 // Class code
 // ----------------------------------
 
-@interface _utf8 : NSObject
+@interface _UTF8 : NSObject
 
 @end

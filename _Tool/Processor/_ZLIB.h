@@ -1,19 +1,3 @@
-//
-//     ____              _____    _____    _____
-//    / ___\   /\ /\     \_   \   \_  _\  /\  __\
-//    \ \     / / \ \     / /\/    / /    \ \  _\_
-//  /\_\ \    \ \_/ /  /\/ /_     / /      \ \____\
-//  \____/     \___/   \____/    /__|       \/____/
-//
-//	Copyright BinaryArtists development team and other contributors
-//
-//	https://github.com/BinaryArtists/suite.great
-//
-//	Free to use, prefer to discuss!
-//
-//  Welcome!
-//
-
 #import <Foundation/Foundation.h>
 
 // ----------------------------------
@@ -23,18 +7,18 @@
 /**
  ZLib error domain
  */
-extern NSString *const JKZlibErrorDomain;
+extern NSString *const _ZlibErrorDomain;
 /**
  When a zlib error occurs, querying this key in the @p userInfo dictionary of the
  @p NSError object will return the underlying zlib error code.
  */
-extern NSString *const JKZlibErrorInfoKey;
+extern NSString *const _ZlibErrorInfoKey;
 
-typedef NS_ENUM(NSUInteger, JKZlibErrorCode) {
-    JKZlibErrorCodeFileTooLarge = 0,
-    JKZlibErrorCodeDeflationError = 1,
-    JKZlibErrorCodeInflationError = 2,
-    JKZlibErrorCodeCouldNotCreateFileError = 3,
+typedef NS_ENUM(NSUInteger, _ZlibErrorCode) {
+    _ZlibErrorCodeFileTooLarge = 0,
+    _ZlibErrorCodeDeflationError = 1,
+    _ZlibErrorCodeInflationError = 2,
+    _ZlibErrorCodeCouldNotCreateFileError = 3,
 };
 
 @interface NSData ( Zlib )
@@ -91,6 +75,6 @@ typedef NS_ENUM(NSUInteger, JKZlibErrorCode) {
 // Class code
 // ----------------------------------
 
-@interface _zlib : NSObject
+@interface _Zlib : NSObject
 
 @end
