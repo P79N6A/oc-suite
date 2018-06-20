@@ -13,34 +13,27 @@ static NSString *const AutocodingException = @"AutocodingException";
 
 @implementation NSObject (AutoCoding)
 
-+ (BOOL)supportsSecureCoding
-{
++ (BOOL)supportsSecureCoding {
     return YES;
 }
 
-+ (instancetype)objectWithContentsOfFile:(NSString *)filePath
-{
++ (instancetype)objectWithContentsOfFile:(NSString *)filePath {
     //load the file
     NSData *data = [NSData dataWithContentsOfFile:filePath];
     
     //attempt to deserialise data as a plist
     id object = nil;
-    if (data)
-    {
+    if (data) {
         NSPropertyListFormat format;
         object = [NSPropertyListSerialization propertyListWithData:data options:NSPropertyListImmutable format:&format error:NULL];
        
 		//success?
-		if (object)
-		{
+		if (object) {
 			//check if object is an NSCoded unarchive
-			if ([object respondsToSelector:@selector(objectForKeyedSubscript:)] && ((NSDictionary *)object)[@"$archiver"])
-			{
+			if ([object respondsToSelector:@selector(objectForKeyedSubscript:)] && ((NSDictionary *)object)[@"$archiver"]) {
 				object = [NSKeyedUnarchiver unarchiveObjectWithData:data];
 			}
-		}
-		else
-		{
+		} else {
 			//return raw data
 			object = data;
 		}
@@ -50,8 +43,7 @@ static NSString *const AutocodingException = @"AutocodingException";
 	return object;
 }
 
-- (BOOL)writeToFile:(NSString *)filePath atomically:(BOOL)useAuxiliaryFile
-{
+- (BOOL)writeToFile:(NSString *)filePath atomically:(BOOL)useAuxiliaryFile {
     //note: NSData, NSDictionary and NSArray already implement this method
     //and do not save using NSCoding, however the objectWithContentsOfFile
     //method will correctly recover these objects anyway
@@ -75,13 +67,11 @@ static NSString *const AutocodingException = @"AutocodingException";
 
 #pragma mark -
 
-+ (NSDictionary<NSString *, Class> *)codableProperties
-{
++ (NSDictionary<NSString *, Class> *)codableProperties {
     //deprecated
     SEL deprecatedSelector = NSSelectorFromString(@"uncodableProperties");
     NSArray *uncodableProperties = nil;
-    if ([self respondsToSelector:deprecatedSelector] || [self instancesRespondToSelector:deprecatedSelector])
-    {
+    if ([self respondsToSelector:deprecatedSelector] || [self instancesRespondToSelector:deprecatedSelector]) {
         uncodableProperties = [self valueForKey:@"uncodableProperties"];
         NSLog(@"AutoCoding Warning: uncodableProperties method is no longer supported. Use ivars, or synthesize your properties using non-KVC-compliant names to avoid coding them instead.");
     }

@@ -12,7 +12,7 @@
  Include GMT and time zone utilities?
  */
 
-#import "NSDate+JKUtilities.h"
+#import "NSDate+Utilities.h"
 #import <UIKit/UIKit.h>
 // Thanks, AshFurrow
 //static const unsigned JK_NSDATE_UTILITIES_COMPONENT_FLAGS = (NSYearCalendarUnit| NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekCalendarUnit |  NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit | NSWeekdayCalendarUnit | NSWeekdayOrdinalCalendarUnit);

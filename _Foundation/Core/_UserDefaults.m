@@ -1,5 +1,11 @@
+//
+//  _UserDefaults.m
+//  _Foundation
+//
+//  Created by 7 on 2018/6/20.
+//
 
-#import "NSObject+UserDefaults.h"
+#import "_UserDefaults.h"
 
 @implementation NSObject (UserDefaults)
 
@@ -15,7 +21,7 @@
     return [ud objectForKey:keyName];
 }
 
-#pragma mark - 
+#pragma mark -
 
 - (void)userDefaultsClear {
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];

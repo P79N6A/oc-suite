@@ -1,4 +1,13 @@
-#import "NSString+Regex.h"
+#import "NSString+Validation.h"
+
+@interface NSString ( Matcher )
+
+- (NSArray *)matchWithRegex:(NSString *)regex;
+- (NSString *)matchWithRegex:(NSString *)regex atIndex:(NSUInteger)index;
+- (NSString *)firstMatchedGroupWithRegex:(NSString *)regex;
+- (NSTextCheckingResult *)firstMatchedResultWithRegex:(NSString *)regex;
+
+@end
 
 @implementation NSString ( Matcher )
 
@@ -33,18 +42,113 @@
 
 @end
 
-@implementation NSString ( NormalRegex )
+@implementation NSString ( Validator )
 
-#pragma mark - 正则相关
+- (BOOL)isNumber {
+    NSString *        regex = @"-?[0-9.]+";
+    NSPredicate *    pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    
+    return [pred evaluateWithObject:self];
+}
+
+- (BOOL)isNumberWithUnit:(NSString *)unit {
+    NSString *        regex = [NSString stringWithFormat:@"-?[0-9.]+%@", unit];
+    NSPredicate *    pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    
+    return [pred evaluateWithObject:self];
+}
+
+- (BOOL)isURL {
+    return ([self hasPrefix:@"http://"] || [self hasPrefix:@"https://"]) ? YES : NO;
+}
+
+- (BOOL)isPureInt {
+    NSScanner* scan = [NSScanner scannerWithString:self];
+    int val;
+    return[scan scanInt:&val] && [scan isAtEnd];
+}
+
+- (BOOL)isPureFloat {
+    NSScanner* scan = [NSScanner scannerWithString:self];
+    float val;
+    return[scan scanFloat:&val] && [scan isAtEnd];
+}
+
+- (BOOL)isContainsEmoji {
+    __block BOOL isEomji = NO;
+    [self enumerateSubstringsInRange:NSMakeRange(0, [self length]) options:NSStringEnumerationByComposedCharacterSequences usingBlock:
+     ^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
+         const unichar hs = [substring characterAtIndex:0];
+         if (0xd800 <= hs && hs <= 0xdbff) {
+             if (substring.length > 1) {
+                 const unichar ls = [substring characterAtIndex:1];
+                 const int uc = ((hs - 0xd800) * 0x400) + (ls - 0xdc00) + 0x10000;
+                 if (0x1d000 <= uc && uc <= 0x1f77f) {
+                     isEomji = YES;
+                 }
+             }
+         } else if (substring.length > 1) {
+             const unichar ls = [substring characterAtIndex:1];
+             if (ls == 0x20e3) {
+                 isEomji = YES;
+             }
+         } else {
+             if (0x2100 <= hs && hs <= 0x27ff && hs != 0x263b) {
+                 isEomji = YES;
+             } else if (0x2B05 <= hs && hs <= 0x2b07) {
+                 isEomji = YES;
+             } else if (0x2934 <= hs && hs <= 0x2935) {
+                 isEomji = YES;
+             } else if (0x3297 <= hs && hs <= 0x3299) {
+                 isEomji = YES;
+             } else if (hs == 0xa9 || hs == 0xae || hs == 0x303d || hs == 0x3030 || hs == 0x2b55 || hs == 0x2b1c || hs == 0x2b1b || hs == 0x2b50|| hs == 0x231a ) {
+                 isEomji = YES;
+             }
+         }
+     }];
+    
+    return isEomji;
+}
+
+- (BOOL)containsChinese {
+    NSUInteger length = [self length];
+    for (NSUInteger i = 0; i < length; i++) {
+        NSRange range = NSMakeRange(i, 1);
+        NSString *subString = [self substringWithRange:range];
+        const char *cString = [subString UTF8String];
+        if (strlen(cString) == 3) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+- (BOOL)containsBlank {
+    NSRange range = [self rangeOfString:@" "];
+    if (range.location != NSNotFound) {
+        return YES;
+    }
+    return NO;
+}
+
+
+- (BOOL)isSMSCode:(int32_t)length {
+    if (self.length <= 0) {
+        return NO;
+    }
+    
+    NSString *regex2 = [NSString stringWithFormat:@"^\\d{%@}$", @(length)];
+    
+    NSPredicate *identityCardPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex2];
+    
+    return [identityCardPredicate evaluateWithObject:self];
+}
 
 - (BOOL)isValidateByRegex:(NSString *)regex {
     NSPredicate *pre = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
     return [pre evaluateWithObject:self];
 }
 
-#pragma mark -
-
-//手机号分服务商
 - (BOOL)isMobileNumberClassification {
     /**
      * 手机号码
@@ -91,26 +195,22 @@
     }
 }
 
-//手机号有效性
 - (BOOL)isMobileNumber {
     NSString *mobileRegex = @"^(0|86|17951)?(13[0-9]|15[012356789]|17[0678]|18[0-9]|14[57])[0-9]{8}$";
     BOOL ret1 = [self isValidateByRegex:mobileRegex];
     return ret1;
 }
 
-//邮箱
 - (BOOL)isEmailAddress {
     NSString *emailRegex = @"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
     return [self isValidateByRegex:emailRegex];
 }
 
-//身份证号
 - (BOOL)simpleVerifyIdentityCardNum {
     NSString *regex2 = @"^(\\d{14}|\\d{17})(\\d|[xX])$";
     return [self isValidateByRegex:regex2];
 }
 
-//车牌
 - (BOOL)isCarNumber {
     //车牌号:湘K-DE829 香港车牌号码:粤Z-J499港
     NSString *carRegex = @"^[\u4e00-\u9fff]{1}[a-zA-Z]{1}[-][a-zA-Z_0-9]{4}[a-zA-Z_0-9_\u4e00-\u9fff]$";//其中\u4e00-\u9fa5表示unicode编码中汉字已编码部分，\u9fa5-\u9fff是保留部分，将来可能会添加
@@ -172,8 +272,6 @@
     return [self isValidateByRegex:regex];
 }
 
-#pragma mark - 算法相关
-//精确的身份证号码有效性检测
 + (BOOL)accurateVerifyIDCardNumber:(NSString *)value {
     value = [value stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
@@ -335,7 +433,7 @@
     return (luhmTotal%10 ==0)?YES:NO;
 }
 
-- (BOOL)isIPAddress{
+- (BOOL)isIPAddress {
     NSString *regex = [NSString stringWithFormat:@"^(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})$"];
     NSPredicate *pre = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
     BOOL rc = [pre evaluateWithObject:self];
@@ -356,7 +454,5 @@
     
     return NO;
 }
-
-
 
 @end

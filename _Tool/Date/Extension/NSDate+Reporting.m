@@ -25,7 +25,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "NSDate+JKReporting.h"
+#import "NSDate+Reporting.h"
 
 // Private Helper functions
 @interface NSDate (Private)

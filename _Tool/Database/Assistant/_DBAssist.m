@@ -121,7 +121,7 @@ static const void * const kDispatchTransactionQueueSpecificKey = &kDispatchTrans
         [_threadLock lock];
         if (_inTransaction) {
             dispatch_sync(_transactionQueue, ^() {
-                block(_transactionDB);
+                block(self->_transactionDB);
             });
         } else {
             [_dbQueue inDatabase:^(FMDatabase *db) {

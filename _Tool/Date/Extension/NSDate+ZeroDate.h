@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSDate (JKZeroDate)
-+ (NSDate *)jk_zeroTodayDate;
-+ (NSDate *)jk_zero24TodayDate;
+@interface NSDate ( ZeroDate )
++ (NSDate *)zeroTodayDate;
++ (NSDate *)zero24TodayDate;
 
-- (NSDate *)jk_zeroDate;
-- (NSDate *)jk_zero24Date;
+- (NSDate *)zeroDate;
+- (NSDate *)zero24Date;
 @end

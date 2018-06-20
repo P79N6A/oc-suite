@@ -4,7 +4,6 @@
 #import <Photos/Photos.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 
-#import "_System.h"
 #import "_Foundation.h"
 #import "_Keychain.h"
 

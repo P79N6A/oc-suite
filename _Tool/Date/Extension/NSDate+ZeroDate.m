@@ -6,11 +6,11 @@
 //  Copyright (c) 2015年 Jakey. All rights reserved.
 //
 
-#import "NSDate+JKZeroDate.h"
+#import "NSDate+ZeroDate.h"
 
-@implementation NSDate (JKZeroDate)
-+ (NSDate *)jk_zeroTodayDate
-{
+@implementation NSDate (ZeroDate)
+
++ (NSDate *)zeroTodayDate {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *components = [calendar components:NSUIntegerMax fromDate:[NSDate date]];
     components.hour = 0;
@@ -19,8 +19,7 @@
     return [calendar dateFromComponents:components];
 }
 
-+ (NSDate *)jk_zero24TodayDate
-{
++ (NSDate *)zero24TodayDate {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *components = [calendar components:NSUIntegerMax fromDate:[NSDate date]];
     components.hour = 23;
@@ -29,8 +28,7 @@
     return [calendar dateFromComponents:components];
 }
 
-- (NSDate *)jk_zeroDate
-{
+- (NSDate *)zeroDate {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *components = [calendar components:NSUIntegerMax fromDate:self];
     components.hour = 0;
@@ -38,8 +36,8 @@
     components.second = 0;
     return [calendar dateFromComponents:components];
 }
-- (NSDate *)jk_zero24Date
-{
+
+- (NSDate *)zero24Date {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *components = [calendar components:NSUIntegerMax fromDate:self];
     components.hour = 23;

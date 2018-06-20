@@ -8,7 +8,7 @@
 
 #import "UILabel+Extension.h"
 #import "NSString+Size.h"
-#import "_system.h"
+#import "_Foundation.h"
 
 @implementation UILabel ( AttributeText )
 

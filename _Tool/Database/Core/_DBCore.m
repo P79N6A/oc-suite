@@ -77,22 +77,22 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
 }
 
 //事务操作
-- (void)inTransaction:(BOOL (^_Nonnull)())block {
+- (void)inTransaction:(BOOL (^_Nonnull)(void))block {
     NSAssert(block, @"block is nil!");
     [self executeDB:^(FMDatabase * _Nonnull db) {
-        _inTransaction = db.inTransaction;
-        if (!_inTransaction) {
-            _inTransaction = [db beginTransaction];
+        self->_inTransaction = db.inTransaction;
+        if (!self->_inTransaction) {
+            self->_inTransaction = [db beginTransaction];
         }
         BOOL isCommit = NO;
         isCommit = block();
-        if (_inTransaction){
+        if (self->_inTransaction){
             if (isCommit) {
                 [db commit];
             }else {
                 [db rollback];
             }
-            _inTransaction = NO;
+            self->_inTransaction = NO;
         }
     }];
 }
@@ -183,7 +183,7 @@ static const void * const BGFMDBDispatchQueueSpecificKey = &BGFMDBDispatchQueueS
     if(flag && _changeBlocks.count > 0){
         //开一个子线程去执行block,防止死锁.
         dispatch_async(dispatch_get_global_queue(0,0), ^{
-            [_changeBlocks enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop){
+            [self->_changeBlocks enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop){
                 NSArray* array = [key componentsSeparatedByString:@"*"];
                 if([name isEqualToString:array.firstObject]){
                     void(^block)(DatabaseOperation) = obj;

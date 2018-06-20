@@ -1,18 +1,47 @@
-//
-//     ____              _____    _____    _____
-//    / ___\   /\ /\     \_   \   \_  _\  /\  __\
-//    \ \     / / \ \     / /\/    / /    \ \  _\_
-//  /\_\ \    \ \_/ /  /\/ /_     / /      \ \____\
-//  \____/     \___/   \____/    /__|       \/____/
-//
-//	Copyright BinaryArtists development team and other contributors
-//
-//	https://github.com/BinaryArtists/suite.great
-//
-//	Free to use, prefer to discuss!
-//
-//  Welcome!
-//
+/**
+ 
+ 格式化参数如下：
+ G: 公元时代，例如AD公元
+ yy: 年的后2位
+ yyyy: 完整年
+ MM: 月，显示为1-12
+ MMM: 月，显示为英文月份简写,如 Jan//跟系统语言版本有关系，中文显示“3月”，英文显示“Jan”
+ MMMM: 月，显示为英文月份全称，如 Janualy//跟系统语言版本有关系，中文显示“3月”，英文显示“Jan”
+ dd: 日，2位数表示，如02
+ d: 日，1-2位显示，如 2
+ EEE: 简写星期几，如Sun
+ EEEE: 全写星期几，如Sunday
+ aa: 上下午，AM/PM
+ H: 时，24小时制，0-23
+ K：时，12小时制，0-11
+ m: 分，1-2位
+ mm: 分，2位
+ s: 秒，1-2位
+ ss: 秒，2位
+ S: 毫秒
+ 
+ */
+
+/**
+ *  @knowledge http://www.cnblogs.com/QianChia/p/5782755.html
+ 
+ 根据提供的日历标示符初始化。
+ 
+ identifier 的范围可以是:
+ 
+ NSCalendarIdentifierGregorian         公历
+ NSCalendarIdentifierBuddhist          佛教日历
+ NSCalendarIdentifierChinese           中国农历
+ NSCalendarIdentifierHebrew            希伯来日历
+ NSCalendarIdentifierIslamic           伊斯兰日历
+ NSCalendarIdentifierIslamicCivil      伊斯兰教日历
+ NSCalendarIdentifierJapanese          日本日历
+ NSCalendarIdentifierRepublicOfChina   中华民国日历（台湾）
+ NSCalendarIdentifierPersian           波斯历
+ NSCalendarIdentifierIndian            印度日历
+ NSCalendarIdentifierISO8601           ISO8601
+ 
+ */
 
 #import "NSDateFormatter+Extension.h"
 #import "NSDate+Extension.h"

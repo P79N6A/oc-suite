@@ -1,19 +1,19 @@
 // ----------------------------------
-// System headers
+// MARK: - System headers
 // ----------------------------------
 
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 
 // ----------------------------------
-// Framework System headers
+// MARK: - Framework System headers
 // ----------------------------------
 
 #import "_Precompile.h"
 #import "_Macros.h"
 
 // ----------------------------------
-// Framework headers
+// MARK: - Framework headers
 // ----------------------------------
 
 #import "metamacros.h"
@@ -42,11 +42,18 @@
 #import "_Geometry.h"
 #import "_Error.h"
 
+#import "_Localization.h"
+#import "_Log.h"
+#import "_Sandbox.h"
+#import "_Task.h"
+#import "_Unitest.h"
+#import "_Assert.h"
+#import "_Debug.h"
+#import "_Device.h"
+
 #import "_Value.h"
 #import "_Coder.h"
 #import "_Directive.h"
-
-#import "_Archiver.h"
 
 #import "_Pair.h"
 #import "_Stack.h"
@@ -57,17 +64,22 @@
 #import "_ThreadSafeDictionary.h"
 #import "_ThreadSafeSet.h"
 
+#import "_Archiver.h"
+#import "_UserDefaults.h"
 #import "_Keychain.h"
 #import "_KeychainQuery.h"
+#import "NSObject+KeyChain.h"
 
 // ----------------------------------
-// Extensions
+// MARK: - Extensions
 // ----------------------------------
 
 #import "NSArray+Extension.h"
 #import "NSAttributedString+Extension.h"
 #import "NSBundle+Extension.h"
 #import "NSData+Extension.h"
+#import "NSDate+Extension.h"
+#import "NSDateFormatter+Extension.h"
 #import "NSDictionary+Extension.h"
 #import "NSException+Extension.h"
 #import "NSInvocation+Extension.h"
@@ -79,5 +91,8 @@
 #import "NSSet+Extension.h"
 #import "NSString+Extension.h"
 #import "NSTimer+Extension.h"
+
+#import "UIDevice+Extension.h"
+#import "UIApplication+Extension.h"
 
 

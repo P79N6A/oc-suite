@@ -75,12 +75,12 @@ extern void bg_setDisableCloseDB(BOOL disableCloseDB);
  事务操作.
  @param block return 返回YES提交事务, 返回NO回滚事务.
  */
-extern void bg_inTransaction(BOOL (^ _Nonnull block)());
+extern void bg_inTransaction(BOOL (^ _Nonnull block)(void));
 
 /**
  清除缓存
  */
-extern void bg_cleanCache();
+extern void bg_cleanCache(void);
 
 // ----------------------------------
 // MARK: 数据库 配置

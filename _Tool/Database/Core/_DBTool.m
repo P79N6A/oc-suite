@@ -83,7 +83,7 @@ void bg_setDisableCloseDB(BOOL disableCloseDB) {
  事务操作.
  返回YES提交事务, 返回NO回滚事务.
  */
-void bg_inTransaction(BOOL (^ _Nonnull block)()) {
+void bg_inTransaction(BOOL (^ _Nonnull block)(void)) {
     [[_Database sharedInstance] inTransaction:block];
 }
 /**

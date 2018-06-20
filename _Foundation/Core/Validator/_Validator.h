@@ -1,5 +1,6 @@
 #import "_Precompile.h"
 #import "_Foundation.h"
+#import "NSString+Validation.h"
 
 // ----------------------------------
 // MARK: _ValidatorRule
@@ -27,30 +28,9 @@ typedef enum {
 // MARK: -
 // ----------------------------------
 
-@interface NSObject ( Validation )
-
-- (BOOL)validate;
-- (BOOL)validate:(NSString *)prop;
-
-@end
-
-// ----------------------------------
-// MARK: -
-// ----------------------------------
-
 @interface NSString ( Validation )
 
-- (BOOL)containsChinese; // 判断URL中是否包含中文
-- (BOOL)containsBlank; // 是否包含空格
-- (BOOL)isNumber;
-- (BOOL)isNumberWithUnit:(NSString *)unit;
-- (BOOL)isEmail;
-- (BOOL)isUrl;
-- (BOOL)isIPAddress;
-- (BOOL)isPureInt;    // 判断是否为整形
-- (BOOL)isPureFloat;  // 判断是否为浮点形
-- (BOOL)isMobileNumber;
-- (BOOL)isContainsEmoji; // 是否包含表情
+
 
 @end
 
@@ -70,8 +50,5 @@ typedef enum {
 - (BOOL)validate:(NSObject *)value rule:(NSString *)rule;
 - (BOOL)validate:(NSObject *)value ruleName:(NSString *)ruleName ruleValue:(NSString *)ruleValue;
 - (BOOL)validate:(NSObject *)value ruleType:(_ValidatorRule)ruleType ruleValue:(NSString *)ruleValue;
-
-- (BOOL)validateObject:(NSObject *)obj;
-- (BOOL)validateObject:(NSObject *)obj property:(NSString *)property;
 
 @end
