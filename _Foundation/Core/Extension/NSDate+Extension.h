@@ -6,9 +6,12 @@
 #define MINUTE		(60 * SECOND)
 #define HOUR		(60 * MINUTE)
 #define DAY			(24 * HOUR)
+#define WEEK        (7 * DAY)
 #define MONTH		(30 * DAY)
 #define YEAR		(12 * MONTH)
 #define NOW			[NSDate date]
+
+#define ymdhms      @"yyyy-MM-dd HH:mm:ss"
 
 #define DATE_COMPONENTS (NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekOfYear | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitWeekday | NSCalendarUnitWeekdayOrdinal)
 #define CURRENT_CALENDAR [NSCalendar currentCalendar]
@@ -40,24 +43,6 @@ typedef enum {
 @prop_readonly( NSInteger,		second );
 @prop_readonly( WeekdayType,	weekday );
 @prop_readonly( NSInteger,	    week );
-@prop_readonly( NSInteger,	    nthWeekday ); // e.g. 2nd Tuesday of the month == 2
-@prop_readonly( NSInteger,      totalDaysInMonth ); // 当前月
-@prop_readonly( NSDate *,       beginningOfMonth ); // first day of current month
-@prop_readonly( NSDate *,       endOfMonth ); // last day of current month
-@prop_readonly( NSDate *,       beginningOfDaytime ); // the zero time of current day
-@prop_readonly( NSString *,     weekStringOfXingQi ); // 星期几
-@prop_readonly( NSString *,     weekStringOfZhou ); // 周几
-@prop_readonly( NSString *,     formattedTime );
-@prop_readonly( NSUInteger,     firstWeekDayInMonth );
-
-@prop_readonly( NSDate *,       beginningOfDay );
-@prop_readonly( NSDate *,       endOfDay );
-@prop_readonly( NSDate *,       beginningOfWeek );
-@prop_readonly( NSDate *,       endOfWeek );
-@prop_readonly( NSDate *,       beginningOfYear );
-@prop_readonly( NSDate *,       endOfYear );
-
-@property (readonly) NSInteger nearestHour;
 
 + (NSTimeInterval)unixTime;
 + (NSString *)unixDate;
@@ -71,60 +56,6 @@ typedef enum {
 - (NSString *)toString:(NSString *)format timeZoneGMT:(NSInteger)hours;
 - (NSString *)toString:(NSString *)format timeZoneName:(NSString *)name;
 
-/*
- * 计算指定时间与当前的时间差
- * @param compareDate   某一指定时间
- * @return 多少(秒or分or天or月or年)+前 (比如，3天前、10分钟前)
- */
-+ (NSString *)compareCurrentTime:(NSDate *) compareDate;
-
-@end
-
-#pragma mark - Comparing dates
-
-@interface NSDate ( Comparison )
-
-+ (BOOL)isLeapYear:(NSInteger)year;
-
-- (BOOL)isDayEqualToDate:(NSDate *)anotherDate;
-- (BOOL)isYearMonthDayEqualToDate:(NSDate *)anotherDate;
-- (BOOL)isYearMonthEqualToDate:(NSDate *)anotherDate;
-- (BOOL)isComponentDayEqualToDate:(NSDate *)anotherDate;
-- (BOOL)isEqualToDateIgnoringTime:(NSDate *)aDate;
-- (BOOL)isToday;
-- (BOOL)isTomorrow;
-- (BOOL)isYesterday;
-- (BOOL)isSameWeekAsDate:(NSDate *)aDate;
-- (BOOL)isThisWeek;
-- (BOOL)isNextWeek;
-- (BOOL)isLastWeek;
-- (BOOL)isSameYearAsDate:(NSDate *)aDate;
-- (BOOL)isThisYear;
-- (BOOL)isNextYear;
-- (BOOL)isLastYear;
-- (BOOL)isEarlierThanDate:(NSDate *)aDate; // is before
-- (BOOL)isLaterThanDate:(NSDate *)aDate; // is after
-
-#pragma mark - 判断日期
-- (BOOL)isSameMonthAsDate:(NSDate *) aDate;
-- (BOOL)isThisMonth;
-- (BOOL)isInFuture;
-- (BOOL)isInPast;
-
-#pragma mark - 周末和工作日
-- (BOOL)isTypicallyWorkday;
-- (BOOL)isTypicallyWeekend;
-
-@end
-
-#define D_MINUTE	60
-#define D_HOUR		3600
-#define D_DAY		86400
-#define D_WEEK		604800
-#define D_YEAR		31556926
-
-@interface NSDate ( Computation )
-
 // Transite by format
 + (NSDate *)fromString:(NSString *)string;
 /*
@@ -136,42 +67,5 @@ typedef enum {
  */
 + (NSDate *)dateFromString:(NSString *)dateString;
 + (NSDate *)dateFromString:(NSString *)dateString withFormat:(NSString *)fmt;
-
-// Relative dates from the current date
-+ (NSDate *)dateTomorrow;
-+ (NSDate *)dateYesterday;
-+ (NSDate *)dateWithDaysFromNow:(NSUInteger)days;
-+ (NSDate *)dateWithDaysBeforeNow:(NSUInteger)days;
-+ (NSDate *)dateWithHoursFromNow:(NSUInteger)dHours;
-+ (NSDate *)dateWithHoursBeforeNow:(NSUInteger)dHours;
-+ (NSDate *)dateWithMinutesFromNow:(NSUInteger)dMinutes;
-+ (NSDate *)dateWithMinutesBeforeNow:(NSUInteger)dMinutes;
-+ (NSDate *)dateFromHour:(NSInteger)hour day:(NSInteger)day month:(NSInteger)month year:(NSInteger)year;
-+ (NSDate *)dateFromDay:(NSInteger)day month:(NSInteger)month year:(NSInteger)year;
-+ (NSDate *)dateWithNoTime:(NSDate *)dateTime middleDay:(BOOL)middle;
-+ (NSDate *)dateFromLongLong:(long long)msSince1970;
-
-// Adjusting dates
-- (NSDate *)dateByAddingDays:(NSUInteger)dDays;
-- (NSDate *)dateBySubtractingDays:(NSUInteger)dDays;
-- (NSDate *)dateByAddingHours:(NSUInteger)dHours;
-- (NSDate *)dateBySubtractingHours:(NSUInteger)dHours;
-- (NSDate *)dateByAddingMinutes:(NSUInteger)dMinutes;
-- (NSDate *)dateBySubtractingMinutes:(NSUInteger)dMinutes;
-- (NSDate *)dateAtStartOfDay;
-- (NSDate *)dateAfterDay:(NSInteger)day; // 返回day天后的日期(若day为负数,则为|day|天前的日期)
-- (NSDate *)dateAfterMonth:(int)month; // month个月后的日期
-
-// Retrieving intervals
-- (NSInteger)minutesAfterDate:(NSDate *)aDate;
-- (NSInteger)minutesBeforeDate:(NSDate *)aDate;
-- (NSInteger)hoursAfterDate:(NSDate *)aDate;
-- (NSInteger)hoursBeforeDate:(NSDate *)aDate;
-- (NSInteger)daysAfterDate:(NSDate *)aDate;
-- (NSInteger)daysBeforeDate:(NSDate *)aDate;
-
-// Calculate month/day/hours count
-+ (NSInteger)numberOfDaysInMonth:(NSInteger)month; // caculate number of days by specified month and current year
-+ (NSInteger)numberOfDaysInMonth:(NSInteger)month year:(NSInteger) year; // caculate number of days by specified month and year
 
 @end
