@@ -24,6 +24,8 @@ target 'startup' do
     # 其他依赖
     ######################################
     
+    pod 'ReactiveObjC'
+    
     pod 'Masonry'
     
     pod 'YYModel'

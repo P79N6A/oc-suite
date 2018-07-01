@@ -26,10 +26,8 @@
 /**
   *  URL到字符串
   */
-#define NSStringFromURL( _url_ )                [NSString stringWithFormat:@"url = {scheme: %@, host: %@, port: %@, path: %@, relative path: %@, path components as array: %@, parameter string: %@, query: %@, fragment: %@, user: %@, password: %@}", url.scheme, url.host, url.port, url.path, url.relativePath, url.pathComponents, url.parameterString, url.query, url.fragment, url.user, url.password]
-
 #define string_format( _format_, ... )          [NSString stringWithFormat:_format_, __VA_ARGS__]
-
+#define string_from_url( _url_ )                [NSString stringWithFormat:@"url = {scheme: %@, host: %@, port: %@, path: %@, relative path: %@, path components as array: %@, parameter string: %@, query: %@, fragment: %@, user: %@, password: %@}", url.scheme, url.host, url.port, url.path, url.relativePath, url.pathComponents, url.parameterString, url.query, url.fragment, url.user, url.password]
 #define string_from_charPtr( _charPtr_ )        [NSString stringWithUTF8String:_charPtr_]
 #define string_from_type( _type_ )              string_from_charPtr( @encode(_type_) )
 #define string_from_int32( _value_ )            [NSString stringWithFormat:@"%d",(int32_t)_value_]

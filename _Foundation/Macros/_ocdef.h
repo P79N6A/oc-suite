@@ -1,11 +1,11 @@
 // weak, 自动变量为 '_'
-#define weakly( _val_ ) __unused __weak typeof(_val_) _ = _val_;
+#define weakly( value ) __unused __weak typeof(value) _ = value;
 
 // 调试代码块
 #ifdef DEBUG
 
 #   define LOG( s, ... ) fprintf(stderr,"%s, %d, %s\n", [[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, [[NSString stringWithFormat:(s), ##__VA_ARGS__] UTF8String]);
-#   define debug_code( __code_fragment ) { __code_fragment }
+#   define debug_code( code_fragment ) { code_fragment }
 
 #else
 
@@ -16,11 +16,11 @@
 
 // 大小
 #ifndef MAX3
-#   define MAX3(a,b,c) ((a) > (b) ? ((a) > (c) ? (a) : (c)) : ((b) > (c) ? (b) : (c)))
+#   define MAX3(a, b, c) ((a) > (b) ? ((a) > (c) ? (a) : (c)) : ((b) > (c) ? (b) : (c)))
 #endif
 
 #ifndef MIN3
-#   define MIN3(a,b,c) ((a) < (b) ? ((a) < (c) ? (a) : (c)) : ((b) < (c) ? (b) : (c)))
+#   define MIN3(a, b, c) ((a) < (b) ? ((a) < (c) ? (a) : (c)) : ((b) < (c) ? (b) : (c)))
 #endif
 
 // 判断某个方法是否覆写
@@ -55,41 +55,41 @@ static inline BOOL is_empty(id thing) {
     ([thing respondsToSelector:@selector(count)]  && [(NSArray *)thing count] == 0);
 }
 
-#define return_if( _exp_ ) if (_exp_) { return; }
+#define return_if( _exp_ )              if (_exp_) { return; }
 
 // 从 String 到 NSURL
 #undef  url_with_string
-#define url_with_string( _str_ ) [NSURL URLWithString:_str_]
+#define url_with_string( _str_ )        [NSURL URLWithString:_str_]
 
 // 从 String.filePath 到 NSURL
 #undef  url_with_filepath
-#define url_with_filepath( _path_ ) [NSURL fileURLWithPath:_path_]
+#define url_with_filepath( _path_ )     [NSURL fileURLWithPath:_path_]
 
 #undef  app_set_indicator
-#define app_set_indicator( _value_ ) [UIApplication sharedApplication].networkActivityIndicatorVisible = _value_;
+#define app_set_indicator( _value_ )    [UIApplication sharedApplication].networkActivityIndicatorVisible = _value_;
 
 #undef  invoke_nullable_block_noarg
-#define invoke_nullable_block_noarg( _block_ ) { if (_block_) _block_(); }
+#define invoke_nullable_block_noarg( _block_ )  { if (_block_) _block_(); }
 
 #undef  invoke_nullable_block
-#define invoke_nullable_block( _block_, ... ) { if (_block_) _block_(__VA_ARGS__); }
+#define invoke_nullable_block( _block_, ... )   { if (_block_) _block_(__VA_ARGS__); }
 
 #undef  selectorify
-#define selectorify( _code_ ) NSSelectorFromString( @#_code_ )
+#define selectorify( _code_ )                   NSSelectorFromString( @#_code_ )
 
 // 类型转换：从 id 到 NSObject
 
 #undef  objectype
-#define objectype( _val_ ) ((NSObject *)_val_)
+#define objectype( _val_ )                      ((NSObject *)_val_)
 
 #undef  stringtype
-#define stringtype( _val_ ) ((NSString *)_val_)
+#define stringtype( _val_ )                     ((NSString *)_val_)
 
 #undef  arraytype
-#define arraytype( _val_ ) ((NSArray *)_val_)
+#define arraytype( _val_ )                      ((NSArray *)_val_)
 
 #undef  dictionarytype
-#define dictionarytype( _val_ ) ((NSDictionary *)_val_)
+#define dictionarytype( _val_ )                 ((NSDictionary *)_val_)
 
 #undef  is_main_thread
-#define is_main_thread          [NSThread isMainThread]
+#define is_main_thread                          [NSThread isMainThread]

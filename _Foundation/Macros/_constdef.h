@@ -52,12 +52,11 @@
 
 // inspired by https://github.com/6david9/CBExtension/tree/master/CBExtension/CBExtension/UtilityMacro
 /** 一天的秒数 */
-#define SecondsOfDay            (24.f * 60.f * 60.f)
-/** 秒数 */
-#define Seconds(Days)           (24.f * 60.f * 60.f * (Days))
-
+#define seconds_of_1day                 (24.f * 60.f * 60.f)
+/** 几天的秒数 */
+#define seconds_of( value )             (24.f * 60.f * 60.f * (value))
 /** 一天的毫秒数 */
-#define MillisecondsOfDay       (24.f * 60.f * 60.f * 1000.f)
-/** 毫秒数 */
-#define Milliseconds(Days)      (24.f * 60.f * 60.f * 1000.f * (Days))
+#define milliseconds_of_1day            (24.f * 60.f * 60.f * 1000.f)
+/** 几天的毫秒数 */
+#define milliseconds_of( value )        (24.f * 60.f * 60.f * 1000.f * (value))
 

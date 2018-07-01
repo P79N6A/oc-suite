@@ -24,15 +24,15 @@
 // ----------------------------------
 // 系统控件基础定义，如：导航栏、状态栏、标签栏
 // ----------------------------------
-#define status_bar_height        20
-#define navigation_bar_height    44
+#define status_bar_height               20
+#define navigation_bar_height           44
 #define navigation_status_bar_height    64
-#define tab_bar_height           49
-#define keyboard_height          216
+#define tab_bar_height                  49
+#define keyboard_height                 216
 
-#define separator_height        8
+#define separator_height                8
 
-#define status_bar_orientation    [[UIApplication sharedApplication] statusBarOrientation]
+#define status_bar_orientation      [[UIApplication sharedApplication] statusBarOrientation]
 
 // ----------------------------------
 // 间隔与边距基础定义
@@ -110,19 +110,19 @@
 #define FONT_18                         [UIFont systemFontOfSize:POUND_18]
 #define FONT_23                         [UIFont systemFontOfSize:POUND_23]
 
-#define font_sm            font_normal_9
-#define font_ss            font_normal_11
-#define font_s             font_normal_14
-#define font_m             font_normal_15
-#define font_l             font_normal_18
-#define font_xl            font_normal_23
+#define font_sm                         font_normal_9
+#define font_ss                         font_normal_11
+#define font_s                          font_normal_14
+#define font_m                          font_normal_15
+#define font_l                          font_normal_18
+#define font_xl                         font_normal_23
 
 //粗体
-#define bold_font_ss        font_bold_11
-#define bold_font_s         font_bold_14
-#define bold_font_m         font_bold_15
-#define bold_font_l         font_bold_18
-#define bold_font_xl        font_bold_23
+#define bold_font_ss                    font_bold_11
+#define bold_font_s                     font_bold_14
+#define bold_font_m                     font_bold_15
+#define bold_font_l                     font_bold_18
+#define bold_font_xl                    font_bold_23
 
 // 定义UIImage对象
 #define image_named( _pointer_ ) [UIImage imageNamed:_pointer_]

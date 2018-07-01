@@ -15,7 +15,6 @@
 #define system_version_less_than_or_equal_to( _version_ )     ([[[UIDevice currentDevice] systemVersion] compare:_version_ options:NSNumericSearch] != NSOrderedDescending)
 
 // 系统版本 常量宏 定义
-
 #define system_version_iOS8_or_later system_version_greater_than_or_equal_to(@"8.0")
 #define system_version_iOS9_or_later system_version_greater_than_or_equal_to(@"9.0")
 #define system_version_iOS10_or_later system_version_greater_than_or_equal_to(@"10.0")
@@ -38,25 +37,17 @@ if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"3.1.1")) {
             [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]]; \
         }
 
-/**
- *  是否模拟器
- */
+/** 是否模拟器 */
 #define is_simulator  (NSNotFound != [[[UIDevice currentDevice] model] rangeOfString:@"Simulator"].location)
 #define is_device !is_simulator
 
-/**
- *  是否iPad
- */
+/** 是否iPad */
 #define is_iPad (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 
-/**
- *  是否iPhone iPod touch
- */
+/** 是否iPhone iPod touch */
 #define is_iPhone (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 
-/**
- *  是否高清屏
- */
+/** 是否高清屏 */
 #define is_retina ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) : NO)
 
 /**

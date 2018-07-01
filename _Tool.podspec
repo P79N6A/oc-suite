@@ -60,9 +60,9 @@ Pod::Spec.new do |s|
     nosql.source_files = "_Tool/NoSQL/**/*.{h,m}"
   end
 
-  s.subspec 'Processor' do |processor|
-    processor.source_files = "_Tool/Processor/**/*.{h,m,mm,c}"
-    processor.libraries = "c++"
+  s.subspec 'Utility' do |utility|
+    utility.source_files = "_Tool/Utility/**/*.{h,m,mm,c}"
+    utility.libraries = "c++"
   end
 
   s.subspec 'Image' do |image|
@@ -71,12 +71,6 @@ Pod::Spec.new do |s|
 
   s.subspec 'Log' do |log|
     log.source_files = "_Tool/Log/**/*.{h,m}"
-  end
-
-  s.subspec 'Validator' do |validator|
-    validator.source_files = "_Tool/Validator/**/*.{h,m}"
-    validator.requires_arc = false
-    validator.requires_arc = ['_Tool/Validator/*.{h,m}', '_Tool/Validator/Extension/*.{h,m}']
   end
 
   s.subspec 'Date' do |date|
