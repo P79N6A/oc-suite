@@ -5,6 +5,7 @@ static NSInteger numberOfRunningOperations;
 static NSString * kBoundary = @"0xKhTmLbOuNdArY";
 
 @interface _NetRequest (/*Private Methods*/)
+
 @property NSMutableArray *stateArray;
 @property NSString *urlString;
 @property NSData *bodyData;
@@ -24,48 +25,45 @@ static NSString * kBoundary = @"0xKhTmLbOuNdArY";
 @property NSMutableArray *completionHandlers;
 @property NSMutableArray *uploadProgressChangedHandlers;
 @property NSMutableArray *downloadProgressChangedHandlers;
+
 @end
 
 @implementation _NetRequest
 
-#pragma mark -
-#pragma mark Designated Initializer
+// MARK: - Designated Initializer
 
 - (instancetype)initWithURLString:(NSString *) aURLString
                            params:(NSDictionary*) params
                          bodyData:(NSData *) bodyData
                        httpMethod:(NSString *) httpMethod {
-  
-  if(self = [super init]) {
-    
-    self.stateArray = [NSMutableArray array];
-    self.urlString = aURLString;
-    if(params) {
-      self.parameters = params.mutableCopy;
-    } else {
-      self.parameters = [NSMutableDictionary dictionary];
+    if (self = [super init]) {
+        self.stateArray = [NSMutableArray array];
+        self.urlString = aURLString;
+        if(params) {
+            self.parameters = params.mutableCopy;
+        } else {
+            self.parameters = [NSMutableDictionary dictionary];
+        }
+
+        self.bodyData = bodyData;
+        self.httpMethod = httpMethod;
+
+        self.headers = [NSMutableDictionary dictionary];
+
+        self.completionHandlers = [NSMutableArray array];
+        self.uploadProgressChangedHandlers = [NSMutableArray array];
+        self.downloadProgressChangedHandlers = [NSMutableArray array];
+
+        self.attachedData = [NSMutableArray array];
+        self.attachedFiles = [NSMutableArray array];
     }
-    
-    self.bodyData = bodyData;
-    self.httpMethod = httpMethod;
-    
-    self.headers = [NSMutableDictionary dictionary];
-    
-    self.completionHandlers = [NSMutableArray array];
-    self.uploadProgressChangedHandlers = [NSMutableArray array];
-    self.downloadProgressChangedHandlers = [NSMutableArray array];
-    
-    self.attachedData = [NSMutableArray array];
-    self.attachedFiles = [NSMutableArray array];
-  }
   
-  return self;
+    return self;
 }
 
-#pragma mark - Lazy request creator
+// MARK: - Lazy request creator
 
 - (NSMutableURLRequest *)request {
-  
   NSURL *url = nil;
   if (([self.httpMethod.uppercaseString isEqualToString:@"GET"] ||
        [self.httpMethod.uppercaseString isEqualToString:@"DELETE"] ||
@@ -205,8 +203,7 @@ static NSString * kBoundary = @"0xKhTmLbOuNdArY";
   return formData;
 }
 
-
-#pragma mark - Network response caching related helper methods
+// MARK: - Network response caching related helper methods
 
 - (BOOL)isSSL {
   return [self.request.URL.scheme.lowercaseString isEqualToString:@"https"];
@@ -250,8 +247,7 @@ static NSString * kBoundary = @"0xKhTmLbOuNdArY";
     }
 }
 
-#pragma mark -
-#pragma mark Methods to customize your network request after initialization
+// MARK: - Methods to customize your network request after initialization
 
 - (void) addCompletionHandler:(NetHandler) completionHandler {
   
@@ -287,24 +283,26 @@ static NSString * kBoundary = @"0xKhTmLbOuNdArY";
   [self.attachedFiles addObject:dict];
 }
 
--(void) attachData:(NSData*) data forKey:(NSString*) key mimeType:(NSString*) mimeType suggestedFileName:(NSString*) fileName {
-  
-  if(!fileName) fileName = key;
-  
-  NSDictionary *dict = @{@"data": data,
+- (void)attachData:(NSData *)data
+            forKey:(NSString *)key
+          mimeType:(NSString *)mimeType
+ suggestedFileName:(NSString *)fileName {
+    if(!fileName) fileName = key;
+
+    NSDictionary *dict = @{@"data": data,
                          @"name": key,
                          @"mimetype": mimeType,
                          @"filename": fileName};
-  
-  [self.attachedData addObject:dict];
+
+    [self.attachedData addObject:dict];
 }
 
--(void) setAuthorizationHeaderValue:(NSString*) value forAuthType:(NSString*) authType {
-  
-  self.headers[@"Authorization"] = [NSString stringWithFormat:@"%@ %@", authType, value];
+- (void)setAuthorizationHeaderValue:(NSString *)value
+                        forAuthType:(NSString *)authType {
+    self.headers[@"Authorization"] = [NSString stringWithFormat:@"%@ %@", authType, value];
 }
 
-#pragma mark - Display Helpers
+// MARK: - Display Helpers
 
 - (NSString *)description {
   
@@ -366,7 +364,7 @@ static NSString * kBoundary = @"0xKhTmLbOuNdArY";
   return displayString;
 }
 
-#pragma mark - Completion triggers
+// MARK: - Completion triggers
 
 - (void)incrementRunningOperations {
   
@@ -437,33 +435,6 @@ static NSString * kBoundary = @"0xKhTmLbOuNdArY";
     [self decrementRunningOperations];
   }
 }
-
-#pragma mark -
-#pragma mark Response formatting helpers
-
-//#if TARGET_OS_IPHONE
-//- (UIImage *)responseAsImage {
-//
-//  static CGFloat scale = 2.0f;
-//  static dispatch_once_t onceToken;
-//  dispatch_once(&onceToken, ^{
-//    scale = [UIScreen mainScreen].scale;
-//  });
-//  return [UIImage imageWithData:self.responseData scale:scale];
-//}
-//
-//-(UIImage*) decompressedResponseImageOfSize:(CGSize) size {
-//
-//  CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)(self.responseData), NULL);
-//  CGImageRef cgImage = CGImageSourceCreateImageAtIndex(source, 0, (__bridge CFDictionaryRef)(@{(id)kCGImageSourceShouldCache:@(YES)}));
-//  UIImage *decompressedImage = [UIImage imageWithCGImage:cgImage];
-//  if(source)
-//    CFRelease(source);
-//  if(cgImage)
-//    CGImageRelease(cgImage);
-//
-//  return decompressedImage;
-//}
 
 - (id)responseAsJSON {
   

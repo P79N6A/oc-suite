@@ -21,6 +21,39 @@ target 'startup' do
     pod '_Tool/Date', :path => '../'
     
     pod '_Modular', :path => '../'
+    
+    pod '_Components/ActionSheetView', :path => '../'
+    pod '_Components/AlertView', :path => '../'
+    pod '_Components/BadgeView', :path => '../'
+    pod '_Components/BlankHolderView', :path => '../'
+    pod '_Components/CycleScrollView', :path => '../'
+    pod '_Components/DatePickerView', :path => '../'
+    pod '_Components/DropDownMenu', :path => '../'
+    pod '_Components/FiniteScrollView', :path => '../'
+    pod '_Components/FlatActionSheetView', :path => '../'
+    pod '_Components/ImageBrowserView', :path => '../'
+    pod '_Components/ImagePicker', :path => '../'
+    pod '_Components/IndicatorView', :path => '../'
+    pod '_Components/InfiniteScrollView', :path => '../'
+    pod '_Components/KeyboardControl', :path => '../'
+    pod '_Components/LaunchAdView', :path => '../'
+    pod '_Components/LoadableImageView', :path => '../'
+    
+    pod '_Components/LocalImageBrowser', :path => '../'
+    pod '_Components/LocalImageEditableBrowserView', :path => '../'
+    pod '_Components/PopupView', :path => '../'
+    pod '_Components/PopViewController', :path => '../'
+    pod '_Components/ProgressHUD', :path => '../'
+    pod '_Components/QRCodeReaderView', :path => '../'
+    
+    pod '_Components/PopViewController', :path => '../'
+    pod '_Components/RateView', :path => '../'
+    pod '_Components/RefreshView', :path => '../'
+    pod '_Components/SegmentControl', :path => '../'
+    pod '_Components/SegmentView', :path => '../'
+    pod '_Components/TagsView', :path => '../'
+    pod '_Components/UserGuideView', :path => '../'
+    pod '_Components/WaterFallView', :path => '../'
 
     ######################################
     # 其他依赖
