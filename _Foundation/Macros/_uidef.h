@@ -8,18 +8,18 @@
 // ----------------------------------
 // 系统屏幕
 // ----------------------------------
-#define screen_bounds       [[UIScreen mainScreen] bounds]
-#define screen_size         screen_bounds.size
-#define screen_width        [[UIScreen mainScreen] bounds].size.width
-#define screen_height       [[UIScreen mainScreen] bounds].size.height
-#define screen_scale        [[UIScreen mainScreen] scale]
+#define screen_bounds                   [[UIScreen mainScreen] bounds]
+#define screen_size                     screen_bounds.size
+#define screen_width                    [[UIScreen mainScreen] bounds].size.width
+#define screen_height                   [[UIScreen mainScreen] bounds].size.height
+#define screen_scale                    [[UIScreen mainScreen] scale]
 
-#define app_frame       [[UIScreen mainScreen] applicationFrame]
-#define app_frame_height        ([[UIScreen mainScreen] applicationFrame].size.height)
-#define app_frame_width         ([[UIScreen mainScreen] applicationFrame].size.width)
+#define app_frame                       [[UIScreen mainScreen] applicationFrame]
+#define app_frame_height                ([[UIScreen mainScreen] applicationFrame].size.height)
+#define app_frame_width                 ([[UIScreen mainScreen] applicationFrame].size.width)
 
 // iphoneX 底部菜单栏 34 nanhaichao
-#define IS_IPHONE_X (screen_height == 812.0)
+#define IS_IPHONE_X                     (screen_height == 812.0)
 
 // ----------------------------------
 // 系统控件基础定义，如：导航栏、状态栏、标签栏
@@ -32,28 +32,28 @@
 
 #define separator_height                8
 
-#define status_bar_orientation      [[UIApplication sharedApplication] statusBarOrientation]
+#define status_bar_orientation          [[UIApplication sharedApplication] statusBarOrientation]
 
 // ----------------------------------
 // 间隔与边距基础定义
 // ----------------------------------
 
-#define PIXEL_sss   0.5f
-#define PIXEL_1     1.f
-#define PIXEL_3     3.f
-#define PIXEL_2     2.f
-#define PIXEL_4     4.f
-#define PIXEL_5     5.f
-#define PIXEL_6     6.f
-#define PIXEL_8     8.f
-#define PIXEL_10    10.f
-#define PIXEL_12    12.f
-#define PIXEL_16    16.f
-#define PIXEL_24    24.f
-#define PIXEL_36    36.f
-#define PIXEL_40    40.f
-#define PIXEL_48    48.f
-#define PIXEL_56    56.f
+#define PIXEL_sss                       0.5f
+#define PIXEL_1                         1.f
+#define PIXEL_3                         3.f
+#define PIXEL_2                         2.f
+#define PIXEL_4                         4.f
+#define PIXEL_5                         5.f
+#define PIXEL_6                         6.f
+#define PIXEL_8                         8.f
+#define PIXEL_10                        10.f
+#define PIXEL_12                        12.f
+#define PIXEL_16                        16.f
+#define PIXEL_24                        24.f
+#define PIXEL_36                        36.f
+#define PIXEL_40                        40.f
+#define PIXEL_48                        48.f
+#define PIXEL_56                        56.f
 
 #define margin_l    PIXEL_16
 #define margin_m    PIXEL_8
@@ -125,8 +125,8 @@
 #define bold_font_xl                    font_bold_23
 
 // 定义UIImage对象
-#define image_named( _pointer_ ) [UIImage imageNamed:_pointer_]
-#define image_pathof( _path_ )   [UIImage imageWithContentsOfFile:(path)]
-#define png_image( _name_ )       [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:(_name_) ofType:@"png"]]
-#define jpg_image( _name_ )       [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:(_name_) ofType:@"jpg"]]
+#define image_named( _pointer_ )        [UIImage imageNamed:_pointer_]
+#define image_pathof( _path_ )          [UIImage imageWithContentsOfFile:(path)]
+#define png_image( _name_ )             [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:(_name_) ofType:@"png"]]
+#define jpg_image( _name_ )             [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:(_name_) ofType:@"jpg"]]
 
