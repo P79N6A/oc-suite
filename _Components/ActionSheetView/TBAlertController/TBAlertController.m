@@ -5,8 +5,8 @@
 //  Copyright © 2015年 Tencent. All rights reserved.
 //
 
+#import "_Building.h"
 #import "TBAlertController.h"
-#import "_building_precompile.h"
 #import <objc/runtime.h>
 
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"

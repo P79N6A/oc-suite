@@ -6,8 +6,8 @@
 //  Copyright © 2016年 杨萧玉. All rights reserved.
 //
 
+#import "_Building.h"
 #import "UIWindow+TBAdditions.h"
-#import "_building_precompile.h"
 
 @implementation UIWindow (TBAdditions)
 

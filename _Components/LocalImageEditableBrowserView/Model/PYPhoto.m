@@ -1,4 +1,4 @@
-#import "_building_precompile.h"
+#import "_Building.h"
 #import "PYPhoto.h"
 
 @implementation PYPhoto

@@ -1,4 +1,4 @@
-#import "_building_precompile.h"
+#import "_Building.h"
 #import "PYPhotoView.h"
 #import "PYPhoto.h"
 #import "PYConst.h"

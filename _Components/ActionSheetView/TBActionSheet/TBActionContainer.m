@@ -6,8 +6,8 @@
 //  Copyright © 2016年 杨萧玉. All rights reserved.
 //
 
+#import "_Building.h"
 #import "TBActionContainer.h"
-#import "_building_precompile.h"
 #import "TBActionSheet.h"
 #import "TBActionButton.h"
 #import "UIView+TBAdditions.h"

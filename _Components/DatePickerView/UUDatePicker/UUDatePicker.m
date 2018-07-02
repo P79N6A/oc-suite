@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 uyiuyao. All rights reserved.
 //
 
+#import "_Building.h"
 #import "UUDatePicker.h"
 #import "UUDatePicker_DateModel.h"
-#import "_greats.h"
 
 #define UUPICKER_MAXDATE 2050
 #define UUPICKER_MINDATE 1970
@@ -418,7 +418,7 @@
     [pickerView reloadAllComponents];
     
 //    [self playTheDelegate];
-    [main_queue queueBlock:^{
+    [main_queue execute:^{
         [self playTheDelegate];
     }];
 }

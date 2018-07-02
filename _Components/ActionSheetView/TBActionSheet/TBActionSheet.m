@@ -5,6 +5,7 @@
 //  Copyright © 2015年 杨萧玉. All rights reserved.
 //
 
+#import "_Building.h"
 #import "TBActionSheet.h"
 #import "UIImage+BoxBlur.h"
 #import "TBActionContainer.h"
@@ -12,7 +13,6 @@
 #import "TBActionSheetController.h"
 #import "UIWindow+TBAdditions.h"
 #import "UIView+TBAdditions.h"
-#import "_building_precompile.h"
 
 const CGFloat bigFragment = 8;
 const CGFloat smallFragment = 0.5;

@@ -6,7 +6,7 @@
 //
 //  fallenink: 这个可以作为window实现弹出框的模板。
 
-#import "BaseViewController.h"
+#import "_Building.h"
 
 #pragma mark -
 
@@ -15,7 +15,7 @@
 /**
  *  1. 不支持点击背景消失
  */
-@interface BusinessTimeDatePickerController : BaseViewController
+@interface BusinessTimeDatePickerController : UIViewController
 
 /**
  *  代理

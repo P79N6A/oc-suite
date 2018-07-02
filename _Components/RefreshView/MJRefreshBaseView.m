@@ -6,7 +6,7 @@
 //  Copyright (c) 2013年 itcast. All rights reserved.
 //
 
-#import "_building_precompile.h"
+#import "_Building.h"
 #import "MJRefreshBaseView.h"
 #import "MJRefreshConst.h"
 #import "UIScrollView+Extension.h"

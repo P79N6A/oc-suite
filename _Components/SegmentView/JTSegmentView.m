@@ -1,5 +1,5 @@
 
-#import "_building_precompile.h"
+#import "_Building.h"
 #import "JTSegmentView.h"
 
 @interface JTSegmentView ()

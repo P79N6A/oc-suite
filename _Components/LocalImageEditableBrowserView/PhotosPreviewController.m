@@ -1,7 +1,5 @@
 
-#import "_building_precompile.h"
-#import "_building_application.h"
-#import "BaseNavigationController.h"
+#import "_Building.h"
 #import "PhotosPreviewController.h"
 #import "PYPhotoCell.h"
 
@@ -184,7 +182,7 @@
 #pragma mark - <UIActionSheetDelegate>
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 0) { // 删除
-        [self showSuccess:@"已删除"];// 计算页数
+//        [self showSuccess:@"已删除"];// 计算页数
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 删除图片
             [self deleteImage];
         });

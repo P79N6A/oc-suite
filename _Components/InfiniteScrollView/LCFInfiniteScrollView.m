@@ -6,9 +6,9 @@
 //  Copyright © 2016年 leichunfeng. All rights reserved.
 //
 
-#import "_building_precompile.h"
-#import "_vendor_sdwebimage.h"
-
+#import "_Building.h"
+#import <SDWebImage/SDWebImageManager.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "LCFInfiniteScrollView.h"
 #import "LCFCollectionViewFlowLayout.h"
 #import "LCFCollectionViewCell.h"

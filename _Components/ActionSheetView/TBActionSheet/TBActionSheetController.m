@@ -6,10 +6,10 @@
 //  Copyright © 2016年 杨萧玉. All rights reserved.
 //
 
+#import "_Building.h"
 #import "TBActionSheetController.h"
 #import "TBActionSheet.h"
 #import "UIWindow+TBAdditions.h"
-#import "_building_precompile.h"
 
 @implementation TBActionSheetController
 
