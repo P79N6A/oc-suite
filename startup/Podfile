@@ -9,7 +9,7 @@ target 'startup' do
     ######################################
     
     pod '_Foundation', :path => '../' # pod '_Foundation', :git => 'https://github.com/fallending/oc-suite.git'
-    pod '_UI', :path => '../'
+    pod '_Building', :path => '../'
     
     pod '_Tool/NetworkLit', :path => '../'
     pod '_Tool/Network/Reachability', :path => '../'
@@ -44,8 +44,8 @@ target 'startup' do
     pod '_Components/PopupView', :path => '../'
     pod '_Components/PopViewController', :path => '../'
     pod '_Components/ProgressHUD', :path => '../'
-    pod '_Components/QRCodeReaderView', :path => '../'
-    
+#    pod '_Components/QRCodeReaderView', :path => '../'
+
     pod '_Components/PopViewController', :path => '../'
     pod '_Components/RateView', :path => '../'
     pod '_Components/RefreshView', :path => '../'
@@ -64,6 +64,10 @@ target 'startup' do
     pod 'Masonry'
     
     pod 'YYModel'
+    
+    pod 'SDWebImage', '~> 4.0'
+    
+    pod 'AFNetworking', '~> 3.0'
     
     # pod 'RealReachability' # 非网络连接状态，而是网络到达状态，比如：Wi-Fi 并 能否连接到www.baidu.com
     

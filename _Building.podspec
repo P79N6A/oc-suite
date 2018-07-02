@@ -7,8 +7,8 @@
 #
 
 Pod::Spec.new do |s|
-  s.name         = "_UI"
-  s.version      = "0.1.0"
+  s.name         = "_Building"
+  s.version      = "0.1.1"
   s.summary      = "iOS 开发包 之 UI 库[Objective-C]"
   s.description  = <<-DESC
                    iOS 开发包 之 UI 库[Objective-C]
@@ -31,7 +31,7 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files = "_UI/*.{h,m}", "_UI/Core/**/*.{h,m}", "_UI/Template/**/*.{h,m}"
+  s.source_files = "_Building/*.{h,m}", "_Building/Core/**/*.{h,m}", "_Building/Template/**/*.{h,m}", "_Building/Base/**/*.{h,m}"
   # s.exclude_files = "Classes/Exclude"
 
 end

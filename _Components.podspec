@@ -24,8 +24,9 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/fallending"
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
   s.author       = { '7' => 'fengzilijie@qq.com' }
-  s.source       = { :git => 'https://github.com/fallending/oc-suite.git', :tag => s.version.to_s }
 
+  s.ios.deployment_target = '8.0'
+  s.source       = { :git => 'https://github.com/fallending/oc-suite.git', :tag => s.version.to_s }
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -129,10 +130,6 @@ Pod::Spec.new do |s|
 
   s.subspec 'ProgressHUD' do |progressHUD|
     progressHUD.source_files = "_Components/ProgressHUD/**/*.{h,m}"
-  end
-
-  s.subspec 'QRCodeReaderView' do |qrCodeReaderView|
-    qrCodeReaderView.source_files = "_Components/QRCodeReaderView/**/*.{h,m}"
   end
 
   s.subspec 'PopViewController' do |popViewController|
