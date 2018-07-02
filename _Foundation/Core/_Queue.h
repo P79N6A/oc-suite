@@ -42,6 +42,7 @@
 
 #pragma mark - 用法
 - (void)execute:(dispatch_block_t)block;
+- (void)execute:(dispatch_block_t)block completion:(dispatch_block_t)completionHandler;
 - (void)execute:(dispatch_block_t)block afterDelay:(int64_t)delta;
 - (void)execute:(dispatch_block_t)block afterDelaySecs:(float)delta;
 - (void)waitExecute:(dispatch_block_t)block;

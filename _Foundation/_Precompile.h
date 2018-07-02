@@ -85,9 +85,6 @@
 
 #import <Availability.h>
 #import <Foundation/Foundation.h>
-
-#if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
-
 #import <UIKit/UIKit.h>
 #import <UIKit/UIGestureRecognizerSubclass.h>
 #import <CoreText/CoreText.h>
@@ -97,28 +94,15 @@
 #import <TargetConditionals.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <SystemConfiguration/SystemConfiguration.h>
-
 #import <AVFoundation/AVFoundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 #import <CoreVideo/CoreVideo.h>
 #import <CoreMedia/CoreMedia.h>
 #import <CoreImage/CoreImage.h>
 #import <CoreLocation/CoreLocation.h>
-
 #import <objc/runtime.h>
 #import <objc/message.h>
 #import <dlfcn.h>
-
-#else	// #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
-
-#import <Cocoa/Cocoa.h>
-#import <AppKit/AppKit.h>
-#import <WebKit/WebKit.h>
-
-#import <objc/objc-class.h>
-
-#endif	// #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
-
 #import <CommonCrypto/CommonDigest.h>
 
 #endif	// #ifdef __OBJC__

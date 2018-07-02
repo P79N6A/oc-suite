@@ -124,8 +124,24 @@ static _Queue *backgroundPriorityGlobalQueue;
     dispatch_async(self.dispatchQueue, block);
 }
 
-- (void)execute:(dispatch_block_t)block afterDelay:(int64_t)delta {
+- (void)execute:(dispatch_block_t)handler completion:(dispatch_block_t)completion {
+    NSParameterAssert(handler);
+    NSParameterAssert(completion);
     
+    dispatch_async(self.dispatchQueue, ^{
+        @autoreleasepool {
+            handler();
+            
+            if (completion) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completion();
+                });
+            }
+        }
+    });
+}
+
+- (void)execute:(dispatch_block_t)block afterDelay:(int64_t)delta {
     NSParameterAssert(block);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delta), self.dispatchQueue, block);
 }

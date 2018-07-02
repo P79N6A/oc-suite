@@ -1,11 +1,4 @@
 // ----------------------------------
-// MARK: - System headers
-// ----------------------------------
-
-#import <Foundation/Foundation.h>
-#import <CoreGraphics/CoreGraphics.h>
-
-// ----------------------------------
 // MARK: - Framework System headers
 // ----------------------------------
 
