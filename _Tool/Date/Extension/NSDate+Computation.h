@@ -56,8 +56,8 @@
 - (NSDate *)dateByAddingMinutes:(NSUInteger)dMinutes;
 - (NSDate *)dateBySubtractingMinutes:(NSUInteger)dMinutes;
 - (NSDate *)dateAtStartOfDay;
-- (NSDate *)dateAfterDay:(NSInteger)day; // 返回day天后的日期(若day为负数,则为|day|天前的日期)
-- (NSDate *)dateAfterMonth:(int)month; // month个月后的日期
+- (NSDate *)dateAfterDay:(NSUInteger)day; // 返回day天后的日期(若day为负数,则为|day|天前的日期)
+- (NSDate *)dateAfterMonth:(NSUInteger)month; // month个月后的日期
 
 // Retrieving intervals
 - (NSInteger)minutesAfterDate:(NSDate *)aDate;
@@ -129,14 +129,6 @@
  *  [7 - Saturday]
  */
 - (NSString *)dayFromWeekday;
-
-/**
- *  Add days to self
- *
- *  @param days The number of days to add
- *  @return Return self by adding the gived days number
- */
-- (NSDate *)dateByAddingDays:(NSUInteger)days;
 
 /**
  *  Get the month as a localized string from the given month number
