@@ -1,11 +1,3 @@
-//
-//  _component.h
-//  component
-//
-//  Created by fallen.ink on 4/12/16.
-//  Copyright © 2016 OpenTeam. All rights reserved.
-//
-
 
 /**
  *  业务组件（Business component）
@@ -14,7 +6,13 @@
  *  2. 流程（process）
  */
 
-#import "_module.h"
+/**
+ *  @brief 包含业务逻辑的组件模块
+ 
+ *  1.
+ */
+
+#import "_Module.h"
 
 #pragma mark -
 

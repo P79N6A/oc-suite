@@ -6,8 +6,8 @@
 //  Copyright © 2017 fallenink. All rights reserved.
 //
 
-#import "_component_loader.h"
-#import "_component.h"
+#import "_ComponentLoader.h"
+#import "_Component.h"
 
 @implementation _ComponentLoader {
     NSMutableDictionary * _components;
