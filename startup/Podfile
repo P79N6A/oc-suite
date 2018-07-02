@@ -19,6 +19,8 @@ target 'startup' do
 #    pod '_Tool/NoSQL', :path => '../'
     pod '_Tool/Utility', :path => '../'
     pod '_Tool/Date', :path => '../'
+    
+    pod '_Modular', :path => '../'
 
     ######################################
     # 其他依赖
