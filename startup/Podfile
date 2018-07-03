@@ -31,7 +31,7 @@ target 'startup' do
     pod '_Components/DropDownMenu', :path => '../'
     pod '_Components/FiniteScrollView', :path => '../'
     pod '_Components/FlatActionSheetView', :path => '../'
-    pod '_Components/ImageBrowserView', :path => '../'
+#    pod '_Components/ImageBrowserView', :path => '../'
     pod '_Components/ImagePicker', :path => '../'
     pod '_Components/IndicatorView', :path => '../'
     pod '_Components/InfiniteScrollView', :path => '../'
@@ -54,6 +54,14 @@ target 'startup' do
     pod '_Components/TagsView', :path => '../'
     pod '_Components/UserGuideView', :path => '../'
     pod '_Components/WaterFallView', :path => '../'
+    
+    pod '_Modules/Components/Application', :path => '../'
+    
+    pod '_Modules/Components/QRCodeReader', :path => '../'
+    pod '_Modules/Components/WebBrowser', :path => '../'
+    
+    pod '_Modules/Services/Assets', :path => '../'
+    pod '_Modules/Services/Growth', :path => '../'
 
     ######################################
     # 其他依赖

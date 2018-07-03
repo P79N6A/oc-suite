@@ -34,6 +34,11 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
+  s.subspec 'Application' do |application|
+    application.source_files = "_Modules/Application/**/*.{h,m}"
+    application.resources = "_Modules/Application/_AppRater.bundle"
+  end
+  
   s.subspec 'Components' do |components|
     components.subspec 'QRCodeReader' do |qrCodeReader|
       qrCodeReader.source_files = "_Modules/Components/QRCodeReader/**/*.{h,m}"
