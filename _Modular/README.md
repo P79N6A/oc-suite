@@ -1,17 +1,17 @@
-# suite.module-x
-oc framework 之 modular 
+# Modular
 
 ### 分层
 
-1. 应用（application）
-2. 组件（component）
-3. 服务（service）
+1. 应用（Application）
+2. 组件（Component）
+2-3. 中间件 (Mediator) (Docker)
+3. 服务（Service）
 
 ### 组合
 
-1. 组件间管理和通信：compoent+mediator
-2. 组件独立运行：component+docker
-3. 组件更新：component+automodule+watcher（难产）
+1. 组件间管理和通信：Compoent+Mediator
+2. 组件独立运行：Component+Docker
+3. 组件更新：Component+Automodule+Watcher（难产）
 4. 组件测试：（难产）
 
 ### 组件设计
