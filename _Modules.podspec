@@ -40,9 +40,11 @@ Pod::Spec.new do |s|
       qrCodeReader.resources = "_Modules/Components/QRCodeReader/Resources/*.png"
     end
 
-    # components.subspec 'Serializer' do |serializer|
-    #   serializer.source_files = "_Tool/Network/Serializer/*.{h,m}"
-    # end
+    components.subspec 'WebBrowser' do |webBrowser|
+      webBrowser.source_files = "_Modules/Components/WebBrowser/**/*.{h,m}"
+      webBrowser.resources = "_Modules/Components/WebBrowser/web.bundle"
+    end
+
   end
 
   s.subspec 'Services' do |services|
@@ -50,9 +52,9 @@ Pod::Spec.new do |s|
       assets.source_files = "_Modules/Services/Assets/**/*.{h,m}"
     end
 
-    # services.subspec 'Serializer' do |serializer|
-    #   serializer.source_files = "_Tool/Network/Serializer/*.{h,m}"
-    # end
+    services.subspec 'Growth' do |growth|
+      growth.source_files = "_Modules/Services/Growth/**/*.{h,m}"
+    end
   end
 
 end
