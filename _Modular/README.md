@@ -41,5 +41,5 @@
 
 ## 其他推荐方案
 
-1. [Small]()
+1. [Small](https://github.com/BinaryArtists/Small)
 2. 

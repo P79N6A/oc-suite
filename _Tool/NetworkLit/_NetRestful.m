@@ -12,12 +12,13 @@
 
 // MARK: -
 
-- (instancetype)initWithHostname:(NSString *)hostname paramEncoding:(NetRequestParameterEncoding)encoding {
+- (instancetype)initWithHostname:(NSString *)hostname paramEncoding:(NetRequestParameterEncoding)encoding secure:(BOOL)isSecure {
     if (self = [super init]) {
         self.host = [[_NetHost alloc] initWithHostName:hostname];
         
         self.host.defaultHeaders = [self defaultHeader];
         self.host.defaultParameterEncoding = encoding;
+        self.host.secureHost = isSecure;
     }
     
     return self;

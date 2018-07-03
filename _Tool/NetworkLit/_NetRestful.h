@@ -16,7 +16,7 @@ typedef NSDictionary * (^ _NetParameterAppendBlock)(NSString *apiname);
 - (instancetype) init __attribute__((unavailable("init not available, call initWithHostname instead")));
 + (instancetype) new __attribute__((unavailable("new not available, call initWithHostname instead")));
 
-- (instancetype)initWithHostname:(NSString *)hostname paramEncoding:(NetRequestParameterEncoding)encoding;
+- (instancetype)initWithHostname:(NSString *)hostname paramEncoding:(NetRequestParameterEncoding)encoding secure:(BOOL)isSecure;
 
 @property (nonatomic, strong) _NetHeaderAppendBlock headerAppendHandler;
 @property (nonatomic, strong) _NetParameterAppendBlock parameterAppendHandler;
