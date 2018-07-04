@@ -12,7 +12,7 @@
 */
 #define localized(...) [NSString localizedStringWithArgs:__VA_ARGS__]
 
-@interface NSString (Localizable)
+@interface NSString ( Localizable )
 
 + (NSString *)localizedStringWithArgs:(NSString *)fmt, ...;
 

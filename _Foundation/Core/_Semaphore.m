@@ -9,42 +9,31 @@
 @implementation _Semaphore
 
 - (instancetype)init {
-    
-    self = [super init];
-    
-    if (self) {
-        
-        self.dispatchSemaphore = dispatch_semaphore_create(0);
-    }
-    
-    return self;
+    return [self initWithValue:0];
 }
 
 - (instancetype)initWithValue:(long)value {
-    
-    self = [super init];
-    
-    if (self) {
-        
-        self.dispatchSemaphore = dispatch_semaphore_create(value);
+    return [self initWithDispatchSemaphore:dispatch_semaphore_create(value)];
+}
+
+- (instancetype)initWithDispatchSemaphore:(dispatch_semaphore_t)dispatchSemaphore {
+    if (self = [super init]) {
+        self.dispatchSemaphore = dispatchSemaphore;
     }
     
     return self;
 }
 
 - (BOOL)signal {
-    
     return dispatch_semaphore_signal(self.dispatchSemaphore) != 0;
 }
 
 - (void)wait {
-    
     dispatch_semaphore_wait(self.dispatchSemaphore, DISPATCH_TIME_FOREVER);
 }
 
-- (BOOL)wait:(int64_t)delta {
-    
-    return dispatch_semaphore_wait(self.dispatchSemaphore, dispatch_time(DISPATCH_TIME_NOW, delta)) == 0;
+- (BOOL)wait:(double)seconds {
+    return dispatch_semaphore_wait(self.dispatchSemaphore, dispatch_time(DISPATCH_TIME_NOW, (seconds * NSEC_PER_SEC))) == 0;
 }
 
 @end

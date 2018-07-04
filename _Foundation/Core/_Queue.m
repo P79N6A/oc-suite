@@ -12,37 +12,37 @@ static _Queue *backgroundPriorityGlobalQueue;
 
 @property (strong, readwrite, nonatomic) dispatch_queue_t dispatchQueue;
 
+//@property (strong, readonly, nonatomic) dispatch_queue_t dispatchQueue;
 @end
 
 @implementation _Queue
 
+@def_singleton( _Queue )
+
+@def_prop_strong( dispatch_queue_t,    serial );
+@def_prop_strong( dispatch_queue_t,    concurrent );
+
 + (_Queue *)main {
-    
     return mainQueue;
 }
 
 + (_Queue *)global {
-    
     return globalQueue;
 }
 
 + (_Queue *)highPriorityGlobal {
-    
     return highPriorityGlobalQueue;
 }
 
 + (_Queue *)lowPriorityGlobal {
-    
     return lowPriorityGlobalQueue;
 }
 
 + (_Queue *)backgroundPriorityGlobal {
-    
     return backgroundPriorityGlobalQueue;
 }
 
 + (void)initialize {
-    
     /**
      Initializes the class before it receives its first message.
      
@@ -54,73 +54,40 @@ static _Queue *backgroundPriorityGlobalQueue;
      categories of the class, you should implement load methods.
      */
     if (self == [_Queue self])  {
-        
-        mainQueue                     = [_Queue new];
-        globalQueue                   = [_Queue new];
-        highPriorityGlobalQueue       = [_Queue new];
-        lowPriorityGlobalQueue        = [_Queue new];
-        backgroundPriorityGlobalQueue = [_Queue new];
-        
-        mainQueue.dispatchQueue                     = dispatch_get_main_queue();
-        globalQueue.dispatchQueue                   = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-        highPriorityGlobalQueue.dispatchQueue       = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
-        lowPriorityGlobalQueue.dispatchQueue        = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0);
-        backgroundPriorityGlobalQueue.dispatchQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
+        mainQueue = [[_Queue alloc] initWithDispatchQueue:dispatch_get_main_queue()];
+        globalQueue = [[_Queue alloc] initWithDispatchQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
+        highPriorityGlobalQueue = [[_Queue alloc] initWithDispatchQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)];
+        lowPriorityGlobalQueue = [[_Queue alloc] initWithDispatchQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0)];
+        backgroundPriorityGlobalQueue = [[_Queue alloc] initWithDispatchQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)];
     }
+}
+
+- (instancetype)initWithDispatchQueue:(dispatch_queue_t)dispatchQueue {
+    if (self = [super init]) {
+        self.dispatchQueue = dispatchQueue;
+    }
+    
+    return self;
 }
 
 - (instancetype)init {
-    
-    return [self initSerial];
-}
-
-- (instancetype)initSerial {
-    
     self = [super init];
-    
-    if (self) {
-        
-        self.dispatchQueue = dispatch_queue_create(nil, DISPATCH_QUEUE_SERIAL);
+    if ( self ) {
+        _serial = dispatch_queue_create( "com.suite.serial", DISPATCH_QUEUE_SERIAL );
+        _concurrent = dispatch_queue_create( "com.suite.concurrent", DISPATCH_QUEUE_CONCURRENT );
     }
     
     return self;
 }
 
-- (instancetype)initSerialWithLabel:(NSString *)label {
-    
-    self = [super init];
-    if (self)
-    {
-        self.dispatchQueue = dispatch_queue_create([label UTF8String], DISPATCH_QUEUE_SERIAL);
-    }
-    
-    return self;
-}
-
-- (instancetype)initConcurrent {
-    
-    self = [super init];
-    
-    if (self) {
-        
-        self.dispatchQueue = dispatch_queue_create(nil, DISPATCH_QUEUE_CONCURRENT);
-    }
-    
-    return self;
-}
-
-- (instancetype)initConcurrentWithLabel:(NSString *)label {
-    self = [super init];
-    if (self)
-    {
-        self.dispatchQueue = dispatch_queue_create([label UTF8String], DISPATCH_QUEUE_CONCURRENT);
-    }
-    return self;
+- (void)dealloc {
+    _serial = nil;
+    _concurrent = nil;
 }
 
 - (void)execute:(dispatch_block_t)block {
-    
     NSParameterAssert(block);
+    
     dispatch_async(self.dispatchQueue, block);
 }
 
@@ -147,13 +114,11 @@ static _Queue *backgroundPriorityGlobalQueue;
 }
 
 - (void)execute:(dispatch_block_t)block afterDelaySecs:(float)delta {
-    
     NSParameterAssert(block);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delta * NSEC_PER_SEC), self.dispatchQueue, block);
 }
 
 - (void)waitExecute:(dispatch_block_t)block {
-    
     /*
      As an optimization, this function invokes the block on
      the current thread when possible.
@@ -165,8 +130,11 @@ static _Queue *backgroundPriorityGlobalQueue;
     dispatch_sync(self.dispatchQueue, block);
 }
 
+- (void)waitExecute:(void (^)(size_t))block iterationCount:(size_t)count {
+    dispatch_apply(count, self.dispatchQueue, block);
+}
+
 - (void)barrierExecute:(dispatch_block_t)block {
-    
     /*
      The queue you specify should be a concurrent queue that you
      create yourself using the dispatch_queue_create function.
@@ -183,7 +151,6 @@ static _Queue *backgroundPriorityGlobalQueue;
 }
 
 - (void)waitBarrierExecute:(dispatch_block_t)block {
-    
     /*
      The queue you specify should be a concurrent queue that you
      create yourself using the dispatch_queue_create function.
@@ -205,85 +172,71 @@ static _Queue *backgroundPriorityGlobalQueue;
 }
 
 - (void)suspend {
-    
     dispatch_suspend(self.dispatchQueue);
 }
 
 - (void)resume {
-    
     dispatch_resume(self.dispatchQueue);
 }
 
 - (void)execute:(dispatch_block_t)block inGroup:(_Group *)group {
-    
     NSParameterAssert(block);
     dispatch_group_async(group.dispatchGroup, self.dispatchQueue, block);
 }
 
 - (void)notify:(dispatch_block_t)block inGroup:(_Group *)group {
-    
     NSParameterAssert(block);
     dispatch_group_notify(group.dispatchGroup, self.dispatchQueue, block);
 }
 
-
 #pragma mark - 便利的构造方法
+
 + (void)executeInMainQueue:(dispatch_block_t)block afterDelaySecs:(NSTimeInterval)sec {
-    
     NSParameterAssert(block);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * sec), mainQueue.dispatchQueue, block);
 }
 
 + (void)executeInGlobalQueue:(dispatch_block_t)block afterDelaySecs:(NSTimeInterval)sec {
-    
     NSParameterAssert(block);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * sec), globalQueue.dispatchQueue, block);
 }
 
 + (void)executeInHighPriorityGlobalQueue:(dispatch_block_t)block afterDelaySecs:(NSTimeInterval)sec {
-    
     NSParameterAssert(block);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * sec), highPriorityGlobalQueue.dispatchQueue, block);
 }
 
 + (void)executeInLowPriorityGlobalQueue:(dispatch_block_t)block afterDelaySecs:(NSTimeInterval)sec {
-    
     NSParameterAssert(block);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * sec), lowPriorityGlobalQueue.dispatchQueue, block);
 }
 
 + (void)executeInBackgroundPriorityGlobalQueue:(dispatch_block_t)block afterDelaySecs:(NSTimeInterval)sec {
-    
     NSParameterAssert(block);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * sec), backgroundPriorityGlobalQueue.dispatchQueue, block);
 }
 
 + (void)executeInMainQueue:(dispatch_block_t)block {
-    
     NSParameterAssert(block);
     dispatch_async(mainQueue.dispatchQueue, block);
 }
 
 + (void)executeInGlobalQueue:(dispatch_block_t)block {
-    
     NSParameterAssert(block);
     dispatch_async(globalQueue.dispatchQueue, block);
 }
 
 + (void)executeInHighPriorityGlobalQueue:(dispatch_block_t)block {
-    
     NSParameterAssert(block);
     dispatch_async(highPriorityGlobalQueue.dispatchQueue, block);
 }
 
 + (void)executeInLowPriorityGlobalQueue:(dispatch_block_t)block {
-    
     NSParameterAssert(block);
     dispatch_async(lowPriorityGlobalQueue.dispatchQueue, block);
 }
 
 + (void)executeInBackgroundPriorityGlobalQueue:(dispatch_block_t)block {
-    
     NSParameterAssert(block);
     dispatch_async(backgroundPriorityGlobalQueue.dispatchQueue, block);
 }

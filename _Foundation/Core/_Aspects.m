@@ -957,8 +957,6 @@ static void aspect_deregisterTrackedSelector(id self, SEL selector) {
 
 #pragma mark -
 
-#pragma mark - Observer
-
 static NSMutableSet *swizzledClasses() {
     static dispatch_once_t onceToken;
     static NSMutableSet *swizzledClasses = nil;

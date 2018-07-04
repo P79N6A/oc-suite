@@ -7,7 +7,7 @@
 
 #import "_Annotation.h"
 #import "_Thread.h"
-#import "_Log.h"
+#import "_Logger.h"
 #import "_Macros.h"
 
 // ----------------------------------

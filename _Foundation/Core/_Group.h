@@ -2,15 +2,57 @@
 
 @interface _Group : NSObject
 
+/**
+ *  Returns the underlying dispatch group object.
+ *
+ *  @return The dispatch group object.
+ */
 @property (strong, nonatomic, readonly) dispatch_group_t dispatchGroup;
 
-#pragma 初始化
+/**
+ *  Initializes a new group.
+ *
+ *  @return The initialized instance.
+ *  @see dispatch_group_create()
+ */
 - (instancetype)init;
 
-#pragma mark - 用法
+/**
+ *  The GCDGroup designated initializer.
+ *
+ *  @param dispatchGroup A dispatch_group_t object.
+ *  @return The initialized instance.
+ */
+- (instancetype)initWithDispatchGroup:(dispatch_group_t)dispatchGroup;
+
+/**
+ *  Explicitly indicates that a block has entered the group.
+ *
+ *  @see dispatch_group_enter()
+ */
 - (void)enter;
+
+/**
+ *  Explicitly indicates that a block in the group has completed.
+ *
+ *  @see dispatch_group_leave()
+ */
 - (void)leave;
+
+/**
+ *  Waits forever for the previously submitted blocks in the group to complete.
+ *
+ *  @see dispatch_group_wait()
+ */
 - (void)wait;
-- (BOOL)wait:(int64_t)delta;
+
+/**
+ *  Waits for the previously submitted blocks in the group to complete.
+ *
+ *  @param seconds The time to wait in seconds.
+ *  @return YES if all blocks completed, NO if the timeout occurred.
+ *  @see dispatch_group_wait()
+ */
+- (BOOL)wait:(double)seconds;
 
 @end

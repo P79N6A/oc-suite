@@ -1,6 +1,6 @@
 #import "_Macros.h"
 #import "_Preconfigs.h"
-#import "_Log.h"
+#import "_Logger.h"
 
 #if __DEBUG__
 #import "Fishhook.h"

@@ -14,31 +14,6 @@ typedef enum {
     LogLevel_All
 } LogLevel;
 
-/**
- *  CocoaLumerjack 宏定义
- */
-#ifdef DEBUG
-
-//#   define ddLogLevel DDLogLevelAll
-
-#   define logv        DDLogVerbose
-#   define logd        DDLogDebug
-#   define logi        DDLogInfo
-#   define logw        DDLogWarn
-#   define loge        DDLogError
-
-#else
-
-//#   define ddLogLevel DDLogLevelError
-
-#   define logv(...)
-#   define logd(...)
-#   define logi(...)
-#   define logw(...)
-#   define loge(...)
-
-#endif
-
 #pragma mark -
 
 #if __LOGGING__

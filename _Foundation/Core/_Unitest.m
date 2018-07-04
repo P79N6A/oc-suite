@@ -2,7 +2,7 @@
 #import "_Precompile.h"
 #import "_Unitest.h"
 #import "_Runtime.h"
-#import "_Log.h"
+#import "_Logger.h"
 
 #import "_pragma_push.h"
 
@@ -23,8 +23,7 @@
 @def_prop_strong( NSString *,	file );
 @def_prop_assign( NSInteger,	line );
 
-+ (_TestFailure *)expr:(const char *)expr file:(const char *)file line:(int)line
-{
++ (_TestFailure *)expr:(const char *)expr file:(const char *)file line:(int)line {
     _TestFailure * failure = [[_TestFailure alloc] initWithName:@"UnitTest" reason:nil userInfo:nil];
     failure.expr = @(expr);
     failure.file = [@(file) lastPathComponent];
@@ -70,7 +69,6 @@
     LogLevel	filter = [_Logger sharedInstance].filter;
     
     [_Logger sharedInstance].filter = LogLevel_Warn;
-    //	[SamuraiLogger sharedInstance].filter = LogLevel_All;
     
     CFTimeInterval beginTime = CACurrentMediaTime();
     
@@ -87,7 +85,7 @@
         
         NSString * formattedName = [testCaseName stringByPaddingToLength:48 withString:@" " startingAtIndex:0];
         
-        //		[[SamuraiLogger sharedInstance] disable];
+        [[_Logger sharedInstance] disable];
         
         fprintf( stderr, "%s", [formattedName UTF8String] );
         
@@ -143,7 +141,7 @@
         CFTimeInterval time2 = CACurrentMediaTime();
         CFTimeInterval time = time2 - time1;
         
-        //		[[SamuraiLogger sharedInstance] enable];
+        [[_Logger sharedInstance] enable];
         
         if ( testCasePassed ) {
             _succeedCount += 1;
@@ -191,17 +189,13 @@
     va_end( args );
 }
 
-- (void)flushLog
-{
-    if ( _logs.count )
-    {
-        for ( NSString * log in _logs )
-        {
+- (void)flushLog {
+    if ( _logs.count ) {
+        for ( NSString * log in _logs ) {
             fprintf( stderr, "       %s\n", [log UTF8String] );
         }
         
-        if ( _logs.count >= MAX_UNITTEST_LOGS )
-        {
+        if ( _logs.count >= MAX_UNITTEST_LOGS ) {
             fprintf( stderr, "       ...\n" );
         }
         
@@ -222,9 +216,31 @@
 #if __TESTING__
 
 TEST_CASE( Core, UnitTest )
+{
+    __ValidatorTestClass * obj1;
+    __ValidatorTestClass * obj2;
+}
 
 DESCRIBE( before )
 {
+    obj1 = [[__ValidatorTestClass alloc] init];
+    obj2 = [[__ValidatorTestClass alloc] init];
+}
+
+DESCRIBE( before:/after: )
+{
+    BOOL valid;
+    
+    valid = [[SamuraiValidator sharedInstance] validate:@"2014/05/11 00:00:00" rule:@"before:2014/05/11 00:00:01"];
+    EXPECTED( YES == valid );
+}
+
+DESCRIBE( between: )
+{
+    BOOL valid;
+    
+    valid = [[SamuraiValidator sharedInstance] validate:@"2" rule:@"between:1,3"];
+    EXPECTED( YES == valid );
 }
 
 DESCRIBE( after )
@@ -233,6 +249,6 @@ DESCRIBE( after )
 
 TEST_CASE_END
 
-#endif	// #if __SAMURAI_TESTING__
+#endif	// #if __TESTING__
 
 #import "_pragma_pop.h"

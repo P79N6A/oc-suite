@@ -24,4 +24,10 @@
 - (NSNumber *)toNumber;
 - (NSString *)toString;
 
+#pragma mark - Object 2 Json\Dictionary
+
+- (NSDictionary *)toDictionary; // 打印属性名－属性值的，键值对
+
+- (NSData *)toJsonDataWithOptions:(NSJSONWritingOptions)options;
+
 @end

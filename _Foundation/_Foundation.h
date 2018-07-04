@@ -36,7 +36,7 @@
 #import "_Error.h"
 
 #import "_Localization.h"
-#import "_Log.h"
+#import "_Logger.h"
 #import "_Sandbox.h"
 #import "_Task.h"
 #import "_Unitest.h"

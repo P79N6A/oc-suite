@@ -258,50 +258,101 @@
     return nil;
 }
 
-- (NSString *)toString
-{
+- (NSString *)toString {
     EncodingType encoding = [_Encoding typeOfObject:self];
     
-    if ( EncodingType_Null == encoding )
-    {
+    if ( EncodingType_Null == encoding ) {
         return nil;
-    }
-    else if ( EncodingType_Number == encoding )
-    {
+    } else if ( EncodingType_Number == encoding ) {
         return [self description];
-    }
-    else if ( EncodingType_String == encoding )
-    {
+    } else if ( EncodingType_String == encoding ) {
         return (NSString *)self;
-    }
-    else if ( EncodingType_Date == encoding )
-    {
+    } else if ( EncodingType_Date == encoding ) {
         return [(NSDate *)self toString:@"yyyy/MM/dd HH:mm:ss z"];
-    }
-    else if ( EncodingType_Data == encoding )
-    {
+    } else if ( EncodingType_Data == encoding ) {
         NSData *    data = (NSData *)self;
         NSString *    text = nil;
         
         text = [[NSString alloc] initWithBytes:data.bytes length:data.length encoding:NSUTF8StringEncoding];
-        if ( nil == text )
-        {
+        if ( nil == text ) {
             text = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            if ( nil == text )
-            {
+            if ( nil == text ) {
                 text = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
             }
         }
         
         return text;
-    }
-    else if ( EncodingType_Url == encoding )
-    {
+    } else if ( EncodingType_Url == encoding ) {
         NSURL * url = (NSURL *)self;
         return [url absoluteString];
     }
     
     return nil;
 }
+
+#pragma mark - Object 2 Json\Dictionary
+
+- (id)getObjectInternal:(id)obj {
+    if([obj isKindOfClass:[NSString class]]
+       || [obj isKindOfClass:[NSNumber class]]
+       || [obj isKindOfClass:[NSNull class]]) {
+        return obj;
+    }
+    
+    if([obj isKindOfClass:[NSArray class]]) {
+        NSArray *objarr = obj;
+        NSMutableArray *arr = [NSMutableArray arrayWithCapacity:objarr.count];
+        
+        for(int i = 0; i < objarr.count; i++) {
+            [arr setObject:[self getObjectInternal:[objarr objectAtIndex:i]] atIndexedSubscript:i];
+        }
+        
+        return arr;
+    }
+    
+    if([obj isKindOfClass:[NSDictionary class]]) {
+        NSDictionary *objdic = obj;
+        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithCapacity:[objdic count]];
+        
+        for(NSString *key in objdic.allKeys) {
+            [dic setObject:[self getObjectInternal:[objdic objectForKey:key]] forKey:key];
+        }
+        
+        return dic;
+    }
+    
+    return [self getObjectData:obj];
+}
+
+- (NSDictionary*)getObjectData:(NSObject *)obj {
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    unsigned int propsCount;
+    objc_property_t *props = class_copyPropertyList([obj class], &propsCount);
+    
+    for(int i = 0; i < propsCount; i++) {
+        objc_property_t prop = props[i];
+        NSString *propName = [NSString stringWithUTF8String:property_getName(prop)];
+        id value = [obj valueForKey:propName];
+        if(value == nil) {
+            value = [NSNull null];
+        } else {
+            value = [self getObjectInternal:value];
+            
+        }
+        
+        [dic setObject:value forKey:propName];
+    }
+    
+    return dic;
+}
+
+- (NSDictionary *)toDictionary {
+    return [self getObjectData:self];
+}
+
+- (NSData *)toJsonDataWithOptions:(NSJSONWritingOptions)options {
+    return [NSJSONSerialization dataWithJSONObject:[self getObjectData:self] options:options error:nil];
+}
+
 
 @end
