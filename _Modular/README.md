@@ -43,3 +43,8 @@
 
 1. [Small](https://github.com/BinaryArtists/Small)
 2. 
+
+## 研究过的方案
+
+1. [meili/MGJRouter](https://github.com/meili/MGJRouter)
+2. [JDongKhan/JDRouter](https://github.com/JDongKhan/JDRouter)
