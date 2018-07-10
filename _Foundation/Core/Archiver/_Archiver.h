@@ -21,16 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
  * will not be encoded (this is a design feature, not a limitation - it makes it
  * easier to exclude properties from encoding)
  *
- * It is not normally necessary to override this method unless you wish to add
- * ivars for coding that do not have matching property definitions, or if you
- * wish to code virtual properties (properties or setter/getter method pairs that
- * are not backed by an ivar). If you wish to exclude certain properties from the
- * serialisation process, you can deliberately give them an non KVC-compliant
- * ivar name (see above).
- *
- * Note that this method only returns the properties defined on a particular
- * class and not any properties that are inherited from its superclasses. You
- * *do not* need to call `[super codableProperties]` if you override this method.
+ * @brief 该方法不建议覆盖. 只返回当前类的KVC-compliant.
  */
 + (NSDictionary<NSString *, Class> *)codableProperties;
 

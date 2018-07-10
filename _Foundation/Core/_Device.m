@@ -67,6 +67,7 @@ BOOL is_screen_58_inch = NO;
 @def_prop_readonly( OperationSystem,	osType );
 @def_prop_readonly( NSString *,			bundleVersion );
 @def_prop_readonly( NSString *,			bundleShortVersion );
+@def_prop_readonly( NSInteger,          bundleBuild );
 @def_prop_readonly( NSString *,			bundleIdentifier );
 @def_prop_readonly( NSString *,			urlSchema );
 @def_prop_readonly( NSString *,			deviceModel );
@@ -181,11 +182,7 @@ BOOL is_screen_58_inch = NO;
 }
 
 - (NSString *)osVersion {
-#if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
     return [NSString stringWithFormat:@"%@ %@", [UIDevice currentDevice].systemName, [UIDevice currentDevice].systemVersion];
-#else
-    return nil;
-#endif
 }
 
 - (OperationSystem)osType {
@@ -199,27 +196,21 @@ BOOL is_screen_58_inch = NO;
 }
 
 - (NSString *)bundleVersion {
-#if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR || TARGET_OS_MAC)
     return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
-#else
-    return nil;
-#endif
 }
 
 - (NSString *)bundleShortVersion {
-#if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR || TARGET_OS_MAC)
     return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
-#else
-    return nil;
-#endif
+}
+
+- (NSInteger)bundleBuild {
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    NSString *build = [infoDictionary objectForKey:@"CFBundleVersion"];
+    return [build integerValue];
 }
 
 - (NSString *)bundleIdentifier {
-#if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
     return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
-#else
-    return nil;
-#endif
 }
 
 - (NSString *)urlSchema {
@@ -935,16 +926,16 @@ BOOL is_screen_58_inch = NO;
     if ([hardware isEqualToString:@"iPhone8,1"])    return IPHONE_6S;
     if ([hardware isEqualToString:@"iPhone8,2"])    return IPHONE_6S_PLUS;
     
-    if ([hardware isEqualToString:@"iPhone9,1"])   return HardwareiPhone7;
-    if ([hardware isEqualToString:@"iPhone9,2"])   return HardwareiPhone7p;
+    if ([hardware isEqualToString:@"iPhone9,1"])   return IPHONE_7;
+    if ([hardware isEqualToString:@"iPhone9,2"])   return IPHONE_7_PLUS;
     
-    if ([hardware isEqualToString:@"iPhone10,1"])   return HardwareiPhone8;
-    if ([hardware isEqualToString:@"iPhone10,4"])   return HardwareiPhone8;
-    if ([hardware isEqualToString:@"iPhone10,2"])   return HardwareiPhone8p;
-    if ([hardware isEqualToString:@"iPhone10,5"])   return HardwareiPhone8p;
+    if ([hardware isEqualToString:@"iPhone10,1"])   return IPHONE_8;
+    if ([hardware isEqualToString:@"iPhone10,4"])   return IPHONE_8;
+    if ([hardware isEqualToString:@"iPhone10,2"])   return IPHONE_8_PLUS;
+    if ([hardware isEqualToString:@"iPhone10,5"])   return IPHONE_8_PLUS;
     
-    if ([hardware isEqualToString:@"iPhone10,3"])   return HardwareiPhoneX;
-    if ([hardware isEqualToString:@"iPhone10,6"])   return HardwareiPhoneX;
+    if ([hardware isEqualToString:@"iPhone10,3"])   return IPHONE_X;
+    if ([hardware isEqualToString:@"iPhone10,6"])   return IPHONE_X;
     
     if ([hardware isEqualToString:@"iPod1,1"])      return IPOD_TOUCH_1G;
     if ([hardware isEqualToString:@"iPod2,1"])      return IPOD_TOUCH_2G;
@@ -1152,13 +1143,13 @@ BOOL is_screen_58_inch = NO;
         case IPHONE_6S:                         return 8.1f;
         case IPHONE_6S_PLUS:                    return 8.2f;
             
-        case HardwareiPhone7:                   return 9.1f;
-        case HardwareiPhone7p:                  return 9.2f;
+        case IPHONE_7:                          return 9.1f;
+        case IPHONE_7_PLUS:                     return 9.2f;
         
-        case HardwareiPhone8:                   return 10.1f;
-        case HardwareiPhone8p:                  return 10.2f;
+        case IPHONE_8:                          return 10.1f;
+        case IPHONE_8_PLUS:                     return 10.2f;
         
-        case HardwareiPhoneX:                   return 10.3f;
+        case IPHONE_X:                          return 10.3f;
             
         case IPOD_TOUCH_1G:                     return 1.1f;
         case IPOD_TOUCH_2G:                     return 2.1f;

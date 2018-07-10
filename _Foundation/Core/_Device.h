@@ -29,13 +29,13 @@ typedef NS_ENUM(NSUInteger, Hardware) {
     IPHONE_6S,
     IPHONE_6S_PLUS,
     
-    HardwareiPhone7,
-    HardwareiPhone7p,
+    IPHONE_7,
+    IPHONE_7_PLUS,
     
-    HardwareiPhone8,
-    HardwareiPhone8p,
+    IPHONE_8,
+    IPHONE_8_PLUS,
     
-    HardwareiPhoneX,
+    IPHONE_X,
     
     IPOD_TOUCH_1G,
     IPOD_TOUCH_2G,
@@ -123,6 +123,7 @@ extern BOOL is_screen_58_inch; // 458 ppi, Safe design area: 750x1468 @2x
 @prop_readonly( OperationSystem,	osType );
 @prop_readonly( NSString *,			bundleVersion );
 @prop_readonly( NSString *,			bundleShortVersion );
+@prop_readonly( NSInteger,          bundleBuild );
 @prop_readonly( NSString *,			bundleIdentifier );
 @prop_readonly( NSString *,			urlSchema );
 @prop_readonly( NSString *,			deviceModel );
