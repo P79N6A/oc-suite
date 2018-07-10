@@ -23,7 +23,7 @@
 
 @implementation _Timer
 
-+ (_Timer *)repeatingTimerWithTimeInterval:(NSTimeInterval)seconds
++ (_Timer *)repeatingWithTimeInterval:(NSTimeInterval)seconds
                                       block:(void (^)(void))block {
     NSParameterAssert(seconds);
     NSParameterAssert(block);

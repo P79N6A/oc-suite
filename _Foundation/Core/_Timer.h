@@ -11,7 +11,7 @@
  @param block Block to execute. Must be non-nil
  @return A new RNTimer object, configured according to the specified parameters.
  */
-+ (_Timer *)repeatingTimerWithTimeInterval:(NSTimeInterval)seconds block:(dispatch_block_t)block;
++ (_Timer *)repeatingTimerTimeInterval:(NSTimeInterval)seconds block:(dispatch_block_t)block;
 
 /**
  * @brief Firing a Timer
