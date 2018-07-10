@@ -5,8 +5,23 @@
 // Category source code
 // ----------------------------------
 
-#define JK_ASSOCIATIVE_CURRENT_DICTIONARY_KEY @"ASSOCIATIVE_CURRENT_DICTIONARY_KEY"
-#define JK_ASSOCIATIVE_CURRENT_TEXT_KEY @"ASSOCIATIVE_CURRENT_TEXT_KEY"
+@implementation NSDictionary (XML)
+
+- (NSString *)XMLString {
+    NSString *xmlStr = @"<xml>";
+    for (NSString *key in self.allKeys) {
+        NSString *value = [self objectForKey:key];
+        xmlStr = [xmlStr stringByAppendingString:[NSString stringWithFormat:@"<%@>%@</%@>", key, value, key]];
+    }
+    
+    xmlStr = [xmlStr stringByAppendingString:@"</xml>"];
+    return xmlStr;
+}
+
+@end
+
+#define ASSOCIATIVE_CURRENT_DICTIONARY_KEY @"ASSOCIATIVE_CURRENT_DICTIONARY_KEY"
+#define ASSOCIATIVE_CURRENT_TEXT_KEY @"ASSOCIATIVE_CURRENT_TEXT_KEY"
 
 @interface NSString () <NSXMLParserDelegate>
 
@@ -50,19 +65,19 @@
 #pragma mark ASSOCIATIVE OVERRIDES
 
 - (void)setCurrentDictionaries:(NSMutableArray *)currentDictionaries {
-    objc_setAssociatedObject(self, JK_ASSOCIATIVE_CURRENT_DICTIONARY_KEY, currentDictionaries, OBJC_ASSOCIATION_RETAIN);
+    objc_setAssociatedObject(self, ASSOCIATIVE_CURRENT_DICTIONARY_KEY, currentDictionaries, OBJC_ASSOCIATION_RETAIN);
 }
 
 - (NSMutableArray *)currentDictionaries {
-    return objc_getAssociatedObject(self, JK_ASSOCIATIVE_CURRENT_DICTIONARY_KEY);
+    return objc_getAssociatedObject(self, ASSOCIATIVE_CURRENT_DICTIONARY_KEY);
 }
 
 - (void)setCurrentText:(NSMutableString *)currentText {
-    objc_setAssociatedObject(self, JK_ASSOCIATIVE_CURRENT_TEXT_KEY, currentText, OBJC_ASSOCIATION_RETAIN);
+    objc_setAssociatedObject(self, ASSOCIATIVE_CURRENT_TEXT_KEY, currentText, OBJC_ASSOCIATION_RETAIN);
 }
 
 - (NSMutableString *)currentText {
-    return objc_getAssociatedObject(self, JK_ASSOCIATIVE_CURRENT_TEXT_KEY);
+    return objc_getAssociatedObject(self, ASSOCIATIVE_CURRENT_TEXT_KEY);
 }
 
 #pragma mark -

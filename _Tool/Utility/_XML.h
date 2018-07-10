@@ -4,6 +4,17 @@
 // Category code
 // ----------------------------------
 
+@interface NSDictionary (XML)
+
+/**
+ *  @brief  将NSDictionary转换成XML 字符串
+ *
+ *  @return XML 字符串
+ */
+- (NSString *)XMLString;
+
+@end
+
 @interface NSString ( XML )
 /**
  *  @brief  xml字符串转换成NSDictionary

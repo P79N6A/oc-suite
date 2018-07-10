@@ -4,7 +4,7 @@
 // Category code
 // ----------------------------------
 
-@interface NSObject ( Json )
+@interface NSObject ( JSON )
 
 @property (nonatomic, readonly) BOOL isJsonObject;
 
@@ -18,11 +18,23 @@
 //
 //@end
 
-@interface NSString ( Json )
+@interface NSString ( JSON )
 
 @property (nonatomic, readonly, nullable) id jsonObject;
 
 @end
+
+@interface NSDictionary ( JSON )
+
+/**
+ *  @brief NSDictionary转换成JSON字符串
+ *
+ *  @return  JSON字符串
+ */
+- (NSString *)JSONString;
+
+@end
+
 
 // ----------------------------------
 // Class code
