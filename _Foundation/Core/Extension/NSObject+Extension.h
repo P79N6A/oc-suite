@@ -8,6 +8,10 @@
 - (void)deepEqualsTo:(id)obj;
 - (void)deepCopyFrom:(id)obj;
 
+- (BOOL)shallowCopy:(NSObject *)obj;
+- (BOOL)deepCopy:(NSObject *)obj;
+- (id)deepCopy;
+
 - (id)clone;					// override point
 
 + (BOOL)isNullValue:(id)value;

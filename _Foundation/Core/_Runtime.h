@@ -164,4 +164,6 @@ void dumpClass(Class cls);
  */
 - (NSArray *)parents;
 
++ (BOOL)isNSObjectClass:(Class)clazz;
+
 @end

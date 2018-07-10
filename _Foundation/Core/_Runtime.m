@@ -903,6 +903,20 @@ void dumpClass(Class cls) {
     return NSStringFromClass([self superclass]);
 }
 
++ (BOOL)isNSObjectClass:(Class)clazz {
+    BOOL flag = class_conformsToProtocol(clazz, @protocol(NSObject));
+    if (flag) {
+        return flag;
+    } else {
+        Class superClass = class_getSuperclass(clazz);
+        if (!superClass) {
+            return NO;
+        } else {
+            return  [NSObject isNSObjectClass:superClass];
+        }
+    }
+}
+
 #pragma mark - Inline method
 
 /*! 以 NSString 类型返回 property名称 */

@@ -12,17 +12,12 @@
 @interface NSObject ( SafeValueWithJSON )
 
 - (id)safeValueFromJSON;
-
 - (id)safeObjectWithClass:(Class)aClass;
 
 - (NSString *)safeString;
-
 - (NSNumber *)safeNumber;
-
 - (NSArray *)safeArray;
-
 - (NSDictionary *)safeDictionary;
-
 - (NSDate *)safeDate;
 
 @end
