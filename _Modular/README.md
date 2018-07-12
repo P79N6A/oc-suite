@@ -48,3 +48,12 @@
 
 1. [meili/MGJRouter](https://github.com/meili/MGJRouter)
 2. [JDongKhan/JDRouter](https://github.com/JDongKhan/JDRouter)
+3. [IOS-组件化架构漫谈](https://www.cnblogs.com/oc-bowen/p/5885476.html)
+	* 主要提出了 组件化架构 解决业务模块复杂化、团队协作开发复杂化的痛点
+	* 尝试提出了 组件设计与封装、组件间通信 的自家方案
+		- 组件路由：MGJRouter
+			> 短链管理： web页面统一来管理所有的URL和参数，Android和iOS都使用这一套URL，可以保持统一性
+		- 组件通信：入参（URL params）
+		- 组件管理：ModuleManager
+			> 在ModuleManager内部维护一张映射表，映射表由之前的"URL -> block"变成"Protocol -> Class"
+			> [ModuleManager registerClass:MGJUserImpl forProtocol:@protocol(MGJUserProtocol)];
