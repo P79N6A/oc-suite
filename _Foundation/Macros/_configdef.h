@@ -39,6 +39,9 @@
 #undef  EXTERN
 #define EXTERN    extern __attribute__((visibility ("default")))
 
+#undef  STATIC_METHOD
+#define STATIC_METHOD    __unused static
+
 #undef  TODO
 #define TODO( X )			_Pragma(macro_cstr(message("TODO: " X)))
 
@@ -48,10 +51,10 @@
 
 #if defined(__cplusplus)
 #   undef	EXTERN_C
-#   define EXTERN_C			extern "C"
+#   define  EXTERN_C			extern "C"
 #else
 #   undef	EXTERN_C
-#   define EXTERN_C			extern
+#   define  EXTERN_C			extern
 #endif
 
 #undef  INLINE
