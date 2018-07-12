@@ -6,7 +6,7 @@
 //  Copyright © 2017 alliance. All rights reserved.
 //
 
-#import "_building_precompile.h"
+//#import "_building_precompile.h"
 #import "BaseWebTextView.h"
 
 @implementation BaseWebTextView
