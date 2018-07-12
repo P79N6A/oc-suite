@@ -7,12 +7,14 @@
 //
 
 #import "BaseViewModel.h"
+#import "BaseDataSource.h"
 
 @implementation BaseViewModel
 
 - (instancetype)initWithParams:(NSDictionary *)params {
     if (self = [super init]) {
-        [self recover];
+        
+        [self setup];
     }
     
     return self;
@@ -20,18 +22,11 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-        [self recover];
+        
+        [self setup];
     }
     
     return self;
-}
-
-+ (instancetype)instance {
-    BaseViewModel *vm = [[self alloc] init];
-    
-    [vm recover];
-    
-    return vm;
 }
 
 - (void)recover {
@@ -42,39 +37,36 @@
     
 }
 
-+ (void)asynchronously:(ObjectBlock)createCompletion {
-    BaseViewModel *vm = [[self alloc] init];
+- (void)setup {
+    [self recover];
+}
+
+- (void)setdown:(id)data {
     
-    [global_queue execute:^{
-        [vm recover];
-    } completion:^{
-        if (createCompletion) {
-            createCompletion(vm);
-        }
-    }];
 }
 
-//+ (void)asynchronouslyWithTuple:(RACTuple *)tuples creation:(ObjectBlock)creationHandler {
-//    // do nothing
-//}
-//
-//+ (void)asynchronouslyWithTuple:(RACTuple *)tuples
-//                       complete:(ObjectBlock)completeHandler
-//                          error:(ErrorBlock)errorHandler {
-//    // do nothing
-//}
+// MARK: - 数据源
 
-+ (void)asynchronouslyComplete:(ObjectBlock)completeHandler error:(ErrorBlock)errorHandler {
-    // Do nothing...
+- (int32_t)numberOfSections {
+    return 0;
 }
-//
-//+ (RACSignal *)asynchronouslyWithTuple:(RACTuple *)tuples {
-//    return nil;
-//}
-//
-//+ (RACSignal *)asynchronoursly {
-//    return nil;
-//}
 
+- (int32_t)numberOfRowsInSection:(int32_t)section {
+    return 0;
+}
+
+- (id)modelForRowAtSection:(int32_t)section row:(int32_t)row {
+    return nil;
+}
+
+@end
+
+#pragma mark -
+
+@implementation UIViewController ( ViewModel )
+
+- (void)bind {
+    
+}
 
 @end

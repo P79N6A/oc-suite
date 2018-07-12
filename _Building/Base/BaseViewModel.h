@@ -1,16 +1,8 @@
-//
-//  BaseViewModel.h
-// fallen.ink
-//
-//  Created by 李杰 on 6/6/15.
-//
-//
 
-//#import "_vendor_reactivecocoa.h"
+//  ViewController -> ViewModel -> DataController
+//  ViewController -> ViewModel -> Service
+
 #import "_Foundation.h"
-
-//@class RACTuple;
-//@class RACSignal;
 
 /**
  *  fallenink:
@@ -32,45 +24,25 @@
  */
 - (void)recover; // Load data from cache
 
-- (void)prepare:(id)data;
+#pragma mark -
 
 /**
- *  alloc\init\recover
+ *  刷新视图模型
  */
-+ (instancetype)instance;
-
-#pragma mark - Asynchronously
+- (void)setdown:(id)data;
 
 /**
- *  Create vm, recover it, call block createCompletion.
- 
- *  createCompletion: if nil, then error
+ *  数据初始化
  */
-+ (void)asynchronously:(ObjectBlock)createCompletion;
-
-///**
-// *  creationHandler: if nil, then error
-// */
-//+ (void)asynchronouslyWithTuple:(RACTuple *)tuples
-//                       creation:(ObjectBlock)creationHandler;
-//
-//+ (void)asynchronouslyWithTuple:(RACTuple *)tuples
-//                       complete:(ObjectBlock)completeHandler
-//                          error:(ErrorBlock)errorHandler;
-
-/**
- *  Useful???
- */
-+ (void)asynchronouslyComplete:(ObjectBlock)completeHandler
-                         error:(ErrorBlock)errorHandler;
-
-#pragma mark - RACSignal
-
-///**
-// *  With RacSignal s
-// */
-//+ (RACSignal *)asynchronoursly;
-//
-//+ (RACSignal *)asynchronouslyWithTuple:(RACTuple *)tuples;
+- (void)setup;
 
 @end
+
+#pragma mark -
+
+@interface UIViewController ( ViewModel )
+
+- (void)bind;
+
+@end
+

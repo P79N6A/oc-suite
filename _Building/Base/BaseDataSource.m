@@ -1,14 +1,8 @@
-//
-//  ALSDataSource.m
-//  wesg
-//
-//  Created by 7 on 29/11/2017.
-//  Copyright © 2017 AliSports. All rights reserved.
-//
 
-#import "ALSDataSource.h"
 
-@interface ALSDataSource ()
+#import "BaseDataSource.h"
+
+@interface BaseDataSource ()
 
 @property (nonatomic, copy) NumberOfSectionsBlock numberOfSectionHandler;
 @property (nonatomic, copy) NumberOfRowsBlock numberOfRowsHandler;
@@ -16,13 +10,13 @@
 
 @end
 
-@implementation ALSDataSource
+@implementation BaseDataSource
 
 + (instancetype)withName:(NSString *)name
         numberOfSections:(NumberOfSectionsBlock)numberOfSectionHandler
             numberOfRows:(NumberOfRowsBlock)numberOfRowsHandler
              modelForRow:(ModelForRowBlock)modelForRowHandler {
-    ALSDataSource *dataSource = [ALSDataSource new];
+    BaseDataSource *dataSource = [self new];
     
     dataSource->_name = name;
     dataSource.numberOfSectionHandler = numberOfSectionHandler;

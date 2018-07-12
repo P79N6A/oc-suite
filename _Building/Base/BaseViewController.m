@@ -10,6 +10,28 @@
 // class implementation
 // ----------------------------------
 
+#pragma mark - Template
+
+@implementation UIViewController ( Template )
+
+- (void)initViews {
+    
+}
+
+- (void)afterViews {
+    
+}
+
+- (void)updateViews {
+    
+}
+
+- (void)constraintViews {
+    
+}
+
+@end
+
 #pragma mark - External
 
 static NSString *backButtonImageName = @"buckbutton";

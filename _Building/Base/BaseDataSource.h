@@ -12,7 +12,7 @@ typedef NSInteger (^ NumberOfSectionsBlock)(void);
 typedef NSInteger (^ NumberOfRowsBlock)(NSInteger section);
 typedef id (^ ModelForRowBlock)(NSInteger section, NSInteger row);
 
-@interface ALSDataSource : NSObject
+@interface BaseDataSource : NSObject
 
 + (instancetype)withName:(NSString *)name
         numberOfSections:(NumberOfSectionsBlock)numberOfSectionHandler

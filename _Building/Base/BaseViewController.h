@@ -23,6 +23,20 @@
 // class declaration
 // ----------------------------------
 
+#pragma mark - Template
+
+@interface UIViewController ( Template )
+
+- (void)initViews; // 初始化视图
+
+- (void)afterViews; // 初始化视图后，做其他初始配置
+
+- (void)updateViews; // 网络回调后 更新视图
+
+- (void)constraintViews; // 给视图加约束
+
+@end
+
 #pragma mark -
 
 /**
