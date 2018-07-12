@@ -3,8 +3,8 @@
 #import <objc/runtime.h>
 #import <objc/message.h>
 
-NSString * const KVOClassPrefix = @"PGKVOClassPrefix_";
-NSString * const KVOAssociatedObservers = @"PGKVOAssociatedObservers";
+NSString * const KVOClassPrefix = @"KVOClassPrefix_";
+NSString * const KVOAssociatedObservers = @"KVOAssociatedObservers";
 
 #pragma mark - KeyValueObservationInfo
 
@@ -66,7 +66,7 @@ static NSString *__setterForGetter(NSString *getter) {
 
 #pragma mark - Overridden Methods
 
-static void __kvo_setter(id self, SEL _cmd, id newValue) {
+static void __kvoSetter(id self, SEL _cmd, id newValue) {
     NSString *setterName = NSStringFromSelector(_cmd);
     NSString *getterName = __getterForSetter(setterName);
     
@@ -95,9 +95,9 @@ static void __kvo_setter(id self, SEL _cmd, id newValue) {
     NSMutableArray *observers = objc_getAssociatedObject(self, (__bridge const void *)(KVOAssociatedObservers));
     for (KeyValueObservationInfo *each in observers) {
         if ([each.key isEqualToString:getterName]) {
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 each.block(self, getterName, oldValue, newValue);
-            });
+//            });
         }
     }
 }
@@ -180,7 +180,7 @@ static Class kvo_class(id self, SEL _cmd) {
         const char *types = method_getTypeEncoding(setterMethod);
         
         // The key operation 2!
-        class_addMethod(observableClazz, setterSelector, (IMP)__kvo_setter, types);
+        class_addMethod(observableClazz, setterSelector, (IMP)__kvoSetter, types);
     }
     
     KeyValueObservationInfo *info = [[KeyValueObservationInfo alloc] initWithObserver:self key:key block:block];

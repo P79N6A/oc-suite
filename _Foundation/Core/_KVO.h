@@ -2,7 +2,7 @@
 #import <Foundation/Foundation.h>
 #import <objc/runtime.h>
 
-#pragma mark - 
+#pragma mark - 系统 KVO 语法糖
 
 /**
  *  inspired by https://github.com/AlexIzh/objc_ext/blob/master/objc_kvo_ext/objc_kvo_ext.h
@@ -49,7 +49,7 @@
 #define add_observer(__X__) add_observer_o(self,__X__)
 #define remove_observer(__X__) remove_observer_o(self, __X__)
 
-#pragma mark -
+#pragma mark - KVO 封装
 
 @interface NSObject ( KVO )
 

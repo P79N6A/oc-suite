@@ -1,7 +1,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void(^ ObservingBlock)(id obj, NSString *key, id oldValue, id newValue);
+typedef void(^ ObservingBlock)(id obj, NSString *key, id oldVal, id newVal);
 
 @interface NSObject ( KVOImpl )
 

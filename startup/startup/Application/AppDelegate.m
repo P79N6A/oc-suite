@@ -34,6 +34,8 @@
     
     [self usageOfReachability];
     
+    [[_UnitTest sharedInstance] run];
+    
     //////////////////////////////
     
     return YES;

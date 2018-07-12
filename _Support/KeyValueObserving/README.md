@@ -1,5 +1,8 @@
 # KVO的实现原理
 
+1. [x] 支持对象类型属性的KVO
+2. [ ] 支持基本类型属性的KVO
+
 ### 概述
 
 * Objective-C 对观察者模式（Observer Pattern）的实现, 也是 Cocoa Binding 的基础
@@ -19,6 +22,28 @@
 
 3. 键值观察通知依赖于NSObject 的两个方法: willChangeValueForKey: 和 didChangevlueForKey:；在一个被观察属性发生改变之前， willChangeValueForKey:一定会被调用，这就 会记录旧的值。而当改变发生后，didChangeValueForKey:会被调用，继而 observeValueForKey:ofObject:change:context: 也会被调用。
 
+```
+- (void)willChangeValueForKey:(NSString *)key {
+    [super willChangeValueForKey:key];
+}
+
+- (void)didChangeValueForKey:(NSString *)key {
+    [super didChangeValueForKey:key];
+}
+
++ (BOOL)automaticallyNotifiesObserversForKey:(NSString *)key {
+    return [super automaticallyNotifiesObserversForKey:key];
+}
+
+// 执行时序为
+
+// 1. 调用 赋值操作
+// 2. willChangeValueForKey:
+// 3. 实际 赋值操作
+// 4. didChangeValueForKey:
+// 5. observeValueForKey:ofObject:change:context:
+```
+
 4. 想要看到NSKVONotifying_Person
 ```
 self.person.age = 20; // 打断点，在调试区域就能看到
@@ -26,6 +51,20 @@ _person->NSObject->isa=(Class)NSKVONotifying_MYPerson // 同时我们在
 self.person = [[MYPerson alloc]init]; //后面打断点，看到
 _person->NSObject->isa=(Class)MYPerson // 由此可见，在添加监听者之后
 person类型已经由MYPerson被改变成NSKVONotifying_MYPerson
+```
+
+### 当前
+
+当前实现，不会触发
+
+```
+- (void)willChangeValueForKey:(NSString *)key {
+    [super willChangeValueForKey:key];
+}
+
+- (void)didChangeValueForKey:(NSString *)key {
+    [super didChangeValueForKey:key];
+}
 ```
 
 ### 官方文档

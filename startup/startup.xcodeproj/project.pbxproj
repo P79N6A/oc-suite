@@ -157,6 +157,7 @@
 		863227E820EBEB4E002F82D3 /* UtilityUsage.m in Sources */ = {isa = PBXBuildFile; fileRef = 863227E720EBEB4E002F82D3 /* UtilityUsage.m */; };
 		863F2C182092B98F005187A3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 863F2C162092B98F005187A3 /* Default-568h@2x.png */; };
 		863F2CA020946637005187A3 /* AppDelegate+Usage.m in Sources */ = {isa = PBXBuildFile; fileRef = 863F2C9F20946637005187A3 /* AppDelegate+Usage.m */; };
+		866974EB20F743390094C32B /* KeyValueObservingTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 866974EA20F743390094C32B /* KeyValueObservingTest.m */; };
 		86711C8F1FECFA89004F2DC0 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86711C841FECFA89004F2DC0 /* MainViewController.m */; };
 		86711C901FECFA89004F2DC0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 86711C881FECFA89004F2DC0 /* AppDelegate.m */; };
 		86711C941FECFA89004F2DC0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 86711C8C1FECFA89004F2DC0 /* main.m */; };
@@ -424,6 +425,8 @@
 		863F2C162092B98F005187A3 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		863F2C9E20946637005187A3 /* AppDelegate+Usage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+Usage.h"; sourceTree = "<group>"; };
 		863F2C9F20946637005187A3 /* AppDelegate+Usage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+Usage.m"; sourceTree = "<group>"; };
+		866974E920F743390094C32B /* KeyValueObservingTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyValueObservingTest.h; sourceTree = "<group>"; };
+		866974EA20F743390094C32B /* KeyValueObservingTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KeyValueObservingTest.m; sourceTree = "<group>"; };
 		86711C691FECF8E2004F2DC0 /* startup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = startup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86711C831FECFA89004F2DC0 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		86711C841FECFA89004F2DC0 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
@@ -834,6 +837,23 @@
 			path = Utility;
 			sourceTree = "<group>";
 		};
+		866974E620F743130094C32B /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				866974E720F743130094C32B /* KeyValueObserving */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		866974E720F743130094C32B /* KeyValueObserving */ = {
+			isa = PBXGroup;
+			children = (
+				866974E920F743390094C32B /* KeyValueObservingTest.h */,
+				866974EA20F743390094C32B /* KeyValueObservingTest.m */,
+			);
+			path = KeyValueObserving;
+			sourceTree = "<group>";
+		};
 		86711C601FECF8E2004F2DC0 = {
 			isa = PBXGroup;
 			children = (
@@ -856,6 +876,7 @@
 		86711C6B1FECF8E2004F2DC0 /* startup */ = {
 			isa = PBXGroup;
 			children = (
+				866974E620F743130094C32B /* Support */,
 				863227CB20EBE8E3002F82D3 /* Tool */,
 				86711C861FECFA89004F2DC0 /* Application */,
 				86711C821FECFA89004F2DC0 /* Component */,
@@ -1226,6 +1247,7 @@
 				862CB07E1FF110EC0059E3A9 /* ZSSDemoPickerViewController.m in Sources */,
 				863227E820EBEB4E002F82D3 /* UtilityUsage.m in Sources */,
 				86711C941FECFA89004F2DC0 /* main.m in Sources */,
+				866974EB20F743390094C32B /* KeyValueObservingTest.m in Sources */,
 				862CAFD21FF0FCB80059E3A9 /* AutoLayoutAttributedLabelCell.m in Sources */,
 				862CAFE51FF0FCB80059E3A9 /* TextContainerViewController.m in Sources */,
 				862CAFA41FF0F7850059E3A9 /* TYTextContainer.m in Sources */,
