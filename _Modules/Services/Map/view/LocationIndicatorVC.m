@@ -1,19 +1,10 @@
-//
-//  GDMapVC.m
-//  yzsee
-//
-//  Created by 三炮 on 15/10/22.
-//
-//
 
-#import "_vendor_lumberjack.h"
 #import "LocationService.h"
 #import "LocationIndicatorVC.h"
 #import <AMapSearchKit/AMapSearchKit.h>
 #import <MAMapKit/MAMapKit.h>
 #import "BaseWebViewController.h"
-#import "ReactiveCocoa.h"
-#import "_building_application.h"
+#import "Masonry.h"
 #import "_pragma_push.h"
 
 #define kGapXOfBottomView 12

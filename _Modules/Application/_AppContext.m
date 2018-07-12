@@ -1,15 +1,8 @@
-//
-//  _app_context.m
-//  kata
-//
-//  Created by fallen on 17/3/10.
-//  Copyright © 2017年 fallenink. All rights reserved.
-//
 
-#import "_app_context.h"
-#import "_building_precompile.h"
-#import "_building_service.h"
-#import "_building_component.h"
+#import "_Service.h"
+#import "APNService.h"
+#import "LocationService.h"
+#import "_AppContext.h"
 
 @implementation _AppContext
 

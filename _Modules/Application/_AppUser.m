@@ -1,17 +1,10 @@
-//
-//  _app_user.m
-//  student
-//
-//  Created by fallen.ink on 19/05/2017.
-//  Copyright © 2017 alliance. All rights reserved.
-//
 
-#import "_app_user.h"
-#import "_building_tools.h"
+#import <_Tool/_Cache.h>
+#import "_AppUser.h"
 
 @implementation _AppUser
 
-@def_singleton_with(_AppUser, ^{if (!_cache_[stringify(_AppUser)]) {_cache_[stringify(_AppUser)] = [_AppUser new];} return _cache_[stringify(_AppUser)];})
+@def_singleton_with(_AppUser, ^{if (!cacheInst[stringify(_AppUser)]) {cacheInst[stringify(_AppUser)] = [_AppUser new];} return cacheInst[stringify(_AppUser)];})
 
 @def_prop_assign( int64_t, id )
 @def_prop_strong( NSString *, token )
@@ -32,7 +25,7 @@
 }
 
 - (void)save {
-    _cache_[stringify(_AppUser)] = self;
+    cacheInst[stringify(_AppUser)] = self;
 }
 
 @end

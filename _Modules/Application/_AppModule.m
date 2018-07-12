@@ -1,15 +1,10 @@
-//
-//  _app_module.m
-//  kata
-//
-//  Created by fallen on 17/3/10.
-//  Copyright © 2017年 fallenink. All rights reserved.
-//
 
-#import "_app_module.h"
-#import "_app_config.h"
-#import "_building_component.h"
-#import "_building_service.h"
+#import <_Modules/ComponentMap.h>
+#import <_Modules/APNService.h>
+#import <_Modules/LocationService.h>
+
+#import "_AppModule.h"
+#import "_AppConfig.h"
 
 @interface _AppModule ()
 
@@ -89,26 +84,26 @@
     }
     
     //share
-    {
-        [[SNShareService sharedInstance] wechatConfig:^BOOL(SNShareService_Config *config) {
-            config.appId = app_config.wechatAppId;
-            config.scheme = app_config.wechatScheme;
-            
-            config.supported = YES;
-            
-            return YES;
-        } qqConfig:^BOOL(SNShareService_Config *config) {            
-            return NO;
-        } sinaConfig:^BOOL(SNShareService_Config *config) {
-            return NO;
-        } smsConfig:^BOOL(SNShareService_Config *config) {
-            return NO;
-        } emailConfig:^BOOL(SNShareService_Config *config) {
-            return NO;
-        } linkConfig:^BOOL(SNShareService_Config *config) {
-            return NO;
-        }];
-    }
+//    {
+//        [[SNShareService sharedInstance] wechatConfig:^BOOL(SNShareService_Config *config) {
+//            config.appId = app_config.wechatAppId;
+//            config.scheme = app_config.wechatScheme;
+//            
+//            config.supported = YES;
+//            
+//            return YES;
+//        } qqConfig:^BOOL(SNShareService_Config *config) {            
+//            return NO;
+//        } sinaConfig:^BOOL(SNShareService_Config *config) {
+//            return NO;
+//        } smsConfig:^BOOL(SNShareService_Config *config) {
+//            return NO;
+//        } emailConfig:^BOOL(SNShareService_Config *config) {
+//            return NO;
+//        } linkConfig:^BOOL(SNShareService_Config *config) {
+//            return NO;
+//        }];
+//    }
     
     // Init pay module
     {

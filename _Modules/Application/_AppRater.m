@@ -1,12 +1,5 @@
-//
-//  AppRater.m
-//  consumer
-//
-//  Created by fallen.ink on 18/10/2016.
-//
-//
 
-#import "_app_rater.h"
+#import "_AppRater.h"
 
 #import <Availability.h>
 #if !__has_feature(objc_arc)

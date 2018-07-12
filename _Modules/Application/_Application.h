@@ -1,13 +1,6 @@
-//
-//  _application.h
-//  kata
-//
-//  Created by fallen.ink on 22/02/2017.
-//  Copyright © 2017 fallenink. All rights reserved.
-//
 
-#import "_precompile.h"
-#import "_greats.h"
+#import <_Foundation/_Precompile.h>
+#import <_Foundation/_Foundation.h>
 
 /**
  *  @knowledge
@@ -42,11 +35,11 @@
 // Cluster code
 // ----------------------------------
 
-#import "_app_context.h"
-#import "_app_module.h"
-#import "_app_rule.h"
-#import "_app_appearance.h"
-#import "_app_config.h"
+#import "_AppContext.h"
+#import "_AppModule.h"
+#import "_AppRule.h"
+#import "_AppAppearance.h"
+#import "_AppConfig.h"
 
 // ----------------------------------
 // Macro

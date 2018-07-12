@@ -1,12 +1,5 @@
-//
-//  _app_easycoding.h
-//  student
-//
-//  Created by fallen.ink on 05/10/2017.
-//  Copyright © 2017 alliance. All rights reserved.
-//
 
-#import "_precompile.h"
+#import <_Foundation/_Foundation.h>
 #import "UIView+.h"
 #import "UITableViewCell+.h"
 #import "UICollectionViewCell+.h"

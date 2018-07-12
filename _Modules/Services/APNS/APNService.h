@@ -1,12 +1,6 @@
-//
-//  APNService.h
-//  hairdresser
-//
-//  Created by fallen.ink on 6/6/16.
-//
-//
 
-#import "_module_x.h"
+#import <_Foundation/_Foundation.h>
+#import <_Modular/_Service.h>
 
 #if defined( __IPHONE_10_0 ) && ( __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0 )
 #import <UserNotifications/UserNotifications.h>

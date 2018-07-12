@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "_Modules"
-  s.version      = "0.0.2"
+  s.version      = "0.0.7"
   s.summary      = "iOS 开发包 之 工具 库[Objective-C]"
   s.description  = <<-DESC
                    iOS 开发包 之 工具 库[Objective-C]
@@ -60,6 +60,38 @@ Pod::Spec.new do |s|
     services.subspec 'Growth' do |growth|
       growth.source_files = "_Modules/Services/Growth/**/*.{h,m}"
     end
-  end
 
+    services.subspec 'Location' do |location|
+      location.source_files = "_Modules/Services/Location/**/*.{h,m}"
+    end
+
+    services.subspec 'APNS' do |apns|
+      apns.source_files = "_Modules/Services/APNS/**/*.{h,m}"
+    end
+
+    services.subspec 'Map' do |map|
+      map.source_files = "_Modules/Services/Map/**/*.{h,m}"
+      map.resource_bundles = {
+        'Map' => ['_Modules/Services/Map/Resources/**/*.png']
+      }
+    end
+
+    services.subspec 'Vendor' do |vendor|
+      vendor.public_header_files = "_Modules/Services/Vendor/JPush-iOS-SDK-2.1.7/lib/**/*.h"
+      vendor.resources = "_Modules/Services/Vendor/GDMap3/*.bundle"
+      vendor.vendored_frameworks = '_Modules/Services/Vendor/GDMap3/*.framework', 
+      vendor.vendored_libraries = '_Modules/Services/Vendor/JPush-iOS-SDK-2.1.7/lib/*.a'
+      # vendor.resource_bundles = {
+      #   'Vendor' => ['Vendor/Assets/**/*.png']
+      # }
+
+      # 系统framework
+      # vendor.frameworks = 'CoreMotion', 'AssetsLibrary', 'AVFoundation', 'WebKit', 'Contacts', 'ContactsUI', 'CoreLocation', 'AddressBook', 'AddressBookUI', 'CoreBluetooth', 'MobileCoreServices', 'AudioToolbox', 'UserNotifications', 'MessageUI'
+      # 系统lib
+      # vendor.ios.libraries = 'sqlite3.0'
+      # 第三方依赖
+      # vendor.dependency 'TTTAttributedLabel', '~> 2.0.0'
+
+    end
+  end
 end

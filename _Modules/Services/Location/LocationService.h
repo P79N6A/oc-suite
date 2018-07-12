@@ -8,7 +8,7 @@
 
 #import <CoreLocation/CoreLocation.h>
 
-#import "_service.h"
+#import <_Modular/_Service.h>
 #import "LocationModel.h"
 
 typedef enum : NSUInteger {

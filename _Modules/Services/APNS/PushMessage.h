@@ -1,14 +1,7 @@
-//
-//  PushMessage.h
-//  consumer
-//
-//  Created by fallen.ink on 8/2/16.
-//
-//
 
-#import "_mtl_model.h"
+#import <_Foundation/_Foundation.h>
 
-@interface PushMessage : _MTLModel
+@interface PushMessage : NSObject
 
 @property (nonatomic, strong) NSString *notification;
 

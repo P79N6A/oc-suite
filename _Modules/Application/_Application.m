@@ -1,12 +1,5 @@
-//
-//  _application.m
-//  kata
-//
-//  Created by fallen.ink on 22/02/2017.
-//  Copyright © 2017 fallenink. All rights reserved.
-//
 
-#import "_application.h"
+#import "_Application.h"
 #import "XHLaunchAd.h"
 #import "APNService.h"
 #import "_pragma_push.h"

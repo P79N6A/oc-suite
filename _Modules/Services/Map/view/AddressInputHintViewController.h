@@ -1,10 +1,3 @@
-//
-//  AddressInputHintViewController.h
-//  QQing
-//
-//  Created by 李杰 on 2/5/15.
-//
-//
 
 #import "BaseViewController.h"
 

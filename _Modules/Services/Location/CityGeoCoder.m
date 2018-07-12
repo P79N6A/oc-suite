@@ -1,13 +1,5 @@
-//
-//  CityGeoCoder.m
-//  component
-//
-//  Created by 郭晓倩 on 15/10/26.
-//  Copyright © 2015年 OpenTeam. All rights reserved.
-//
 
-#import "_greats.h"
-#import "_vendor_lumberjack.h"
+
 #import "CityGeoCoder.h"
 
 @implementation CityGeoCoder

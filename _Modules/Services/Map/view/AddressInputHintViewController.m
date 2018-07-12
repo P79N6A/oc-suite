@@ -1,15 +1,7 @@
-//
-//  AddressInputHintViewController.m
-//  QQing
-//
-//  Created by 李杰 on 2/5/15.
-//
-//
 
-#import "_building_precompile.h"
+#import <_Building/_Building.h>
 #import <AMapSearchKit/AMapSearchKit.h>
 #import "AddressInputHintViewController.h"
-#import "_vendor_lumberjack.h"
 #import "LocationViewController.h"
 #import "_pragma_push.h"
 #import "LocationService.h"
@@ -156,7 +148,7 @@
 }
 
 - (void)AMapSearchRequest:(id)request didFailWithError:(NSError *)error{
-    DDLogError(@"地址搜索.高德搜索API失败,error=%@",error);
+//    DDLogError(@"地址搜索.高德搜索API失败,error=%@",error);
 }
 
 #pragma mark - UITableViewDataSource

@@ -1,15 +1,9 @@
-//
-//  LocationServiceImpl.m
-//  student
-//
-//  Created by fallen.ink on 10/06/2017.
-//  Copyright © 2017 alliance. All rights reserved.
-//
+
 
 //新增Key: NSLocationAlwaysUsageDescription 和 NSLocationWhenInUseUsageDescription ，这两个Key的值将分别用于描述应用程序始终使用和使用期间使用定位的说明，这些说明将显示在用户设置中。
 
+#import <_Foundation/_Foundation.h>
 #import "LocationServiceImpl.h"
-#import "_building_precompile.h"
 
 @interface LocationServiceImpl () <CLLocationManagerDelegate>
 

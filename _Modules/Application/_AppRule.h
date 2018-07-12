@@ -6,7 +6,7 @@
 //  Copyright © 2017 alliance. All rights reserved.
 //
 
-#import "_building_precompile.h"
+#import <_Foundation/_Foundation.h>
 
 // ----------------------------------
 // FIXME: 即将废弃

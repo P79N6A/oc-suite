@@ -74,6 +74,7 @@
 #import "NSDate+Extension.h"
 #import "NSDateFormatter+Extension.h"
 #import "NSDictionary+Extension.h"
+#import "NSError+Extension.h"
 #import "NSException+Extension.h"
 #import "NSInvocation+Extension.h"
 #import "NSMutableArray+Extension.h"

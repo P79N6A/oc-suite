@@ -65,6 +65,11 @@ target 'startup' do
     
     pod '_Modules/Services/Assets', :path => '../'
     pod '_Modules/Services/Growth', :path => '../'
+    pod '_Modules/Services/Location', :path => '../'
+    pod '_Modules/Services/Map', :path => '../'
+    pod '_Modules/Services/APNS', :path => '../'
+    
+    pod '_Modules/Services/Vendor', :path => '../'
 
     ######################################
     # 其他依赖

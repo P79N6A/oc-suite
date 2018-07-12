@@ -1,13 +1,5 @@
-//
-//  LocationService.m
-//  hairdresser
-//
-//  Created by fallen.ink on 6/6/16.
-//
-//
 
-#import "_vendor_lumberjack.h"
-#import "_vendor_reactivecocoa.h"
+
 #import "LocationService.h"
 #import "CityGeoCoder.h"
 #import "LocationServiceImpl.h"
@@ -24,7 +16,7 @@ const int kUpdateLocationInterval = 1*60;//每1分钟刷新定位
 
 @prop_strong(CLLocation *, currrentSimLocation)
 
-@prop_strong(RACDisposable *, dispose)
+//@prop_strong(RACDisposable *, dispose) // FIXME: 需要修改
 
 @end
 
@@ -51,8 +43,8 @@ const int kUpdateLocationInterval = 1*60;//每1分钟刷新定位
 
 - (void)powerOff {
     // 关闭定时自动定位
-    [self.dispose dispose];
-    self.dispose = nil;
+//    [self.dispose dispose]; // FIXME: 需要修改
+//    self.dispose = nil; // FIXME: 需要修改
     
     // 切换状态
     self.locationStatus = LocationStatus_Failed;

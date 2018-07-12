@@ -9,12 +9,10 @@
 //  @Knowledge
 //  1. Look up ur app id : http://blog.csdn.net/kesalin/article/details/6605934
 
-#import "_precompile.h"
-#import "_foundation.h"
-#import "_pragma_push.h"
-
 #import <Availability.h>
 #import <TargetConditionals.h>
+#import <_Foundation/_Foundation.h>
+#import "_pragma_push.h"
 
 // ----------------------------------
 // Macro

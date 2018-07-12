@@ -1,17 +1,10 @@
-//
-//  LocationViewController.m
-//  QQing
-//
-//  Created by 李杰 on 1/27/15.
-//
-//
 
-#import "_building_precompile.h"
-#import "_building_application.h"
+#import <_Building/_Building.h>
 #import <MAMapKit/MAMapKit.h>
 #import <AMapSearchKit/AMapSearchKit.h>
 #import "_validator.h"
-#import "_app_appearance.h"
+#import "_AppAppearance.h"
+#import "_AppEasycoding.h"
 #import "LocationViewController.h"
 #import "AddressInputHintViewController.h"
 #import "LocationService.h"

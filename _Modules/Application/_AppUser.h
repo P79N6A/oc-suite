@@ -1,13 +1,5 @@
-//
-//  _app_user.h
-//  student
-//
-//  Created by fallen.ink on 19/05/2017.
-//  Copyright © 2017 alliance. All rights reserved.
-//
 
-#import "_building_precompile.h"
-#import "_archiver.h" // 自动NSCoding
+#import <_Foundation/_Foundation.h>
 
 // ----------------------------------
 // Macro

@@ -1,13 +1,6 @@
-//
-//  _app_config.h
-//  student
-//
-//  Created by fallen.ink on 13/04/2017.
-//  Copyright © 2017 alliance. All rights reserved.
-//
 
-#import "_building_precompile.h"
-#import "_app_rater.h"
+#import <_Foundation/_Foundation.h>
+#import "_AppRater.h"
 
 // ----------------------------------
 // Macro

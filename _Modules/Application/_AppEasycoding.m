@@ -1,20 +1,12 @@
-//
-//  _app_easycoding.m
-//  student
-//
-//  Created by fallen.ink on 05/10/2017.
-//  Copyright © 2017 alliance. All rights reserved.
-//
 
-#import "_app_easycoding.h"
-#import "_building_ui_component.h"
+#import <_Foundation/_Foundation.h>
+#import "_AppEasycoding.h"
 #import <objc/runtime.h>
 #import "SVProgressHUD.h"
 #import "AlertView.h"
 #import "UIView+Extension.h"
-#import "_foundation.h"
-#import "_building_component.h"
 #import "_pragma_push.h"
+#import "FTIndicator.h"
 
 // ----------------------------------
 // MARK: Source - Extension

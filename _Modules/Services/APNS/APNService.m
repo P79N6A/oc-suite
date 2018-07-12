@@ -1,15 +1,6 @@
-//
-//  APNService.m
-//  hairdresser
-//
-//  Created by fallen.ink on 6/6/16.
-//
-//
 
 #import "APNService.h"
 #import "JPushService.h"
-#import "_greats.h"
-#import "_building_application.h"
 #import "_pragma_push.h"
 
 // ios 10 : http://www.jianshu.com/p/2f3202b5e758

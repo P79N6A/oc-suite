@@ -6,7 +6,7 @@
 //  Copyright © 2017 alliance. All rights reserved.
 //
 
-#import "_app_rule.h"
+#import "_AppRule.h"
 
 @implementation _AppRule
 

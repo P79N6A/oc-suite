@@ -1,10 +1,4 @@
-//
-//  CityGeoCoder.h
-//  component
-//
-//  Created by 郭晓倩 on 15/10/26.
-//  Copyright © 2015年 OpenTeam. All rights reserved.
-//
+
 //  与城市相关的地理编码和逆编码
 
 #import <Foundation/Foundation.h>

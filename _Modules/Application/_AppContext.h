@@ -1,16 +1,8 @@
-//
-//  _app_context.h
-//  kata
-//
-//  Created by fallen on 17/3/10.
-//  Copyright © 2017年 fallenink. All rights reserved.
-//
 
-#import <Foundation/Foundation.h>
-
-#import "_app_init.h"
-#import "_app_uninit.h"
-#import "_app_user.h"
+#import <_Foundation/_Foundation.h>
+#import "_AppInit.h"
+#import "_AppUninit.h"
+#import "_AppUser.h"
 
 // ----------------------------------
 // Macro

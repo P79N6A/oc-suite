@@ -6,8 +6,7 @@
 //  Copyright © 2017 alliance. All rights reserved.
 //
 
-#import "_building_precompile.h"
-
+#import "_Foundation.h"
 #import "UIButton+Appearance.h"
 #import "UIColor+Appearance.h"
 
