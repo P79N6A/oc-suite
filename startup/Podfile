@@ -21,6 +21,7 @@ target 'startup' do
     pod '_Tool/Date', :path => '../'
     
     pod '_Support/KeyValueObserving', :path => '../'
+    pod '_Support/Chronograph', :path => '../'
     
     pod '_Modular', :path => '../'
     

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddressInputHintViewController">
+            <connections>
+                <outlet property="tableView" destination="Qzc-wT-1Bh" id="SyG-zt-1cd"/>
+                <outlet property="view" destination="iN0-l3-epB" id="swB-Dq-sqh"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Qzc-wT-1Bh">
+                    <rect key="frame" x="8" y="58" width="304" height="502"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Qzc-wT-1Bh" secondAttribute="trailing" constant="8" id="8XW-N4-F89"/>
+                <constraint firstItem="Qzc-wT-1Bh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="8jV-dC-rcd"/>
+                <constraint firstItem="Qzc-wT-1Bh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="58" id="Ibw-gj-tWx"/>
+                <constraint firstAttribute="bottom" secondItem="Qzc-wT-1Bh" secondAttribute="bottom" constant="8" id="oqz-f5-g08"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <point key="canvasLocation" x="354" y="283"/>
+        </view>
+    </objects>
+</document>
