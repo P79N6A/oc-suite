@@ -1,4 +1,5 @@
 
+#import <_Building/_Building.h>
 #import "LocationService.h"
 #import "LocationIndicatorVC.h"
 #import <AMapSearchKit/AMapSearchKit.h>
@@ -123,29 +124,30 @@
 }
 
 - (void)bindViewModel {
-    @weakify(self);
-    RACSignal* sig_currentLocationSuccess = nil;
-    if (service.location.available) {
-       sig_currentLocationSuccess = [[RACObserve(self.mapView.userLocation, location) filter:^BOOL(id value) {
-            return value != nil;
-        }]take:1];
-    }else{
-        sig_currentLocationSuccess = [RACSignal return:@(YES)];
-    }
-
-    RACSignal* sig_destinationSuccess = [[RACObserve(self, destinationGeoInfo) filter:^BOOL(id value) {
-        return value != nil;
-    }]take:1];
-    
-    [[sig_destinationSuccess onMainThread]subscribeNext:^(id x) {
-        @strongify(self);
-        [self showDestination];
-    }];
-    
-    [[[[RACSignal combineLatest:@[sig_currentLocationSuccess,sig_destinationSuccess]]take:1]onMainThread]subscribeNext:^(id x) {
-        @strongify(self);
-        [self showBottomView];
-    }];
+    // FIXME:
+//    @weakify(self);
+//    RACSignal* sig_currentLocationSuccess = nil;
+//    if (service.location.available) {
+//       sig_currentLocationSuccess = [[RACObserve(self.mapView.userLocation, location) filter:^BOOL(id value) {
+//            return value != nil;
+//        }]take:1];
+//    }else{
+//        sig_currentLocationSuccess = [RACSignal return:@(YES)];
+//    }
+//
+//    RACSignal* sig_destinationSuccess = [[RACObserve(self, destinationGeoInfo) filter:^BOOL(id value) {
+//        return value != nil;
+//    }]take:1];
+//
+//    [[sig_destinationSuccess onMainThread]subscribeNext:^(id x) {
+//        @strongify(self);
+//        [self showDestination];
+//    }];
+//
+//    [[[[RACSignal combineLatest:@[sig_currentLocationSuccess,sig_destinationSuccess]]take:1]onMainThread]subscribeNext:^(id x) {
+//        @strongify(self);
+//        [self showBottomView];
+//    }];
 }
 
 #pragma mark - UI Action
@@ -171,13 +173,13 @@
     MARouteConfig * config = [[MARouteConfig alloc] init];
     config.startCoordinate = startLocation;
     config.destinationCoordinate = destinationLocation;
-    config.appScheme = greats.device.urlSchema;
+    config.appScheme = [_Device sharedInstance].urlSchema;
     config.appName = app_display_name;
     config.routeType = MARouteSearchTypeDriving;
     //若未调起高德地图App,跳转到高德H5应用
     NSString* url = [NSString stringWithFormat:@"http://m.amap.com/navi/?start=%f,%f&dest=%f,%f&destName=%@&naviBy=car&key=%@",startLocation.longitude,startLocation.latitude,destinationLocation.longitude,destinationLocation.latitude,destinationName,GDMapH5APIKey];
     
-    DDLogDebug(@"高德H5应用URL:%@",url);
+    LOG(@"高德H5应用URL:%@",url);
     
     NSString *encodedUrl = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     [self pushHtml:[NSURL URLWithString:encodedUrl] extraParams:@{@"title":@"高德地图"}];
