@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "_Support"
-  s.version      = "0.0.2"
+  s.version      = "0.0.3"
   s.summary      = "iOS 开发包 之 工具 库[Objective-C]"
   s.description  = <<-DESC
                    iOS 开发包 之 工具 库[Objective-C]
@@ -30,6 +30,10 @@ Pod::Spec.new do |s|
 
   s.subspec 'Chronograph' do |chronograph|
     chronograph.source_files = "_Support/Chronograph/**/*.{h,m}"
+  end
+
+  s.subspec 'CountDown' do |countDown|
+    countDown.source_files = "_Support/CountDown/**/*.{h,m}"
   end
 
 end
