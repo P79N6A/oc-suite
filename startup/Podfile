@@ -94,6 +94,14 @@ target 'startup' do
     # pod 'JHChainableAnimations', '~> 3.0.1' # While use 'ChainableAnimations' in Swift
 
     # pod 'RegexKitLite' # 正则表达式
+
+    # 友盟
+    pod 'UMengUShare/Core', '6.4.8'
+    pod 'UMengAnalytics-NO-IDFA', '4.1.5'
+    pod 'UMengFeedback', '~> 2.3.4'
+    pod 'UMengUShare/Social/Sina'#,            '6.4.1'
+    pod 'UMengUShare/Social/WeChat'#,            '6.4.1'
+    pod 'UMengUShare/Social/QQ'#,            '6.4.1'
     
     ######################################
     # UI 组件
