@@ -25,10 +25,10 @@ NSString * const UUIDForDeviceKey = @"uuidForDevice";
 
 BOOL IOS8 = NO;
 BOOL IOS9 = NO;
-BOOL iOS10 = NO;
-BOOL iOS11 = NO;
+BOOL IOS10 = NO;
+BOOL IOS11 = NO;
 
-BOOL iOS11_or_later = NO;
+BOOL IOS11_OR_LATER = NO;
 BOOL IOS10_OR_LATER = NO;
 BOOL IOS9_OR_LATER = NO;
 BOOL IOS8_OR_LATER = NO;
@@ -38,7 +38,7 @@ BOOL IOS5_OR_LATER = NO;
 BOOL IOS4_OR_LATER = NO;
 BOOL IOS3_OR_LATER = NO;
 
-BOOL iOS11_or_earlier = NO;
+BOOL IOS11_OR_EARLIER = NO;
 BOOL IOS9_OR_EARLIER = NO;
 BOOL IOS8_OR_EARLIER = NO;
 BOOL IOS7_OR_EARLIER = NO;
@@ -51,7 +51,28 @@ BOOL IS_SCREEN_35_INCH = NO;
 BOOL IS_SCREEN_4_INCH = NO;
 BOOL IS_SCREEN_47_INCH = NO;
 BOOL IS_SCREEN_55_INCH = NO;
-BOOL is_screen_58_inch = NO;
+BOOL IS_SCREEN_58_INCH = NO;
+
+#pragma mark -
+
+BOOL IS_IPHONE_4        = NO;
+BOOL IS_IPHONE_4S       = NO;
+BOOL IS_IPHONE_5        = NO;
+BOOL IS_IPHONE_5C       = NO;
+BOOL IS_IPHONE_5S       = NO;
+BOOL IS_IPHONE_6        = NO;
+BOOL IS_IPHONE_6S       = NO;
+BOOL IS_IPHONE_6P       = NO;
+BOOL IS_IPHONE_6SP      = NO;
+BOOL IS_IPHONE_6SE      = NO;
+BOOL IS_IPHONE_7        = NO;
+BOOL IS_IPHONE_7P       = NO;
+BOOL IS_IPHONE_8        = NO;
+BOOL IS_IPHONE_8P       = NO;
+BOOL IS_IPHONE_X        = NO;
+BOOL IS_SIMULATOR       = NO;
+
+BOOL IS_IPHONE_DESIGN_X = NO;
 
 #pragma mark -
 
@@ -114,7 +135,10 @@ BOOL is_screen_58_inch = NO;
 + (void)load {
     [self sharedInstance];
     
-#if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
+    [self loadDeviceModel];
+    
+    [self loadDeviceDesignModel];
+    
     /**
      *  ios 10.0 新方案：
      *
@@ -123,10 +147,10 @@ BOOL is_screen_58_inch = NO;
     // 判断当前系统版本
     IOS8 = [[UIDevice currentDevice].systemVersion floatValue] >= 8.0 && [[UIDevice currentDevice].systemVersion floatValue] < 9.0;
     IOS9 = [[UIDevice currentDevice].systemVersion floatValue] >= 9.0 && [[UIDevice currentDevice].systemVersion floatValue] < 10.0;
-    iOS10 = [[UIDevice currentDevice].systemVersion floatValue] >= 10.0 && [[UIDevice currentDevice].systemVersion floatValue] < 11.0;
-    iOS11 = [[UIDevice currentDevice].systemVersion floatValue] >= 11.0 && [[UIDevice currentDevice].systemVersion floatValue] < 12.0;
+    IOS10 = [[UIDevice currentDevice].systemVersion floatValue] >= 10.0 && [[UIDevice currentDevice].systemVersion floatValue] < 11.0;
+    IOS11 = [[UIDevice currentDevice].systemVersion floatValue] >= 11.0 && [[UIDevice currentDevice].systemVersion floatValue] < 12.0;
 
-    iOS11_or_later = ([[[UIDevice currentDevice] systemVersion] floatValue] >= 11.0);
+    IOS11_OR_LATER = ([[[UIDevice currentDevice] systemVersion] floatValue] >= 11.0);
     IOS10_OR_LATER = ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0);
     IOS9_OR_LATER =  ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0);
     IOS8_OR_LATER =  ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0);
@@ -136,7 +160,7 @@ BOOL is_screen_58_inch = NO;
     IOS4_OR_LATER =  ([[[UIDevice currentDevice] systemVersion] floatValue] >= 4.0);
     IOS3_OR_LATER =  ([[[UIDevice currentDevice] systemVersion] floatValue] >= 3.0);
     
-    iOS11_or_earlier = !iOS11_or_later;
+    IOS11_OR_EARLIER  = !IOS11_OR_LATER;
     IOS9_OR_EARLIER = !IOS10_OR_LATER;
     IOS8_OR_EARLIER = !IOS9_OR_LATER;
     IOS7_OR_EARLIER = !IOS8_OR_LATER;
@@ -169,10 +193,7 @@ BOOL is_screen_58_inch = NO;
     IS_SCREEN_35_INCH = ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) : NO);
     IS_SCREEN_47_INCH = ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(750, 1334), [[UIScreen mainScreen] currentMode].size) : NO);
     IS_SCREEN_55_INCH = ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2208), [[UIScreen mainScreen] currentMode].size) : NO);
-    is_screen_58_inch = ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436)/** 如果不适配启动图，那么有效显示区域在中间，上下有黑边，同时这里获取到的height为2001.所以先适配启动图 */, [[UIScreen mainScreen] currentMode].size) : NO);
-#else
-    // all NO
-#endif
+    IS_SCREEN_58_INCH = ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436)/** 如果不适配启动图，那么有效显示区域在中间，上下有黑边，同时这里获取到的height为2001.所以先适配启动图 */, [[UIScreen mainScreen] currentMode].size) : NO);
 }
 
 - (NSString *)now {
@@ -1342,6 +1363,126 @@ BOOL is_screen_58_inch = NO;
             }
         }
             break;
+    }
+}
+
+#pragma mark -
+
++ (void)loadDeviceModel {
+    int mib[2];
+    size_t len;
+    char *machine;
+    
+    mib[0] = CTL_HW;
+    mib[1] = HW_MACHINE;
+    sysctl(mib, 2, NULL, &len, NULL, 0);
+    machine = malloc(len);
+    sysctl(mib, 2, machine, &len, NULL, 0);
+    
+    NSString *platform = [NSString stringWithCString:machine encoding:NSASCIIStringEncoding];
+    free(machine);
+    
+    // iPhone
+    if ([platform isEqualToString:@"iPhone1,1"]) {}
+    if ([platform isEqualToString:@"iPhone1,2"]) {}
+    if ([platform isEqualToString:@"iPhone2,1"]) {}
+    if ([platform isEqualToString:@"iPhone3,1"]) IS_IPHONE_4=YES;
+    if ([platform isEqualToString:@"iPhone3,2"]) IS_IPHONE_4=YES;
+    if ([platform isEqualToString:@"iPhone3,3"]) IS_IPHONE_4=YES;
+    if ([platform isEqualToString:@"iPhone4,1"]) IS_IPHONE_4S=YES;
+    if ([platform isEqualToString:@"iPhone5,1"]) IS_IPHONE_5=YES;
+    if ([platform isEqualToString:@"iPhone5,2"]) IS_IPHONE_5=YES;
+    if ([platform isEqualToString:@"iPhone5,3"]) IS_IPHONE_5C=YES;
+    if ([platform isEqualToString:@"iPhone5,4"]) IS_IPHONE_5C=YES;
+    if ([platform isEqualToString:@"iPhone6,1"]) IS_IPHONE_5S=YES;
+    if ([platform isEqualToString:@"iPhone6,2"]) IS_IPHONE_5S=YES;
+    if ([platform isEqualToString:@"iPhone7,2"]) IS_IPHONE_6=YES;
+    if ([platform isEqualToString:@"iPhone7,1"]) IS_IPHONE_6P=YES;
+    if ([platform isEqualToString:@"iPhone8,1"]) IS_IPHONE_6SP=YES;
+    if ([platform isEqualToString:@"iPhone8,2"]) IS_IPHONE_6SP=YES;
+    if ([platform isEqualToString:@"iPhone8,3"]) IS_IPHONE_6SE=YES;
+    if ([platform isEqualToString:@"iPhone8,4"]) IS_IPHONE_6SE=YES;
+    if ([platform isEqualToString:@"iPhone9,1"]) IS_IPHONE_7=YES;
+    if ([platform isEqualToString:@"iPhone9,2"]) IS_IPHONE_7P=YES;
+    if ([platform isEqualToString:@"iPhone10,1"])   IS_IPHONE_8=YES;
+    if ([platform isEqualToString:@"iPhone10,4"])   IS_IPHONE_8=YES;
+    if ([platform isEqualToString:@"iPhone10,2"])   IS_IPHONE_8P=YES;
+    if ([platform isEqualToString:@"iPhone10,5"])   IS_IPHONE_8P=YES;
+    if ([platform isEqualToString:@"iPhone10,3"])   IS_IPHONE_X=YES;
+    if ([platform isEqualToString:@"iPhone10,6"])   IS_IPHONE_X=YES;
+    
+    //iPod Touch
+    if ([platform isEqualToString:@"iPod1,1"])   {}
+    if ([platform isEqualToString:@"iPod2,1"])   {}
+    if ([platform isEqualToString:@"iPod3,1"])   {}
+    if ([platform isEqualToString:@"iPod4,1"])   {}
+    if ([platform isEqualToString:@"iPod5,1"])   {}
+    if ([platform isEqualToString:@"iPod7,1"])   {}
+    
+    //iPad
+    if ([platform isEqualToString:@"iPad1,1"])   {}
+    if ([platform isEqualToString:@"iPad2,1"])   {}
+    if ([platform isEqualToString:@"iPad2,2"])   {}
+    if ([platform isEqualToString:@"iPad2,3"])   {}
+    if ([platform isEqualToString:@"iPad2,4"])   {}
+    if ([platform isEqualToString:@"iPad3,1"])   {}
+    if ([platform isEqualToString:@"iPad3,2"])   {}
+    if ([platform isEqualToString:@"iPad3,3"])   {}
+    if ([platform isEqualToString:@"iPad3,4"])   {}
+    if ([platform isEqualToString:@"iPad3,5"])   {}
+    if ([platform isEqualToString:@"iPad3,6"])   {}
+    
+    //iPad Air
+    if ([platform isEqualToString:@"iPad4,1"])   {}
+    if ([platform isEqualToString:@"iPad4,2"])   {}
+    if ([platform isEqualToString:@"iPad4,3"])   {}
+    if ([platform isEqualToString:@"iPad5,3"])   {}
+    if ([platform isEqualToString:@"iPad5,4"])   {}
+    
+    //iPad mini
+    if ([platform isEqualToString:@"iPad2,5"])   {}
+    if ([platform isEqualToString:@"iPad2,6"])   {}
+    if ([platform isEqualToString:@"iPad2,7"])   {}
+    if ([platform isEqualToString:@"iPad4,4"])   {}
+    if ([platform isEqualToString:@"iPad4,5"])   {}
+    if ([platform isEqualToString:@"iPad4,6"])   {}
+    if ([platform isEqualToString:@"iPad4,7"])   {}
+    if ([platform isEqualToString:@"iPad4,8"])   {}
+    if ([platform isEqualToString:@"iPad4,9"])   {}
+    if ([platform isEqualToString:@"iPad5,1"])   {}
+    if ([platform isEqualToString:@"iPad5,2"])   {}
+    
+    if ([platform isEqualToString:@"i386"])      IS_SIMULATOR=YES;
+    if ([platform isEqualToString:@"x86_64"])    IS_SIMULATOR=YES;
+}
+
++ (void)loadDeviceDesignModel {
+    if (CGSizeEqualToSize([UIScreen mainScreen].currentMode.size, CGSizeMake(1125, 2436))) {
+        IS_IPHONE_DESIGN_X = YES;
+    }
+}
+
+#pragma mark - Public method
+
++ (void)iPhoneXWith:(Block)handler {
+    if (IS_IPHONE_DESIGN_X) {
+        if (handler) handler();
+    }
+}
+
++ (void)iPhoneXWith:(Block)handlerX otherwise:(Block)handlerOther {
+    if (IS_IPHONE_DESIGN_X) {
+        if (handlerX) handlerX();
+    } else {
+        if (handlerOther) handlerOther();
+    }
+}
+
++ (void)iOS11_NotiPhoneXWith:(Block)handler {
+    if (@available(iOS 11.0, *)) {
+        if (IS_NOT_IPHONE_DESIGN_X) {
+            if (handler) handler();
+        }
     }
 }
 

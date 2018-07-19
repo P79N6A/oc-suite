@@ -18,9 +18,6 @@
 #define app_frame_height                ([[UIScreen mainScreen] applicationFrame].size.height)
 #define app_frame_width                 ([[UIScreen mainScreen] applicationFrame].size.width)
 
-// iphoneX 底部菜单栏 34 nanhaichao
-#define IS_IPHONE_X                     (screen_height == 812.0)
-
 // ----------------------------------
 // 系统控件基础定义，如：导航栏、状态栏、标签栏
 // ----------------------------------
