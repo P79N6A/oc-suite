@@ -1,9 +1,12 @@
 
-#define color_with_rgb_value( value )       [UIColor \
+#define color_with_rgba_value( value, a ) \
+        [UIColor \
         colorWithRed:((float)((value & 0xFF0000) >> 16))/255.0 \
         green:((float)((value & 0xFF00) >> 8))/255.0 \
-        blue:((float)(value & 0xFF))/255.0 alpha:1.0]
-#define color_with_hex( value )            color_with_rgb_value( value )
+        blue:((float)(value & 0xFF))/255.0 \
+        alpha:a]
+#define color_with_hex( value )             color_with_rgba_value( value, 1.0 )
+#define color_with_hexa( value, a )         color_with_rgba_value( value, a )
 #define color_with_rgba(r, g, b, a)         [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a]
 #define color_with_rgb(r, g,  b)            color_with_rgba(r, g, b, 1.0f)
 
@@ -36,3 +39,9 @@
 #define gray_6     [UIColor colorWithRGBHex:0x666666]
 #define gray_7     [UIColor colorWithRGBHex:0x333333]
 #define gray_8     [UIColor colorWithHexString:@"979797"]
+
+// ----------------------------------
+// MARK: Custom color
+// ----------------------------------
+
+#define color_disabled  [UIColor colorWithHexString:@"#BBBBBB"]

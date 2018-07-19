@@ -77,6 +77,14 @@ static inline BOOL is_empty(id thing) {
 #undef  selectorify
 #define selectorify( _code_ )                   NSSelectorFromString( @#_code_ )
 
+#define keypathify( __keypath__ ) NSStringFromSelector(@selector(__keypath__))
+
+#define take_nonull( ... ) macro_concat(take_nonull_, macro_count(__VA_ARGS__))( __VA_ARGS__ )
+#define take_nonull_0( ... )
+#define take_nonull_1( ... )
+#define take_nonull_2( a, b )   ( a ? a : b )
+#define take_nonull_3( a, b, c ) take_nonull_2( take_nonull_2(a, b), c)
+
 // 类型转换：从 id 到 NSObject
 
 #undef  objectype
@@ -93,3 +101,5 @@ static inline BOOL is_empty(id thing) {
 
 #undef  is_main_thread
 #define is_main_thread                          [NSThread isMainThread]
+
+#define view_SafeAreaInsets(view) ({UIEdgeInsets insets; if(@available(iOS 11.0, *)) {insets = view.safeAreaInsets;} else {insets = UIEdgeInsetsZero;} insets;})

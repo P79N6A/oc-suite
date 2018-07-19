@@ -13,6 +13,7 @@
 #define screen_width                    [[UIScreen mainScreen] bounds].size.width
 #define screen_height                   [[UIScreen mainScreen] bounds].size.height
 #define screen_scale                    [[UIScreen mainScreen] scale]
+#define border_width                    (1.0 / screen_scale)
 
 #define app_frame                       [[UIScreen mainScreen] applicationFrame]
 #define app_frame_height                ([[UIScreen mainScreen] applicationFrame].size.height)
@@ -21,11 +22,15 @@
 // ----------------------------------
 // 系统控件基础定义，如：导航栏、状态栏、标签栏
 // ----------------------------------
-#define status_bar_height               20
-#define navigation_bar_height           44
-#define navigation_status_bar_height    64
-#define tab_bar_height                  49
-#define keyboard_height                 216
+#define is_iPhoneX (screen_width == 375.f && screen_height == 812.f ? YES : NO)
+
+#define navigation_bar_height           44.f
+#define navigation_status_bar_height    64.f
+#define keyboard_height                 216.f
+#define status_bar_height      (is_iPhoneX ? 44.f : 20.f)
+#define tabbar_height         (is_iPhoneX ? (49.f+34.f) : 49.f)
+#define tabbar_safe_bottom_margin         (is_iPhoneX ? 34.f : 0.f)
+#define status_bar_navigation_bar_height  (is_iPhoneX ? 88.f : 64.f)
 
 #define separator_height                8
 

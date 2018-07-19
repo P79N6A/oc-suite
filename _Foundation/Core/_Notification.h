@@ -50,10 +50,24 @@ typedef NSNotification NotificationType;
 
 @interface NSNotification ( Extension )
 
+/**
+ *  @brief 将通知的对等，等同于其name
+ *
+ *  @param name 通知的name
+ */
 - (BOOL)is:(NSString *)name;
-- (BOOL)isKindOf:(NSString *)prefix;
-
-+ (instancetype)notificationWithName:(NSString *)aName;
+/**
+ *  @brief  将通知的比较，利用前缀匹配
+ *
+ *  @param prefix 通知的name
+ */
+- (BOOL)isKindOf:(NSString *)prefix; // 前缀匹配
+/**
+ *  @brief 用通知的name实例化一个通知对象
+ *
+ *  @param name 通知的name
+ */
++ (instancetype)notificationWithName:(NSString *)name;
 
 @end
 

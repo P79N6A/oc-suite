@@ -17,9 +17,9 @@ Pod::Spec.new do |s|
 
   s.name         = "_Modular"
   s.version      = "0.0.1"
-  s.summary      = "iOS 开发包 之 工具 库[Objective-C]"
+  s.summary      = "iOS 开发包 之 模块化机制 [Objective-C]"
   s.description  = <<-DESC
-                   iOS 开发包 之 工具 库[Objective-C]
+                   iOS 开发包 之 模块化机制 [Objective-C]
                    DESC
   s.homepage     = "https://github.com/fallending"
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
