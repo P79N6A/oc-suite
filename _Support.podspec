@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "_Support"
-  s.version      = "0.0.3"
+  s.version      = "0.0.4"
   s.summary      = "iOS 开发包 之 其他可复用类 [Objective-C]"
   s.description  = <<-DESC
                    iOS 开发包 之 其他可复用类 [Objective-C]
@@ -34,6 +34,10 @@ Pod::Spec.new do |s|
 
   s.subspec 'CountDown' do |countDown|
     countDown.source_files = "_Support/CountDown/**/*.{h,m}"
+  end
+
+  s.subspec 'MJExtension' do |mj|
+    mj.source_files = "_Support/MJExtension/**/*.{h,m}"
   end
 
 end
