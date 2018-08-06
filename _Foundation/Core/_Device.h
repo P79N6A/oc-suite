@@ -218,11 +218,6 @@ extern BOOL IS_IPHONE_DESIGN_X;
 - (void)openSettings;
 
 /**
- *  WIFI
- */
-- (void)openWIFI;
-
-/**
  *  打电话
  *
  *  @param phone 电话号码

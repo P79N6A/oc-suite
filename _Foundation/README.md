@@ -95,3 +95,89 @@ Reference：(Thanks & がんばって<罗马音：ganbatte 中文近似读音：
 * [iOS单元测试：Specta + Expecta + OCMock + OHHTTPStubs + KIF](http://blog.csdn.net/colorapp/article/details/47007431)
 * [JxbDebugTool](https://github.com/JxbSir/JxbDebugTool), 一个iOS调试工具，监控所有HTTP请求，自动捕获Crash分析。
 * [A/B test search](https://github.com/search?l=Objective-C&q=a%2Fb+testing&ref=searchresults&type=Repositories&utf8=✓)
+
+## 问题
+
+1. 案子1: [iOS在App中打开设置中的指定模块](https://www.jianshu.com/p/2e31fcc728b5)
+
+```
+被拒绝理由：
+Your app uses the "prefs:root=" non-public URL scheme, which is a private entity. The use of non-public APIs is not permitted on the App Store because it can lead to a poor user experience should these APIs change.
+
+Continuing to use or conceal non-public APIs in future submissions of this app may result in the termination of your Apple Developer account, as well as removal of all associated apps from the App Store.
+
+Next Steps
+
+To resolve this issue, please revise your app to provide the associated functionality using public APIs or remove the functionality using the "prefs:root" or "App-Prefs:root" URL scheme.
+
+If there are no alternatives for providing the functionality your app requires, you can file an enhancement request.
+```
+
+```
+相关代码，已经删除：
+/**
+ About — prefs:root=General&path=About
+ Accessibility — prefs:root=General&path=ACCESSIBILITY
+ Airplane Mode On — prefs:root=AIRPLANE_MODE
+ Auto-Lock — prefs:root=General&path=AUTOLOCK
+ Brightness — prefs:root=Brightness
+ Bluetooth — prefs:root=General&path=Bluetooth
+ Date & Time — prefs:root=General&path=DATE_AND_TIME
+ FaceTime — prefs:root=FACETIME
+ General — prefs:root=General
+ Keyboard — prefs:root=General&path=Keyboard
+ iCloud — prefs:root=CASTLE
+ iCloud Storage & Backup — prefs:root=CASTLE&path=STORAGE_AND_BACKUP
+ International — prefs:root=General&path=INTERNATIONAL
+ Location Services — prefs:root=LOCATION_SERVICES
+ Music — prefs:root=MUSIC
+ Music Equalizer — prefs:root=MUSIC&path=EQ
+ Music Volume Limit — prefs:root=MUSIC&path=VolumeLimit
+ Network — prefs:root=General&path=Network
+ Nike + iPod — prefs:root=NIKE_PLUS_IPOD
+ Notes — prefs:root=NOTES
+ Notification — prefs:root=NOTIFICATIONS_ID
+ Phone — prefs:root=Phone
+ Photos — prefs:root=Photos
+ Profile — prefs:root=General&path=ManagedConfigurationList
+ Reset — prefs:root=General&path=Reset
+ Safari — prefs:root=Safari
+ Siri — prefs:root=General&path=Assistant
+ Sounds — prefs:root=Sounds
+ Software Update — prefs:root=General&path=SOFTWARE_UPDATE_LINK
+ Store — prefs:root=STORE
+ Twitter — prefs:root=TWITTER
+ Usage — prefs:root=General&path=USAGE
+ VPN — prefs:root=General&path=Network/VPN
+ Wallpaper — prefs:root=Wallpaper
+ Wi-Fi — prefs:root=WIFI
+ */
+
+- (void)openSettings {
+    if (IOS8_OR_LATER) {
+        NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+        if ([[UIApplication sharedApplication] canOpenURL:url]) {
+            [[UIApplication sharedApplication] openURL:url];
+        }
+    } else {
+        NSURL *url = [NSURL URLWithString:@"prefs:root=NOTIFICATIONS_ID"];
+        if ([[UIApplication sharedApplication] canOpenURL:url]) {
+            [[UIApplication sharedApplication] openURL:url];
+        }
+    }
+}
+
+- (void)openWIFI {
+    if (IOS8_OR_LATER) {
+        //        NSURL *url = [NSURL URLWithString:UIApplicationOpen];
+        //        if ([[UIApplication sharedApplication] canOpenURL:url]) {
+        //            [[UIApplication sharedApplication] openURL:url];
+        //        }
+    } else {
+        NSURL *url = [NSURL URLWithString:@"prefs:root=WIFI"];
+        if ([[UIApplication sharedApplication] canOpenURL:url]) {
+            [[UIApplication sharedApplication] openURL:url];
+        }
+    }
+}
+```
