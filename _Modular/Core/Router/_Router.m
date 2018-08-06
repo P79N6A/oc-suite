@@ -1,13 +1,6 @@
-//
-//  _router.m
-//  hairdresser
-//
-//  Created by fallen.ink on 6/1/16.
-//
-//
 
-#import "_router.h"
-#import "UINavigationController+Extension.h"
+#import "_Router.h"
+//#import "UINavigationController+Extension.h"
 
 @interface _Router ()
 

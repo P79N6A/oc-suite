@@ -19,12 +19,4 @@
     [super uninstall];
 }
 
-- (void)powerOn {
-    [super powerOn];
-}
-
-- (void)powerOff {
-    [super powerOff];
-}
-
 @end

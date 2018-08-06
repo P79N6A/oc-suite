@@ -5,10 +5,10 @@
 
 @interface _Module : NSObject
 
-@prop_strong( NSString *,		name ); // Name is set to be class name, by default.
-@prop_strong( NSBundle *,		bundle ); // Bundle 's name is set to be class name, by default.
-@prop_assign( BOOL,				running );  // Set if u need, or'll be changed by super class.
-@prop_assign( BOOL,				installed ); // Set if u need, or'll be changed by super class.
+@prop_strong( NSString *,		name ) // Name is set to be class name, by default.
+@prop_strong( NSBundle *,		bundle ) // Bundle 's name is set to be class name, by default.
+@prop_assign( BOOL,				running )  // Set if u need, or'll be changed by super class.
+@prop_assign( BOOL,				installed ) // Set if u need, or'll be changed by super class.
 
 /**
  *  安装、卸载
@@ -26,5 +26,7 @@
  */
 - (void)powerOn;
 - (void)powerOff;
+    
+- (NSString *)moduleDescription;
 
 @end

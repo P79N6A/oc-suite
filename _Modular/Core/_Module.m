@@ -45,5 +45,8 @@
     self.running = NO;
 }
 
+- (NSString *)moduleDescription {
+    return nil;
+}
 
 @end

@@ -28,7 +28,4 @@
 - (void)install;
 - (void)uninstall;
 
-- (void)powerOn;
-- (void)powerOff;
-
 @end
