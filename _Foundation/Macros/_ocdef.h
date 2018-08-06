@@ -10,7 +10,7 @@
 #else
 
 #   define LOG( s, ... )
-#   define debug_code()
+#   define debug_code( code_fragment )
 
 #endif
 
