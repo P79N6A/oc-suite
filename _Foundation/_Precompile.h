@@ -85,6 +85,7 @@
 
 #import <Availability.h>
 #import <Foundation/Foundation.h>
+#import <Foundation/NSObjCRuntime.h>
 #import <UIKit/UIKit.h>
 #import <UIKit/UIGestureRecognizerSubclass.h>
 #import <CoreText/CoreText.h>

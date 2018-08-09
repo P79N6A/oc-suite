@@ -49,3 +49,24 @@
 - (BOOL)addObjectsFromArrayIfNotNil:(NSArray *)otherArray;
 
 @end
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface __GENERICS(NSMutableArray, ObjectType) (Function)
+
+/** Filters a mutable array to the objects matching the block.
+ */
+- (void)performSelect:(BOOL (^)(id ObjectType))block;
+
+/** Filters a mutable array to all objects but the ones matching the block,
+ the logical inverse to select:.
+ */
+- (void)performReject:(BOOL (^)(id ObjectType))block;
+
+/** Transform the objects in the array to the results of the block.
+ */
+- (void)performMap:(id (^)(id ObjectType))block;
+
+@end
+
+NS_ASSUME_NONNULL_END

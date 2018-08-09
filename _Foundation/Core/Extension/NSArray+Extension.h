@@ -1,5 +1,7 @@
 
-#import "_Macros.h"
+#import "_Precompile.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark -
 
@@ -27,29 +29,35 @@ typedef NSComparisonResult	(^NSArrayCompareBlock)(id left, id right );
 
 @end
 
-#pragma mark - Computation
+#pragma mark -
 
-@interface __GENERICS(NSArray, ObjectType) ( Computation )
+@interface __GENERICS(NSArray, ObjectType) ( Function )
 
 /**
  *  遍历
  */
-- (void)each:(void (^)(id obj))block;
+- (void)each:(void (^)(ObjectType obj))block;
 
-/**
- *  映射
- */
-- (NSArray *)map: (id (^)(id obj))block;
-
-/**
- *  筛选
- */
-- (NSArray *)select: (BOOL (^)(id obj))block;
+- (void)apply:(void (^)(ObjectType obj))block;
 
 /**
  *  匹配
  */
-- (id)match: (BOOL (^)(id obj))block;
+- (id)match: (BOOL (^)(ObjectType obj))block;
+
+/**
+ *  筛选
+ */
+- (NSArray *)select: (BOOL (^)(ObjectType obj))block;
+
+- (NSArray *)reject:(BOOL (^)(ObjectType obj))block;
+
+/**
+ *  映射
+ */
+- (NSArray *)map: (id (^)(ObjectType obj))block;
+
+- (NSArray *)compact:(id (^)(ObjectType obj))block;
 
 /**
  *  化简
@@ -59,7 +67,26 @@ typedef NSComparisonResult	(^NSArrayCompareBlock)(id left, id right );
  *
  *  @return result
  */
-- (id)reduce:(id)initial withBlock:(id (^)(id sum, ObjectType obj))block;
+- (id)reduce:(nullable id)initial withBlock:(__nullable id (^)(__nullable id sum, ObjectType obj))block;
+- (NSInteger)reduceInteger:(NSInteger)initial withBlock:(NSInteger(^)(NSInteger result, ObjectType obj))block;
+- (CGFloat)reduceFloat:(CGFloat)inital withBlock:(CGFloat(^)(CGFloat result, ObjectType obj))block;
+
+- (BOOL)any:(BOOL (^)(ObjectType obj))block;
+
+/** Loops through an array to find whether no objects match the block.
+ */
+- (BOOL)none:(BOOL (^)(ObjectType obj))block;
+
+/** Loops through an array to find whether all objects match the block.
+ 
+ @param block A single-argument, BOOL-returning code block.
+ @return YES if the block returns YES for all objects in the array, NO otherwise.
+ */
+- (BOOL)all:(BOOL (^)(ObjectType obj))block;
+
+/** Tests whether every element of this array relates to the corresponding element of another array according to match by block.
+ */
+- (BOOL)corresponds:(NSArray *)list withBlock:(BOOL (^)(ObjectType obj1, id obj2))block;
 
 @end
 
@@ -145,3 +172,5 @@ typedef NSComparisonResult	(^NSArrayCompareBlock)(id left, id right );
 - (void)replaceRectAtIndex:(NSUInteger)index withRect:(CGRect)o;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -5,6 +5,72 @@
 #import <MapKit/MapKit.h>
 #import <QuartzCore/QuartzCore.h>
 
+struct Block_literal_1 {
+    void *isa; // initialized to &_NSConcreteStackBlock or &_NSConcreteGlobalBlock
+    int flags;
+    int reserved;
+    void (*invoke)(void *, ...);
+    struct Block_descriptor_1 {
+        unsigned long int reserved;     // NULL
+        unsigned long int size;         // sizeof(struct Block_literal_1)
+        // optional helper functions
+        // void (*copy_helper)(void *dst, void *src);     // IFF (1<<25)
+        // void (*dispose_helper)(void *src);             // IFF (1<<25)
+        // required ABI.2010.3.16
+        // const char *signature;                         // IFF (1<<30)
+        void* rest[1];
+    } *descriptor;
+    // imported variables
+};
+
+enum {
+    BLOCK_HAS_COPY_DISPOSE =  (1 << 25),
+    BLOCK_HAS_CTOR =          (1 << 26), // helpers have C++ code
+    BLOCK_IS_GLOBAL =         (1 << 28),
+    BLOCK_HAS_STRET =         (1 << 29), // IFF BLOCK_HAS_SIGNATURE
+    BLOCK_HAS_SIGNATURE =     (1 << 30),
+};
+
+static const char *__BlockSignature__(id blockObj) {
+    struct Block_literal_1 *block = (__bridge void *)blockObj;
+    struct Block_descriptor_1 *descriptor = block->descriptor;
+    assert(block->flags & BLOCK_HAS_SIGNATURE);
+    int offset = 0;
+    if(block->flags & BLOCK_HAS_COPY_DISPOSE)
+    offset += 2;
+    return (char*)(descriptor->rest[offset]);
+}
+
+@interface _InvocationGrabber : NSProxy
+    
++ (_InvocationGrabber *)grabberWithTarget:(id)target;
+    
+    @property (nonatomic, strong) id target;
+    @property (nonatomic, strong) NSInvocation *invocation;
+    
+    @end
+
+@implementation _InvocationGrabber
+    
++ (_InvocationGrabber *)grabberWithTarget:(id)target {
+    _InvocationGrabber *instance = [_InvocationGrabber alloc];
+    instance.target = target;
+    return instance;
+}
+    
+- (NSMethodSignature *)methodSignatureForSelector:(SEL)selector {
+    return [self.target methodSignatureForSelector:selector];
+}
+    
+- (void)forwardInvocation:(NSInvocation*)invocation {
+    [invocation setTarget:self.target];
+    NSParameterAssert(self.invocation == nil);
+    self.invocation = invocation;
+}
+    
+@end
+
+
 @implementation NSInvocation ( Extension )
 
 + (NSString*)encodeType:(char *)encodedType {
@@ -401,47 +467,12 @@
     return result;
 }
 
-@end
-
-#pragma mark - Block
-
-struct Block_literal_1 {
-    void *isa; // initialized to &_NSConcreteStackBlock or &_NSConcreteGlobalBlock
-    int flags;
-    int reserved;
-    void (*invoke)(void *, ...);
-    struct Block_descriptor_1 {
-        unsigned long int reserved;     // NULL
-        unsigned long int size;         // sizeof(struct Block_literal_1)
-        // optional helper functions
-        // void (*copy_helper)(void *dst, void *src);     // IFF (1<<25)
-        // void (*dispose_helper)(void *src);             // IFF (1<<25)
-        // required ABI.2010.3.16
-        // const char *signature;                         // IFF (1<<30)
-        void* rest[1];
-    } *descriptor;
-    // imported variables
-};
-
-enum {
-    BLOCK_HAS_COPY_DISPOSE =  (1 << 25),
-    BLOCK_HAS_CTOR =          (1 << 26), // helpers have C++ code
-    BLOCK_IS_GLOBAL =         (1 << 28),
-    BLOCK_HAS_STRET =         (1 << 29), // IFF BLOCK_HAS_SIGNATURE
-    BLOCK_HAS_SIGNATURE =     (1 << 30),
-};
-
-static const char *__BlockSignature__(id blockObj) {
-    struct Block_literal_1 *block = (__bridge void *)blockObj;
-    struct Block_descriptor_1 *descriptor = block->descriptor;
-    assert(block->flags & BLOCK_HAS_SIGNATURE);
-    int offset = 0;
-    if(block->flags & BLOCK_HAS_COPY_DISPOSE)
-        offset += 2;
-    return (char*)(descriptor->rest[offset]);
++ (instancetype)invocationWithTarget:(id)target block:(void (^)(id target))block {
+    NSParameterAssert(block != nil);
+    _InvocationGrabber *grabber = [_InvocationGrabber grabberWithTarget:target];
+    block(grabber);
+    return grabber.invocation;
 }
-
-@implementation NSInvocation ( Block )
 
 + (instancetype)invocationWithBlock:(id) block {
     NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:[NSMethodSignature signatureWithObjCTypes:__BlockSignature__(block)]];

@@ -125,3 +125,50 @@
 - (void)setRect:(CGRect)o forKey:(NSString *)key;
 
 @end
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface __GENERICS(NSDictionary, KeyType, ObjectType) ( Function )
+
+/** Loops through the dictionary and executes the given block using each item.
+ */
+- (void)each:(void (^)(KeyType key, ObjectType obj))block;
+
+/** Enumerates through the dictionary concurrently and executes
+ the given block once for each pair.
+ */
+- (void)apply:(void (^)(KeyType key, ObjectType obj))block;
+
+/** Loops through a dictionary to find the first key/value pair matching the block.
+ */
+- (nullable id)match:(BOOL (^)(KeyType key, ObjectType obj))block;
+
+/** Loops through a dictionary to find the key/value pairs matching the block.
+ */
+- (NSDictionary *)select:(BOOL (^)(KeyType key, ObjectType obj))block;
+
+/** Loops through a dictionary to find the key/value pairs not matching the block.
+ */
+- (NSDictionary *)reject:(BOOL (^)(KeyType key, ObjectType obj))block;
+
+/** Call the block once for each object and create a dictionary with the same keys
+ and a new set of values.
+ */
+- (NSDictionary *)map:(id (^)(KeyType key, ObjectType obj))block;
+
+/** Loops through a dictionary to find whether any key/value pair matches the block.
+ */
+- (BOOL)any:(BOOL (^)(KeyType key, ObjectType obj))block;
+
+/** Loops through a dictionary to find whether no key/value pairs match the block.
+ */
+- (BOOL)none:(BOOL (^)(KeyType key, ObjectType obj))block;
+
+/** Loops through a dictionary to find whether all key/value pairs match the block.
+ */
+- (BOOL)all:(BOOL (^)(KeyType key, ObjectType obj))block;
+
+@end
+
+NS_ASSUME_NONNULL_END
+

@@ -32,5 +32,10 @@
  *  @return 结果
  */
 - (NSNumber *)doFloorWithDigit:(NSUInteger)digit;
+    
+/**
+ * @brief 循环执行
+ */
+- (void)times:(void (^)())block;
 
 @end

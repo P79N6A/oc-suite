@@ -1,44 +1,67 @@
 
-#import <Foundation/Foundation.h>
+#import "_Precompile.h"
 
-@interface NSSet ( Extension )
+NS_ASSUME_NONNULL_BEGIN
 
-/**
- *  映射
- */
-- (NSSet *)map: (id (^)(id obj))block;
-
-/**
- *  筛选
- */
-- (NSSet *)select: (BOOL (^)(id obj))block;
-
-/**
- *  匹配
- */
-- (id)match: (BOOL (^)(id obj))block;
+@interface __GENERICS(NSSet, ObjectType) ( Extension )
 
 /**
  *  遍历
  */
-- (void)each:(void (^)(id))block;
-- (void)eachWithIndex:(void (^)(id, int))block;
+- (void)each:(void (^)(ObjectType obj))block;
+- (void)eachWithIndex:(void (^)(ObjectType obj, int idx))block;
 
 /**
- *  化简
+ * 并发
  */
-- (id)reduce:(id(^)(id accumulator, id object))block;
-- (id)reduce:(id)initial withBlock:(id(^)(id accumulator, id object))block;
+- (void)apply:(void (^)(ObjectType obj))block;
+
+/**
+ *  匹配
+ */
+- (nullable id)match: (BOOL (^)(ObjectType obj))block;
+
+/**
+ *  筛选
+ */
+- (NSSet *)select: (BOOL (^)(ObjectType obj))block;
 
 /**
  *  排除
  */
-- (NSArray *)reject:(BOOL (^)(id object))block;
+- (NSSet *)reject:(BOOL (^)(ObjectType obj))block;
+
+/**
+ *  映射
+ */
+- (NSSet *)map: (id (^)(ObjectType obj))block;
+
+/**
+ *  化简
+ */
+- (id)reduce:(id)initial withBlock:(id (^)(id sum, id obj))block;
+
+/**
+ * 条件判断：任意一个满足
+ */
+- (BOOL)any:(BOOL (^)(ObjectType obj))block;
+
+/**
+ * 条件判断：无一满足
+ */
+- (BOOL)none:(BOOL (^)(ObjectType obj))block;
+
+/**
+ * 条件判断：所有都满足
+ */
+- (BOOL)all:(BOOL (^)(ObjectType obj))block;
 
 /**
  *  排序
  */
-- (NSArray *)sort;
+- (NSSet *)sort;
 
 @end
+
+NS_ASSUME_NONNULL_END
 
