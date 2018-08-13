@@ -32,6 +32,13 @@
 
 @end
 
+@interface NSString(MD5Addition)
+
+- (NSString *) stringFromMD5;
+- (NSString *) stringFromMD5WithGBK;
+@end
+
+
 // ----------------------------------
 // Class code
 // ----------------------------------

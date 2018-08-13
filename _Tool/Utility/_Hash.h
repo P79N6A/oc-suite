@@ -7,6 +7,13 @@
 
 #import <Foundation/Foundation.h>
 
+@interface NSString (Hash)
+
+//sha1
+- (NSString *)hashString;
+
+@end
+
 @interface _Hash : NSObject
 
 @end

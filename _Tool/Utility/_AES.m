@@ -3,6 +3,8 @@
 #import "_BASE64.h"
 #import <CommonCrypto/CommonCryptor.h>
 #import <CommonCrypto/CommonDigest.h>
+#import <CommonCrypto/CommonCryptor.h>
+#import "GTMBase64.h"
 
 // ----------------------------------
 // Category source code
@@ -119,6 +121,82 @@
 // Source code
 // ----------------------------------
 
-@implementation _aes
+@implementation _AES
+
+- (NSString *)AES256Operation:(_OperationCrypt)operation withString:(NSString *)content key:(NSString *)key mode:(_OperationCryptOptions)options {
+    NSData *data = [content dataUsingEncoding:NSUTF8StringEncoding];
+    if (!data) {
+        return nil;
+    }
+    char keyPtr[kCCKeySizeAES256+1];
+    bzero(keyPtr, sizeof(keyPtr));
+    [key getCString:keyPtr maxLength:sizeof(keyPtr) encoding:NSUTF8StringEncoding];
+    NSUInteger dataLength = [content length];
+    size_t bufferSize = dataLength + kCCBlockSizeAES128;
+    void *buffer = malloc(bufferSize);
+    size_t numBytesEncrypted = 0;
+    CCCryptorStatus cryptStatus = CCCrypt(operation,
+                                          kCCAlgorithmAES128,
+                                          options,
+                                          keyPtr,
+                                          kCCBlockSizeAES128,
+                                          NULL,
+                                          [data bytes],
+                                          dataLength,
+                                          buffer,
+                                          bufferSize,
+                                          &numBytesEncrypted);
+    if (cryptStatus == kCCSuccess) {
+        NSData *encryptedData = [NSData dataWithBytesNoCopy:buffer length:numBytesEncrypted];
+        return [encryptedData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    }
+    free(buffer);
+    return nil;
+}
+
+- (NSString *)AES128Operation:(_OperationCrypt)operation withString:(NSString *)content Key:(NSString *)key vector:(NSString *)vector mode:(_OperationCryptOptions)options {
+    NSData *dataIn = [content dataUsingEncoding:NSUTF8StringEncoding];
+    if (operation == _OperationDecrypt) {
+        dataIn = [GTMBase64 decodeData:dataIn];
+    }
+    NSData *keyData = [key dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *ivData = [vector dataUsingEncoding:NSUTF8StringEncoding];
+    
+    CCCryptorStatus ccStatus   = kCCSuccess;
+    size_t          cryptBytes = 0;
+    NSMutableData  *dataOut    = [NSMutableData dataWithLength:dataIn.length + kCCBlockSizeAES128];
+    
+    ccStatus = CCCrypt(operation,
+                       kCCAlgorithmAES128,
+                       options,
+                       keyData.bytes,
+                       kCCKeySizeAES128,
+                       ivData.bytes,
+                       dataIn.bytes,
+                       dataIn.length,
+                       dataOut.mutableBytes,
+                       dataOut.length,
+                       &cryptBytes);
+    
+    if (ccStatus == kCCSuccess) {
+        dataOut.length = cryptBytes;
+    }
+    else {
+        dataOut = nil;
+    }
+    
+    switch (operation) {
+        case _OperationEncrypt: {
+            return [dataOut base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+        }
+            break;
+        case _OperationDecrypt: {
+            return [[NSString alloc] initWithData:dataOut encoding:NSUTF8StringEncoding];
+        }
+        default:
+            break;
+    }
+    return nil;
+}
 
 @end

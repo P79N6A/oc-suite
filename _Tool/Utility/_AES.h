@@ -1,5 +1,16 @@
 #import <Foundation/Foundation.h>
 
+typedef enum {
+    _OperationEncrypt,
+    _OperationDecrypt
+} _OperationCrypt;
+
+typedef enum {
+    _OptionCBCMode        = 0x0000,
+    _OptionPKCS7Padding   = 0x0001,
+    _OptionECBMode        = 0x0002
+} _OperationCryptOptions;
+
 // ----------------------------------
 // Category code
 // ----------------------------------
@@ -63,6 +74,12 @@
 // Class code
 // ----------------------------------
 
-@interface _aes : NSObject
+@interface _AES : NSObject
+
+//AES128加解密
+- (NSString *)AES256Operation:(_OperationCrypt)operation withString:(NSString *)content key:(NSString *)key mode:(_OperationCryptOptions)options;
+
+//AES256加解密
+- (NSString *)AES128Operation:(_OperationCrypt)operation withString:(NSString *)content Key:(NSString *)key vector:(NSString *)vector mode:(_OperationCryptOptions)options;
 
 @end
