@@ -160,7 +160,6 @@ typedef NS_ENUM(NSUInteger, EdgeStyle) {
 /**
  *  在view上画线
  *
- *  @param view      被画的view
  *  @param start     起始点
  *  @param end       结束点
  *  @param width     宽度
@@ -173,7 +172,6 @@ typedef NS_ENUM(NSUInteger, EdgeStyle) {
 /**
  *  为view渲染渐变色背景
  *
- *  @param view      被渲染的view
  *  @param frame     显示的区域
  *  @param start     渐变起始点
  *  @param end       渐变结束点

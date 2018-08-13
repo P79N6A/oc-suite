@@ -9,6 +9,7 @@
 
 #import "_Geometry.h"
 #import "_Frame.h"
+#import "_Layout.h"
 
 // ----------------------------------
 // UI Animation
@@ -17,6 +18,21 @@
 #import "MovingNavigationBarManager.h" // 导航栏移动动画、特效处理
 #import "FadingNavigationBarManager.h" // 导航栏渐变动画、特效处理
 #import "BlurViewController.h" // 模糊背景弹出
+
+// image
+
+#import "UIImage+Alpha.h"
+#import "UIImage+Capture.h"
+#import "UIImage+Compress.h"
+#import "UIImage+Crop.h"
+#import "UIImage+Effects.h"
+#import "UIImage+FileName.h"
+#import "UIImage+GIF.h"
+#import "UIImage+GImageExtension.h"
+#import "UIImage+Merge.h"
+#import "UIImage+Transform.h"
+#import "UIImage+Vector.h"
+#import "UIImageView+FaceDetect.h"
 
 // extension-easy
 
@@ -67,6 +83,7 @@
 #import "UITextView+Extension.h"
 #import "UIView+Extension.h"
 #import "UIView+CustomBorder.h"
+#import "UIView+Creation.h"
 #import "UIView+Recursion.h"
 #import "UIView+Screenshot.h"
 #import "UIView+Visuals.h"

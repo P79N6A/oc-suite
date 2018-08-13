@@ -104,7 +104,63 @@ NS_ASSUME_NONNULL_BEGIN
                      shadowOffset:(CGSize)shadowOffset
                        shadowBlur:(CGFloat)shadowBlur;
 
+- (UIImage *)image:(UIImage *)image withColor:(UIColor *)color;
+/**
+ 长宽等比例缩放，
+ */
+//- (UIImage *)scaleImage:(UIImage *)image toScale:(float)scaleSize;
++ (UIImage *)scaleImage:(UIImage *)image toScale:(float)scaleSize;
+
++ (UIImage *)scaleImage2:(UIImage *)image widthScale:(float)widthScale heightScale:(float)heightScale;
+
 @end
+
+/**
+ 左上对齐
+ |----|
+ |____|________
+ |  second  |
+ |__________|
+ 
+ 
+ ________
+ |      |
+ ________|______|
+ |  second      |
+ |______________|
+ 
+ 
+ *  @brief  合并两个图片
+ *
+ *  @param firstImage  一个图片
+ *  @param secondImage 二个图片
+ *
+ *  @return 合并后图片
+ */
+
+typedef enum {
+    diagonal = 0, //对角线
+    leftMarginTopAlignment = 1,    //左上对齐，
+    leftMarginTopAlignment2 = 6,    //绝对左上对齐，
+    leftMarginBottomAlignment = 2, //左下对齐，
+    rightMarginTopAlignment = 3,   //右上对齐，
+    horizontalAlignment = 4,         //水平居中
+    verticalAlignment = 5      //竖直居中
+}MergeType;
+
+
+@interface UIImage (Merge)
+/**
+ *  @brief  合并两个图片
+ *
+ *  @param firstImage  一个图片
+ *  @param secondImage 二个图片
+ *
+ *  @return 合并后图片
+ */
++ (UIImage*)mergeImage:(UIImage*)firstImage withImage:(UIImage*)secondImage mergeType:(MergeType)mergeType;
+@end
+
 
 
 NS_ASSUME_NONNULL_END

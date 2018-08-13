@@ -697,5 +697,94 @@ void __cleanupBuffer(void *userData, void *buf_data) { free(buf_data); }
     return shadowedImage;
 }
 
+- (UIImage *)image:(UIImage *)image withColor:(UIColor *)color {
+    CGRect rect = CGRectMake(0.0f, 0.0f, image.size.width + 3, image.size.height + 3 );
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, image.scale);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [image drawInRect:CGRectInset(rect, 3, 3)];
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextSetBlendMode(context, kCGBlendModeNormal);
+    CGContextFillRect(context, rect);
+    
+    UIImage*newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
++ (UIImage *)scaleImage:(UIImage *)image toScale:(float)scaleSize{
+    UIGraphicsBeginImageContext(CGSizeMake(image.size.width * scaleSize, image.size.height * scaleSize));
+    [image drawInRect:CGRectMake(0, 0, image.size.width * scaleSize, image.size.height * scaleSize)];
+    UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return scaledImage;
+}
+
++ (UIImage *)scaleImage2:(UIImage *)image widthScale:(float)widthScale heightScale:(float)heightScale{
+    UIGraphicsBeginImageContext(CGSizeMake(image.size.width * widthScale, image.size.height * heightScale));
+    [image drawInRect:CGRectMake(0, 0, image.size.width * widthScale, image.size.height * heightScale)];
+    UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return scaledImage;
+}
+
 @end
+
+#define offsetMargin 10.0f
+
+@implementation UIImage (Merge)
+/**
+ *  @brief  合并两个图片
+ *
+ *  @param firstImage  一个图片
+ *  @param secondImage 二个图片
+ *  以第一个图片为支点
+ *  @return 合并后图片
+ */
+
++ (UIImage*)mergeImage:(UIImage*)firstImage withImage:(UIImage*)secondImage mergeType:(MergeType)mergeType{
+    
+    CGImageRef firstImageRef = firstImage.CGImage;
+    CGFloat firstWidth = CGImageGetWidth(firstImageRef);
+    CGFloat firstHeight = CGImageGetHeight(firstImageRef);
+    CGImageRef secondImageRef = secondImage.CGImage;
+    CGFloat secondWidth = CGImageGetWidth(secondImageRef);
+    CGFloat secondHeight = CGImageGetHeight(secondImageRef);
+    
+    CGSize mergedSize = CGSizeMake((firstWidth + secondWidth), (firstHeight + secondHeight));
+    CGRect xx = CGRectNull, yy = CGRectNull ;
+    if (mergeType == diagonal) {
+        xx = CGRectMake(0, 0, firstWidth, firstHeight);
+        yy = CGRectMake(xx.size.width/2, xx.size.height/2, secondWidth, secondHeight);
+    }else if(mergeType == leftMarginTopAlignment) {
+        xx = CGRectMake(0, 0, firstWidth, firstHeight);
+        yy = CGRectMake(xx.size.width/2, xx.size.height, secondWidth, secondHeight);
+    }else if(mergeType == leftMarginTopAlignment2) {
+        xx = CGRectMake(0, 0, firstWidth, firstHeight);
+        yy = CGRectMake(0 + offsetMargin, xx.size.height, secondWidth, secondHeight);
+    }else if(mergeType == leftMarginBottomAlignment) {
+        xx = CGRectMake(0, secondHeight, firstWidth, firstHeight);
+        yy = CGRectMake(xx.size.width/2, 0, secondWidth, secondHeight);
+        
+    }else if(mergeType == rightMarginTopAlignment) {
+        xx = CGRectMake(mergedSize.width - firstWidth, 0, firstWidth, firstHeight);
+        yy = CGRectMake(xx.origin.x +firstWidth/2 - secondWidth + offsetMargin, xx.size.height, secondWidth, secondHeight);
+    }else if(mergeType == verticalAlignment) {
+        xx = CGRectMake(mergedSize.width/2 - firstWidth/2, 0, firstWidth, firstHeight);
+        yy = CGRectMake(mergedSize.width/2 - secondWidth/2 + offsetMargin, xx.size.height, secondWidth, secondHeight);
+    }else if(mergeType == horizontalAlignment) {
+        xx = CGRectMake(mergedSize.width - firstWidth, 0, firstWidth, firstHeight);
+        yy = CGRectMake(0, 0, secondWidth, secondHeight);
+    }
+    
+    UIGraphicsBeginImageContext(mergedSize);
+    [firstImage drawInRect:xx];
+    [secondImage drawInRect:yy];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
+
+@end
+
 

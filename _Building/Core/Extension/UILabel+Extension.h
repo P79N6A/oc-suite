@@ -42,6 +42,9 @@
 
 - (BOOL)isTruncated;
 
+- (CGFloat)sizeToFitWithMaximumNumberOfLines:(NSInteger)lines;
+- (CGSize)sizeOfSizeToFitWithMaximumNumberOfLines:(NSInteger)lines;
+
 @end
 
 #pragma mark - System Adapt
