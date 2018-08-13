@@ -8,16 +8,26 @@
 + (NSString *)platform;
 + (NSString *)platformString;
 
-
 + (NSString *)macAddress;
 
-//Return the current device CPU frequency
+/**
+ * @brief CPU 主频
+ */
 + (NSUInteger)cpuFrequency;
-// Return the current device BUS frequency
+
+/**
+ * @brief BUS 主频
+ */
 + (NSUInteger)busFrequency;
-//current device RAM size
+
+/**
+ * @brief 内存大小
+ */
 + (NSUInteger)ramSize;
-//Return the current device CPU number
+
+/**
+ * @brief the current device CPU number
+ */
 + (NSUInteger)cpuNumber;
 //Return the current device total memory
 

@@ -98,6 +98,8 @@
     return [components weekOfYear];
 }
 
+/////// MARK: -
+
 + (NSTimeInterval)unixTime {
     return [[NSDate date] timeIntervalSince1970];
 }
@@ -105,6 +107,22 @@
 + (NSString *)unixDate {
     return [[NSDate date] toString:@"yyyy/MM/dd HH:mm:ss z"];
 }
+
++ (NSDate *)gmtDate {
+    NSDate * now = [NSDate date];
+    NSInteger gmtOffset = [[NSTimeZone localTimeZone] secondsFromGMT];
+    return [NSDate dateWithTimeInterval:gmtOffset sinceDate:now];
+}
+
++ (NSTimeInterval)gmtTime {
+    NSDate *date = [NSDate date];
+    NSTimeZone *zone = [NSTimeZone systemTimeZone];
+    NSInteger interval = [zone secondsFromGMTForDate: date];
+    NSDate *localeDate = [date  dateByAddingTimeInterval: interval];
+    return [localeDate timeIntervalSince1970];
+}
+
+////// MARK:
 
 + (NSDateFormatter *)format {
     return [self format:@"yyyy/MM/dd HH:mm:ss z"];

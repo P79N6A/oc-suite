@@ -1,5 +1,6 @@
 
 #import "_Precompile.h"
+#import <CoreLocation/CoreLocation.h>
 
 #pragma mark -
 
@@ -84,6 +85,8 @@
 
 - (NSArray *)pairSeparatedByString:(NSString *)separator;
 
+- (NSArray<NSString *> *)rangeStringsOfSubString:(NSString *)subString;
+
 @end
 
 #pragma mark - Attributed 
@@ -105,6 +108,18 @@
 @interface NSString (JSDomOperate)
 
 +(NSString*)js_getCurrentClickImageIndexAndUrl;
+
+@end
+
+@interface NSString (Convertion)
+
++ (NSString *)distanceDescriptionWithMeters:(NSUInteger)meters;
+
++ (CLLocationCoordinate2D)coordinateFromString:(NSString *)string;
+
++ (NSString *)stringFromCoordinate:(CLLocationCoordinate2D)coordinate;
+
++ (NSString *)jsonFromObject:(id)obj;
 
 @end
 

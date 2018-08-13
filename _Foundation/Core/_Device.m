@@ -3,6 +3,8 @@
 #import <mach/mach.h>
 #import <Photos/Photos.h>
 #import <AssetsLibrary/AssetsLibrary.h>
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
+#import <CoreTelephony/CTCarrier.h>
 
 #import "_Foundation.h"
 #import "_Keychain.h"
@@ -82,55 +84,58 @@ BOOL IS_IPHONE_DESIGN_X = NO;
     NSString *_uuidForInstallation;
 }
 
-@def_singleton( _Device );
+@def_singleton( _Device )
 
-@def_prop_readonly( NSString *,			osVersion );
-@def_prop_readonly( OperationSystem,	osType );
-@def_prop_readonly( NSString *,			bundleVersion );
-@def_prop_readonly( NSString *,			bundleShortVersion );
-@def_prop_readonly( NSInteger,          bundleBuild );
-@def_prop_readonly( NSString *,			bundleIdentifier );
-@def_prop_readonly( NSString *,			urlSchema );
-@def_prop_readonly( NSString *,			deviceModel );
+@def_prop_readonly( NSString *,			osVersion )
+@def_prop_readonly( OperationSystem,	osType )
+@def_prop_readonly( NSString *,			bundleVersion )
+@def_prop_readonly( NSString *,			bundleShortVersion )
+@def_prop_readonly( NSInteger,          bundleBuild )
+@def_prop_readonly( NSString *,			bundleIdentifier )
+@def_prop_readonly( NSString *,			urlSchema )
+@def_prop_readonly( NSString *,			deviceModel )
 
-@def_prop_readonly( BOOL,				isJailBroken );
-@def_prop_readonly( BOOL,				runningOnPhone );
-@def_prop_readonly( BOOL,				runningOnPad );
-@def_prop_readonly( BOOL,				requiresPhoneOS );
+@def_prop_readonly( BOOL,				isJailBroken )
+@def_prop_readonly( BOOL,				runningOnPhone )
+@def_prop_readonly( BOOL,				runningOnPad )
+@def_prop_readonly( BOOL,				requiresPhoneOS )
 
-@def_prop_readonly( BOOL,				isScreenPhone );
-@def_prop_readonly( BOOL,				isScreen320x480 );
-@def_prop_readonly( BOOL,				isScreen640x960 );
-@def_prop_readonly( BOOL,				isScreen640x1136 );
+@def_prop_readonly( BOOL,				isScreenPhone )
+@def_prop_readonly( BOOL,				isScreen320x480 )
+@def_prop_readonly( BOOL,				isScreen640x960 )
+@def_prop_readonly( BOOL,				isScreen640x1136 )
 
-@def_prop_readonly( BOOL,				isScreenPad );
-@def_prop_readonly( BOOL,				isScreen768x1024 );
-@def_prop_readonly( BOOL,				isScreen1536x2048 );
+@def_prop_readonly( BOOL,				isScreenPad )
+@def_prop_readonly( BOOL,				isScreen768x1024 )
+@def_prop_readonly( BOOL,				isScreen1536x2048 )
 
-@def_prop_readonly( CGSize,				screenSize );
+@def_prop_readonly( CGSize,				screenSize )
 
-@def_prop_readonly( double,             totalMemory );
-@def_prop_readonly( double,				availableMemory );
-@def_prop_readonly( double,				usedMemory );
+@def_prop_readonly( double,             totalMemory )
+@def_prop_readonly( double,				availableMemory )
+@def_prop_readonly( double,				usedMemory )
 
-@def_prop_readonly( double,				availableDisk );
+@def_prop_readonly( double,				availableDisk )
 
-@def_prop_readonly( NSString *,         appSize );
+@def_prop_readonly( NSString *,         appSize )
 
-@def_prop_readonly( NSString *,         buildCode );
-@def_prop_readonly( int32_t,            intAppVersion );
-@def_prop_readonly( NSString *,         appVersion );
+@def_prop_readonly( NSString *,         buildCode )
+@def_prop_readonly( int32_t,            intAppVersion )
+@def_prop_readonly( NSString *,         appVersion )
 
-@def_prop_readonly( BOOL,               photoCaptureAccessable );
-@def_prop_readonly( BOOL,               photoLibraryAccessable );
+@def_prop_readonly( BOOL,               photoCaptureAccessable )
+@def_prop_readonly( BOOL,               photoLibraryAccessable )
 
-@def_prop_readonly( NSArray *,          languages );
+@def_prop_readonly( NSArray *,          languages )
 
-@def_prop_readonly( NSString *,         uuid );
-@def_prop_readonly( NSString *,         uuidForSession );
-@def_prop_readonly( NSString *,         uuidForInstallation );
-@def_prop_readonly( NSString *,         uuidForVendor );
-@def_prop_readonly( NSString *,         uuidForDevice );
+@def_prop_readonly( NSString *,         uuid )
+@def_prop_readonly( NSString *,         uuidForSession )
+@def_prop_readonly( NSString *,         uuidForInstallation )
+@def_prop_readonly( NSString *,         uuidForVendor )
+@def_prop_readonly( NSString *,         uuidForDevice )
+
+@def_prop_readonly( NSString *,         deviceInfo )
+@def_prop_readonly( NSString *,         deviceVersion )
 
 + (void)load {
     [self sharedInstance];
@@ -815,6 +820,26 @@ BOOL IS_IPHONE_DESIGN_X = NO;
 - (NSString *)deviceUDID {
     return [self uuidForDevice];
 }
+
+///// MARK: -
+
+- (NSString *)deviceInfo {
+    CTTelephonyNetworkInfo *info = [[CTTelephonyNetworkInfo alloc] init];
+    
+    return [NSString stringWithFormat: @"%@ %@ %@ %@ %@", [[UIDevice currentDevice] systemName], [[UIDevice currentDevice] systemVersion], [self deviceVersion], [[UIDevice currentDevice] localizedModel], [[info subscriberCellularProvider] carrierName]];
+}
+
+- (NSString *)deviceVersion {
+    size_t size;
+    sysctlbyname("hw.machine", NULL, &size, NULL, 0);
+    char *machine = malloc(size);
+    sysctlbyname("hw.machine", machine, &size, NULL, 0);
+    NSString *platform = [NSString stringWithCString:machine encoding:NSUTF8StringEncoding];
+    free(machine);
+    return platform;
+}
+
+///// MARK: -
 
 - (void)openSettings {
     NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];

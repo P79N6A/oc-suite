@@ -46,6 +46,8 @@ typedef enum {
 
 + (NSTimeInterval)unixTime;
 + (NSString *)unixDate;
++ (NSDate *)gmtDate; // 格林威治时间 (GMT)
++ (NSTimeInterval)gmtTime;
 
 + (NSDateFormatter *)format;
 + (NSDateFormatter *)format:(NSString *)format;

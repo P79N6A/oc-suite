@@ -189,15 +189,18 @@ extern BOOL IS_IPHONE_DESIGN_X;
 /**
  *  en_US, zh_CN,
  */
-@prop_readonly( NSArray *,          languages ); // 系统语言
-@prop_readonly( NSString *,         currentLanguage ); // 系统当前使用语言
+@prop_readonly( NSArray *,          languages ) // 系统语言
+@prop_readonly( NSString *,         currentLanguage ) // 系统当前使用语言
 
 // uuid inspired by FCUUID
 @prop_readonly( NSString *,         uuid ); // changes each time (no persistent)
-@prop_readonly( NSString *,         uuidForSession ); // changes each time the app gets launched (persistent to session)
-@prop_readonly( NSString *,         uuidForInstallation ); // changes each time the app gets installed (persistent to installation)
-@prop_readonly( NSString *,         uuidForVendor ); // changes each time all the apps of the same vendor are uninstalled (this works exactly as identifierForVendor)
-@prop_readonly( NSString *,         uuidForDevice ); // changes only on system reset, this is the best replacement to the good old udid (persistent to device)
+@prop_readonly( NSString *,         uuidForSession ) // changes each time the app gets launched (persistent to session)
+@prop_readonly( NSString *,         uuidForInstallation ) // changes each time the app gets installed (persistent to installation)
+@prop_readonly( NSString *,         uuidForVendor ) // changes each time all the apps of the same vendor are uninstalled (this works exactly as identifierForVendor)
+@prop_readonly( NSString *,         uuidForDevice ) // changes only on system reset, this is the best replacement to the good old udid (persistent to device)
+
+@prop_readonly( NSString *,         deviceInfo )
+@prop_readonly( NSString *,         deviceVersion )
 
 - (NSString *)urlSchemaWithName:(NSString *)name;
 
@@ -225,16 +228,16 @@ extern BOOL IS_IPHONE_DESIGN_X;
 - (BOOL)call:(NSString *)phone;
 
 /** This method retruns the hardware type */
-+ (NSString*)hardwareString;
++ (NSString *)hardwareString;
 
 /** This method returns the Hardware enum depending upon harware string */
 + (Hardware)hardware;
 
 /** This method returns the readable description of hardware string */
-+ (NSString*)hardwareDescription;
++ (NSString *)hardwareDescription;
 
 /** This method returns the readable simple description of hardware string */
-+ (NSString*)hardwareSimpleDescription;
++ (NSString *)hardwareSimpleDescription;
 
 /**
  This method returns the hardware number not actual but logically.
