@@ -43,6 +43,8 @@ typedef enum {
 @prop_readonly( NSInteger,		second );
 @prop_readonly( WeekdayType,	weekday );
 @prop_readonly( NSInteger,	    week );
+@prop_readonly( NSDate *,       beginningOfDay ); // NSDate convenience methods which shortens some of frequently used formatting and date altering methods.
+
 
 + (NSTimeInterval)unixTime;
 + (NSString *)unixDate;

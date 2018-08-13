@@ -63,6 +63,7 @@ Pod::Spec.new do |s|
   s.subspec 'Utility' do |utility|
     utility.source_files = "_Tool/Utility/**/*.{h,m,mm,c}"
     utility.libraries = "c++"
+    utility.dependency "ZipArchive"
   end
 
   s.subspec 'Image' do |image|

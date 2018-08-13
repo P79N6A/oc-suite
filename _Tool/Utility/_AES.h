@@ -77,9 +77,9 @@ typedef enum {
 @interface _AES : NSObject
 
 //AES128加解密
-- (NSString *)AES256Operation:(_OperationCrypt)operation withString:(NSString *)content key:(NSString *)key mode:(_OperationCryptOptions)options;
++ (NSString *)AES256Operation:(_OperationCrypt)operation withString:(NSString *)content key:(NSString *)key mode:(_OperationCryptOptions)options;
 
 //AES256加解密
-- (NSString *)AES128Operation:(_OperationCrypt)operation withString:(NSString *)content Key:(NSString *)key vector:(NSString *)vector mode:(_OperationCryptOptions)options;
++ (NSString *)AES128Operation:(_OperationCrypt)operation withString:(NSString *)content Key:(NSString *)key vector:(NSString *)vector mode:(_OperationCryptOptions)options;
 
 @end

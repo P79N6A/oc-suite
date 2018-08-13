@@ -56,14 +56,15 @@
 
 #pragma mark - Decomposing Dates
 
-@def_prop_dynamic( NSInteger,	year );
-@def_prop_dynamic( NSInteger,	month );
-@def_prop_dynamic( NSInteger,	day );
-@def_prop_dynamic( NSInteger,	hour );
-@def_prop_dynamic( NSInteger,	minute );
-@def_prop_dynamic( NSInteger,	second );
-@def_prop_dynamic( NSInteger,	weekday );
-@def_prop_dynamic( NSInteger,	week );
+@def_prop_dynamic( NSInteger,	year )
+@def_prop_dynamic( NSInteger,	month )
+@def_prop_dynamic( NSInteger,	day )
+@def_prop_dynamic( NSInteger,	hour )
+@def_prop_dynamic( NSInteger,	minute )
+@def_prop_dynamic( NSInteger,	second )
+@def_prop_dynamic( NSInteger,	weekday )
+@def_prop_dynamic( NSInteger,	week )
+@def_prop_dynamic( NSInteger,   beginningOfDay)
 
 - (NSInteger)year {
     return [[NSCalendar currentCalendar] components:NSCalendarUnitYear fromDate:self].year;
@@ -96,6 +97,14 @@
 - (NSInteger)week {
     NSDateComponents *components = [CURRENT_CALENDAR components:DATE_COMPONENTS fromDate:self];
     return [components weekOfYear];
+}
+
+- (NSDate *)beginningOfDay {
+    NSDateComponents *components = [CURRENT_CALENDAR components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay ) fromDate:self];
+    NSDate *absDate = [CURRENT_CALENDAR dateFromComponents:components];
+    NSInteger gmtOffset = [[NSTimeZone localTimeZone] secondsFromGMT];
+    
+    return [NSDate dateWithTimeInterval:gmtOffset sinceDate:absDate];
 }
 
 /////// MARK: -

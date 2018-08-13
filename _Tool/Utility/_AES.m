@@ -123,7 +123,7 @@
 
 @implementation _AES
 
-- (NSString *)AES256Operation:(_OperationCrypt)operation withString:(NSString *)content key:(NSString *)key mode:(_OperationCryptOptions)options {
++ (NSString *)AES256Operation:(_OperationCrypt)operation withString:(NSString *)content key:(NSString *)key mode:(_OperationCryptOptions)options {
     NSData *data = [content dataUsingEncoding:NSUTF8StringEncoding];
     if (!data) {
         return nil;
@@ -154,7 +154,7 @@
     return nil;
 }
 
-- (NSString *)AES128Operation:(_OperationCrypt)operation withString:(NSString *)content Key:(NSString *)key vector:(NSString *)vector mode:(_OperationCryptOptions)options {
++ (NSString *)AES128Operation:(_OperationCrypt)operation withString:(NSString *)content Key:(NSString *)key vector:(NSString *)vector mode:(_OperationCryptOptions)options {
     NSData *dataIn = [content dataUsingEncoding:NSUTF8StringEncoding];
     if (operation == _OperationDecrypt) {
         dataIn = [GTMBase64 decodeData:dataIn];

@@ -76,6 +76,7 @@
 #import "UIScreen+Extension.h"
 #import "UIScrollView+Extension.h"
 #import "UISearchBar+Extension.h"
+#import "UITabBar+Extension.h"
 #import "UITableView+Extension.h"
 #import "UITableViewCell+Extension.h"
 #import "UITextField+Extension.h"
