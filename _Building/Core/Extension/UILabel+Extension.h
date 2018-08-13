@@ -24,9 +24,6 @@
 
 @interface UILabel ( Instance )
 
-/**
- 
- */
 + (instancetype)instance;
 + (instancetype)instanceWithFont:(UIFont *)font color:(UIColor *)color;
 + (instancetype)instanceWithFont:(UIFont *)font color:(UIColor *)color alignment:(NSTextAlignment)alignment;

@@ -8,7 +8,7 @@
 
 #import "UIView+Recursion.h"
 
-@implementation UIView ( JKRecursion )
+@implementation UIView ( Recursion )
 
 /**
  *  @brief  寻找子视图
@@ -18,7 +18,7 @@
  *  @return  Return YES from the block to recurse into the subview.
  Set stop to YES to return the subview.
  */
-- (UIView*)findViewRecursively:(BOOL(^)(UIView* subview, BOOL* stop))recurse {
+- (UIView *)findViewRecursively:(BOOL(^)(UIView* subview, BOOL* stop))recurse {
     for( UIView* subview in self.subviews ) {
         BOOL stop = NO;
         if( recurse( subview, &stop ) ) {
@@ -31,14 +31,14 @@
     return nil;
 }
 
-- (void)runBlockOnAllSubviews:(JKSubviewBlock)block {
+- (void)runBlockOnAllSubviews:(ObjectBlock)block {
     block(self);
     for (UIView* view in [self subviews]) {
         [view runBlockOnAllSubviews:block];
     }
 }
 
-- (void)runBlockOnAllSuperviews:(JKSuperviewBlock)block {
+- (void)runBlockOnAllSuperviews:(ObjectBlock)block {
     block(self);
     if (self.superview) {
         [self.superview runBlockOnAllSuperviews:block];

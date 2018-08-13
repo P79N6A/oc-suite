@@ -15,6 +15,8 @@
 + (UIColor *)colorWithRGBHex:(UInt32)hex alpha:(CGFloat)alpha;
 + (UIColor *)colorWithHexString:(NSString *)stringToConvert;
 
++ (UIColor *)colorWithRGBString:(NSString *)rgbString;
+
 // Extract color from Image
 + (UIColor *)getPixelColorAtLocation:(CGPoint)point inImage:(UIImage *)image;
 

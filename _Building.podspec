@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "_Building"
-  s.version      = "0.1.1"
+  s.version      = "0.2.0"
   s.summary      = "iOS 开发包 之 页面库 [Objective-C]"
   s.description  = <<-DESC
                    iOS 开发包 之 页面库 [Objective-C]

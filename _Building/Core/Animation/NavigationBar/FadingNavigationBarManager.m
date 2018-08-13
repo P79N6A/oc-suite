@@ -6,6 +6,7 @@
 //  Copyright © 2017 alliance. All rights reserved.
 //
 
+#import "_Foundation.h"
 #import "FadingNavigationBarManager.h"
 #import "Masonry.h"
 #import "TLYDelegateProxy.h"
@@ -191,7 +192,7 @@ static const float   kDefaultAnimationTime = 0.35f;
     [textAttr setObject:color forKey:NSForegroundColorAttributeName];
     
     // 暂时用适配方案
-    if (iOS11_or_later) {
+    if (IOS11_OR_LATER) {
         [textAttr setObject:[UIColor clearColor] forKey:NSBackgroundColorAttributeName];
     }
     

@@ -6,10 +6,7 @@
 //  Copyright © 2015年 www.skyfox.org. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
-typedef void (^JKSubviewBlock) (UIView* view);
-typedef void (^JKSuperviewBlock) (UIView* superview);
+#import "_Precompile.h"
 
 @interface UIView ( Recursion )
 
@@ -23,8 +20,8 @@ typedef void (^JKSuperviewBlock) (UIView* superview);
  */
 - (UIView *)findViewRecursively:(BOOL(^)(UIView* subview, BOOL* stop))recurse;
 
-- (void)runBlockOnAllSubviews:(JKSubviewBlock)block;
-- (void)runBlockOnAllSuperviews:(JKSuperviewBlock)block;
+- (void)runBlockOnAllSubviews:(ObjectBlock)block;
+- (void)runBlockOnAllSuperviews:(ObjectBlock)block;
 - (void)enableAllControlsInViewHierarchy;
 - (void)disableAllControlsInViewHierarchy;
 

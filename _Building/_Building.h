@@ -28,8 +28,13 @@
 // extension-view
 
 #import "UISurePlaceholderView.h"
-#import "UICollectionView+PlaceHolder.h"
-#import "UITableView+PlaceHolder.h"
+#import "UI3DTouchController.h"
+#import "UIRealTimeBlurView.h"
+#import "UIShapeView.h"
+#import "UITitleDisplayViewController.h"
+#import "UIToast.h"
+//#import "UICollectionView+PlaceHolder.h"
+//#import "UITableView+PlaceHolder.h"
 
 // extension
 #import "NSIndexPath+Extension.h"

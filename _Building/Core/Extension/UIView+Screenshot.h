@@ -16,6 +16,8 @@
  */
 - (UIImage *)screenshot;
 
+- (UIImage *)takeSnapshot;
+
 /**
  *  @author Jakey
  *

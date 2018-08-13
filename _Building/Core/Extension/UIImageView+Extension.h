@@ -75,3 +75,16 @@
 
 @end
 
+// MARK: - Shape
+
+@interface UIImageView (shape)
+
+@property (nonatomic, strong) CALayer *contentLayer;
+
+- (void)shapeWithPath:(CGPathRef)path;
+
+- (void)setShapedImage:(UIImage *)image;
+
+@end
+
+

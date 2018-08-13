@@ -43,6 +43,18 @@
     return [UIColor colorWithRGBHex:hexNum];
 }
 
++ (UIColor *)colorWithRGBString:(NSString *)rgbString {
+    if (!rgbString || ![rgbString isKindOfClass:[NSString class]]) {
+        return nil;
+    }
+    NSArray *colorArray = [rgbString componentsSeparatedByString:@","];
+    if ([colorArray count] < 3) {
+        return nil;
+    }
+    UIColor *color = [UIColor colorWithRed:[[colorArray objectAtIndex:0] floatValue]/255.0 green:[[colorArray objectAtIndex:1] floatValue]/255.0 blue:[[colorArray objectAtIndex:2] floatValue]/255.0 alpha:1];
+    return color;
+}
+
 
 #pragma mark -
 
