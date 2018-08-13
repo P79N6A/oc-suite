@@ -52,6 +52,11 @@ Pod::Spec.new do |s|
 
   end
 
+  s.subspec 'Midwares' do |midwares|
+    midwares.source_files = "_Midwares/**/*.{h,m}"
+    # midwares.resources = "_Modules/Application/_AppRater.bundle"
+  end
+
   s.subspec 'Services' do |services|
     services.subspec 'Assets' do |assets|
       assets.source_files = "_Modules/Services/Assets/**/*.{h,m}"
