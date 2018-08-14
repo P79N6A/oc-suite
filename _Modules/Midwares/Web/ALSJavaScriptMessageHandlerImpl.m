@@ -6,20 +6,20 @@
 //  Copyright © 2017 AliSports. All rights reserved.
 //
 
-#import "ALSportsPrecompile.h"
+#import "_MidwarePrecompile.h"
 #import "ALSJavaScriptMessageHandlerImpl.h"
 #import "ALSJavaScriptMessageImpl.h"
 
 @interface ALSJavaScriptMessageHandlerImpl ()
 
-@property (nonatomic, weak) id<ALSBrowserProtocol> browser;
+@property (nonatomic, weak) id<_BrowserProtocol> browser;
 
 @end
 
 @implementation ALSJavaScriptMessageHandlerImpl
 @synthesize message;
 
-+ (instancetype)withRaw:(NSDictionary *)data browser:(id<ALSBrowserProtocol>)browser {
++ (instancetype)withRaw:(NSDictionary *)data browser:(id<_BrowserProtocol>)browser {
     ALSJavaScriptMessageImpl *message = [ALSJavaScriptMessageImpl with:data];
     
     if (!message) {

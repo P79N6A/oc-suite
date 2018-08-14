@@ -6,10 +6,10 @@
 //  Copyright © 2017 yangzm. All rights reserved.
 //
 
-#import "ALSportsPrecompile.h"
+#import "_MidwarePrecompile.h"
 #import "ALSPayInAppPurchaseImpl.h"
 #import "ALSErrorImpl.h"
-
+#import "_Foundation.h"
 #if __has_ALSPayment
 #import <ALSInterfaceSdk/ALSTransactionKit.h>
 #import "ALSPaymentProtocol.h"

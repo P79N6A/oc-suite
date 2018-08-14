@@ -6,13 +6,13 @@
 //  Copyright © 2017 Altair. All rights reserved.
 //
 
-#import "ALSportsPrecompile.h"
-#import "ALSBrowserProtocol.h"
+#import "_MidwarePrecompile.h"
+#import "_BrowserProtocol.h"
 
 #if __has_ALSWebViewController
-@interface ALSBrowserImpl : ALSWebViewController <ALSBrowserProtocol>
+@interface ALSBrowserImpl : ALSWebViewController <_BrowserProtocol>
 #else
-@interface ALSBrowserImpl : NSObject <ALSBrowserProtocol>
+@interface ALSBrowserImpl : NSObject <_BrowserProtocol>
 #endif
 
 @end

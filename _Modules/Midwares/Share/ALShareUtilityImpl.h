@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-#import "ALShareUtilityProtocol.h"
+#import "_ShareUtilityProtocol.h"
 
-@interface ALShareUtilityImpl : NSObject <ALShareUtilityProtocol>
+@interface ALShareUtilityImpl : NSObject <_ShareUtilityProtocol>
 
 @end

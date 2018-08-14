@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ALSegueProtocol.h"
+#import "_SegueProtocol.h"
 
-@interface ALSegueImpl : NSObject <ALSegueProtocol>
+@interface ALSegueImpl : NSObject <_SegueProtocol>
 
 @end

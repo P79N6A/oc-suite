@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ALSBrowserService.h"
+#import "_BrowserService.h"
 
-@interface ALSBrowserServiceImpl : NSObject <ALSBrowserService>
+@interface ALSBrowserServiceImpl : NSObject <_BrowserService>
 
 @end

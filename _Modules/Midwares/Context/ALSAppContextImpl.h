@@ -6,8 +6,8 @@
 //  Copyright © 2017 AliSports. All rights reserved.
 //
 
-#import "ALSAppContextProtocol.h"
+#import "_AppContextProtocol.h"
 
-@interface ALSAppContextImpl : NSObject <ALSAppContextProtocol>
+@interface ALSAppContextImpl : NSObject <_AppContextProtocol>
 
 @end

@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-#import "ALSImageLoaderProtocol.h"
+#import "_ImageLoaderProtocol.h"
 
 #pragma mark - 
 
-@interface ALSImageLoaderImpl : NSObject <ALSImageLoaderProtocol>
+@interface ALSImageLoaderImpl : NSObject <_ImageLoaderProtocol>
 
 @end

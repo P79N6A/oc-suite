@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ALSEncryptionProtocol.h"
+#import "_EncryptionProtocol.h"
 
-@interface ALSEncryptionImpl : NSObject <ALSEncryptionProtocol>
+@interface ALSEncryptionImpl : NSObject <_EncryptionProtocol>
 
 @end

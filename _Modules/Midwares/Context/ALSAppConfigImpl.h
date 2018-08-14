@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ALSAppConfigProtocol.h"
+#import "_AppConfigProtocol.h"
 
-@interface ALSAppConfigImpl : NSObject <ALSAppConfigProtocol>
+@interface ALSAppConfigImpl : NSObject <_AppConfigProtocol>
 
 @end

@@ -6,8 +6,8 @@
 //  Copyright © 2017 AliSports. All rights reserved.
 //
 
-#import "ALSErrorProtocol.h"
+#import "_ErrorProtocol.h"
 
-@interface NSError (ALSErrorImpl) <ALSErrorProtocol>
+@interface NSError (ALSErrorImpl) <_ErrorProtocol>
 
 @end

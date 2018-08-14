@@ -6,7 +6,7 @@
 //  Copyright © 2017 Altair. All rights reserved.
 //
 
-#import "ALSportsPrecompile.h"
+#import "_MidwarePrecompile.h"
 #import "ALSPaysImpl.h"
 
 @interface ALSPaysImpl ()

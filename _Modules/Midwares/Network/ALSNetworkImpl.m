@@ -7,7 +7,7 @@
 //
 
 #import "ALSNetworkImpl.h"
-#import "ALSportsPrecompile.h"
+#import "_MidwarePrecompile.h"
 #import "ALSErrorImpl.h"
 
 @implementation ALSNetworkImpl
@@ -87,11 +87,21 @@
 // MARK: - 普通接口 1
 // -------------------------------
 
-- (void)requestWith:(NSString *)identifier parameters:(NSDictionary *)param finished:(ALSRequestFinishedBlock)finishedHandler {
-    [self requestWith:identifier parameters:param before:nil after:nil finished:finishedHandler];
+- (void)requestWith:(NSString *)identifier
+         parameters:(NSDictionary *)param
+           finished:(_RequestFinishedBlock)finishedHandler {
+    [self requestWith:identifier
+           parameters:param
+               before:nil
+                after:nil
+             finished:finishedHandler];
 }
 
-- (void)requestWith:(NSString *)identifier parameters:(NSDictionary *)param before:(ALSRequestBeforeBlock)beforeHandler after:(ALSRequestAfterBlock)afterHandler finished:(ALSRequestFinishedBlock)finishedHandler {
+- (void)requestWith:(NSString *)identifier
+         parameters:(NSDictionary *)param
+             before:(_RequestBeforeBlock)beforeHandler
+              after:(_RequestAfterBlock)afterHandler
+           finished:(_RequestFinishedBlock)finishedHandler {
 
     if (self.onParameterFilter) {
         param = self.onParameterFilter(param);
@@ -129,11 +139,24 @@
 // MARK: - 普通接口 2
 // -------------------------------
 
-- (void)requestWith:(NSString *)identifier responseClass:(Class)cls  parameters:(NSDictionary *)param finished:(ALSRequestFinishedBlock)finishedHandler {
-    [self requestWith:identifier responseClass:cls parameters:param before:nil after:nil finished:finishedHandler];
+- (void)requestWith:(NSString *)identifier
+      responseClass:(Class)cls
+         parameters:(NSDictionary *)param
+           finished:(_RequestFinishedBlock)finishedHandler {
+    [self requestWith:identifier
+        responseClass:cls
+           parameters:param
+               before:nil
+                after:nil
+             finished:finishedHandler];
 }
 
-- (void)requestWith:(NSString *)identifier responseClass:(Class)cls  parameters:(NSDictionary *)param before:(ALSRequestBeforeBlock)beforeHandler after:(ALSRequestAfterBlock)afterHandler finished:(ALSRequestFinishedBlock)finishedHandler {
+- (void)requestWith:(NSString *)identifier
+      responseClass:(Class)cls
+         parameters:(NSDictionary *)param
+             before:(_RequestBeforeBlock)beforeHandler
+              after:(_RequestAfterBlock)afterHandler
+           finished:(_RequestFinishedBlock)finishedHandler {
     NSAssert(self.serialization, @"'serialization' shouldn't be nil.'");
     NSAssert(self.dataField, @"'dataField' shouldn't be nil.'");
     NSAssert(self.errorCodeField, @"'errorCodeField' shouldn't be nil.'");
@@ -206,12 +229,16 @@
 // MARK: - 上传、下载接口
 // -------------------------------
 
-- (void)downloadWith:(NSString *)identifier current:(ALSRequestCurrentBlock)currentHandler finished:(ALSRequestFinishedBlock)finishedHandler {
+- (void)downloadWith:(NSString *)identifier
+             current:(_RequestCurrentBlock)currentHandler
+            finished:(_RequestFinishedBlock)finishedHandler {
     
 }
 
 
-- (void)uploadWith:(NSString *)identifier current:(ALSRequestCurrentBlock)currentHandler finished:(ALSRequestFinishedBlock)finishedHandler {
+- (void)uploadWith:(NSString *)identifier
+           current:(_RequestCurrentBlock)currentHandler
+          finished:(_RequestFinishedBlock)finishedHandler {
 #if __has_AEDataKit
     AEDKProcess *s = [[AEDKServer server] requestServiceWithName:identifier];
     s.configuration.Processing = ^(int64_t totalAmount, int64_t currentAmount, NSURLRequest * _Nonnull currentRequest) {

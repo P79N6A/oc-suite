@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ALSBrowserConfigureProtocol.h"
+#import "_BrowserConfigureProtocol.h"
 
-@interface ALSBrowserConfigureImpl : NSObject <ALSBrowserConfigureProtocol>
+@interface ALSBrowserConfigureImpl : NSObject <_BrowserConfigureProtocol>
 
 @end

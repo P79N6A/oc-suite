@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ALSDependencyProtocol.h"
+#import "_DependencyProtocol.h"
 
-@interface ALSDependencyImpl : NSObject <ALSDependencyProtocol>
+@interface ALSDependencyImpl : NSObject <_DependencyProtocol>
 
 @end

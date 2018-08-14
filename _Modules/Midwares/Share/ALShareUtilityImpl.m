@@ -6,7 +6,7 @@
 //  Copyright © 2017 Altair. All rights reserved.
 //
 
-#import "ALSportsPrecompile.h"
+#import "_MidwarePrecompile.h"
 #import "ALShareUtilityImpl.h"
 #if __has_ALSShareService
 #import <ALSShare/ALSShareTool.h>
@@ -14,7 +14,7 @@
 
 @implementation ALShareUtilityImpl
 
-- (BOOL)availableForPlatform:(ALSharePlatformType)platformType {
+- (BOOL)availableForPlatform:(_SharePlatformType)platformType {
     BOOL available = NO;
     
 #if __has_ALSShareService
@@ -28,7 +28,7 @@
     return available;
 }
 
-- (NSUInteger)sceneTypeOfPlatform:(ALSharePlatformType)platformType {
+- (NSUInteger)sceneTypeOfPlatform:(_SharePlatformType)platformType {
     NSUInteger sceneType = 0;
     
 #if __has_ALSShareService
@@ -79,7 +79,7 @@
     return sceneType;
 }
 
-- (NSUInteger)typeOfPlatform:(ALSharePlatformType)platformType {
+- (NSUInteger)typeOfPlatform:(_SharePlatformType)platformType {
     NSUInteger type = 0;
     
 #if __has_ALSShareService

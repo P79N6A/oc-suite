@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ALSLogConfigureProtocol.h"
+#import "_LogConfigureProtocol.h"
 
-@interface ALSLogConfigureImpl : NSObject <ALSLogConfigureProtocol>
+@interface ALSLogConfigureImpl : NSObject <_LogConfigureProtocol>
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "ALSerializationImpl.h"
-#import "ALSportsPrecompile.h"
+#import "_MidwarePrecompile.h"
 
 @implementation ALSerializationImpl
 

@@ -6,12 +6,11 @@
 //  Copyright © 2017 Altair. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "NSLaunchableProtocol.h"
-#import "ALSharesProtocol.h"
-#import "ALSportsMacro.h"
+#import "_Foundation.h"
+#import "_LaunchableProtocol.h"
+#import "_SharesProtocol.h"
 
-@interface ALSharesImpl : NSObject <ALSharesProtocol, NSLaunchableProtocol>
+@interface ALSharesImpl : NSObject <_SharesProtocol, _LaunchableProtocol>
 
 @singleton( ALSharesImpl )
 

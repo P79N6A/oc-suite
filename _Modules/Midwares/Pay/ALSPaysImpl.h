@@ -7,9 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "_PaysProtocol.h"
 
-#import "ALSPaysProtocol.h"
-
-@interface ALSPaysImpl : NSObject <ALSPaysProtocol>
+@interface ALSPaysImpl : NSObject <_PaysProtocol>
 
 @end

@@ -6,8 +6,6 @@
 //  Copyright © 2017 Altair. All rights reserved.
 //
 
-#import "_MidwareMacro.h"
-
 // -------------------------------------------
 // 特有预定义
 // -------------------------------------------
@@ -195,8 +193,6 @@
 #else
 #   define __has_SecurityGuardSDK 0
 #endif
-
-
 
 
 // -------------------------------------------

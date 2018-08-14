@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ALSerializationProtocol.h"
+#import "_SerializationProtocol.h"
 
-@interface ALSerializationImpl : NSObject <ALSerializationProtocol>
+@interface ALSerializationImpl : NSObject <_SerializationProtocol>
 
 @end

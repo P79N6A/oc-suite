@@ -6,7 +6,7 @@
 //  Copyright © 2017 AliSports. All rights reserved.
 //
 
-#import "ALSportsPrecompile.h"
+#import "_MidwarePrecompile.h"
 #import "ALSegueImpl.h"
 
 @implementation ALSegueImpl

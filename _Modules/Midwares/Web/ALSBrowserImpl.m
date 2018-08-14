@@ -6,15 +6,15 @@
 //  Copyright © 2017 Altair. All rights reserved.
 //
 
-#import "ALSportsPrecompile.h"
+#import "_MidwarePrecompile.h"
 #import "ALSBrowserImpl.h"
 #import "ALSJavaScriptMessageHandlerImpl.h"
 
 @interface ALSBrowserImpl ()
 
-@property (nonatomic, strong) NSHashTable<id<ALSBrowserService>> *extensions;
+@property (nonatomic, strong) NSHashTable<id<_BrowserService>> *extensions;
 
-@property (nonatomic, strong) NSHashTable<id<ALSJavaScriptMessagePerformer>> *performers;
+@property (nonatomic, strong) NSHashTable<id<_JavaScriptMessagePerformer>> *performers;
 
 @end
 
@@ -37,55 +37,55 @@
 
 #pragma mark - Extension
 
-- (void)addExtension:(id<ALSBrowserService>)e {
+- (void)addExtension:(id<_BrowserService>)e {
     NSAssert(e, @"e 空异常");
     
     [self.extensions addObject:e];
 }
 
-- (void)removeExtension:(id<ALSBrowserService>)e {
+- (void)removeExtension:(id<_BrowserService>)e {
     NSAssert(e, @"e 空异常");
     
     [self.extensions removeObject:e];
 }
 
-- (void)eachExtension:(void (^)(id<ALSBrowserService>))handler {
+- (void)eachExtension:(void (^)(id<_BrowserService>))handler {
     NSAssert(handler, @"handler 空异常");
     
-    NSEnumerator<id<ALSBrowserService>> *iterator= self.extensions.objectEnumerator;
+    NSEnumerator<id<_BrowserService>> *iterator= self.extensions.objectEnumerator;
     
-    [iterator.allObjects enumerateObjectsUsingBlock:^(id<ALSBrowserService>  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [iterator.allObjects enumerateObjectsUsingBlock:^(id<_BrowserService>  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         handler(obj);
     }];
 }
 
 #pragma mark - Performer
 
-- (void)addPerformer:(id<ALSJavaScriptMessagePerformer>)p {
+- (void)addPerformer:(id<_JavaScriptMessagePerformer>)p {
     NSAssert(p, @"p 空异常");
     
     [self.performers addObject:p];
 }
 
-- (void)removePerformer:(id<ALSJavaScriptMessagePerformer>)p {
+- (void)removePerformer:(id<_JavaScriptMessagePerformer>)p {
     NSAssert(p, @"p 空异常");
     
     [self.performers removeObject:p];
 }
 
-- (void)eachPerformer:(BOOL (^)(id<ALSJavaScriptMessagePerformer>))handler {
+- (void)eachPerformer:(BOOL (^)(id<_JavaScriptMessagePerformer>))handler {
     NSAssert(handler, @"handler 空异常");
     
-    NSEnumerator<id<ALSJavaScriptMessagePerformer>> *iterator= self.performers.objectEnumerator;
+    NSEnumerator<id<_JavaScriptMessagePerformer>> *iterator= self.performers.objectEnumerator;
     
-    [iterator.allObjects enumerateObjectsUsingBlock:^(id<ALSJavaScriptMessagePerformer>  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [iterator.allObjects enumerateObjectsUsingBlock:^(id<_JavaScriptMessagePerformer>  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (! handler(obj)) *stop = YES;
     }];
 }
 
 #pragma mark -
 
-- (id<ALSJavaScriptMessageHandler>)callbackWith:(id)data {
+- (id<_JavaScriptMessageHandler>)callbackWith:(id)data {
     return [ALSJavaScriptMessageHandlerImpl withRaw:data browser:self];
 }
 

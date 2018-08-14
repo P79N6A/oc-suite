@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ALSJavaScriptMessageHandler.h"
+#import "_JavaScriptMessageHandler.h"
 
-@interface ALSJavaScriptMessageHandlerImpl : NSObject <ALSJavaScriptMessageHandler>
+@interface ALSJavaScriptMessageHandlerImpl : NSObject <_JavaScriptMessageHandler>
 
 @end

@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ALSCacheProtocol.h"
+#import "_CacheProtocol.h"
 
-@interface ALSCacheImpl : NSObject <ALSCacheProtocol>
+@interface ALSCacheImpl : NSObject <_CacheProtocol>
 
 @end

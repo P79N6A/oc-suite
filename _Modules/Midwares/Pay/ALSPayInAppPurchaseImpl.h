@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ALSPayInAppPurchaseProtocol.h"
+#import "_PayInAppPurchaseProtocol.h"
 #import "ALSPayImpl.h"
 
 /**
@@ -17,6 +17,6 @@
  *      - 不要用正式账号
  */
 
-@interface ALSPayInAppPurchaseImpl : ALSPayImpl <ALSPayInAppPurchaseProtocol>
+@interface ALSPayInAppPurchaseImpl : ALSPayImpl <_PayInAppPurchaseProtocol>
 
 @end

@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ALSNetworkProtocol.h"
+#import "_NetworkProtocol.h"
 
-@interface ALSNetworkImpl : NSObject <ALSNetworkProtocol>
+@interface ALSNetworkImpl : NSObject <_NetworkProtocol>
 
 @end

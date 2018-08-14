@@ -13,7 +13,7 @@
 @synthesize webView;
 @synthesize containerView;
 
-- (BOOL)handleMessage:(id<ALSJavaScriptMessageHandler>)handler {
+- (BOOL)handleMessage:(id<_JavaScriptMessageHandler>)handler {
     return NO;
 }
 

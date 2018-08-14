@@ -7,7 +7,8 @@
 //
 
 #import <objc/runtime.h>
-#import "ALSportsPrecompile.h"
+#import "_Building.h"
+#import "_MidwarePrecompile.h"
 #import "ALSImageLoaderImpl.h"
 #if __has_OSSService
 #import "OSSService.h"
@@ -55,6 +56,7 @@
 }
 
 - (void)uploadOnCloudWithImage:(UIImage *)image
+                           uid:(NSString *)uid
                      objectKey:(NSString *)objectKey
                      accessKey:(NSString *)accessKey
                      secretKey:(NSString *)secretKey
@@ -62,8 +64,8 @@
                     expiration:(NSString *)expiration
                    callbackURL:(NSString *)callbackURL
                       filename:(NSString *)filename
-                       current:(ALSRequestCurrentBlock)currentHandler
-                      finished:(ALSRequestFinishedBlock)finishedHandler {
+                       current:(_RequestCurrentBlock)currentHandler
+                      finished:(_RequestFinishedBlock)finishedHandler {
 #if __has_OSSService
 #define OSS_BUCKETNAME (@"oneimg")
     id<OSSCredentialProvider> provider = [[OSSFederationCredentialProvider alloc] initWithFederationTokenGetter:^OSSFederationToken *{
@@ -77,7 +79,7 @@
     
     [self.ossClient setCredentialProvider:provider];
     
-    NSString *aliuid = [AESUser currentUser].uid;
+    NSString *aliuid = uid;
     
     OSSPutObjectRequest *request = [OSSPutObjectRequest new];
     request.bucketName = OSS_BUCKETNAME;
@@ -117,8 +119,8 @@
                         objectKey:(NSString *)objectKey
                         accessKey:(NSString *)accessKey
                         secretKey:(NSString *)secretKey
-                          current:(ALSRequestCurrentBlock)currentHandler
-                         finished:(ALSRequestFinishedBlock)finishedHandler {
+                          current:(_RequestCurrentBlock)currentHandler
+                         finished:(_RequestFinishedBlock)finishedHandler {
     // TODO: 该方法还没有测试过！！！！！！！！！！！！别轻信！！！！！！！！！！
     
 #if __has_OSSService

@@ -6,7 +6,7 @@
 //  Copyright © 2017 Altair. All rights reserved.
 //
 
-#import "ALSportsPrecompile.h"
+#import "_MidwarePrecompile.h"
 #import "ALSharesImpl.h"
 
 @interface ALSharesImpl ()
@@ -38,7 +38,7 @@
 // MARK: -
 
 - (void)shareSuccess:(void (^)(void))successHandler failure:(void (^)(NSError *))failureHandler {
-    ALSharePlatformType platform = self.param.type;
+    _SharePlatformType platform = self.param.type;
     
     @weakify(self)
     
@@ -58,15 +58,15 @@
     };
     
     // 分享调用
-    if (platform & ALSharePlatformWechatMask) {
+    if (platform & _SharePlatformWechatMask) {
         [self.wechat shareWithParam:self.param
                             success:successHandler_
                             failure:failureHandler_];
-    } else if (platform & ALSharePlatformWeiboMask) {
+    } else if (platform & _SharePlatformWeiboMask) {
         [self.weibo shareWithParam:self.param
                            success:successHandler_
                            failure:failureHandler_];
-    } else if (platform & ALSharePlatformTencentMask) {
+    } else if (platform & _SharePlatformTencentMask) {
         [self.tencent shareWithParam:self.param
                              success:successHandler_
                              failure:failureHandler_];

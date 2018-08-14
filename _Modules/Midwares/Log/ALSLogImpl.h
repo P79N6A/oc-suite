@@ -6,9 +6,8 @@
 //  Copyright © 2017 Altair. All rights reserved.
 //
 
-#import "ALSModule.h"
-#import "ALSLogProtocol.h"
+#import "_LogProtocol.h"
 
-@interface ALSLogImpl : ALSModule <ALSLogProtocol>
+@interface ALSLogImpl : NSObject <_LogProtocol>
 
 @end

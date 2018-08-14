@@ -7,7 +7,7 @@
 //
 
 #import "ShareViewController.h"
-#import "ALSports.h"
+#import "_Midware.h"
 
 @interface ShareViewController ()
 
@@ -94,8 +94,8 @@
 
 - (void)resetShareButtonStatus {
     // 微信好友
-    self.wechatSessionButton.tag = ALSharePlatformWechatSession;
-    if ([sports.share.utility availableForPlatform:ALSharePlatformWechatSession]) {
+    self.wechatSessionButton.tag = _SharePlatformWechatSession;
+    if ([midware.share.utility availableForPlatform:_SharePlatformWechatSession]) {
         [self.wechatSessionButton setEnabled:YES];
         [self.wechatSessionTitleLabel setAlpha:1];
     } else {
@@ -104,8 +104,8 @@
     }
 
     // 微信朋友圈
-    self.wechatTimeLineButton.tag = ALSharePlatformWechatTimeLine;
-    if ([sports.share.utility availableForPlatform:ALSharePlatformWechatTimeLine]) {
+    self.wechatTimeLineButton.tag = _SharePlatformWechatTimeLine;
+    if ([midware.share.utility availableForPlatform:_SharePlatformWechatTimeLine]) {
         [self.wechatTimeLineButton setEnabled:YES];
         [self.wechatTimeLineTitleLabel setAlpha:1];
     } else {
@@ -114,8 +114,8 @@
     }
     
     // 微博
-    self.weiboButton.tag = ALSharePlatformWeiboCommon;
-    if ([sports.share.utility availableForPlatform:ALSharePlatformWeiboCommon]) {
+    self.weiboButton.tag = _SharePlatformWeiboCommon;
+    if ([midware.share.utility availableForPlatform:_SharePlatformWeiboCommon]) {
         [self.weiboButton setEnabled:YES];
         [self.weiboTitleLabel setAlpha:1];
     } else {
@@ -124,8 +124,8 @@
     }
     
     // QQ好友
-    self.qqButton.tag = ALSharePlatformTencentQQ;
-    if ([sports.share.utility availableForPlatform:ALSharePlatformTencentQQ]) {
+    self.qqButton.tag = _SharePlatformTencentQQ;
+    if ([midware.share.utility availableForPlatform:_SharePlatformTencentQQ]) {
         [self.qqButton setEnabled:YES];
         [self.qqTitleLabel setAlpha:1];
     } else {
@@ -134,8 +134,8 @@
     }
     
     // QQ空间
-    self.qzoneButton.tag = ALSharePlatformTencentQZone;
-    if ([sports.share.utility availableForPlatform:ALSharePlatformTencentQZone]) {
+    self.qzoneButton.tag = _SharePlatformTencentQZone;
+    if ([midware.share.utility availableForPlatform:_SharePlatformTencentQZone]) {
         [self.qzoneButton setEnabled:YES];
         [self.qzoneTitleLabel setAlpha:1];
     } else {
@@ -146,13 +146,13 @@
 
 - (IBAction)didClickedShareButton:(id)sender {
     UIButton *button = (UIButton *)sender;
-    ALSharePlatformType type = (ALSharePlatformType)button.tag;
+    _SharePlatformType type = (_SharePlatformType)button.tag;
 
     [self dismissViewControllerAnimated:YES completion:^{
 
-        sports.share.param.type = type;
+        midware.share.param.type = type;
         
-        [sports.share shareSuccess:^{
+        [midware.share shareSuccess:^{
             
             self.successHandler();
             

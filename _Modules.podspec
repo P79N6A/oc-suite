@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "_Modules"
-  s.version      = "0.1.0"
+  s.version      = "0.2.1"
   s.summary      = "iOS 开发包 之 模块库 [Objective-C]"
   s.description  = <<-DESC
                    iOS 开发包 之 模块库 [Objective-C]
@@ -53,7 +53,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'Midwares' do |midwares|
-    midwares.source_files = "_Midwares/**/*.{h,m}"
+    midwares.source_files = "_Modules/Midwares/**/*.{h,m}"
     # midwares.resources = "_Modules/Application/_AppRater.bundle"
   end
 

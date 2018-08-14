@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ALSPayProtocol.h"
+#import "_PayProtocol.h"
 
-@interface ALSPayImpl : NSObject <ALSPayProtocol>
+@interface ALSPayImpl : NSObject <_PayProtocol>
 
 @end

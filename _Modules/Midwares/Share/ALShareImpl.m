@@ -6,13 +6,13 @@
 //  Copyright © 2017 Altair. All rights reserved.
 //
 
-#import "ALSportsPrecompile.h"
+#import "_MidwarePrecompile.h"
 #import "ALShareImpl.h"
 #import "ALShareUtilityImpl.h"
 
 @interface ALShareImpl ()
 
-@property (nonatomic, strong) id<ALShareUtilityProtocol> utility;
+@property (nonatomic, strong) id<_ShareUtilityProtocol> utility;
 
 @end
 
@@ -32,7 +32,9 @@
 
 // MARK: - Public Method
 
-- (void)shareWithParam:(id<ALShareParamProtocol>)param success:(void (^)(void))successHandler failure:(void (^)(NSError *))failureHandler {
+- (void)shareWithParam:(id<_ShareParamProtocol>)param
+               success:(void (^)(void))successHandler
+               failure:(void (^)(NSError *))failureHandler {
 #if __has_ALSShareService
     ALSShareContext *context = nil;
     ALSShareObject *object = nil;

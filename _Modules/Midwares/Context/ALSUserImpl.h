@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ALSUserProtocol.h"
+#import "_UserProtocol.h"
 
-@interface ALSUserImpl : NSObject <ALSUserProtocol>
+@interface ALSUserImpl : NSObject <_UserProtocol>
 
 @end
