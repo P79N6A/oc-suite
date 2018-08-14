@@ -44,4 +44,4 @@
 // MARK: Custom color
 // ----------------------------------
 
-#define color_disabled  [UIColor colorWithHexString:@"#BBBBBB"]
+#define color_disabled  [UIColor colorWithHexString:@"BBBBBB"]

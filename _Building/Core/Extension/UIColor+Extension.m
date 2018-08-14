@@ -34,13 +34,32 @@
                            alpha:alpha];
 }
 
-// Returns a UIColor by scanning the string for a hex number and passing that to +[UIColor colorWithRGBHex:]
-// Skips any leading whitespace and ignores any trailing characters
-+ (UIColor *)colorWithHexString:(NSString *)stringToConvert {
-    NSScanner *scanner = [NSScanner scannerWithString:stringToConvert];
++ (UIColor *)colorWithHexString:(NSString *)hexString {
+    return [self colorWithHexString:hexString alpha:1.0f];
+}
+
++ (UIColor *)colorWithHexString:(NSString *)hexString alpha:(CGFloat)alpha {
+    // 删除字符串中的空格
+    hexString = [[hexString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
+    // String should be 6 or 8 characters
+    if ([hexString length] < 6) {
+        return [UIColor clearColor];
+    }
+    if ([hexString hasPrefix:@"0X"] ||
+        [hexString hasPrefix:@"0x"]) {
+        hexString = [hexString substringFromIndex:2];
+    }
+    if ([hexString hasPrefix:@"#"]) {
+        hexString = [hexString substringFromIndex:1];
+    }
+    if ([hexString length] != 6) {
+        return [UIColor clearColor];
+    }
+    
+    NSScanner *scanner = [NSScanner scannerWithString:hexString];
     unsigned hexNum;
     if (![scanner scanHexInt:&hexNum]) return nil;
-    return [UIColor colorWithRGBHex:hexNum];
+    return [UIColor colorWithRGBHex:hexNum alpha:alpha];
 }
 
 + (UIColor *)colorWithRGBString:(NSString *)rgbString {

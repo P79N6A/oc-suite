@@ -13,7 +13,8 @@
 // Color builders
 + (UIColor *)colorWithRGBHex:(UInt32)hex;
 + (UIColor *)colorWithRGBHex:(UInt32)hex alpha:(CGFloat)alpha;
-+ (UIColor *)colorWithHexString:(NSString *)stringToConvert;
++ (UIColor *)colorWithHexString:(NSString *)hexString;
++ (UIColor *)colorWithHexString:(NSString *)hexString alpha:(CGFloat)alpha;
 
 + (UIColor *)colorWithRGBString:(NSString *)rgbString;
 
