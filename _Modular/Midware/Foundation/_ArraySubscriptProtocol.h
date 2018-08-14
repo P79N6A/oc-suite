@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol NSArraySubscriptProtocol <NSObject>
+@protocol _ArraySubscriptProtocol <NSObject>
 
 // 数组样式
 - (nullable id)objectAtIndexedSubscript:(NSUInteger)idx;

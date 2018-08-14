@@ -1,9 +1,10 @@
 #import "_Precompile.h"
 #import "_Foundation.h"
+#import "_LoadableProtocol.h"
 
 #pragma mark -
 
-@interface _Module : NSObject
+@interface _Module : NSObject <_LoadableProtocol>
 
 @prop_strong( NSString *,		name ) // Name is set to be class name, by default.
 @prop_strong( NSBundle *,		bundle ) // Bundle 's name is set to be class name, by default.

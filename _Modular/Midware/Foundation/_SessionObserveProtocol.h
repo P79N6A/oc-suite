@@ -7,12 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "NSLoginObserveProtocol.h"
-#import "NSLogoutObserveProtocol.h"
+#import "_LoginObserveProtocol.h"
+#import "_LogoutObserveProtocol.h"
 
-@protocol NSSessionObserveProtocol <
-NSLoginObserveProtocol,
-NSLogoutObserveProtocol
+@protocol _SessionObserveProtocol <
+_LoginObserveProtocol,
+_LogoutObserveProtocol
 >
 
 @end

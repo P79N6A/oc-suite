@@ -6,11 +6,8 @@
 //  Copyright © 2017 AliSports. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "NSLaunchObserveProtocol.h"
+#import "_LaunchObserveProtocol.h"
 
-@protocol NSAppLifeCycleObserveProtocol <
-NSLaunchObserveProtocol
->
+@protocol _AppLifeCycleObserveProtocol <_LaunchObserveProtocol>
 
 @end

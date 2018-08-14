@@ -11,6 +11,10 @@
 #define current_thread  [NSThread currentThread]
 #define main_thread     [NSThread mainThread]
 
+#ifndef on_main
+#define on_main( void_block )     dispatch_async(dispatch_get_main_queue(), void_block);
+#endif
+
 /**
  *  Inserts code that executes a block only once, regardless of how many times the macro is invoked.
  *

@@ -49,4 +49,10 @@
     return nil;
 }
 
+// MARK: - _LoadableProtocol
+
++ (void)onLoad {
+    
+}
+
 @end

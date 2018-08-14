@@ -7,27 +7,27 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ALSportsMacro.h"
-#import "ALSportsConfig.h"
-#import "ALSportsManager.h"
-#import "ALSNetworkProtocol.h"
-#import "ALSBrowserProtocol.h"
-#import "ALSImageLoaderProtocol.h"
-#import "ALSCacheProtocol.h"
-#import "ALSUserProtocol.h"
-#import "ALSegueProtocol.h"
-#import "ALSLogProtocol.h"
-#import "ALSharesProtocol.h"
-#import "ALSPaysProtocol.h"
-#import "ALSAppContextProtocol.h"
-#import "ALSDependencyProtocol.h"
-#import "ALSEncryptionProtocol.h"
-#import "ALSAppConfigProtocol.h"
+#import "_MidwareConfig.h"
+#import "_MidwareManager.h"
 
-#import "_foundation.h"
-#import "_i_utility.h"
-#import "_i_processor.h"
-#import "_i_validator.h"
+#import "_NetworkProtocol.h"
+#import "_BrowserProtocol.h"
+#import "_ImageLoaderProtocol.h"
+#import "_CacheProtocol.h"
+#import "_UserProtocol.h"
+#import "_SegueProtocol.h"
+#import "_LogProtocol.h"
+#import "_SharesProtocol.h"
+#import "_PaysProtocol.h"
+#import "_AppContextProtocol.h"
+#import "_DependencyProtocol.h"
+#import "_EncryptionProtocol.h"
+#import "_AppConfigProtocol.h"
+
+#import "_Foundation.h"
+//#import "_i_utility.h"
+//#import "_i_processor.h"
+//#import "_i_validator.h"
 
 @interface _Midware : NSObject
 
@@ -70,13 +70,13 @@
 //
 //@prop_strong(id<_INetwork>, net)
 
-@prop_strong(id<_IUtility>, util)
+//@prop_strong(id<_IUtility>, util)
 
 //@prop_strong(id<_IDatabase>, db)
 
-@prop_strong(id<_IProcessor>, processor)
+//@prop_strong(id<_IProcessor>, processor)
 
-@prop_strong(id<_IValidator>, validator)
+//@prop_strong(id<_IValidator>, validator)
 
 @end
 

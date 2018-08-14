@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "_Modules"
-  s.version      = "0.0.7"
+  s.version      = "0.1.0"
   s.summary      = "iOS 开发包 之 模块库 [Objective-C]"
   s.description  = <<-DESC
                    iOS 开发包 之 模块库 [Objective-C]
