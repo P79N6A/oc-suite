@@ -125,8 +125,7 @@
     return (size.height > self.frame.size.height);
 }
 
-- (CGFloat)sizeToFitWithMaximumNumberOfLines:(NSInteger)lines
-{
+- (CGFloat)sizeToFitWithMaximumNumberOfLines:(NSInteger)lines {
     return [self sizeOfSizeToFitWithMaximumNumberOfLines:lines].height;
 }
 

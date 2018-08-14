@@ -34,13 +34,6 @@
 #import "UIImage+Vector.h"
 #import "UIImageView+FaceDetect.h"
 
-// extension-easy
-
-#import "UICollectionViewCell+.h"
-#import "UITableViewCell+.h"
-#import "UIView+.h"
-#import "UIViewController+.h"
-
 // extension-view
 
 #import "UISurePlaceholderView.h"
@@ -93,5 +86,17 @@
 #import "UIWindow+Hierarchy.h"
 
 // Base
+#import "BaseDataController.h"
+#import "BaseDataSource.h"
+#import "BaseNavigationBar.h"
 #import "BaseNavigationController.h"
+#import "BaseTabBarController.h"
+#import "BaseTableModel.h"
+#import "BaseTableView.h"
+#import "BaseTableViewCell.h"
+#import "BaseTableViewController.h"
+#import "BaseView.h"
+#import "BaseViewController.h"
+#import "BaseViewModel.h"
+#import "BaseWindowController.h"
 

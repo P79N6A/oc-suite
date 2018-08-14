@@ -135,11 +135,27 @@ int rreplace (char *buf, int size, regex_t *re, char *rp) {
     return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 }
 
-+(NSString*)trimmingWhitespaceAndChangLineWithChangN:(NSString*)str{
++ (NSString *)trimmingWhitespaceAndChangLineWithChangN:(NSString*)str{
     str = [str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]; //去除掉首尾的空白字符和换行字符
     str = [str stringByReplacingOccurrencesOfString:@"\r" withString:@""];
     str = [str stringByReplacingOccurrencesOfString:@"\n" withString:@""];
     return str;
+}
+
+- (NSString *)trimmingLeadingAndTrailingWhitespace {
+    
+    NSString *newString = [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    return [newString trimmingLeadingWhitespace];
+}
+
+- (NSString *)trimmingLeadingWhitespace {
+    NSInteger i = 0;
+    
+    while ((i < [self length])
+           && [[NSCharacterSet whitespaceCharacterSet] characterIsMember:[self characterAtIndex:i]]) {
+        i++;
+    }
+    return [self substringFromIndex:i];
 }
 
 #pragma mark -

@@ -27,6 +27,15 @@
 
 @interface UIViewController ( Template )
 
+- (id)_initWithNib;
+
++ (instancetype)controller;
++ (instancetype)controllerWithNibName:(NSString *)nibName;
+
+#pragma mark - Views operations: overrided if needed
+
+- (void)initDefault;
+
 - (void)initViews; // 初始化视图
 
 - (void)afterViews; // 初始化视图后，做其他初始配置
@@ -34,6 +43,39 @@
 - (void)updateViews; // 网络回调后 更新视图
 
 - (void)constraintViews; // 给视图加约束
+
+- (void)initNavigationBar;
+
+- (void)restoreNavigationBar;
+
+- (void)initData;
+
+- (void)initDataSource;
+
+- (void)initScrollView;
+
+- (void)initTableView;
+
+- (void)initCollectionView;
+
+- (void)initChildViewController;
+
+/**
+ *  当UIViewController有两种展示方式，则可以调用该策略view初始化
+ */
+- (void)initViewStrategy;
+
+#pragma mark - Constraints operations: Need to be overrided
+
+// mark template
+
+#pragma mark - Initialize
+#pragma mark - Life cycle
+#pragma mark - Update
+#pragma mark - Action handler && Notification handler &&
+#pragma mark - ANY delegate
+#pragma mark - Property
+#pragma mark -
 
 @end
 
@@ -134,6 +176,8 @@
 - (void)onBack; // fallenink: 以后的形式都是，on＋动作
 
 #pragma mark - Utility
+
++ (UIViewController *)topViewController;
 
 - (BOOL)isVisibleEx;
 

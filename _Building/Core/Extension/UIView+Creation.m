@@ -88,4 +88,14 @@
     }
 }
 
++ (UINib *)nib{
+    NSString *nibName = NSStringFromClass([self class]);
+    return [self nibWithName:nibName];
+}
+
++ (UINib *)nibWithName:(NSString *)name{
+    UINib *nib = [UINib nibWithNibName:name bundle:nil];
+    return nib;
+}
+
 @end

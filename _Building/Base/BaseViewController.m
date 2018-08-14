@@ -14,6 +14,22 @@
 
 @implementation UIViewController ( Template )
 
+- (id)_initWithNib {
+    return [self initWithNibName:NSStringFromClass([self class]) bundle:nil];
+}
+
++ (instancetype)controller {
+    return [self controllerWithNibName:NSStringFromClass([self class])];
+}
+
++ (instancetype)controllerWithNibName:(NSString *)nibName {
+    return [[self alloc] initWithNibName:nibName bundle:nil];
+}
+
+- (void)initDefault {
+    
+}
+
 - (void)initViews {
     
 }
@@ -27,6 +43,42 @@
 }
 
 - (void)constraintViews {
+    
+}
+
+- (void)initNavigationBar {
+    
+}
+
+- (void)restoreNavigationBar {
+    
+}
+
+- (void)initData {
+    
+}
+
+- (void)initDataSource {
+    
+}
+
+- (void)initScrollView {
+    
+}
+
+- (void)initTableView {
+    
+}
+
+- (void)initCollectionView {
+    
+}
+
+- (void)initChildViewController {
+    
+}
+
+- (void)initViewStrategy {
     
 }
 
@@ -314,6 +366,25 @@ static NSString *backButtonImageName = @"buckbutton";
 }
 
 #pragma mark - Utility
+
++ (UIViewController *)topViewController {
+    UIViewController *resultVC = [self topViewControllerOfViewController:[[UIApplication sharedApplication].keyWindow rootViewController]];
+    while (resultVC.presentedViewController) {
+        resultVC = [self topViewControllerOfViewController:resultVC.presentedViewController];
+    }
+    return resultVC;
+}
+
++ (UIViewController *)topViewControllerOfViewController:(UIViewController *)vc {
+    if ([vc isKindOfClass:[UINavigationController class]]) {
+        return [self topViewControllerOfViewController:[(UINavigationController *)vc topViewController]];
+    } else if ([vc isKindOfClass:[UITabBarController class]]) {
+        return [self topViewControllerOfViewController:[(UITabBarController *)vc selectedViewController]];
+    } else {
+        return vc;
+    }
+    return nil;
+}
 
 - (BOOL)isNavigationRootController {
     if (!self.navigationController ||

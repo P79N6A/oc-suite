@@ -14,7 +14,9 @@
 - (NSString *)trimFloatPointNumber; // 去掉浮点数尾部的'0'和'.' 如：1.00 ==> 1, 0.00 ==> 0, 0.50 ==> 0.5
 - (NSString *)trimmingWhitespace; // 去除空格
 - (NSString *)trimmingWhitespaceAndNewlines; // 去除字符串与空行
-+(NSString*)trimmingWhitespaceAndChangLineWithChangN:(NSString*)str;
++ (NSString *)trimmingWhitespaceAndChangLineWithChangN:(NSString*)str;
+- (NSString *)trimmingLeadingWhitespace; // 去掉NSString前面的空格
+- (NSString *)trimmingLeadingAndTrailingWhitespace; // 去掉NSString前面和后面的空格
 
 - (NSString *)strippingHTML;
 - (NSString *)removingScriptsAndStrippingHTML; // 清除js脚本

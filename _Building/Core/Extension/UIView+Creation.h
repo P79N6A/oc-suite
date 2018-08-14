@@ -32,5 +32,8 @@ return self;\
  */
 - (id)getObjectFromNib;
 
++ (UINib *)nib;
+
++ (UINib *)nibWithName:(NSString *)name;
 
 @end
