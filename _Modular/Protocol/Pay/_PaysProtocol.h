@@ -14,11 +14,11 @@
 - (void)launch;
 
 //// 最老的版本，最好也写上
-//- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url { return [sports.pay handleOpenURL:url]; }
+//- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url { return [midware.pay handleOpenURL:url]; }
 //// iOS 9.0 之前 会调用
-//- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation { return [sports.pay handleOpenURL:url]; }
+//- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation { return [midware.pay handleOpenURL:url]; }
 //// iOS 9.0 以上（包括iOS9.0）
-//- (BOOL)application:(UIApplication *)application openURL:(nonnull NSURL *)url options:(nonnull NSDictionary<NSString *,id> *)options { return [sports.pay handleOpenURL:url]; }
+//- (BOOL)application:(UIApplication *)application openURL:(nonnull NSURL *)url options:(nonnull NSDictionary<NSString *,id> *)options { return [midware.pay handleOpenURL:url]; }
 
 - (BOOL)handleOpenURL:(NSURL *)url; // 有可能会挪到 ALSPayProtocol 中
 

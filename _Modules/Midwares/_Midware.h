@@ -22,6 +22,7 @@
 #import "_DependencyProtocol.h"
 #import "_EncryptionProtocol.h"
 #import "_AppConfigProtocol.h"
+#import "ALSErrorImpl.h"
 
 #import "_Foundation.h"
 

@@ -6,6 +6,11 @@
 
 #import "_Foundation.h"
 
+#import "_Watcher.h"
+
+#import "_Module.h"
+#import "_ModuleLoader.h"
+
 #import "_Service.h"
 #import "_ServiceManager.h"
 
