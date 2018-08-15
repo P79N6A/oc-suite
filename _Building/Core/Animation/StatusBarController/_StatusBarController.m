@@ -1,31 +1,53 @@
 //
-//  _Layout.m
+//  _StatusBarController.m
 //  _Building
 //
 //  Created by 7 on 2018/8/12.
 //
 
-#import "_Layout.h"
+#import "_Foundation.h"
+#import "_StatusBarController.h"
 
-@implementation _Layout
+@interface _StatusBarController ()
+
+@singleton( _StatusBarController )
+
+@property (atomic, assign) BOOL statusBarLocked;
 
 @end
 
-// MARK: -
+@implementation _StatusBarController
 
-@implementation UIView (AutoLayout)
+@def_singleton( _StatusBarController )
 
-- (BOOL)resetFirstLayoutAttribute:(NSLayoutAttribute)attribute withConstant:(CGFloat)constant {
-    NSArray *leftBorderConstraintsArray = [self constraints];
-    BOOL hasAttr = NO;
-    for (NSLayoutConstraint *constraint in leftBorderConstraintsArray) {
-        if (constraint.firstAttribute == attribute) {
-            constraint.constant = constant;
-            hasAttr = YES;
-            break;
+- (instancetype)init {
+    if (self = [super init]) {
+        self.statusBarLocked = NO;
+    }
+    
+    return self;
+}
+
++ (void)lockStatusBar {
+    @synchronized(self.sharedInstance) {
+        self.sharedInstance.statusBarLocked = YES;
+    }
+}
+
++ (void)unlockStatusBar {
+    @synchronized(self.sharedInstance) {
+        self.sharedInstance.statusBarLocked = NO;
+    }
+}
+
++ (void)setStatusBarBackgroundColor:(UIColor *)color {
+    UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
+    
+    if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
+        if (!self.sharedInstance.statusBarLocked) {
+            statusBar.backgroundColor = color;
         }
     }
-    return hasAttr;
 }
 
 @end

@@ -125,5 +125,7 @@
 
 - (NSDictionary *)parsetUrlString;
 
+- (NSDictionary *)toDictionary;
+
 @end
 

@@ -812,6 +812,19 @@ int rreplace (char *buf, int size, regex_t *re, char *rp) {
     return [NSDictionary dictionaryWithDictionary:dic];
 }
 
+- (NSDictionary *)toDictionary {
+    NSData *jsonData = [self dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                        options:NSJSONReadingMutableContainers
+                                                          error:&err];
+    if(err) {
+        NSLog(@"json解析失败：%@",err);
+        return nil;
+    }
+    return dic;
+}
+
 @end
 
 

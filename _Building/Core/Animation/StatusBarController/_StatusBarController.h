@@ -1,5 +1,5 @@
 //
-//  _Layout.h
+//  _StatusBarController.h
 //  _Building
 //
 //  Created by 7 on 2018/8/12.
@@ -7,15 +7,17 @@
 
 #import <Foundation/Foundation.h>
 
-@interface _Layout : NSObject
+// ----------------------------------
+// MARK: Interface
+// ----------------------------------
 
-@end
+@interface _StatusBarController : NSObject
 
-// MARK: -
+// 以下两个方法，必须成对出现！
++ (void)lockStatusBar;
++ (void)unlockStatusBar;
 
-@interface UIView (AutoLayout)
-
-- (BOOL)resetFirstLayoutAttribute:(NSLayoutAttribute)attribute withConstant:(CGFloat)constant;
++ (void)setStatusBarBackgroundColor:(UIColor *)color;
 
 @end
 

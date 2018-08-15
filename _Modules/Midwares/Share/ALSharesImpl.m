@@ -128,4 +128,8 @@
 
 #endif
 
++ (void)onLaunch:(UIApplication *)application options:(NSDictionary *)options {
+    
+}
+
 @end

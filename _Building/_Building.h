@@ -18,6 +18,7 @@
 #import "MovingNavigationBarManager.h" // 导航栏移动动画、特效处理
 #import "FadingNavigationBarManager.h" // 导航栏渐变动画、特效处理
 #import "BlurViewController.h" // 模糊背景弹出
+#import "_StatusBarController.h"
 
 // image
 

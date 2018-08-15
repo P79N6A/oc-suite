@@ -10,4 +10,7 @@
 
 @implementation ALSLogConfigureImpl
 
+@synthesize enabledLocalLog;
+@synthesize enabledRemoteLog;
+
 @end

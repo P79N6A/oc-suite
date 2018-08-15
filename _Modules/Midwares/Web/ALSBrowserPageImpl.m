@@ -10,4 +10,6 @@
 
 @implementation ALSBrowserPageImpl
 
+@synthesize view;
+
 @end
