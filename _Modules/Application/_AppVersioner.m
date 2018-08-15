@@ -199,5 +199,27 @@ impl_embed_class_JSONTransformer(appVersion, VersionDetail)
     }
 }
 
++ (int)compareVersion:(NSString *)firstVersion version:(NSString *)secondVersion {
+    int result = 0;
+    NSArray *firstVersionItems = [firstVersion componentsSeparatedByString:@"."];
+    NSArray *secondVersionItems = [secondVersion componentsSeparatedByString:@"."];
+    for (int i = 0; i<[firstVersionItems count] || i< [secondVersionItems count]; i++) {
+        int firstItem = 0;
+        int secondItem = 0;
+        if (i<[firstVersionItems count]) {
+            firstItem = [[firstVersionItems objectAtIndex:i] intValue];
+        }
+        if (i<[secondVersionItems count]) {
+            secondItem = [[secondVersionItems objectAtIndex:i] intValue];
+        }
+        
+        if (firstItem != secondItem) {
+            result = (firstItem<secondItem)?-1:1;
+            break;
+        }
+    }
+    
+    return result;
+}
 
 @end

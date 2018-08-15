@@ -13,7 +13,7 @@
 /**
  *  动态加密字符串值
  *
- *  @param key string值对应的key
+ *  @param plainText 需要加密的字符串
  *
  *  @return 返回加密结果，加密失败返回nil
  */
@@ -23,7 +23,7 @@
 /**
  *  动态解密字符串值
  *
- *  @param cipherText string需要解密的字符串值
+ *  @param cipherText 需要解密的字符串
  *
  *  @return 返回解密结果，解密失败返回nil
  */

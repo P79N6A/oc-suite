@@ -76,4 +76,15 @@
 
 + (NSArray<NSString *> *)filenamesInDirectory:(NSString *)directory;
 
+/**
+ *  将包内文件拷贝到文件沙盒
+ *
+ *  @param bundlePath 包内路径
+ *  @param filePath   文件路径
+ *
+ *  @return //如果filePath中已存在，则直接返回YES
+ //如果bundle和filePath中都不存在，则返回NO
+ //如果bundle中存在，则复制到filePath，并返回拷贝结果。
+ */
++ (BOOL)copyFileFromBundlePath:(NSString *)bundlePath toFilePath:(NSString *)filePath;
 @end

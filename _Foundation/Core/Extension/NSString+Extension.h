@@ -123,5 +123,7 @@
 
 + (NSString *)jsonFromObject:(id)obj;
 
+- (NSDictionary *)parsetUrlString;
+
 @end
 

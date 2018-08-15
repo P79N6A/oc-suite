@@ -767,6 +767,51 @@ int rreplace (char *buf, int size, regex_t *re, char *rp) {
     return jsonString;
 }
 
+- (NSDictionary *)parsetUrlString {
+    NSString *urlString = [self copy];
+    if ([urlString length] == 0) {
+        return nil;
+    }
+    NSString *questionSymbol = @"?";
+    NSInteger index = [urlString rangeOfString:questionSymbol].location;
+    if([urlString length] > index+1) {
+        urlString = [urlString substringFromIndex:index+1];
+    }
+    NSString *connectSymbol = @"&";
+    NSArray *arrayOfKeyValue = [urlString componentsSeparatedByString:connectSymbol];
+    NSString *key = nil;
+    NSString *value = nil;
+    NSString *equalSymbol = @"=";
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    for(NSString *str in arrayOfKeyValue) {
+        NSArray *array = [str componentsSeparatedByString:equalSymbol];
+        if([array count] == 2) {
+            key = [array objectAtIndex:0];
+            value = [array objectAtIndex:1];
+        } else if([array count] == 1) {
+            key = [array objectAtIndex:0];
+            value = @" ";
+        } else if([array count] > 2) {
+            key = [array objectAtIndex:0];
+            
+            NSInteger equalSymbolIndex = [str rangeOfString:equalSymbol].location;
+            if([str length] > equalSymbolIndex + 1) {
+                value = [str substringFromIndex:equalSymbolIndex+1];
+            } else {
+                value = @" ";
+            }
+        } else {
+            key = @" ";
+            value = @" ";
+        }
+        [dic setObject:value forKey:key];
+    }
+    if ([dic count] == 0) {
+        return nil;
+    }
+    return [NSDictionary dictionaryWithDictionary:dic];
+}
+
 @end
 
 

@@ -17,4 +17,17 @@
 
 - (void)checkUpdate;
 
+/**
+ *  比较版本号大小
+ *
+ *  @param firstVersion  第一个版本号
+ *  @param secondVersion 第二个版本号
+ *
+ *  @return 返回第一个比第二个的结果
+            -1 firstVersion < secondVersion
+            0 firstVersion = secondVersion
+            1 firstVersion > secondVersion
+ */
++ (int)compareVersion:(NSString *)firstVersion version:(NSString *)secondVersion;
+
 @end

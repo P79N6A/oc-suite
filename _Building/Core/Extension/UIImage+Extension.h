@@ -128,14 +128,6 @@ NS_ASSUME_NONNULL_BEGIN
  ________|______|
  |  second      |
  |______________|
- 
- 
- *  @brief  合并两个图片
- *
- *  @param firstImage  一个图片
- *  @param secondImage 二个图片
- *
- *  @return 合并后图片
  */
 
 typedef enum {

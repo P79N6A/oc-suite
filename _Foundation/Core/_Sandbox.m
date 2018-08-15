@@ -215,5 +215,25 @@ static const NSString *path_service = nil;
     return fileList;
 }
 
++ (BOOL)copyFileFromBundlePath:(NSString *)bundlePath toFilePath:(NSString *)filePath {
+    NSFileManager *manager = [NSFileManager defaultManager];
+    if ([manager fileExistsAtPath:filePath isDirectory:NULL]) {
+        return YES;
+    }
+    if (![manager fileExistsAtPath:bundlePath isDirectory:NULL]) {
+        return NO;
+    }
+    BOOL checkCopyValidData = YES;//判断是否拷贝成功
+    NSError *error=nil;
+    [[NSFileManager defaultManager] copyItemAtPath:bundlePath toPath:filePath error:&error ];
+    if (error!=nil) {
+        NSLog(@"%@", error);
+        NSLog(@"%@", [error userInfo]);
+        checkCopyValidData = NO;
+    }
+    return checkCopyValidData;
+}
+
+
 @end
 
