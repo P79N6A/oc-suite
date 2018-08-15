@@ -8,6 +8,7 @@
 
 #import "BaseNavigationController.h"
 #import "BaseNavigationBar.h"
+#import "UIImage+Extension.h"
 
 typedef void (^APTransitionBlock)(void);
 
@@ -188,6 +189,18 @@ typedef void (^APTransitionBlock)(void);
         handler(self.navigationBar);
     }
     
+}
+
+// [[AUIThemeManager manager] currentTheme].navibarBGColor;
+- (void)setNavigationBarBackgroundColor:(UIColor *)color alpha:(CGFloat)alpha  {
+    if (alpha >= 1) {
+        [self.navigationBar setTranslucent:NO];
+    } else {
+        [self.navigationBar setTranslucent:YES];
+    }
+    
+    UIImage *image = [UIImage imageWithColor:[color colorWithAlphaComponent:alpha]];
+    [self.navigationBar setBackgroundImage:image forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
 }
 
 #pragma mark - 

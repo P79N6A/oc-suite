@@ -6,17 +6,7 @@
 //  Copyright © 2017 Altair. All rights reserved.
 //
 
-// -------------------------------------------
-// 特有预定义
-// -------------------------------------------
-
-#ifndef VERBOSE
-#   define VERBOSE(format, ...) fprintf(stderr, "class：%s \nline： %d \nmethod：%s \nmessage：%s \n%s \n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String],__LINE__, __func__,[[NSString stringWithFormat:format, ##__VA_ARGS__] UTF8String], [@"----------------------------------------------" UTF8String]);
-#endif
-
-#ifndef INFO
-#   define INFO(format, ...) fprintf(stderr, "%s \n",[[NSString stringWithFormat:format, ##__VA_ARGS__] UTF8String]);
-#endif
+#import "_Foundation.h"
 
 // -------------------------------------------
 // 数据能力

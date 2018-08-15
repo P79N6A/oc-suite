@@ -9,6 +9,15 @@
 #import "_Foundation.h"
 #import "_Keychain.h"
 
+BOOL isFirstLaunched () {
+    BOOL has = [[[NSUserDefaults standardUserDefaults] objectForKey:app_version] boolValue];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:app_version];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    return has;
+}
+
 #pragma mark -
 
 NSString * const UUIDForInstallationKey = @"uuidForInstallation";

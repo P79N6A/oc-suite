@@ -95,6 +95,7 @@
 #import "BaseTableView.h"
 #import "BaseTableViewCell.h"
 #import "BaseTableViewController.h"
+#import "BaseService.h"
 #import "BaseView.h"
 #import "BaseViewController.h"
 #import "BaseViewModel.h"

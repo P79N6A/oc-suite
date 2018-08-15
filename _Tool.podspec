@@ -37,17 +37,28 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'Network' do |network|
-    # network.source_files = "tool/network/reachability/*.{h,m}"
     network.subspec 'Reachability' do |reachability|
-
       reachability.source_files = "_Tool/Network/Reachability/*.{h,m}"
-
     end
 
     network.subspec 'Serializer' do |serializer|
-
       serializer.source_files = "_Tool/Network/Serializer/*.{h,m}"
+    end
 
+    network.subspec 'Cookie' do |cookie|
+      cookie.source_files = "_Tool/Network/Cookie/*.{h,m}"
+    end
+
+    network.subspec 'Manager' do |manager|
+      manager.source_files = "_Tool/Network/Manager/*.{h,m}"
+    end
+
+    network.subspec 'Extension' do |extension|
+      extension.source_files = "_Tool/Network/Extension/*.{h,m}"
+    end
+
+    network.subspec 'Wrapper' do |wrapper|
+      wrapper.source_files = "_Tool/Network/Wrapper/*.{h,m}"
     end
 
   end

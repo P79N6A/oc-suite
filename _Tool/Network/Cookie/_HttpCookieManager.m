@@ -1,42 +1,11 @@
-//
-//  AEHttpCookieManager.m
-//  AEAssistant
-//
-//  Created by Qian Ye on 16/4/22.
-//  Copyright © 2016年 StarDust. All rights reserved.
-//
 
-#import "AEHttpCookieManager.h"
+#import "_HttpCookieManager.h"
 
+@implementation _HttpCookieManager
 
-static AEHttpCookieManager *_sharedManager = nil;
+@def_singleton( _HttpCookieManager )
 
-@implementation AEHttpCookieManager
-
-- (id)init
-{
-    self = [super init];
-    if (self) {
-    }
-    
-    return self;
-}
-
-
-+ (instancetype)sharedManager
-{
-    static dispatch_once_t predicate = 0;
-    
-    dispatch_once(&predicate, ^ (void) {
-        _sharedManager = [[AEHttpCookieManager alloc] init];
-    });
-    
-    return _sharedManager;
-}
-
-
-- (void)setIcsonCookieWithName:(NSString *)name andValue:(NSString *)value
-{
+- (void)setIcsonCookieWithName:(NSString *)name andValue:(NSString *)value {
     if (!name || !value) {
         return;
     }
@@ -51,15 +20,11 @@ static AEHttpCookieManager *_sharedManager = nil;
     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:kisTCCookie];
 }
 
-
-- (void)setCookie:(NSHTTPCookie *)cookie
-{
+- (void)setCookie:(NSHTTPCookie *)cookie {
     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
 }
 
-
-- (void)setIcsonCookiesWithNameValueDictionaries:(NSArray *)array
-{
+- (void)setIcsonCookiesWithNameValueDictionaries:(NSArray *)array {
     if (!array) {
         return;
     }
@@ -69,10 +34,7 @@ static AEHttpCookieManager *_sharedManager = nil;
     }
 }
 
-
-
-- (void)setIcsonCookiesWithNamesAndValues:(NSString *)first, ...
-{
+- (void)setIcsonCookiesWithNamesAndValues:(NSString *)first, ... {
     va_list arguments;
     NSString *eachString;
     if (first) {
@@ -101,8 +63,7 @@ static AEHttpCookieManager *_sharedManager = nil;
 }
 
 
-- (void)setIcsonCookiesWithNames:(NSArray *)namesArray andValues:(NSArray *)valuesArray
-{
+- (void)setIcsonCookiesWithNames:(NSArray *)namesArray andValues:(NSArray *)valuesArray {
     if (!namesArray || !valuesArray) {
         return;
     }
@@ -119,21 +80,17 @@ static AEHttpCookieManager *_sharedManager = nil;
     }
 }
 
-
-- (void)setCookies:(NSArray *)cookiesArray
-{
+- (void)setCookies:(NSArray *)cookiesArray {
     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookies:cookiesArray forURL:nil mainDocumentURL:nil];
 }
 
 
-- (NSHTTPCookie *)getCookieWithName:(NSString *)name
-{
+- (NSHTTPCookie *)getCookieWithName:(NSString *)name {
     if (!name) {
         return nil;
     }
     NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    for (NSHTTPCookie *cookie in [storage cookies])
-    {
+    for (NSHTTPCookie *cookie in [storage cookies]) {
         if ([cookie.name isEqualToString:name] && [cookie.domain isEqualToString:self.cookieDomain]) {
             return cookie;
         }
@@ -141,9 +98,7 @@ static AEHttpCookieManager *_sharedManager = nil;
     return nil;
 }
 
-
-- (NSArray *)getCookiesWithNames:(NSArray *)namesArray
-{
+- (NSArray<NSHTTPCookie *> *)getCookiesWithNames:(NSArray *)namesArray {
     if (!namesArray) {
         return nil;
     }
@@ -162,44 +117,27 @@ static AEHttpCookieManager *_sharedManager = nil;
     return nil;
 }
 
-
-- (NSArray *)getAllCookies
-{
+- (NSArray *)getAllCookies {
     return [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
 }
 
-
-- (void)deleteCookieWithName:(NSString *)name
-{
+- (void)deleteCookieWithName:(NSString *)name {
     if (!name) {
         return;
     }
     NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    for (NSHTTPCookie *cookie in [storage cookies])
-    {
+    for (NSHTTPCookie *cookie in [storage cookies]) {
         if ([cookie.name isEqualToString:name]) {
             [storage deleteCookie:cookie];
         }
     }
 }
 
-
-- (void)deleteAllCookies
-{
+- (void)deleteAllCookies {
     NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    for (NSHTTPCookie *cookie in [storage cookies])
-    {
+    for (NSHTTPCookie *cookie in [storage cookies]) {
         [storage deleteCookie:cookie];
     }
 }
-
-- (NSString*)currentCookiesString{
-    NSHTTPCookieStorage*cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    NSMutableString *cookieString = [[NSMutableString alloc] init];
-    for (NSHTTPCookie*cookie in [cookieJar cookies]) {
-        [cookieString appendFormat:@"%@=%@;",cookie.name,cookie.value];
-    }
-    return cookieString;
-} 
 
 @end

@@ -1,37 +1,16 @@
-//
-//  AEHttpCookieManager.h
-//  AEAssistant
-//
-//  Created by Qian Ye on 16/4/22.
-//  Copyright © 2016年 StarDust. All rights reserved.
-//
 
-#import <Foundation/Foundation.h>
+#import "_Foundation.h"
 
 //管理[NSHTTPCookieStorage sharedHTTPCookieStorage]中的cookie
-@interface AEHttpCookieManager : NSObject
+
+@interface _HttpCookieManager : NSObject
 
 @property (nonatomic, strong) NSString *cookieDomain;
 
-/*
- *brief:AEHttpCookieManager单例方法
- *return:AEHttpCookieManager实例
- */
-+ (instancetype)sharedManager;
+@singleton( _HttpCookieManager )
 
-/*
- *brief:根据name和value设置cookie
- *param:name
- *param:value
- *return:void
- */
 - (void)setIcsonCookieWithName:(NSString *)name andValue:(NSString *)value;
 
-/*
- *brief:设置cookie
- *param:cookie
- *return:void
- */
 - (void)setCookie:(NSHTTPCookie *)cookie;
 
 /*
@@ -75,13 +54,13 @@
  *param:name数组
  *return:name对应domain关联域名的cookie数组
  */
-- (NSArray *)getCookiesWithNames:(NSArray *)namesArray;
+- (NSArray<NSHTTPCookie *> *)getCookiesWithNames:(NSArray *)namesArray;
 
 /*
  *brief:获取所有cookie
  *return:所有cookie的数组
  */
-- (NSArray *)getAllCookies;
+- (NSArray<NSHTTPCookie *> *)getAllCookies;
 
 /*
  *brief:根据name删除cookie
@@ -95,15 +74,5 @@
  *return:void
  */
 - (void)deleteAllCookies;
-
-
-/**
- 将NSHTTPCookieStorage中的cookies转为字符串
-
- @return string
- */
-- (NSString *) currentCookiesString;
-
-
 
 @end

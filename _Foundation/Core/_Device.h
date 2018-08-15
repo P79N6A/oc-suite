@@ -2,6 +2,10 @@
 #import "_Singleton.h"
 #import "_Property.h"
 
+EXTERN_C BOOL isFirstLaunched ();
+
+#define is_first_launched isFirstLaunched()
+
 #pragma mark -
 
 // 更新时间：2017/10/18

@@ -191,52 +191,52 @@ static _Queue *backgroundPriorityGlobalQueue;
 
 #pragma mark - 便利的构造方法
 
-+ (void)executeInMainQueue:(dispatch_block_t)block afterDelaySecs:(NSTimeInterval)sec {
++ (void)executeInMain:(dispatch_block_t)block afterDelaySecs:(NSTimeInterval)sec {
     NSParameterAssert(block);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * sec), mainQueue.dispatchQueue, block);
 }
 
-+ (void)executeInGlobalQueue:(dispatch_block_t)block afterDelaySecs:(NSTimeInterval)sec {
++ (void)executeInGlobal:(dispatch_block_t)block afterDelaySecs:(NSTimeInterval)sec {
     NSParameterAssert(block);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * sec), globalQueue.dispatchQueue, block);
 }
 
-+ (void)executeInHighPriorityGlobalQueue:(dispatch_block_t)block afterDelaySecs:(NSTimeInterval)sec {
++ (void)executeInHighPriorityGlobal:(dispatch_block_t)block afterDelaySecs:(NSTimeInterval)sec {
     NSParameterAssert(block);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * sec), highPriorityGlobalQueue.dispatchQueue, block);
 }
 
-+ (void)executeInLowPriorityGlobalQueue:(dispatch_block_t)block afterDelaySecs:(NSTimeInterval)sec {
++ (void)executeInLowPriorityGlobal:(dispatch_block_t)block afterDelaySecs:(NSTimeInterval)sec {
     NSParameterAssert(block);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * sec), lowPriorityGlobalQueue.dispatchQueue, block);
 }
 
-+ (void)executeInBackgroundPriorityGlobalQueue:(dispatch_block_t)block afterDelaySecs:(NSTimeInterval)sec {
++ (void)executeInBackgroundPriorityGlobal:(dispatch_block_t)block afterDelaySecs:(NSTimeInterval)sec {
     NSParameterAssert(block);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * sec), backgroundPriorityGlobalQueue.dispatchQueue, block);
 }
 
-+ (void)executeInMainQueue:(dispatch_block_t)block {
++ (void)executeInMain:(dispatch_block_t)block {
     NSParameterAssert(block);
     dispatch_async(mainQueue.dispatchQueue, block);
 }
 
-+ (void)executeInGlobalQueue:(dispatch_block_t)block {
++ (void)executeInGlobal:(dispatch_block_t)block {
     NSParameterAssert(block);
     dispatch_async(globalQueue.dispatchQueue, block);
 }
 
-+ (void)executeInHighPriorityGlobalQueue:(dispatch_block_t)block {
++ (void)executeInHighPriorityGlobal:(dispatch_block_t)block {
     NSParameterAssert(block);
     dispatch_async(highPriorityGlobalQueue.dispatchQueue, block);
 }
 
-+ (void)executeInLowPriorityGlobalQueue:(dispatch_block_t)block {
++ (void)executeInLowPriorityGlobal:(dispatch_block_t)block {
     NSParameterAssert(block);
     dispatch_async(lowPriorityGlobalQueue.dispatchQueue, block);
 }
 
-+ (void)executeInBackgroundPriorityGlobalQueue:(dispatch_block_t)block {
++ (void)executeInBackgroundPriorityGlobal:(dispatch_block_t)block {
     NSParameterAssert(block);
     dispatch_async(backgroundPriorityGlobalQueue.dispatchQueue, block);
 }

@@ -43,7 +43,7 @@
 }
 
 - (NSString *)join {
-	return [self join:nil];
+	return [self join:@""];
 }
 
 - (NSString *)join:(NSString *)delimiter {
@@ -125,6 +125,13 @@
     return nil;
     
     return self[index];
+}
+
+- (NSArray *)select:(BOOL (^)(id obj))block {
+    NSParameterAssert(block != nil);
+    return [self objectsAtIndexes:[self indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+        return block(obj);
+    }]];
 }
 
 - (NSArray *)reject:(BOOL (^)(id obj))block {

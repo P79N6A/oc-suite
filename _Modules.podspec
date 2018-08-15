@@ -81,6 +81,10 @@ Pod::Spec.new do |s|
       }
     end
 
+    services.subspec 'Time' do |time|
+      time.source_files = "_Modules/Services/Time/**/*.{h,m}"
+    end
+
     services.subspec 'Vendor' do |vendor|
       vendor.public_header_files = "_Modules/Services/Vendor/JPush-iOS-SDK-2.1.7/lib/**/*.h"
       vendor.resources = "_Modules/Services/Vendor/GDMap3/*.bundle"

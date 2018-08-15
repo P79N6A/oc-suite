@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment version="2048" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AEDatePickerViewController">
+            <connections>
+                <outlet property="alphaView" destination="BzK-M0-QXt" id="Hrw-K7-i1j"/>
+                <outlet property="cancelButton" destination="l3l-zG-KbM" id="rdh-aN-Arw"/>
+                <outlet property="confirmButton" destination="Fku-Vp-5m9" id="EbN-cM-RZa"/>
+                <outlet property="datePicker" destination="qId-Ao-QKf" id="owh-xk-c6c"/>
+                <outlet property="view" destination="dcN-FO-jWg" id="dR9-TT-Jc9"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="dcN-FO-jWg">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rx3-HZ-cNr" userLabel="buttonBGView">
+                    <frame key="frameInset" minY="360" width="600" height="40"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fku-Vp-5m9">
+                            <frame key="frameInset" minX="560" minY="5" width="30" height="30"/>
+                            <state key="normal" title="确定"/>
+                            <connections>
+                                <action selector="didClickedConfirmButton:" destination="-1" eventType="touchUpInside" id="evs-WL-gnL"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l3l-zG-KbM">
+                            <frame key="frameInset" minX="10" minY="5" width="30" height="30"/>
+                            <state key="normal" title="取消"/>
+                            <connections>
+                                <action selector="didClickedCancelButton:" destination="-1" eventType="touchUpInside" id="ohK-ma-9hB"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="Fku-Vp-5m9" secondAttribute="trailing" constant="10" id="Ny0-Jz-vaC"/>
+                        <constraint firstItem="l3l-zG-KbM" firstAttribute="leading" secondItem="rx3-HZ-cNr" secondAttribute="leading" constant="10" id="O8U-r5-rTv"/>
+                        <constraint firstItem="Fku-Vp-5m9" firstAttribute="centerY" secondItem="rx3-HZ-cNr" secondAttribute="centerY" id="PrE-45-ES1"/>
+                        <constraint firstAttribute="height" constant="40" id="mKw-KV-F56"/>
+                        <constraint firstItem="l3l-zG-KbM" firstAttribute="centerY" secondItem="rx3-HZ-cNr" secondAttribute="centerY" id="od8-XS-ZKx"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lgg-o3-pkg" userLabel="bgView">
+                    <frame key="frameInset" minY="400" width="600" height="200"/>
+                    <subviews>
+                        <datePicker contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qId-Ao-QKf">
+                            <frame key="frameInset" width="600" height="200"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="200" id="1sH-dv-4XJ"/>
+                            </constraints>
+                            <date key="date" timeIntervalSinceReferenceDate="473338800.25852799">
+                                <!--2016-01-01 11:00:00 +0000-->
+                            </date>
+                            <date key="minimumDate" timeIntervalSinceReferenceDate="-2240571600">
+                                <!--1930-01-01 11:00:00 +0000-->
+                            </date>
+                            <date key="maximumDate" timeIntervalSinceReferenceDate="473338800">
+                                <!--2016-01-01 11:00:00 +0000-->
+                            </date>
+                        </datePicker>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="qId-Ao-QKf" secondAttribute="trailing" id="Bt1-bi-bxL"/>
+                        <constraint firstAttribute="height" constant="200" id="pPf-0g-wwX"/>
+                        <constraint firstItem="qId-Ao-QKf" firstAttribute="top" secondItem="lgg-o3-pkg" secondAttribute="top" id="r0P-Bt-yhM"/>
+                        <constraint firstAttribute="bottom" secondItem="qId-Ao-QKf" secondAttribute="bottom" id="xmb-Jv-jNg"/>
+                        <constraint firstItem="qId-Ao-QKf" firstAttribute="leading" secondItem="lgg-o3-pkg" secondAttribute="leading" id="yza-JZ-hRN"/>
+                    </constraints>
+                </view>
+                <view alpha="0.5" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BzK-M0-QXt" userLabel="alphaView">
+                    <frame key="frameInset" width="600" height="360"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="lgg-o3-pkg" firstAttribute="leading" secondItem="dcN-FO-jWg" secondAttribute="leading" id="06k-Ju-r1r"/>
+                <constraint firstItem="BzK-M0-QXt" firstAttribute="top" secondItem="dcN-FO-jWg" secondAttribute="top" id="5Br-PY-tO5"/>
+                <constraint firstItem="lgg-o3-pkg" firstAttribute="top" secondItem="rx3-HZ-cNr" secondAttribute="bottom" id="EJF-ze-47K"/>
+                <constraint firstAttribute="trailing" secondItem="rx3-HZ-cNr" secondAttribute="trailing" id="JhH-aD-lYR"/>
+                <constraint firstAttribute="trailing" secondItem="BzK-M0-QXt" secondAttribute="trailing" id="QUC-ys-cHh"/>
+                <constraint firstItem="BzK-M0-QXt" firstAttribute="leading" secondItem="dcN-FO-jWg" secondAttribute="leading" id="RrM-57-gQ4"/>
+                <constraint firstItem="rx3-HZ-cNr" firstAttribute="leading" secondItem="dcN-FO-jWg" secondAttribute="leading" id="UsZ-tR-UgF"/>
+                <constraint firstAttribute="bottom" secondItem="lgg-o3-pkg" secondAttribute="bottom" id="ZL6-sb-lkt"/>
+                <constraint firstItem="rx3-HZ-cNr" firstAttribute="top" secondItem="BzK-M0-QXt" secondAttribute="bottom" id="lxQ-w6-V20"/>
+                <constraint firstAttribute="trailing" secondItem="lgg-o3-pkg" secondAttribute="trailing" id="yQc-Be-k4x"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

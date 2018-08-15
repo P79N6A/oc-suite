@@ -33,11 +33,11 @@
 + (void)executeInHighPriorityGlobal:(dispatch_block_t)block;
 + (void)executeInLowPriorityGlobal:(dispatch_block_t)block;
 + (void)executeInBackgroundPriorityGlobal:(dispatch_block_t)block;
-+ (void)executeInMainQueue:(dispatch_block_t)block afterDelaySecs:(NSTimeInterval)sec;
-+ (void)executeInGlobalQueue:(dispatch_block_t)block afterDelaySecs:(NSTimeInterval)sec;
-+ (void)executeInHighPriorityGlobalQueue:(dispatch_block_t)block afterDelaySecs:(NSTimeInterval)sec;
-+ (void)executeInLowPriorityGlobalQueue:(dispatch_block_t)block afterDelaySecs:(NSTimeInterval)sec;
-+ (void)executeInBackgroundPriorityGlobalQueue:(dispatch_block_t)block afterDelaySecs:(NSTimeInterval)sec;
++ (void)executeInMain:(dispatch_block_t)block afterDelaySecs:(NSTimeInterval)sec;
++ (void)executeInGlobal:(dispatch_block_t)block afterDelaySecs:(NSTimeInterval)sec;
++ (void)executeInHighPriorityGlobal:(dispatch_block_t)block afterDelaySecs:(NSTimeInterval)sec;
++ (void)executeInLowPriorityGlobal:(dispatch_block_t)block afterDelaySecs:(NSTimeInterval)sec;
++ (void)executeInBackgroundPriorityGlobal:(dispatch_block_t)block afterDelaySecs:(NSTimeInterval)sec;
 
 #pragma mark - 用法
 - (void)execute:(dispatch_block_t)block;

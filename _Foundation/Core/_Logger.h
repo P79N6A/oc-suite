@@ -16,7 +16,6 @@ typedef enum {
 
 #pragma mark -
 
-#if __LOGGING__
 
 #if __DEBUG__
 
@@ -26,15 +25,7 @@ typedef enum {
 #define ERROR( ... )		[[_Logger sharedInstance] file:@(__FILE__) line:__LINE__ func:@(__PRETTY_FUNCTION__) level:LogLevel_Error format:__VA_ARGS__];
 #define PRINT( ... )		[[_Logger sharedInstance] file:@(__FILE__) line:__LINE__ func:@(__PRETTY_FUNCTION__) level:LogLevel_All format:__VA_ARGS__];
 
-#else
-
-#define INFO( ... )			[[_Logger sharedInstance] file:nil line:0 func:nil level:LogLevel_Info format:__VA_ARGS__];
-#define PERF( ... )			[[_Logger sharedInstance] file:nil line:0 func:nil level:LogLevel_Perf format:__VA_ARGS__];
-#define WARN( ... )			[[_Logger sharedInstance] file:nil line:0 func:nil level:LogLevel_Warn format:__VA_ARGS__];
-#define ERROR( ... )		[[_Logger sharedInstance] file:nil line:0 func:nil level:LogLevel_Error format:__VA_ARGS__];
-#define PRINT( ... )		[[_Logger sharedInstance] file:nil line:0 func:nil level:LogLevel_All format:__VA_ARGS__];
-
-#endif
+#define VERBOSE(format, ...) fprintf(stderr, "class：%s \nline： %d \nmethod：%s \nmessage：%s \n%s \n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String],__LINE__, __func__,[[NSString stringWithFormat:format, ##__VA_ARGS__] UTF8String], [@"----------------------------------------------" UTF8String]);
 
 #else
 
@@ -43,6 +34,7 @@ typedef enum {
 #define WARN( ... )
 #define ERROR( ... )
 #define PRINT( ... )
+#define VERBOSE(format, ...)
 
 #endif
 

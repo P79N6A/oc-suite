@@ -6,8 +6,7 @@
 //
 //
 
-#import "_greats.h"
-#import "_date.h"
+//#import "_Date.h"
 #import "TimePresenter.h"
 
 @interface TimePresenter ()
@@ -54,15 +53,15 @@
     
     NSMutableArray *names = [NSMutableArray new];
     
-    for (int i = start; i < count + start; i++) {
-        if (i) {
-            NSDate *date = [self.date dateByAddingDays:i];
-            
-            [names addObject:[nameMapper objectAtIndex:date.weekday]];
-        } else {
-            [names addObject:[nameMapper objectAtIndex:self.date.weekday]];
-        }
-    }
+//    for (int i = start; i < count + start; i++) {
+//        if (i) {
+//            NSDate *date = [self.date dateByAddingDays:i];
+//
+//            [names addObject:[nameMapper objectAtIndex:date.weekday]];
+//        } else {
+//            [names addObject:[nameMapper objectAtIndex:self.date.weekday]];
+//        }
+//    }
     
     return names;
 }
@@ -70,15 +69,15 @@
 - (NSArray *)dayDescriptionsWithStart:(int32_t)start count:(int32_t)count formatString:(NSString *)format {
     NSMutableArray *descriptions = [NSMutableArray new];
     
-    for (int i = start; i < start+count; i++) {
-        if (i) {
-            NSDate *date = [self.date dateByAddingDays:i];
-            
-            [descriptions addObject:[date toString:format]];
-        } else {
-            [descriptions addObject:[self.date toString:format]];
-        }
-    }
+//    for (int i = start; i < start+count; i++) {
+//        if (i) {
+//            NSDate *date = [self.date dateByAddingDays:i];
+//
+//            [descriptions addObject:[date toString:format]];
+//        } else {
+//            [descriptions addObject:[self.date toString:format]];
+//        }
+//    }
     
     return descriptions;
 }
@@ -86,9 +85,9 @@
 - (NSString *)stringWithDate:(NSDate *)date year:(NSString *)year month:(NSString *)month day:(NSString *)day {
     NSMutableString *string = [[NSMutableString alloc] initWithString:@""];
     
-    if ([year notEmpty]) [string appendFormat:@"%@%@", @(date.year), year];
-    if ([month notEmpty]) [string appendFormat:@"%@%@", @(date.month), month];
-    if ([day notEmpty]) [string appendFormat:@"%@%@", @(date.day), day];
+//    if ([year notEmpty]) [string appendFormat:@"%@%@", @(date.year), year];
+//    if ([month notEmpty]) [string appendFormat:@"%@%@", @(date.month), month];
+//    if ([day notEmpty]) [string appendFormat:@"%@%@", @(date.day), day];
     
     return string;
 }
@@ -96,17 +95,17 @@
 - (NSArray *)dayDescriptionsWithStart:(int32_t)start count:(int32_t)count year:(NSString *)year month:(NSString *)month day:(NSString *)day {
     NSMutableArray *descriptions = [NSMutableArray new];
     
-    for (int i = start; i < start + count; i++) {
-        if (i) {
-            NSDate *date = [self.date dateByAddingDays:i];
-            NSString *desc = [self stringWithDate:date year:year month:month day:day];
-            
-            [descriptions addObject:desc];
-        } else {
-            NSString *desc = [self stringWithDate:self.date year:year month:month day:day];
-            [descriptions addObject:desc];
-        }
-    }
+//    for (int i = start; i < start + count; i++) {
+//        if (i) {
+//            NSDate *date = [self.date dateByAddingDays:i];
+//            NSString *desc = [self stringWithDate:date year:year month:month day:day];
+//            
+//            [descriptions addObject:desc];
+//        } else {
+//            NSString *desc = [self stringWithDate:self.date year:year month:month day:day];
+//            [descriptions addObject:desc];
+//        }
+//    }
     
     return descriptions;
 }

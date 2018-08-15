@@ -12,6 +12,9 @@
 
 @def_singleton( TimeService )
 
+@def_prop_assign( NSTimeInterval, timeOffset )
 @def_prop_instance( TimePresenter, presenter )
 
 @end
+
+@def_namespace( service , time, TimeService )
