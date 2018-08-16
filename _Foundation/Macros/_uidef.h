@@ -36,6 +36,11 @@
 
 #define status_bar_orientation          [[UIApplication sharedApplication] statusBarOrientation]
 
+#define iPhone4_4s     (screen_width == 320.f && screen_height == 480.f ? YES : NO)
+#define iPhone5_5s     (screen_width == 320.f && screen_height == 568.f ? YES : NO)
+#define iPhone6_6s     (screen_width == 375.f && screen_height == 667.f ? YES : NO)
+#define iPhone6_6sPlus (screen_width == 414.f && screen_height == 736.f ? YES : NO)
+
 // ----------------------------------
 // 间隔与边距基础定义
 // ----------------------------------

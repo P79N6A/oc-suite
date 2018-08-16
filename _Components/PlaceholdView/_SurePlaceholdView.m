@@ -6,7 +6,7 @@
 //  Copyright © 2017 alliance. All rights reserved.
 //
 
-#import "UISurePlaceholderView.h"
+#import "_SurePlaceholdView.h"
 
 @interface UISurePlaceholderView ()
 

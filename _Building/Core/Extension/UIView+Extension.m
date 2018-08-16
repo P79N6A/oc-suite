@@ -634,13 +634,10 @@
     [shapeLayer setBounds:self.bounds];
     [shapeLayer setPosition:self.center];
     [shapeLayer setFillColor:[[UIColor clearColor] CGColor]];
-    // 设置虚线颜色
     [shapeLayer setStrokeColor:color.CGColor];
-    // 设置虚线的宽度
     [shapeLayer setLineWidth:width];
     [shapeLayer setLineJoin:kCALineJoinRound];
-    if (isVirtual) {
-        // 线段的长度和每条线的间距
+    if (isVirtual) { // 如果是虚线
         [shapeLayer setLineDashPattern: [NSArray arrayWithObjects:[NSNumber numberWithFloat:length], [NSNumber numberWithFloat:gap], nil]];
     }
     // Setup the path

@@ -120,6 +120,10 @@ Pod::Spec.new do |s|
     localImageEditableBrowserView.source_files = "_Components/LocalImageEditableBrowserView/**/*.{h,m}"
   end
 
+  s.subspec 'PlaceholdView' do |placeholdView|
+    placeholdView.source_files = "_Components/PlaceholdView/**/*.{h,m}"
+  end
+
   s.subspec 'PopupView' do |popupView|
     popupView.source_files = "_Components/PopupView/**/*.{h,m}"
   end
