@@ -140,12 +140,9 @@
 // 支付 组件
 // -------------------------------------------
 
-#if __has_include("ALSPayment.h")
+#if __has_include("ALSTransactionDef.h")
 #   define __has_ALSPayment 1
-#   import "ALSPayment.h"
-#   import "ALSPaymentProtocol.h"
-#   import <ALSInterfaceSdk/ALSTransactionKit.h>
-#   import <ALSInterfaceSdk/NetHelp.h>
+#   import "ALSTransactionDef.h"
 #else
 #   define __has_ALSPayment 0
 #endif

@@ -8,11 +8,6 @@
 
 #import "_MidwarePrecompile.h"
 #import "ALSPayImpl.h"
-#if __has_ALSPayment
-#import <ALSInterfaceSdk/ALSTransactionKit.h>
-#import "ALSPaymentProtocol.h"
-#import <ALSInterfaceSdk/NetHelp.h>
-#endif
 
 @implementation ALSPayImpl
 @synthesize isBusy;
@@ -21,9 +16,9 @@
 
 - (void)payWithSuccess:(void (^)(void))successHandler failure:(void (^)(NSError *))failureHandler {
 #if __has_ALSPayment
-    ALSPayment *pay = [ALSPayment new];
+    ALSFument *pay = [ALSFument new];
     pay.map = self.param.payload;
-    pay.platform = ALSTKPaymentPlatformWechat;
+    pay.platform = _PaymentPlatformWechat;
     
     [ALS_PAYMENT_WECHAT startPayment:pay callback:^(ENUMPayCode Code, NSString *resultStr, NSError *error) {
         

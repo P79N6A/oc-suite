@@ -50,6 +50,11 @@ Pod::Spec.new do |s|
       webBrowser.resources = "_Modules/Components/WebBrowser/web.bundle"
     end
 
+    components.subspec 'ALSTransaction' do |alsTransaction|
+      alsTransaction.source_files = "_Modules/Components/ALSTransaction/**/*.{h,m}"
+      alsTransaction.resources = "_Modules/Components/ALSTransaction/Resource/*.bundle"
+    end
+
   end
 
   s.subspec 'Midwares' do |midwares|

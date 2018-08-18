@@ -7,6 +7,7 @@
 //
 
 #import "_MidwarePrecompile.h"
+#import "_BrowserProtocol.h"
 #import "ALSJavaScriptMessageHandlerImpl.h"
 #import "ALSJavaScriptMessageImpl.h"
 

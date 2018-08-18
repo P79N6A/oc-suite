@@ -6,6 +6,7 @@
 
 typedef enum : NSUInteger {
     _PaymentPlatformAlipay = 0,
+    _PaymentPlatformAlipayWeb,
     _PaymentPlatformWechat,
     _PaymentPlatformIAP,
 } _PaymentPlatformType;

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "_Tool"
-  s.version      = "0.1.15"
+  s.version      = "0.2.0"
   s.summary      = "iOS 开发包 之 工具库 [Objective-C]"
   s.description  = <<-DESC
                    iOS 开发包 之 工具库 [Objective-C]
@@ -41,8 +41,12 @@ Pod::Spec.new do |s|
       reachability.source_files = "_Tool/Network/Reachability/*.{h,m}"
     end
 
-    network.subspec 'Serializer' do |serializer|
-      serializer.source_files = "_Tool/Network/Serializer/*.{h,m}"
+    network.subspec 'Core' do |core|
+      core.source_files = "_Tool/Network/Core/**/*.{h,m}"
+    end
+
+    network.subspec 'Loader' do |loader|
+      loader.source_files = "_Tool/Network/Loader/**/*.{h,m}"
     end
 
     network.subspec 'Cookie' do |cookie|

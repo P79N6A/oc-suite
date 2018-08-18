@@ -69,7 +69,7 @@
     if ([url.host isEqualToString:@"pay"])
         result = [ALS_PAYMENT_WECHAT handleThirdPartyPaymentCallback:url];
     else
-        result = [ALS_PAYMENT_ALIPAY handleThirdPartyPaymentCallback:url];
+        result = [ALS_PAYMENT_ALIFU handleThirdPartyPaymentCallback:url];
 #endif
     
     return result;
@@ -88,19 +88,19 @@
 
 // MARK: - ALSThirdPartyPaymentInitDelegate
 
-- (ALSThirdPartyPaymentInfitInfo *)thirdPartyPaymentInitInfoPlatform:(ALSTKPaymentPlatform)platform {
+- (ALSThirdPartyPaymentInfitInfo *)thirdPartyPaymentInitInfoPlatform:(_PaymentPlatformType)platform {
     ALSThirdPartyPaymentInfitInfo* info = [ALSThirdPartyPaymentInfitInfo new];
     info.platform = platform;
     
     // 写入支付宝字段
-    if ( platform == ALSTKPaymentPlatformAlipay ) {
+    if ( platform == _PaymentPlatformAlipay ) {
         info.appKey = self.alipay.config.key;
         info.appSecret = self.alipay.config.secret;
         info.urlSecheme = self.alipay.config.scheme;
     }
     
     // 微信字段信息
-    if ( platform == ALSTKPaymentPlatformWechat ) {
+    if ( platform == _PaymentPlatformWechat ) {
         info.appKey = self.wechat.config.key;
         info.appSecret = self.wechat.config.secret;
         info.urlSecheme = self.wechat.config.scheme;

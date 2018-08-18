@@ -10,20 +10,14 @@
 #import "ALSPayInAppPurchaseImpl.h"
 #import "ALSErrorImpl.h"
 #import "_Foundation.h"
-#if __has_ALSPayment
-#import <ALSInterfaceSdk/ALSTransactionKit.h>
-#import "ALSPaymentProtocol.h"
-#import <ALSInterfaceSdk/NetHelp.h>
-#import "ALSInAppPurchase.h"
-#endif
 
 @implementation ALSPayInAppPurchaseImpl
 
 - (void)payWithSuccess:(void (^)(void))successHandler failure:(void (^)(NSError *))failureHandler {
 #if __has_ALSPayment
-    ALSPayment* pay = [ALSPayment new];
+    ALSFument* pay = [ALSFument new];
     pay.map = self.param.payload;
-    pay.platform = ALSTKPaymentPlatfomIAP;
+    pay.platform = _PaymentPlatformIAP;
     
     // @[
     //   @"com.alisports.wesg.flower20",
