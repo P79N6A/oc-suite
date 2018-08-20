@@ -19,8 +19,8 @@
 @synthesize WeiboSecret;
 @synthesize TencentKey;
 @synthesize TencentSecret;
-@synthesize MemberKey;
-@synthesize MemberSecret;
+//@synthesize MemberKey;
+//@synthesize MemberSecret;
 @synthesize AccountKey;
 @synthesize AccountSecret;
 @end

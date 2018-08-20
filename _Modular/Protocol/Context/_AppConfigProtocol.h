@@ -24,8 +24,8 @@
 @property (nonatomic, strong) NSString *TencentSecret;
 
 // Member??
-@property (nonatomic, strong) NSString *MemberKey;
-@property (nonatomic, strong) NSString *MemberSecret;
+//@property (nonatomic, strong) NSString *MemberKey;
+//@property (nonatomic, strong) NSString *MemberSecret;
 
 // 账户中心
 @property (nonatomic, strong) NSString *AccountKey;
