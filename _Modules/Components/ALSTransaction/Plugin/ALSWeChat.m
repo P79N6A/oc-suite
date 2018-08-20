@@ -9,22 +9,16 @@
 #import "ALSWeChat.h"
 
 @implementation ALSWeChat
-{
-    
+
+- (_PaymentPlatformType)getName {
+    return _PaymentPlatformWechat;
 }
 
-- (ALSTKPaymentPlatform)getName
-{
-    return ALSTKPaymentPlatformWechat;
-}
-
-- (BOOL)IsDebug
-{
+- (BOOL)IsDebug {
     return self.isdebug;
 }
 
-- (void)setDebug:(BOOL)isdebug
-{
+- (void)setDebug:(BOOL)isdebug {
     self.isdebug = isdebug;
 }
 

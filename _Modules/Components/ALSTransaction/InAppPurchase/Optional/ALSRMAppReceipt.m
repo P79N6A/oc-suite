@@ -38,8 +38,6 @@
 #import <openssl/x509.h>
 */
 
-#import "PodAsset.h"
-
 #ifdef ALS_IAP_OPENSSL
 
 // From https://developer.apple.com/library/ios/releasenotes/General/ValidateAppStoreReceipt/Chapters/ReceiptFields.html#//apple_ref/doc/uid/TP40010573-CH106-SW1

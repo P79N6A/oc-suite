@@ -10,28 +10,22 @@
 #import "ALSThirdPartyPaymentInfitInfo.h"
 
 @interface ALSIAPPayment()
-{
-    
-}
+
 @end
 
-@implementation ALSIAPPayment
-{
+@implementation ALSIAPPayment {
     
 }
 
-- (ALSTKPaymentPlatform)getName
-{
-    return ALSTKPaymentPlatfomIAP;
+- (_PaymentPlatformType)getName {
+    return _PaymentPlatformIAP;
 }
 
-- (BOOL)IsDebug
-{
+- (BOOL)IsDebug {
     return self.isdebug;
 }
 
-- (void)setDebug:(BOOL)isdebug
-{
+- (void)setDebug:(BOOL)isdebug {
     self.isdebug = isdebug;
 }
 

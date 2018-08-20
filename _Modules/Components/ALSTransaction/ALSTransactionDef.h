@@ -14,4 +14,8 @@
 
 @interface ALSTransactionDef : NSObject
 
+@singleton( ALSTransactionDef )
+
+// 配置信息
+
 @end

@@ -13,8 +13,7 @@
 
 #import "NetKReachability.h"
 
-@interface ALSTransactionKit()
-{
+@interface ALSTransactionKit() {
     
 }
 @property (nonatomic,copy)ALSFuCompleteCallBack paycallBack;
@@ -22,13 +21,11 @@
 
 @end
 
-@implementation ALSTransactionKit
-{
+@implementation ALSTransactionKit {
     
 }
 
-+ (instancetype)shareManager
-{
++ (instancetype)shareManager {
     static ALSTransactionKit *instance;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -37,8 +34,7 @@
     return instance;
 }
 
-- (void)asyncInit:(NSString*)appid callback:(ALSFuCompleteCallBack)callback
-{
+- (void)asyncInit:(NSString*)appid callback:(ALSFuCompleteCallBack)callback {
     self.paycallBack = callback;
     NetKReachability *manager = [NetKReachability sharedInstance];
     [manager startNetworkMonitoringWithStatusChangeBlock:^ (NetKNetworkStatus status) {

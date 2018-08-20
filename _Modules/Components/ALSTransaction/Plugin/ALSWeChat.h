@@ -11,13 +11,10 @@
 #import "ALSThirdPartyPaymentInfitInfo.h"
 
 @interface ALSWeChat : NSObject <ALSFumentPlugProtocol>
-{
-    
-}
 
-@property(nonatomic,assign)BOOL isdebug;
+@property (nonatomic, assign) BOOL isdebug;
 
-- (ALSTKPaymentPlatform)getName;
+- (_PaymentPlatformType)getName;
 - (BOOL)IsDebug;
 - (void)setDebug:(BOOL)isdebug;
 @end

@@ -9,4 +9,6 @@
 
 @implementation ALSTransactionDef
 
+@def_singleton( ALSTransactionDef )
+
 @end

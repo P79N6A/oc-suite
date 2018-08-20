@@ -25,6 +25,19 @@
 - (BOOL)touch:(NSString *)path;
 - (BOOL)touchFile:(NSString *)file;
 
+/**
+ * 应用bundle
+ */
++ (NSString *)pathForFilename:(NSString *)filename pod:(NSString *)podName;
++ (NSData *)dataForFilename:(NSString *)filename pod:(NSString *)podName;
++ (NSString *)stringForFilename:(NSString *)filename pod:(NSString *)podName;
+// returns the resource bundle path for the specified pod
++ (NSString *)bundlePathForPod:(NSString *)podName;
+// return the resource bundle
++ (NSBundle *)bundleForPod:(NSString *)podName;
+// returns all assets in the bundle that contains the specified pod
++ (NSArray *)assetsInPod:(NSString *)podName;
+
 @end
 
 #pragma mark - 
@@ -87,4 +100,5 @@
  //如果bundle中存在，则复制到filePath，并返回拷贝结果。
  */
 + (BOOL)copyFileFromBundlePath:(NSString *)bundlePath toFilePath:(NSString *)filePath;
+
 @end

@@ -14,12 +14,9 @@
 #define ALS_PAYMENT_WECHAT [[ALSTransactionKit shareManager] getService:_PaymentPlatformWechat]
 #define ALS_PAYMENT_ALIFU [[ALSTransactionKit shareManager] getService:_PaymentPlatformAlipay]
 #define ALS_PAYMENT_IAP [[ALSTransactionKit shareManager] getService:_PaymentPlatformIAP]
-#define ALS_PAYMENT_WEB_FU  [[ALSTransactionKit shareManager] getService:ALSTKPaymentPlatformAlifuWeb]
+#define ALS_PAYMENT_WEB_FU  [[ALSTransactionKit shareManager] getService:_PaymentPlatformAlipayWeb]
 
 @interface ALSTransactionKit : NSObject
-{
-    
-}
 
 @property ( nonatomic, strong ) id WeChat;
 @property ( nonatomic, strong) id AliFu;
