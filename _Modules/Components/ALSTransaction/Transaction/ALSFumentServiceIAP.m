@@ -17,6 +17,7 @@
 #import "NetHelp.h"
 #import "ALSKeyChainStore.h"
 #import "ALSTransactionKit.h"
+#import "ALSTransactionDef.h"
 
 #define   KEY_CHAIN_FLAG    @"ALSFUMENT"
 #define   KEY_CHAIN_ALS_DATA  @"ALS_DATA"
@@ -142,10 +143,9 @@
 {
     NSString* urlFromClient;
     if ( [ALSTransactionKit shareManager].isDebug )
-        //urlFromClient = @"http://10.101.108.143/pay_order/dispatch_start_pay";
-        urlFromClient = @"http://trade.alisports.taobao.net/pay_order/dispatch_start_pay";
+        urlFromClient = [ALSTransactionDef sharedInstance].payInfoUrlDaily;
     else
-        urlFromClient = @"https://trade-alisports.taobao.com/pay_order/dispatch_start_pay";
+        urlFromClient = [ALSTransactionDef sharedInstance].payInfoUrlProduct;
     
     NSMutableDictionary* dicFromClient = [[NSMutableDictionary alloc] initWithDictionary:payment.map];
     [dicFromClient setObject:@"MOBILE_SDK" forKey:@"platform"];
@@ -239,9 +239,9 @@
 {
     NSString* url;
     if ( [ALSTransactionKit shareManager].isDebug )
-        url = @"http://10.101.108.143/pay_order/apple_pay_notify";
+        url = [ALSTransactionDef sharedInstance].payNotifyUrlDaily;
     else
-        url = @"https://trade-alisports.taobao.com/pay_order/apple_pay_notify";
+        url = [ALSTransactionDef sharedInstance].payNotifyUrlProduct;
     
     NSString* orderMessage;
     if ( nil == entermap ){

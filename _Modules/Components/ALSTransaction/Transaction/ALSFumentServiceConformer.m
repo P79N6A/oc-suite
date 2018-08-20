@@ -10,6 +10,7 @@
 #import "ALSFumentServiceConformer.h"
 #import "ALSThirdPartyPaymentInfitInfo.h"
 #import "ALSTransactionKit.h"
+#import "ALSTransactionDef.h"
 
 #if __has_include("ALSPayManager.h")
 #define ALS_IAP_MANAGER
@@ -19,19 +20,14 @@
 #import "NetHelp.h"
 
 @interface ALSFumentServiceConformer()
-{
 
-}
+@property (nonatomic, strong) ALSThirdPartyPaymentInfitInfo* payinfo;
+@property (nonatomic, strong) ALSThirdPartyPaymentInfitInfo* weixinInfo;
+@property (nonatomic, strong) id<ALSThirdPartyPaymentInitDelegate> thirdPartDelegate;
 
-@property( nonatomic, strong ) ALSThirdPartyPaymentInfitInfo* payinfo;
-@property( nonatomic, strong ) ALSThirdPartyPaymentInfitInfo* weixinInfo;
-@property(nonatomic,strong) id<ALSThirdPartyPaymentInitDelegate> thirdPartDelegate;
 @end
 
 @implementation ALSFumentServiceConformer
-{
-    
-}
 
 #ifdef ALS_IAP_MANAGER
 - (void)setInitDelegate:(id)alsthirdpartypaymentInitDelegate {
@@ -73,17 +69,15 @@
     return NO;
 }
 
-- (void)startPayment:(ALSFument*)payment callback:(ALSFuCompleteCallBack)callback
-{
+- (void)startPayment:(ALSFument*)payment callback:(ALSFuCompleteCallBack)callback {
     if ( nil == payment )
         return;
     
     NSString* url;
     if ( [ALSTransactionKit shareManager].isDebug )
-        //url = @"http://10.101.108.143/pay_order/dispatch_start_pay";
-        url = @"http://trade.alisports.taobao.net/pay_order/dispatch_start_pay";
+        url = [ALSTransactionDef sharedInstance].payInfoUrlDaily;
     else
-        url = @"https://trade-alisports.taobao.com/pay_order/dispatch_start_pay";
+        url = [ALSTransactionDef sharedInstance].payInfoUrlProduct;
     
     NSMutableDictionary* dic = [[NSMutableDictionary alloc] initWithDictionary:payment.map];
     [dic setObject:@"MOBILE_SDK" forKey:@"platform"];

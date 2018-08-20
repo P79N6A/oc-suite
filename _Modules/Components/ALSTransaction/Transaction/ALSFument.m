@@ -8,9 +8,6 @@
 
 #import "ALSFument.h"
 
-
-
-
 @implementation ALSFument
 
 @end

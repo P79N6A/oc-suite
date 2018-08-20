@@ -18,4 +18,10 @@
 
 // 配置信息
 
+@property (nonatomic, strong) NSString *payInfoUrlDaily;
+@property (nonatomic, strong) NSString *payInfoUrlProduct;
+
+@property (nonatomic, strong) NSString *payNotifyUrlDaily;
+@property (nonatomic, strong) NSString *payNotifyUrlProduct;
+
 @end

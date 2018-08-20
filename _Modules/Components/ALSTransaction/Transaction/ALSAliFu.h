@@ -18,4 +18,5 @@
 - (_PaymentPlatformType)getName;
 - (BOOL)IsDebug;
 - (void)setDebug:(BOOL)isdebug;
+
 @end

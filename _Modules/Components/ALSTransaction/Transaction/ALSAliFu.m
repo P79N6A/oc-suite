@@ -10,7 +10,6 @@
 
 @implementation ALSAliFu
 
-
 - (_PaymentPlatformType)getName {
     return _PaymentPlatformAlipay;
 }
