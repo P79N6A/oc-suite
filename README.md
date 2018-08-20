@@ -51,10 +51,7 @@
 * 相关第三方库
 	- ALSShare
 	- ALSTransactionSdkKit
-
-## [_Midware 中间层](_Midware/README.md)
-
-* 依赖的框架
+* [_Midware 中间层](_Midware/README.md)
 
 ## [_Hybrid 混合](_Hybrid/README.md)
 
