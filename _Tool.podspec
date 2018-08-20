@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "_Tool"
-  s.version      = "0.2.0"
+  s.version      = "0.2.1"
   s.summary      = "iOS 开发包 之 工具库 [Objective-C]"
   s.description  = <<-DESC
                    iOS 开发包 之 工具库 [Objective-C]
@@ -39,6 +39,10 @@ Pod::Spec.new do |s|
   s.subspec 'Network' do |network|
     network.subspec 'Reachability' do |reachability|
       reachability.source_files = "_Tool/Network/Reachability/*.{h,m}"
+    end
+
+    network.subspec 'XReachability' do |xReachability|
+      xReachability.source_files = "_Tool/Network/XReachability/*.{h,m}"
     end
 
     network.subspec 'Core' do |core|
