@@ -18,11 +18,7 @@
 	- licucore.tbd
 * 相关第三方库
 	- ALSCommonKit
-
-## [_Modular 模块](_Modular/README.md)
-
-* 依赖的框架
-	- _Foundation
+* [_Modular 模块](_Modular/README.md)
 
 ## [_Tool 工具](_Tool/README.md)
 
@@ -32,6 +28,7 @@
 	- AEDataKit
 	- ALSLog
 	- AlisNetworking
+* [_Support 其他能力支持](_Support/README.md)
 
 ## [_Building 集成](_Building/README.md)
 
@@ -78,8 +75,6 @@
 
 * 依赖的框架
 	- _Foundation
-
-## [_Support 其他能力支持](_Support/README.md)
 
 ## qy的iOS框架设计解读
 

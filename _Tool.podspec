@@ -24,6 +24,22 @@ Pod::Spec.new do |s|
 
   # s.requires_arc = true
 
+  s.subspec 'KeyValueObserving' do |keyValueObserving|
+    keyValueObserving.source_files = "_Tool/KeyValueObserving/**/*.{h,m}"
+  end
+
+  s.subspec 'Chronograph' do |chronograph|
+    chronograph.source_files = "_Tool/Chronograph/**/*.{h,m}"
+  end
+
+  s.subspec 'CountDown' do |countDown|
+    countDown.source_files = "_Tool/CountDown/**/*.{h,m}"
+  end
+
+  s.subspec 'MJExtension' do |mj|
+    mj.source_files = "_Support/MJExtension/**/*.{h,m}"
+  end
+
   s.subspec 'Cache' do |cache|
     cache.source_files = "_Tool/Cache/**/*.{h,m}"
   end
