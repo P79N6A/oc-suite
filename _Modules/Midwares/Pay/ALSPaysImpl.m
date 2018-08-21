@@ -44,6 +44,10 @@
     
     [ALSTransactionKit shareManager].isDebug = self.debugMode;
     
+#else
+    
+    [ALSTransactionKit shareManager].isDebug = NO;
+    
 #endif
     
     [[ALSTransactionKit shareManager] asyncInit:@"" callback:nil];

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "_Tool"
-  s.version      = "0.2.1"
+  s.version      = "0.3.0"
   s.summary      = "iOS 开发包 之 工具库 [Objective-C]"
   s.description  = <<-DESC
                    iOS 开发包 之 工具库 [Objective-C]
@@ -37,7 +37,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'MJExtension' do |mj|
-    mj.source_files = "_Support/MJExtension/**/*.{h,m}"
+    mj.source_files = "_Tool/MJExtension/**/*.{h,m}"
   end
 
   s.subspec 'Cache' do |cache|

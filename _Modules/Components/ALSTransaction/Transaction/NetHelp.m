@@ -183,6 +183,8 @@ NSString*FillNil( NSString* str )
     [request addValue:FillNil([NetHelp currentAppBuildVersion]) forHTTPHeaderField:@"x-alisports-bundle-build-version"];
     [request addValue:@"AppStore" forHTTPHeaderField:@"x-alisports-bundle-channel"];
     
+    NSLog(@"Pay request = %@", [request description]);
+    
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:block ] resume];
 }
 
@@ -227,20 +229,19 @@ NSString*FillNil( NSString* str )
 }
 
 //把NSDictionary解析成post格式的NSString字符串
-+ (NSString *)parseParams:(NSDictionary *)params
-{
++ (NSString *)parseParams:(NSDictionary *)params {
     NSString *keyValueFormat;
     NSMutableString *result = [NSMutableString new];
     
     //实例化一个key枚举器用来存放dictionary的key
     NSEnumerator *keyEnum = [params keyEnumerator];
     id key;
-    while (key = [keyEnum nextObject])
-    {
+    while (key = [keyEnum nextObject]) {
         keyValueFormat = [NSString stringWithFormat:@"%@=%@&",key,[params valueForKey:key]];
         [result appendString:keyValueFormat];
-        NSLog(@"post()方法参数解析结果：%@",result);
     }
+    
+    NSLog(@"Pay request params=%@", result);
     
     return result;
 }

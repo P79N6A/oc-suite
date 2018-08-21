@@ -16,19 +16,12 @@
 
 * 依赖的系统库
 	- licucore.tbd
-* 相关第三方库
-	- ALSCommonKit
-* [_Modular 模块](_Modular/README.md)
+* [提供模块机制](_Foundation/Modular/README.md)
 
 ## [_Tool 工具](_Tool/README.md)
 
 * 依赖的框架
 	- _Foundation
-* 相关第三方库
-	- AEDataKit
-	- ALSLog
-	- AlisNetworking
-* [_Support 其他能力支持](_Support/README.md)
 
 ## [_Building 集成](_Building/README.md)
 
@@ -46,26 +39,18 @@
 * 依赖的框架
 	- _Foundation
 	- _Building
-	- _Modular
 	- _Tool
-* 相关第三方库
-	- ALSShare
-	- ALSTransactionSdkKit
-* [_Midware 中间层](_Midware/README.md)
 
 ## [_Hybrid 混合](_Hybrid/README.md)
 
 * 依赖的系统库
   - WebKit.framework
   - JavaScriptCore.framework
-* 相关第三方库
-	- ALISJSBridgeKit
 
 ## [_Monitor 监控](_Monitor/README.md)
 
 * 依赖的框架
 	- _Foundation
-	- _Modular
 	- _Tool
 
 ## [_Test 测试](_Test/README.md)

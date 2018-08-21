@@ -166,6 +166,7 @@
                  if ( callback ){
                      // yangzm add data
                      NSString *data = [retdic objectForKey:@"alisp_data"];
+                     data = data ? data : @"支付错误";
                      NSError *error = [NSError errorWithDomain:data code:-1 userInfo:nil];
                      callback( [str integerValue], msg, error );
                  }
