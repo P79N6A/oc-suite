@@ -85,18 +85,14 @@
     if ( payment.platform == _PaymentPlatformWechat ) {
         #ifdef ALS_IAP_WX
         
-        if ( NO == [WXApi isWXAppInstalled] ){
+        if ( NO == [WXApi isWXAppInstalled] ) {
             NSInteger retcode = 100000 + 1000;
             callback( (ENUMPayCode)(retcode), @"没有安装微信!", nil );
-        }
-        else if (NO == [WXApi isWXAppSupportApi] ){
+        } else if (NO == [WXApi isWXAppSupportApi] ) {
             NSInteger retcode = 100000 + 1001;
             callback( (ENUMPayCode)(retcode), @"微信版本不支持!", nil );
-        }
-        else
-        {
-            [NetHelp post:url RequestParams:dic FinishBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable connectionError)
-             {
+        } else {
+            [NetHelp post:url RequestParams:dic FinishBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable connectionError) {
                  if ( connectionError == nil ){
                      NSError* error = nil;
                      NSDictionary *retdic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
@@ -168,8 +164,7 @@
                  NSString *orderMessage = [retdic objectForKey:@"alisp_data"];
                  NSInteger code = [[retdic objectForKey:@"alisp_code"] integerValue];
                  if ( 200 == code ){
-                     [ALS_PAY payWithOrderMessage:orderMessage callBack:^(FLErrCode errCode, NSString *errStr)
-                      {
+                     [ALS_PAY payWithOrderMessage:orderMessage callBack:^(FLErrCode errCode, NSString *errStr) {
                          NSInteger retcode = 9998; // 未知错误
                          switch (errCode) {
                              case FLErrCodeSuccess:
@@ -189,7 +184,7 @@
                      }];
                  }
                  else{
-                     if ( callback ){
+                     if ( callback ) {
                          // yangzm
                          NSString* str = [@"" stringByAppendingFormat:@"%@%ld",@"6",(long)code];
                          NSString *msg = [retdic objectForKey:@"alisp_msg"];
@@ -200,8 +195,7 @@
                          callback( (ENUMPayCode)[str integerValue], msg, error );
                      }
                  }
-             }
-             else{
+             } else {
                  if ( callback )
                      callback( (ENUMPayCode)connectionError.code, @"net work error...", connectionError );
                  NSLog( @"error:%ld", (long)connectionError.code );

@@ -6,7 +6,7 @@
 //  Copyright © 2017年 alisports. All rights reserved.
 //
 
-#import "WKWapperView.h"
+#import "TransactionWebView.h"
 #import <Foundation/Foundation.h>
 #ifndef k404NotFoundHTMLPath
 #define k404NotFoundHTMLPath [[NSBundle bundleForClass:NSClassFromString(@"WKWapperView")] pathForResource:@"WKWebViewController.bundle/html.bundle/404" ofType:@"html"]

@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "ALSThirdPartyPaymentInfitInfo.h"
 
-typedef NS_ENUM(NSInteger,ENUMPayCode){
-    PayCodeSuccess=200100, // 成功
+typedef enum : NSUInteger {
+    PayCodeSuccess = 200100, // 成功
     PayCodeFailure, // 失败
     PayCodeCancel, // 取消
     PayquerySuccess, // 查询成功
@@ -28,16 +28,13 @@ typedef NS_ENUM(NSInteger,ENUMPayCode){
     PayRemoteVerifyFailure,
     PayAppleApiSuccess,
     PayAppleApiFailure,
-};
+} PayCodeType;
 
-typedef void(^ALSPayCompleteCallBack)(ENUMPayCode Code,NSString *resultStr, NSError* error );
-typedef void (^IAPProductsRequestSuccessBlock)(NSArray *products, NSArray *invalidIdentifiers);
-typedef void (^IAPStoreFailureBlock)(NSError *error);
+typedef void(^ ALSPayCompleteCallBack)(ENUMPayCode Code,NSString *resultStr, NSError* error );
+typedef void (^ IAPProductsRequestSuccessBlock)(NSArray *products, NSArray *invalidIdentifiers);
+typedef void (^ IAPStoreFailureBlock)(NSError *error);
 
 @interface ALSPayment : NSObject
-{
-    
-}
 
 @property( nonatomic, assign ) ALSTKPaymentPlatform  platform;
 @property( nonatomic, strong ) NSString* paymentInfo;
