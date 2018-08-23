@@ -1,56 +1,15 @@
 
-#import <Foundation/Foundation.h>
-
-//#import "WXApi.h"
-//#import <AlipaySDK/AlipaySDK.h>
-
-#if __has_include("WXApi.h")
-#define ALS_IAP_WX
-#import "WXApi.h"
-#endif
-
-#if __has_include(<AlipaySDK/AlipaySDK.h>)
-#define ALS_IAP_PAY
-#import <AlipaySDK/AlipaySDK.h>
-#endif
-
-/**
- *  @author yangzm
- *
- *  此处必须保证在Info.plist 中的 URL Types 的 Identifier 对应一致
- */
-#define WEI_XIN @"weixin"
-#define ALI_PAY_NAME @"alipay"
-
-#define ALS_PAY [ALSPayManager shareManager]
-/**
- *  @author yangzm
- *
- *  回调状态码
- */
-typedef NS_ENUM(NSInteger,FLErrCode){
-    FLErrCodeSuccess,// 成功
-    FLErrCodeFailure,// 失败
-    FLErrCodeCancel// 取消
-};
-
-typedef NS_ENUM(NSInteger,PAYType)
-{
-    Enum_WEI_XIN,
-    Enum_ALI_PAY
-};
+#import "_Foundation.h"
+#import "ALSTransactionPrecompile.h"
 
 typedef void(^FLCompleteCallBack)(FLErrCode errCode,NSString *errStr);
 
 @interface ALSPayManager : NSObject
-{
-    
-}
 
 // 是否还在支付中...
-@property (atomic, assign) BOOL is_paying;
+@property (atomic, assign) BOOL isPaying;
 
-+ (instancetype)shareManager;
+@singleton(ALSPayManager)
 
 /**
  *  @author yangzm

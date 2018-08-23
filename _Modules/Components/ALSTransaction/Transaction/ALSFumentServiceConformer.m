@@ -52,7 +52,7 @@
             }*/
         }
         
-        [ALS_PAY registerPay];
+        [[ALSPayManager sharedInstance] registerPay];
     }
 }
 
@@ -61,10 +61,10 @@
         return NO;
     
     if ( platform == _PaymentPlatformWechat )
-        return [ALS_PAY isAppInstalled:Enum_WEI_XIN];
+        return [[ALSPayManager sharedInstance] isAppInstalled:Enum_WEI_XIN];
     
     if ( platform == _PaymentPlatformAlipay )
-        return [ALS_PAY isAppInstalled:Enum_ALI_PAY];
+        return [[ALSPayManager sharedInstance] isAppInstalled:Enum_ALI_PAY];
     
     return NO;
 }
@@ -116,7 +116,7 @@
                          req.nonceStr= [newDic objectForKey:@"noncestr"];
                          req.sign = [newDic objectForKey:@"sign"];
                          
-                         [ALS_PAY payWithOrderMessage:req callBack:^(FLErrCode errCode, NSString *errStr) {
+                         [[ALSPayManager sharedInstance] payWithOrderMessage:req callBack:^(FLErrCode errCode, NSString *errStr) {
                              NSInteger retcode = 9998; // 未知错误
                              switch (errCode) {
                                  case FLErrCodeSuccess:
@@ -133,7 +133,7 @@
                              
                              if ( callback )
                                  callback( (ENUMPayCode)(retcode), errStr, nil );
-                             NSLog(@"errCode = %zd,errStr = %@",errCode,errStr);
+                             NSLog(@"errCode = %ld,errStr = %@", (long)errCode, errStr);
                          }];
                      }
                      else{
@@ -160,8 +160,7 @@
     }
     else if ( payment.platform == _PaymentPlatformAlipay ){
 #ifdef ALS_IAP_PAY
-        [NetHelp post:url RequestParams:dic FinishBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable connectionError)
-         {
+        [NetHelp post:url RequestParams:dic FinishBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable connectionError) {
              if ( connectionError == nil ){
                  NSError* error;
                  NSDictionary *retdic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
@@ -218,22 +217,19 @@
  @param orderid <#orderid description#>
  @param callback <#callback description#>
  */
-- (void)queryPaymentWithOrderId: (NSString*)orderid  callback:(ALSFuCompleteCallBack)callback
-{
+- (void)queryPaymentWithOrderId: (NSString*)orderid  callback:(ALSFuCompleteCallBack)callback {
     if ( callback )
         callback( 0, @"这个要以后服务器实现才可以返回结果", nil );
 }
 
-- (BOOL)handleThirdPartyPaymentCallback:(NSURL*)url
-{
+- (BOOL)handleThirdPartyPaymentCallback:(NSURL*)url {
     if ( url )
-        return [ALS_PAY handleUrl: url];
+        return [[ALSPayManager sharedInstance] handleUrl: url];
     
     return NO;
 }
 
-- (void)getPaymentInfor:(ALSFument*)payment callback:(ALSFuCompleteCallBack)back
-{
+- (void)getPaymentInfor:(ALSFument*)payment callback:(ALSFuCompleteCallBack)back {
     
 }
 #endif

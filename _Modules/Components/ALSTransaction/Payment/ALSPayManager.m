@@ -18,47 +18,36 @@
 #define FLTIP_URLTYPE_SCHEME(name) [NSString stringWithFormat:@"请先在Info.plist 的 URL Type 添加 %@ 对应的 URL Scheme",name]
 
 #ifdef ALS_IAP_WX
-@interface ALSPayManager ()<WXApiDelegate>
+@interface ALSPayManager () <WXApiDelegate>
 #else
 @interface ALSPayManager ()
 #endif
 
 // 缓存回调
-@property (nonatomic,copy)FLCompleteCallBack callBack;
+@property (nonatomic, copy) FLCompleteCallBack callBack;
 // 缓存appScheme
-@property (nonatomic,strong)NSMutableDictionary *appSchemeDict;
+@property (nonatomic, strong) NSMutableDictionary *appSchemeDict;
+    
 @end
 
 @implementation ALSPayManager
 
-+ (instancetype)shareManager{
-    static ALSPayManager *instance;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        instance = [[self alloc] init];
-    });
-    return instance;
-}
+@def_singleton(ALSPayManager)
 
-- (BOOL)handleUrl:(NSURL *)url
-{
+- (BOOL)handleUrl:(NSURL *)url {
     NSAssert(url, FLTIP_CALLBACKURL);
-    if ([url.host isEqualToString:@"pay"])
-    {
+    if ([url.host isEqualToString:@"pay"]) {
         // 微信
          #ifdef ALS_IAP_WX
          return [WXApi handleOpenURL:url delegate:self];
          #else
         return NO;
          #endif
-    }
-    else if ([url.host isEqualToString:@"safepay"])
-    {
+    } else if ([url.host isEqualToString:@"safepay"]) {
         #ifdef ALS_IAP_PAY
         // 支付宝
         // 支付跳转支付宝钱包进行支付，处理支付结果(在app被杀模式下，通过这个方法获取支付结果）
-        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic)
-        {
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
             NSString *resultStatus = resultDic[@"resultStatus"];
             NSString *errStr = resultDic[@"memo"];
             FLErrCode errorCode = FLErrCodeSuccess;
@@ -82,19 +71,15 @@
         
          #ifdef ALS_IAP_PAY
         // 授权跳转支付宝钱包进行支付，处理支付结果
-        [[AlipaySDK defaultService] processAuth_V2Result:url standbyCallback:^(NSDictionary *resultDic)
-        {
+        [[AlipaySDK defaultService] processAuth_V2Result:url standbyCallback:^(NSDictionary *resultDic) {
             NSLog(@"result = %@",resultDic);
             // 解析 auth code
             NSString *result = resultDic[@"result"];
             NSString *authCode = nil;
-            if (result.length>0)
-            {
+            if (result.length > 0) {
                 NSArray *resultArr = [result componentsSeparatedByString:@"&"];
-                for (NSString *subResult in resultArr)
-                {
-                    if (subResult.length > 10 && [subResult hasPrefix:@"auth_code="])
-                    {
+                for (NSString *subResult in resultArr) {
+                    if (subResult.length > 10 && [subResult hasPrefix:@"auth_code="]) {
                         authCode = [subResult substringFromIndex:10];
                         break;
                     }
@@ -105,25 +90,20 @@
         #endif
         
         return YES;
-    }
-    else{
+    } else {
         return NO;
     }
 }
 
--(NSString*) currentVersion:(PAYType)paytype
-{
-    if ( paytype == Enum_ALI_PAY )
-    {
+- (NSString *) currentVersion:(PAYType)paytype {
+    if ( paytype == Enum_ALI_PAY ) {
          #ifdef ALS_IAP_PAY
             return [[AlipaySDK defaultService] currentVersion];
          #else
             return @"";
         #endif
         
-    }
-    else if ( paytype == Enum_WEI_XIN )
-    {
+    } else if ( paytype == Enum_WEI_XIN ) {
         #ifdef ALS_IAP_WX
             return [WXApi getWXAppInstallUrl];
         #else
@@ -134,14 +114,10 @@
     return @"Unknow version!";
 }
 
-- (BOOL)isAppInstalled:(PAYType)paytype
-{
-     if ( paytype == Enum_ALI_PAY )
-     {
+- (BOOL)isAppInstalled:(PAYType)paytype {
+    if ( paytype == Enum_ALI_PAY ) {
          return [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"alipay://"]];
-     }
-    else if ( paytype == Enum_WEI_XIN )
-    {
+    } else if ( paytype == Enum_WEI_XIN ) {
         #ifdef ALS_IAP_WX
             return [WXApi isWXAppInstalled];
         #else
@@ -153,8 +129,7 @@
 }
 
 // 这里如果设置了则可以使用
-- (BOOL)registerPay:(NSDictionary*)param
-{
+- (BOOL)registerPay:(NSDictionary *)param {
     NSString* strWeixin = [param objectForKey:WEI_XIN];
     if ( strWeixin ){
         [self.appSchemeDict setValue:strWeixin forKey:WEI_XIN];
@@ -170,7 +145,7 @@
     }
     
     NSString* strAlspay = [param objectForKey:ALI_PAY_NAME];
-    if ( strAlspay ){
+    if ( strAlspay ) {
         // 保存支付宝scheme，以便发起支付使用
         [self.appSchemeDict setValue:strAlspay forKey:ALI_PAY_NAME];
     }
@@ -183,16 +158,14 @@
  *  info 对微信进行注册 URLType读取 alipay 设置数据
  *
  */
-- (void)registerPay
-{
+- (void)registerPay {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"];
     NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:path];
     NSArray *urlTypes = dict[@"CFBundleURLTypes"];
     NSAssert(urlTypes, FLTIP_URLTYPE);
     
     // 读取info 当中的数据
-    for (NSDictionary *urlTypeDict in urlTypes)
-    {
+    for (NSDictionary *urlTypeDict in urlTypes) {
         NSString *urlName = urlTypeDict[@"CFBundleURLName"];
         NSArray *urlSchemes = urlTypeDict[@"CFBundleURLSchemes"];
         
@@ -200,38 +173,33 @@
         
         // 一般对应只有一个
         NSString *urlScheme = urlSchemes.lastObject;
-        if ([urlName isEqualToString:WEI_XIN])
-        {
+        if ([urlName isEqualToString:WEI_XIN]) {
             [self.appSchemeDict setValue:urlScheme forKey:WEI_XIN];
             // 注册微信
             #ifdef ALS_IAP_WX
             [WXApi registerApp:urlScheme];
             #endif
-        }
-        else if ([urlName isEqualToString:ALI_PAY_NAME]){
+        } else if ([urlName isEqualToString:ALI_PAY_NAME]) {
             // 保存支付宝scheme，以便发起支付使用
             [self.appSchemeDict setValue:urlScheme forKey:ALI_PAY_NAME];
         }
     }
 }
 
-- (void)payWithOrderMessage:(id)orderMessage callBack:(FLCompleteCallBack)callBack
-{
+- (void)payWithOrderMessage:(id)orderMessage callBack:(FLCompleteCallBack)callBack {
     NSAssert(orderMessage, FLTIP_ORDERMESSAGE);
     // 缓存block
     self.callBack = callBack;
+    
     // 发起支付
-    //if ([orderMessage isKindOfClass:[PayReq class]])
-   if ([orderMessage isKindOfClass:[NSString class]])
-    {
+   if ([orderMessage isKindOfClass:[NSString class]]) {
         // 支付宝
         NSAssert(![orderMessage isEqualToString:@""], FLTIP_ORDERMESSAGE);
         NSAssert(self.appSchemeDict[ALI_PAY_NAME], FLTIP_URLTYPE_SCHEME(ALI_PAY_NAME));
-        _is_paying = YES;
+        self.isPaying = YES;
          #ifdef ALS_IAP_PAY
-        [[AlipaySDK defaultService] payOrder:(NSString *)orderMessage fromScheme:self.appSchemeDict[ALI_PAY_NAME] callback:^(NSDictionary *resultDic)
-        {
-            _is_paying = NO;
+        [[AlipaySDK defaultService] payOrder:(NSString *)orderMessage fromScheme:self.appSchemeDict[ALI_PAY_NAME] callback:^(NSDictionary *resultDic) {
+            self.isPaying = NO;
             NSString *resultStatus = resultDic[@"resultStatus"];
             NSString *errStr = resultDic[@"memo"];
             FLErrCode errorCode = FLErrCodeSuccess;
@@ -252,11 +220,10 @@
             }
         }];
         #endif
-    }
-   else{
+    } else{
            // 微信
            NSAssert(self.appSchemeDict[WEI_XIN], FLTIP_URLTYPE_SCHEME(WEI_XIN));
-           _is_paying = YES;
+           self.isPaying = YES;
 #ifdef ALS_IAP_WX
            [WXApi sendReq:(PayReq *)orderMessage];
 #endif
@@ -265,8 +232,7 @@
 
 #pragma mark - WXApiDelegate
  #ifdef ALS_IAP_WX
-- (void)onResp:(BaseResp *)resp
-{
+- (void)onResp:(BaseResp *)resp {
     // 判断支付类型
     if([resp isKindOfClass:[PayResp class]]){
         //支付回调
@@ -291,7 +257,7 @@
                 break;
         }
         
-        _is_paying = NO;
+        self.isPaying = NO;
         if (self.callBack) {
             self.callBack(errorCode,errStr);
         }
@@ -301,7 +267,7 @@
 
 #pragma mark -- Setter & Getter
 
-- (NSMutableDictionary *)appSchemeDict{
+- (NSMutableDictionary *)appSchemeDict {
     if (_appSchemeDict == nil) {
         _appSchemeDict = [NSMutableDictionary dictionary];
     }
