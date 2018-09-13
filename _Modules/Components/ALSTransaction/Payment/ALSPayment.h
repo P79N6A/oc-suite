@@ -30,7 +30,7 @@ typedef enum : NSUInteger {
     PayAppleApiFailure,
 } PayCodeType;
 
-typedef void(^ ALSPayCompleteCallBack)(ENUMPayCode Code,NSString *resultStr, NSError* error );
+typedef void(^ ALSPayCompleteCallBack)(PayCodeType Code,NSString *resultStr, NSError* error );
 typedef void (^ IAPProductsRequestSuccessBlock)(NSArray *products, NSArray *invalidIdentifiers);
 typedef void (^ IAPStoreFailureBlock)(NSError *error);
 

@@ -231,7 +231,7 @@ static NSString * const CacheSharedName = @"CacheShared";
         };
     }
     
-    [self.memoryCache trimToAge:[date timeIntervalSince1970] block:memBlock];
+    [self.memoryCache trimToDate:date block:memBlock];
     [self.diskCache trimToDate:date block:diskBlock];
     
     if (group) {
@@ -300,7 +300,7 @@ static NSString * const CacheSharedName = @"CacheShared";
     if (!date)
         return;
     
-    [self.memoryCache trimToAge:[date timeIntervalSince1970]];
+    [self.memoryCache trimToDate:date];
     [self.diskCache trimToDate:date];
 }
 

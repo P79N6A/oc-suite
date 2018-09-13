@@ -1,15 +1,42 @@
+#import <pthread.h>
 #import "_MemoryCache.h"
+#import "_LinkedMap.h"
+
+//@property (nonatomic, strong) dispatch_semaphore_t lockSemaphore;
+//    dispatch_semaphore_wait(_lockSemaphore, DISPATCH_TIME_FOREVER);
+//    dispatch_semaphore_signal(_lockSemaphore);
+
+#define LOCK \
+    pthread_mutex_lock(&_lock);
+
+#define UNLOCK \
+    pthread_mutex_unlock(&_lock);
+
+#define lockable( code ) \
+{ \
+    pthread_mutex_lock(&_lock); \
+    code \
+    pthread_mutex_unlock(&_lock); \
+}
+
+#define trylockable( code ) \
+if (pthread_mutex_trylock(&_lock) == 0) { \
+    code \
+    pthread_mutex_unlock(&_lock); \
+}
 
 NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
 
 @interface _MemoryCache ()
 
 @property (nonatomic, strong) dispatch_queue_t concurrentQueue;
-@property (nonatomic, strong) dispatch_semaphore_t lockSemaphore;
 
-@property (nonatomic, strong) NSMutableDictionary *dictionary;
-@property (nonatomic, strong) NSMutableDictionary *dates;
-@property (nonatomic, strong) NSMutableDictionary *costs;
+@property (nonatomic, assign) pthread_mutex_t lock;
+
+/**
+ * 如果不使用LinkedMap，则需要三个容器：存放KV、内存消耗、TTL
+ */
+@property (nonatomic, strong) _LinkedMap *lru;
 
 @end
 
@@ -18,7 +45,6 @@ NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
 @synthesize ageLimit = _ageLimit;
 @synthesize costLimit = _costLimit;
 @synthesize totalCost = _totalCost;
-@synthesize ttlCache = _ttlCache;
 @synthesize willAddObjectBlock = _willAddObjectBlock;
 @synthesize willRemoveObjectBlock = _willRemoveObjectBlock;
 @synthesize willRemoveAllObjectsBlock = _willRemoveAllObjectsBlock;
@@ -43,18 +69,16 @@ NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
 }
 
 - (void)initDefault {
-    _lockSemaphore = dispatch_semaphore_create(1);
+    pthread_mutex_init(&_lock, NULL);
+    
     NSString *queueName = [[NSString alloc] initWithFormat:@"%@.%p", MemoryCachePrefix, (void *)self];
     _concurrentQueue = dispatch_queue_create([queueName UTF8String], DISPATCH_QUEUE_CONCURRENT);
     
-    _dictionary = [[NSMutableDictionary alloc] init];
-    _dates = [[NSMutableDictionary alloc] init];
-    _costs = [[NSMutableDictionary alloc] init];
+    _lru = [_LinkedMap new];
     
     _willAddObjectBlock = nil;
     _willRemoveObjectBlock = nil;
     _willRemoveAllObjectsBlock = nil;
-    
     _didAddObjectBlock = nil;
     _didRemoveObjectBlock = nil;
     _didRemoveAllObjectsBlock = nil;
@@ -62,12 +86,15 @@ NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
     _didReceiveMemoryWarningBlock = nil;
     _didEnterBackgroundBlock = nil;
     
-    _ageLimit = 0.0;
-    _costLimit = 0;
-    _totalCost = 0;
+    _countLimit = NSUIntegerMax;
+    _costLimit = NSUIntegerMax;
+    _ageLimit = DBL_MAX;
+    _autoTrimInterval = 5.0;
     
     _removeAllObjectsOnMemoryWarning = YES;
     _removeAllObjectsOnEnteringBackground = YES;
+    
+    [self _trimRecursively];
 }
 
 - (void)initObserver {
@@ -77,6 +104,82 @@ NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
 
 - (void)dealloc {
     [self unobserveAllNotifications];
+    
+    [_lru removeAll];
+}
+
+// MARK: - Setter & Getter
+
+- (NSUInteger)totalCount {
+    lockable( NSUInteger count = _lru->_totalCount; return count; )
+}
+
+- (NSUInteger)totalCost {
+    lockable( NSUInteger totalCost = _lru->_totalCost; return totalCost; )
+}
+
+- (MemoryCacheObjectBlock)willAddObjectBlock {
+    lockable( MemoryCacheObjectBlock block = _willAddObjectBlock; return block; )
+}
+
+- (void)setWillAddObjectBlock:(MemoryCacheObjectBlock)block {
+    lockable( _willAddObjectBlock = [block copy]; )
+}
+
+- (MemoryCacheObjectBlock)willRemoveObjectBlock {
+    lockable( MemoryCacheObjectBlock block = _willRemoveObjectBlock; return block; )
+}
+
+- (void)setWillRemoveObjectBlock:(MemoryCacheObjectBlock)block {
+    lockable( _willRemoveObjectBlock = [block copy]; )
+}
+
+- (MemoryCacheBlock)willRemoveAllObjectsBlock {
+    lockable( MemoryCacheBlock block = _willRemoveAllObjectsBlock; return block; )
+}
+
+- (void)setWillRemoveAllObjectsBlock:(MemoryCacheBlock)block {
+    lockable( _willRemoveAllObjectsBlock = [block copy]; )
+}
+
+- (MemoryCacheObjectBlock)didAddObjectBlock {
+    lockable( MemoryCacheObjectBlock block = _didAddObjectBlock; return block; )
+}
+
+- (void)setDidAddObjectBlock:(MemoryCacheObjectBlock)block {
+    lockable( _didAddObjectBlock = [block copy]; )
+}
+
+- (MemoryCacheObjectBlock)didRemoveObjectBlock {
+    lockable( MemoryCacheObjectBlock block = _didRemoveObjectBlock; return block; )
+}
+
+- (void)setDidRemoveObjectBlock:(MemoryCacheObjectBlock)block {
+    lockable( _didRemoveObjectBlock = [block copy]; )
+}
+
+- (MemoryCacheBlock)didRemoveAllObjectsBlock {
+    lockable( MemoryCacheBlock block = _didRemoveAllObjectsBlock; return block; )
+}
+
+- (void)setDidRemoveAllObjectsBlock:(MemoryCacheBlock)block {
+    lockable( _didRemoveAllObjectsBlock = [block copy]; )
+}
+
+- (MemoryCacheBlock)didReceiveMemoryWarningBlock {
+    lockable( MemoryCacheBlock block = _didReceiveMemoryWarningBlock; return block; )
+}
+
+- (void)setDidReceiveMemoryWarningBlock:(MemoryCacheBlock)block {
+    lockable( _didReceiveMemoryWarningBlock = [block copy]; )
+}
+
+- (MemoryCacheBlock)didEnterBackgroundBlock {
+    lockable( MemoryCacheBlock block = _didEnterBackgroundBlock; return block; )
+}
+
+- (void)setDidEnterBackgroundBlock:(MemoryCacheBlock)block {
+    lockable( _didEnterBackgroundBlock = [block copy]; )
 }
 
 #pragma mark - Memory warning handling
@@ -103,9 +206,9 @@ NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
             return;
         }
         
-        [self lock];
+        LOCK
         MemoryCacheBlock didReceiveMemoryWarningBlock = self->_didReceiveMemoryWarningBlock;
-        [self unlock];
+        UNLOCK
         
         if (didReceiveMemoryWarningBlock)
             didReceiveMemoryWarningBlock(self);
@@ -126,9 +229,9 @@ NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
             return;
         }
         
-        [self lock];
+        LOCK
         MemoryCacheBlock didEnterBackgroundBlock = self->_didEnterBackgroundBlock;
-        [self unlock];
+        UNLOCK
         
         if (didEnterBackgroundBlock)
             didEnterBackgroundBlock(self);
@@ -138,117 +241,28 @@ NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
 #pragma mark -
 
 - (void)removeObjectAndExecuteBlocksForKey:(NSString *)key {
-    [self lock];
-    
-    id object = _dictionary[key];
-    NSNumber *cost = _costs[key];
     MemoryCacheObjectBlock willRemoveObjectBlock = _willRemoveObjectBlock;
     MemoryCacheObjectBlock didRemoveObjectBlock = _didRemoveObjectBlock;
-    [self unlock];
     
-    if (willRemoveObjectBlock)
-        willRemoveObjectBlock(self, key, object);
-    
-    [self lock];
-    if (cost)
-        _totalCost -= [cost unsignedIntegerValue];
-    
-    [_dictionary removeObjectForKey:key];
-    [_dates removeObjectForKey:key];
-    [_costs removeObjectForKey:key];
-    [self unlock];
+    lockable(
+             _LinkedMapNode *node = _lru[key];
+             
+             if (willRemoveObjectBlock)
+             willRemoveObjectBlock(self, key, node->_value);
+             
+             if (node) {
+                 [_lru removeNode:node];
+             }
+             
+             dispatch_async(_concurrentQueue, ^{
+                 [node class]; //hold and release in queue
+             });
+    )
     
     if (didRemoveObjectBlock)
         didRemoveObjectBlock(self, key, nil);
 }
 
-- (void)trimMemoryToDate:(NSDate *)trimDate {
-    [self lock];
-    NSArray *keysSortedByDate = [_dates keysSortedByValueUsingSelector:@selector(compare:)];
-    NSDictionary *dates = [_dates copy];
-    [self unlock];
-    
-    for (NSString *key in keysSortedByDate) { // oldest objects first
-        NSDate *accessDate = dates[key];
-        if (!accessDate)
-            continue;
-        
-        if ([accessDate compare:trimDate] == NSOrderedAscending) { // older than trim date
-            [self removeObjectAndExecuteBlocksForKey:key];
-        } else {
-            break;
-        }
-    }
-}
-
-- (void)trimToCostLimit:(NSUInteger)limit {
-    NSUInteger totalCost = 0;
-    
-    [self lock];
-    totalCost = _totalCost;
-    NSArray *keysSortedByCost = [_costs keysSortedByValueUsingSelector:@selector(compare:)];
-    [self unlock];
-    
-    if (totalCost <= limit) {
-        return;
-    }
-    
-    for (NSString *key in [keysSortedByCost reverseObjectEnumerator]) { // costliest objects first
-        [self removeObjectAndExecuteBlocksForKey:key];
-        
-        [self lock];
-        totalCost = _totalCost;
-        [self unlock];
-        
-        if (totalCost <= limit)
-            break;
-    }
-}
-
-- (void)trimToCostLimitByDate:(NSUInteger)limit {
-    NSUInteger totalCost = 0;
-    
-    [self lock];
-    totalCost = _totalCost;
-    NSArray *keysSortedByDate = [_dates keysSortedByValueUsingSelector:@selector(compare:)];
-    [self unlock];
-    
-    if (totalCost <= limit)
-        return;
-    
-    for (NSString *key in keysSortedByDate) { // oldest objects first
-        [self removeObjectAndExecuteBlocksForKey:key];
-        
-        [self lock];
-        totalCost = _totalCost;
-        [self unlock];
-        if (totalCost <= limit)
-            break;
-    }
-}
-
-- (void)trimToAgeLimitRecursively {
-    [self lock];
-    NSTimeInterval ageLimit = _ageLimit;
-    [self unlock];
-    
-    if (ageLimit == 0.0)
-        return;
-    
-    NSDate *date = [[NSDate alloc] initWithTimeIntervalSinceNow:-ageLimit];
-    
-    [self trimMemoryToDate:date];
-    
-    @weakify(self)
-    
-    dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(ageLimit * NSEC_PER_SEC));
-    dispatch_after(time, _concurrentQueue, ^(void){
-        
-        @strongify(self);
-        
-        [self trimToAgeLimitRecursively];
-    });
-}
 
 #pragma mark - Asynchronous Methods
 
@@ -309,42 +323,6 @@ NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
     });
 }
 
-- (void)trimToDate:(NSDate *)trimDate block:(MemoryCacheBlock)block {
-    @weakify(self)
-    
-    dispatch_async(_concurrentQueue, ^{
-        @strongify(self)
-        [self trimToDate:trimDate];
-        
-        if (block)
-            block(self);
-    });
-}
-
-- (void)trimToCost:(NSUInteger)cost block:(MemoryCacheBlock)block {
-    @weakify(self)
-    
-    dispatch_async(_concurrentQueue, ^{
-        @strongify(self)
-        [self trimToCost:cost];
-        
-        if (block)
-            block(self);
-    });
-}
-
-- (void)trimToCostByDate:(NSUInteger)cost block:(MemoryCacheBlock)block {
-    @weakify(self)
-    
-    dispatch_async(_concurrentQueue, ^{
-        @strongify(self)
-        [self trimToCostByDate:cost];
-        
-        if (block)
-            block(self);
-    });
-}
-
 - (void)removeAllObjects:(MemoryCacheBlock)block {
     @weakify(self)
     
@@ -378,32 +356,17 @@ NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
     if (!key)
         return NO;
     
-    [self lock];
-    BOOL containsObject = (_dictionary[key] != nil);
-    [self unlock];
-    return containsObject;
+    LOCK
+    _LinkedMapNode *node = _lru[key];
+    UNLOCK
+    return !!node;
 }
 
 - (id)objectForKey:(NSString *)key {
     if (!key)
         return nil;
     
-    NSDate *now = [[NSDate alloc] init];
-    [self lock];
-    id object = nil;
-    // If the cache should behave like a TTL cache, then only fetch the object if there's a valid ageLimit and  the object is still alive
-    if (!self->_ttlCache || self->_ageLimit <= 0 || fabs([[_dates objectForKey:key] timeIntervalSinceDate:now]) < self->_ageLimit) {
-        object = _dictionary[key];
-    }
-    [self unlock];
-    
-    if (object) {
-        [self lock];
-        _dates[key] = now;
-        [self unlock];
-    }
-    
-    return object;
+    lockable( _LinkedMapNode *node = _lru[key]; return node ? node->_value : nil; )
 }
 
 - (void)setObject:(id)object forKey:(NSString *)key {
@@ -411,31 +374,56 @@ NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
 }
 
 - (void)setObject:(id)object forKey:(NSString *)key withCost:(NSUInteger)cost {
-    if (!key || !object)
+    if (!key)
         return;
+    if (!object) {
+        [self removeObjectForKey:key];
+        return;
+    }
     
-    [self lock];
     MemoryCacheObjectBlock willAddObjectBlock = _willAddObjectBlock;
     MemoryCacheObjectBlock didAddObjectBlock = _didAddObjectBlock;
-    NSUInteger costLimit = _costLimit;
-    [self unlock];
-    
+
     if (willAddObjectBlock)
         willAddObjectBlock(self, key, object);
     
-    [self lock];
-    _dictionary[key] = object;
-    _dates[key] = [[NSDate alloc] init];
-    _costs[key] = @(cost);
-    
-    _totalCost += cost;
-    [self unlock];
+    lockable(
+             _LinkedMapNode *node = _lru[key];
+             NSTimeInterval now = CACurrentMediaTime();
+             if (node) {
+                 _lru->_totalCost -= node->_cost;
+                 _lru->_totalCost += cost;
+                 node->_cost = cost;
+                 node->_time = now;
+                 node->_value = object;
+                 [_lru bringNodeToHead:node];
+             } else {
+                 node = [_LinkedMapNode new];
+                 node->_cost = cost;
+                 node->_time = now;
+                 node->_key = key;
+                 node->_value = object;
+                 [_lru insertNodeAtHead:node];
+             }
+             
+             if (_lru->_totalCost > _costLimit) { // 总量限制
+                 dispatch_async(_concurrentQueue, ^{
+                     [self trimToCost:_costLimit];
+                 });
+             }
+             
+             if (_lru->_totalCount > _countLimit) { // 总数限制
+                 _LinkedMapNode *node = [_lru removeTailNode];
+                 
+                 dispatch_async(_concurrentQueue, ^{
+                     [node class];
+                 });
+             }
+             
+    )
     
     if (didAddObjectBlock)
         didAddObjectBlock(self, key, object);
-    
-    if (costLimit > 0)
-        [self trimToCostByDate:costLimit];
 }
 
 - (void)removeObjectForKey:(NSString *)key {
@@ -445,42 +433,14 @@ NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
     [self removeObjectAndExecuteBlocksForKey:key];
 }
 
-- (void)trimToDate:(NSDate *)trimDate {
-    if (!trimDate)
-        return;
-    
-    if ([trimDate isEqualToDate:[NSDate distantPast]]) {
-        [self removeAllObjects];
-        return;
-    }
-    
-    [self trimMemoryToDate:trimDate];
-}
-
-- (void)trimToCost:(NSUInteger)cost {
-    [self trimToCostLimit:cost];
-}
-
-- (void)trimToCostByDate:(NSUInteger)cost {
-    [self trimToCostLimitByDate:cost];
-}
-
 - (void)removeAllObjects {
-    [self lock];
     MemoryCacheBlock willRemoveAllObjectsBlock = _willRemoveAllObjectsBlock;
     MemoryCacheBlock didRemoveAllObjectsBlock = _didRemoveAllObjectsBlock;
-    [self unlock];
     
     if (willRemoveAllObjectsBlock)
         willRemoveAllObjectsBlock(self);
     
-    [self lock];
-    [_dictionary removeAllObjects];
-    [_dates removeAllObjects];
-    [_costs removeAllObjects];
-    
-    _totalCost = 0;
-    [self unlock];
+    lockable( [_lru removeAll]; )
     
     if (didRemoveAllObjectsBlock)
         didRemoveAllObjectsBlock(self);
@@ -490,200 +450,15 @@ NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
     if (!block)
         return;
     
-    [self lock];
-    NSDate *now = [[NSDate alloc] init];
-    NSArray *keysSortedByDate = [_dates keysSortedByValueUsingSelector:@selector(compare:)];
-    
-    for (NSString *key in keysSortedByDate) {
-        // If the cache should behave like a TTL cache, then only fetch the object if there's a valid ageLimit and  the object is still alive
-        if (!self->_ttlCache || self->_ageLimit <= 0 || fabs([[_dates objectForKey:key] timeIntervalSinceDate:now]) < self->_ageLimit) {
-            block(self, key, _dictionary[key]);
-        }
-    }
-    [self unlock];
+    LOCK
+    weakly(self)
+    [_lru enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj) {
+        block(_, key, obj);
+    }];
+    UNLOCK
 }
 
-#pragma mark - Public Thread Safe Accessors -
-
-- (MemoryCacheObjectBlock)willAddObjectBlock {
-    [self lock];
-    MemoryCacheObjectBlock block = _willAddObjectBlock;
-    [self unlock];
-    
-    return block;
-}
-
-- (void)setWillAddObjectBlock:(MemoryCacheObjectBlock)block {
-    [self lock];
-    _willAddObjectBlock = [block copy];
-    [self unlock];
-}
-
-- (MemoryCacheObjectBlock)willRemoveObjectBlock {
-    [self lock];
-    MemoryCacheObjectBlock block = _willRemoveObjectBlock;
-    [self unlock];
-    
-    return block;
-}
-
-- (void)setWillRemoveObjectBlock:(MemoryCacheObjectBlock)block {
-    [self lock];
-    _willRemoveObjectBlock = [block copy];
-    [self unlock];
-}
-
-- (MemoryCacheBlock)willRemoveAllObjectsBlock {
-    [self lock];
-    MemoryCacheBlock block = _willRemoveAllObjectsBlock;
-    [self unlock];
-    
-    return block;
-}
-
-- (void)setWillRemoveAllObjectsBlock:(MemoryCacheBlock)block {
-    [self lock];
-    _willRemoveAllObjectsBlock = [block copy];
-    [self unlock];
-}
-
-- (MemoryCacheObjectBlock)didAddObjectBlock {
-    [self lock];
-    MemoryCacheObjectBlock block = _didAddObjectBlock;
-    [self unlock];
-    
-    return block;
-}
-
-- (void)setDidAddObjectBlock:(MemoryCacheObjectBlock)block {
-    [self lock];
-    _didAddObjectBlock = [block copy];
-    [self unlock];
-}
-
-- (MemoryCacheObjectBlock)didRemoveObjectBlock {
-    [self lock];
-    MemoryCacheObjectBlock block = _didRemoveObjectBlock;
-    [self unlock];
-    
-    return block;
-}
-
-- (void)setDidRemoveObjectBlock:(MemoryCacheObjectBlock)block {
-    [self lock];
-    _didRemoveObjectBlock = [block copy];
-    [self unlock];
-}
-
-- (MemoryCacheBlock)didRemoveAllObjectsBlock {
-    [self lock];
-    MemoryCacheBlock block = _didRemoveAllObjectsBlock;
-    [self unlock];
-    
-    return block;
-}
-
-- (void)setDidRemoveAllObjectsBlock:(MemoryCacheBlock)block {
-    [self lock];
-    _didRemoveAllObjectsBlock = [block copy];
-    [self unlock];
-}
-
-- (MemoryCacheBlock)didReceiveMemoryWarningBlock {
-    [self lock];
-    MemoryCacheBlock block = _didReceiveMemoryWarningBlock;
-    [self unlock];
-    
-    return block;
-}
-
-- (void)setDidReceiveMemoryWarningBlock:(MemoryCacheBlock)block {
-    [self lock];
-    _didReceiveMemoryWarningBlock = [block copy];
-    [self unlock];
-}
-
-- (MemoryCacheBlock)didEnterBackgroundBlock {
-    [self lock];
-    MemoryCacheBlock block = _didEnterBackgroundBlock;
-    [self unlock];
-    
-    return block;
-}
-
-- (void)setDidEnterBackgroundBlock:(MemoryCacheBlock)block {
-    [self lock];
-    _didEnterBackgroundBlock = [block copy];
-    [self unlock];
-}
-
-- (NSTimeInterval)ageLimit {
-    [self lock];
-    NSTimeInterval ageLimit = _ageLimit;
-    [self unlock];
-    
-    return ageLimit;
-}
-
-- (void)setAgeLimit:(NSTimeInterval)ageLimit {
-    [self lock];
-    _ageLimit = ageLimit;
-    [self unlock];
-    
-    [self trimToAgeLimitRecursively];
-}
-
-- (NSUInteger)costLimit {
-    [self lock];
-    NSUInteger costLimit = _costLimit;
-    [self unlock];
-    
-    return costLimit;
-}
-
-- (void)setCostLimit:(NSUInteger)costLimit {
-    [self lock];
-    _costLimit = costLimit;
-    [self unlock];
-    
-    if (costLimit > 0)
-        [self trimToCostLimitByDate:costLimit];
-}
-
-- (NSUInteger)totalCost {
-    [self lock];
-    NSUInteger cost = _totalCost;
-    [self unlock];
-    
-    return cost;
-}
-
-- (BOOL)isTTLCache {
-    BOOL isTTLCache;
-    
-    [self lock];
-    isTTLCache = _ttlCache;
-    [self unlock];
-    
-    return isTTLCache;
-}
-
-- (void)setTtlCache:(BOOL)ttlCache {
-    [self lock];
-    _ttlCache = ttlCache;
-    [self unlock];
-}
-
-
-- (void)lock {
-    dispatch_semaphore_wait(_lockSemaphore, DISPATCH_TIME_FOREVER);
-}
-
-- (void)unlock {
-    dispatch_semaphore_signal(_lockSemaphore);
-}
-
-#pragma mark - CacheObjectSubscripting
+// MARK: - CacheObjectSubscripting
 
 - (id)objectForKeyedSubscript:(NSString *)key {
     return [self objectForKey:key];
@@ -691,6 +466,183 @@ NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
 
 - (void)setObject:(id)obj forKeyedSubscript:(NSString *)key {
     [self setObject:obj forKey:key];
+}
+
+// MARK: - Trim
+
+- (void)trimToAge:(NSTimeInterval)age block:(MemoryCacheBlock)block {
+    @weakify(self)
+    
+    dispatch_async(_concurrentQueue, ^{
+        @strongify(self)
+        [self trimToAge:age];
+        
+        if (block)
+            block(self);
+    });
+}
+
+- (void)trimToCost:(NSUInteger)cost block:(MemoryCacheBlock)block {
+    @weakify(self)
+    
+    dispatch_async(_concurrentQueue, ^{
+        @strongify(self)
+        [self trimToCost:cost];
+        
+        if (block)
+            block(self);
+    });
+}
+
+- (void)trimToCount:(NSUInteger)count block:(MemoryCacheBlock)block {
+    @weakify(self)
+    
+    dispatch_async(_concurrentQueue, ^{
+        @strongify(self)
+        [self trimToCount:count];
+        
+        if (block)
+            block(self);
+    });
+}
+
+- (void)trimToCount:(NSUInteger)count {
+    if (count == 0) {
+        [self removeAllObjects];
+        return;
+    }
+    [self _trimToCount:count];
+}
+
+- (void)trimToCost:(NSUInteger)cost {
+    [self _trimToCost:cost];
+}
+
+- (void)trimToAge:(NSTimeInterval)age {
+    [self _trimToAge:age];
+}
+
+#pragma mark - Private
+
+- (void)_trimRecursively {
+    __weak typeof(self) _self = self;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(_autoTrimInterval * NSEC_PER_SEC)), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        __strong typeof(_self) self = _self;
+        if (!self) return;
+        [self _trimInBackground];
+        [self _trimRecursively];
+    });
+}
+
+- (void)_trimInBackground {
+    dispatch_async(_concurrentQueue, ^{
+        [self _trimToCost:self->_costLimit];
+        [self _trimToCount:self->_countLimit];
+        [self _trimToAge:self->_ageLimit];
+    });
+}
+
+- (void)_trimToCost:(NSUInteger)costLimit {
+    BOOL finish = NO;
+
+    lockable(
+         if (costLimit == 0) {
+             [_lru removeAll];
+             finish = YES;
+         } else if (_lru->_totalCost <= costLimit) {
+             finish = YES;
+         }
+    )
+    
+    if (finish) return;
+    
+    NSMutableArray *holder = [NSMutableArray new];
+    while (!finish) {
+        
+        trylockable(
+            if (_lru->_totalCost > costLimit) {
+                _LinkedMapNode *node = [_lru removeTailNode];
+                if (node) [holder addObject:node];
+            } else {
+                finish = YES;
+            }
+        ) else {
+            usleep(10 * 1000); //10 ms
+        }
+    }
+    if (holder.count) {
+        dispatch_async(_concurrentQueue, ^{
+            [holder count]; // release in queue
+        });
+    }
+}
+
+- (void)_trimToCount:(NSUInteger)countLimit {
+    BOOL finish = NO;
+    LOCK
+    if (countLimit == 0) {
+        [_lru removeAll];
+        finish = YES;
+    } else if (_lru->_totalCount <= countLimit) {
+        finish = YES;
+    }
+    UNLOCK
+    if (finish) return;
+    
+    NSMutableArray *holder = [NSMutableArray new];
+    while (!finish) {
+        trylockable(
+            if (_lru->_totalCount > countLimit) {
+                _LinkedMapNode *node = [_lru removeTailNode];
+                if (node) [holder addObject:node];
+            } else {
+                finish = YES;
+            }
+        ) else {
+            usleep(10 * 1000); //10 ms
+        }
+    }
+    if (holder.count) {
+        dispatch_async(_concurrentQueue, ^{
+            [holder count]; // release in queue
+        });
+    }
+}
+
+- (void)_trimToAge:(NSTimeInterval)ageLimit {
+    BOOL finish = NO;
+    NSTimeInterval now = CACurrentMediaTime();
+
+    lockable(
+        if (ageLimit <= 0) {
+            [_lru removeAll];
+            finish = YES;
+        } else if (!_lru->_tail || (now - _lru->_tail->_time) <= ageLimit) {
+            finish = YES;
+        }
+    )
+    
+    if (finish) return;
+    
+    NSMutableArray *holder = [NSMutableArray new];
+    while (!finish) {
+        trylockable(
+            if (_lru->_tail && (now - _lru->_tail->_time) > ageLimit) {
+                _LinkedMapNode *node = [_lru removeTailNode];
+                if (node) [holder addObject:node];
+            } else {
+                finish = YES;
+            }
+        ) else {
+            usleep(10 * 1000); //10 ms
+        }
+
+    }
+    if (holder.count) {
+        dispatch_async(_concurrentQueue, ^{
+            [holder count]; // release in queue
+        });
+    }
 }
 
 @end
