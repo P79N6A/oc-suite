@@ -44,6 +44,10 @@ Pod::Spec.new do |s|
     cache.source_files = "_Tool/Cache/**/*.{h,m}"
   end
 
+  s.subspec 'Structures' do |structures|
+    structures.source_files = "_Tool/Structures/**/*.{h,m}"
+  end
+
   s.subspec 'HttpMock' do |httpmock|
     httpmock.source_files = '_Tool/HttpMock/**/*.{h,m}'
   end
