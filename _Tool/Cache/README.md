@@ -1,4 +1,4 @@
-# [YYCache](https://github.com/ibireme/YYCache)
+# [YYCache](https://github.com/ibireme/YYCache), [YYCache 设计思路](https://blog.ibireme.com/2015/10/26/yycache/)
 
 * TTL(生存时间值) 管理
 * LRU: 缓存支持 LRU (least-recently-used) 淘汰算法（需要额外空间的时候，LRU缓存把最近最少使用的数据移除）
@@ -35,3 +35,23 @@
 
 
 ### 技术点
+
+* YYKVStorage
+	- 储存NSNumber和NSData YYKVStorageTypeFile和YYKVStorageTypeSQLite类型所用的时间：(选择合适的储存方式是很有必要)
+	```
+	==========================================================
+	Disk cache set 1000 key-value pairs (value is NSNumber)
+	YYKVFile:			365.55
+	YYKVSQLite:		63.03
+	YYDiskCache:	72.34
+	PINDiskCache:	422.00
+	TMDiskCache:	417.01
+	==========================================================
+	Disk cache set 1000 key-value pairs (value is NSData(100KB))
+	YYKVFile:			494.17
+	YYKVSQLite:		1805.29
+	YYDiskCache:	523.92
+	PINDiskCache:	502.25
+	TMDiskCache:	492.26
+	```
+	-	YYKVStorageTypeFile类型其实不仅写入了本地文件也同时写入了数据库，只不过数据库里面存的是除了value值以外的key, filename, size, inline_data（NULL）, modification_time , last_access_time, extended_data字段。

@@ -105,7 +105,7 @@ NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
 - (void)dealloc {
     [self unobserveAllNotifications];
     
-    [_lru removeAll];
+    [_lru removeAllObjects];
 }
 
 // MARK: - Setter & Getter
@@ -245,17 +245,20 @@ NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
     MemoryCacheObjectBlock didRemoveObjectBlock = _didRemoveObjectBlock;
     
     lockable(
-             _LinkedMapNode *node = _lru[key];
+             id obj = [_lru objectForKey:key];
              
              if (willRemoveObjectBlock)
-             willRemoveObjectBlock(self, key, node->_value);
+             willRemoveObjectBlock(self, key, obj);
              
-             if (node) {
-                 [_lru removeNode:node];
+             if (obj) {
+                 [_lru removeObjectForKey:key];
              }
              
              dispatch_async(_concurrentQueue, ^{
-                 [node class]; //hold and release in queue
+                /**
+                 * 不是延迟释放，只是为了提供一个思路：数据资源在子线程释放、视图资源在主线程释放
+                 */
+                 [obj class]; //hold and release in queue
              });
     )
     
@@ -357,16 +360,16 @@ NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
         return NO;
     
     LOCK
-    _LinkedMapNode *node = _lru[key];
+    id obj = [_lru objectForKey:key];
     UNLOCK
-    return !!node;
+    return !!obj;
 }
 
 - (id)objectForKey:(NSString *)key {
     if (!key)
         return nil;
     
-    lockable( _LinkedMapNode *node = _lru[key]; return node ? node->_value : nil; )
+    lockable( return [_lru objectForKey:key]; )
 }
 
 - (void)setObject:(id)object forKey:(NSString *)key {
@@ -387,36 +390,21 @@ NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
     if (willAddObjectBlock)
         willAddObjectBlock(self, key, object);
     
+    // 加锁
     lockable(
-             _LinkedMapNode *node = _lru[key];
-             NSTimeInterval now = CACurrentMediaTime();
-             if (node) {
-                 _lru->_totalCost -= node->_cost;
-                 _lru->_totalCost += cost;
-                 node->_cost = cost;
-                 node->_time = now;
-                 node->_value = object;
-                 [_lru bringNodeToHead:node];
-             } else {
-                 node = [_LinkedMapNode new];
-                 node->_cost = cost;
-                 node->_time = now;
-                 node->_key = key;
-                 node->_value = object;
-                 [_lru insertNodeAtHead:node];
-             }
+             [_lru setObject:object forKey:key withCost:cost];
              
-             if (_lru->_totalCost > _costLimit) { // 总量限制
+             if ([_lru isObjectCostsOverflow:_costLimit]) { // 总量限制
                  dispatch_async(_concurrentQueue, ^{
                      [self trimToCost:_costLimit];
                  });
              }
              
-             if (_lru->_totalCount > _countLimit) { // 总数限制
-                 _LinkedMapNode *node = [_lru removeTailNode];
+             if ([_lru isObjectCountsOverflow:_countLimit]) { // 总数限制
+                 object = [_lru removeObject];
                  
                  dispatch_async(_concurrentQueue, ^{
-                     [node class];
+                     [object class];
                  });
              }
              
@@ -440,7 +428,7 @@ NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
     if (willRemoveAllObjectsBlock)
         willRemoveAllObjectsBlock(self);
     
-    lockable( [_lru removeAll]; )
+    lockable( [_lru removeAllObjects]; )
     
     if (didRemoveAllObjectsBlock)
         didRemoveAllObjectsBlock(self);
@@ -547,9 +535,9 @@ NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
 
     lockable(
          if (costLimit == 0) {
-             [_lru removeAll];
+             [_lru removeAllObjects];
              finish = YES;
-         } else if (_lru->_totalCost <= costLimit) {
+         } else if (![_lru isObjectCostsOverflow:costLimit]) {
              finish = YES;
          }
     )
@@ -561,8 +549,8 @@ NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
         
         trylockable(
             if (_lru->_totalCost > costLimit) {
-                _LinkedMapNode *node = [_lru removeTailNode];
-                if (node) [holder addObject:node];
+                id object = [_lru removeObject];
+                if (object) [holder addObject:object];
             } else {
                 finish = YES;
             }
@@ -581,7 +569,7 @@ NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
     BOOL finish = NO;
     LOCK
     if (countLimit == 0) {
-        [_lru removeAll];
+        [_lru removeAllObjects];
         finish = YES;
     } else if (_lru->_totalCount <= countLimit) {
         finish = YES;
@@ -592,9 +580,9 @@ NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
     NSMutableArray *holder = [NSMutableArray new];
     while (!finish) {
         trylockable(
-            if (_lru->_totalCount > countLimit) {
-                _LinkedMapNode *node = [_lru removeTailNode];
-                if (node) [holder addObject:node];
+                    if ([_lru isObjectCountsOverflow:countLimit]) {
+                id object = [_lru removeObject];
+                if (object) [holder addObject:object];
             } else {
                 finish = YES;
             }
@@ -615,7 +603,7 @@ NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
 
     lockable(
         if (ageLimit <= 0) {
-            [_lru removeAll];
+            [_lru removeAllObjects];
             finish = YES;
         } else if (!_lru->_tail || (now - _lru->_tail->_time) <= ageLimit) {
             finish = YES;
@@ -628,8 +616,8 @@ NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
     while (!finish) {
         trylockable(
             if (_lru->_tail && (now - _lru->_tail->_time) > ageLimit) {
-                _LinkedMapNode *node = [_lru removeTailNode];
-                if (node) [holder addObject:node];
+                id object = [_lru removeObject];
+                if (object) [holder addObject:object];
             } else {
                 finish = YES;
             }

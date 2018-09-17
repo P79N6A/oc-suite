@@ -1,30 +1,36 @@
 #import <Foundation/Foundation.h>
-#import "_DictionaryProtocol.h"
+#import "_LinkedMapProtocol.h"
 
 @class _LinkedMapNode;
 
 /**
- A linked map used by YYMemoryCache.
- It's not thread-safe and does not validate the parameters.
- 
- Typically, you should not use this class directly.
+ * 非线程安全、无参数检查、字典、双向链表
+ * LRU 是用双向链表配合 NSDictionary 实现的，增、删、改、查、清空的时间复杂度都是 O(1)
  */
-@interface _LinkedMap : NSObject <_DictionaryProtocol> {
+@interface _LinkedMap : NSObject <_LinkedMapProtocol> {
     @package
     CFMutableDictionaryRef _dic; // do not set object directly
     NSUInteger _totalCost;
     NSUInteger _totalCount;
     _LinkedMapNode *_head; // MRU, do not change it directly
-    _LinkedMapNode*_tail; // LRU, do not change it directly
+    _LinkedMapNode *_tail; // LRU, do not change it directly
 }
 
 @property (atomic, strong) void (^ enumerationHandler)(id key, id obj);
 
-- (void)insertNodeAtHead:(_LinkedMapNode *)node;
-- (void)bringNodeToHead:(_LinkedMapNode *)node;
-- (void)removeNode:(_LinkedMapNode *)node;
-- (_LinkedMapNode *)removeTailNode;
-- (void)removeAll;
+// MARK: - _LinkedMapProtocol
+
+- (nullable id)objectForKey:(NSString *)key;
+- (void)setObject:(id)object forKey:(NSString *)key withCost:(NSUInteger)cost;
+
+- (id)removeObjectForKey:(NSString *)key;
+- (void)removeAllObjects;
+- (id)removeObject;
+
+- (void)enumerateKeysAndObjectsUsingBlock:(void (NS_NOESCAPE ^)(id key, id obj))block;
+
+- (BOOL)isObjectCountsOverflow:(NSUInteger)limit;
+- (BOOL)isObjectCostsOverflow:(NSUInteger)limit;
 
 @end
 
@@ -37,4 +43,7 @@
     NSUInteger _cost;
     NSTimeInterval _time;
 }
+
++ (instancetype)instance;
+
 @end

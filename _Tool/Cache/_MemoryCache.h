@@ -3,13 +3,13 @@
 
 @class _MemoryCache;
 
-
 typedef void (^ MemoryCacheBlock)(_MemoryCache *cache);
 typedef void (^ MemoryCacheObjectBlock)(_MemoryCache *cache, NSString *key, id object);
 typedef void (^ MemoryCacheContainmentBlock)(BOOL containsObject);
 
 /**
- *
+ * 接口类似：NSCache
+ * 多线程下，QPS 不会高于单线程，但会降低多少要看具体情况。由于 cache 内部是用锁来保证线程安全的，所以线程数越多、访问竞争越激烈、CPU 资源就消耗越大，QPS 也就越低。在 App 开发里，一般使用时倒不会遇到这种极端情况
  */
 
 @interface _MemoryCache : NSObject <CacheObjectSubscripting>
