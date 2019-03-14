@@ -36,6 +36,6 @@
 /**
  * @brief 循环执行
  */
-- (void)times:(void (^)())block;
+- (void)times:(void (^)(void))block;
 
 @end

@@ -1,5 +1,9 @@
 # 说明
 
+* [支付宝客户端架构解析：iOS 容器化框架初探](https://juejin.im/post/5bdc19cbf265da614b117217)
+	- 其中的思想，与_Modules/Application, _Modules/Midwares, _Modules/Services, 以至于 _Foundation/Modular, _Modules/Components
+	- 类似
+
 ## 集成
 
 * [This block declaration is not a prototype.]
@@ -22,6 +26,9 @@
 
 * 依赖的框架
 	- _Foundation
+
+* 其他推荐
+	- [日志系统](https://github.com/CocoaLumberjack/CocoaLumberjack)，https://github.com/0xced/XCDLumberjackNSLogger，https://github.com/s4nchez/LogIO-CocoaLumberjack
 
 ## [_Building 集成](_Building/README.md)
 

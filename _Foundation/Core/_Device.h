@@ -2,7 +2,7 @@
 #import "_Singleton.h"
 #import "_Property.h"
 
-EXTERN_C BOOL isFirstLaunched ();
+EXTERN_C BOOL isFirstLaunched (void);
 
 #define is_first_launched isFirstLaunched()
 
