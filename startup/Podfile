@@ -17,14 +17,11 @@ target 'startup' do
 #    pod '_Tool/NoSQL', :path => '../'
     pod '_Tool/Utility', :path => '../'
     pod '_Tool/Date', :path => '../'
+    pod '_Tool/KeyValueObserving', :path => '../'
+    pod '_Tool/Chronograph', :path => '../'
     
-    pod '_Support/KeyValueObserving', :path => '../'
-    pod '_Support/Chronograph', :path => '../'
-    
-    pod '_Modular', :path => '../'
-    
-    pod '_Components/ActionSheetView', :path => '../'
-    pod '_Components/AlertView', :path => '../'
+    pod '_Components/ActionSheetView', :path => '../'                   # 底部弹出选择器
+    pod '_Components/AlertView', :path => '../'                         # 弹框
     pod '_Components/BadgeView', :path => '../'
     pod '_Components/BlankHolderView', :path => '../'
     pod '_Components/CycleScrollView', :path => '../'
