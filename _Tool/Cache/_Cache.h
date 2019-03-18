@@ -187,5 +187,5 @@ NS_ASSUME_NONNULL_END
 // ----------------------------------
 
 #define cacheInst [_Cache sharedInstance] // Specially
-#define memoryCacheInst [_MemoryCache sharedInstance]
+#define memCacheInst [_MemoryCache sharedInstance]
 #define diskCacheInst [_DiskCache sharedInstance]

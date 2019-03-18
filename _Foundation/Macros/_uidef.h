@@ -24,10 +24,14 @@
 // ----------------------------------
 #define is_iPhoneX (screen_width == 375.f && screen_height == 812.f ? YES : NO)
 
-#define navigation_bar_height           44.f
-#define navigation_status_bar_height    64.f
-#define keyboard_height                 216.f
 #define status_bar_height      (is_iPhoneX ? 44.f : 20.f)
+#define navigation_bar_height           44.f
+#define navigation_status_bar_height    (status_bar_height+navigation_bar_height)
+#define large_navigation_bar_height     96.f
+#define large_navigation_status_bar_height (status_bar_height+large_navigation_bar_height)
+
+#define keyboard_height                 216.f
+
 #define tabbar_height         (is_iPhoneX ? (49.f+34.f) : 49.f)
 #define tabbar_safe_bottom_margin         (is_iPhoneX ? 34.f : 0.f)
 #define status_bar_navigation_bar_height  (is_iPhoneX ? 88.f : 64.f)

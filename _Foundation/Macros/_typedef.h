@@ -52,14 +52,14 @@ typedef void(^ SendRequestAndResendRequestBlock)( id _Nullable sendBlock, id _Nu
  */
 #define OperationTypeKey @"key.OperationType"
 typedef enum : NSUInteger {
-    Operation_Add = 0,
-    Operation_Delete,
-    Operation_Edit,
-    Operation_Query,
+    OperationAdd = 0,
+    OperationDelete,
+    OperationEdit,
+    OperationQuery,
 } _OperationType;
 
 typedef enum {
-    HttpMethod_GET = 0,
-    HttpMethod_POST = 1,
-    HttpMethod_DELETE = 2
+    HttpMethodGet = 0,
+    HttpMethodPost = 1,
+    HttpMethodDelete = 2
 } _HttpMethodType;

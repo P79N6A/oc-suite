@@ -4,8 +4,6 @@ target 'startup' do
 
     ######################################
     # 主框架
-    #  * 外部引用
-    #    - pod 'oc-foundation', :git => 'https://github.com/fallending/oc-suite.git'
     ######################################
     
     pod '_Foundation', :path => '../' # pod '_Foundation', :git => 'https://github.com/fallending/oc-suite.git'

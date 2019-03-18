@@ -7,22 +7,22 @@
 //    dispatch_semaphore_signal(_lockSemaphore);
 
 #define LOCK \
-    pthread_mutex_lock(&_lock);
+    pthread_mutex_lock(&self->_lock);
 
 #define UNLOCK \
-    pthread_mutex_unlock(&_lock);
+    pthread_mutex_unlock(&self->_lock);
 
 #define lockable( code ) \
 { \
-    pthread_mutex_lock(&_lock); \
+    pthread_mutex_lock(&self->_lock); \
     code \
-    pthread_mutex_unlock(&_lock); \
+    pthread_mutex_unlock(&self->_lock); \
 }
 
 #define trylockable( code ) \
-if (pthread_mutex_trylock(&_lock) == 0) { \
+if (pthread_mutex_trylock(&self->_lock) == 0) { \
     code \
-    pthread_mutex_unlock(&_lock); \
+    pthread_mutex_unlock(&self->_lock); \
 }
 
 NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
@@ -200,15 +200,16 @@ NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
     
     dispatch_async(_concurrentQueue, ^{
         
-        @strongify(self);
+        @strongify(self)
 
         if (!self) {
             return;
         }
         
-        LOCK
-        MemoryCacheBlock didReceiveMemoryWarningBlock = self->_didReceiveMemoryWarningBlock;
-        UNLOCK
+        MemoryCacheBlock didReceiveMemoryWarningBlock = nil;
+        lockable(
+            didReceiveMemoryWarningBlock = self->_didReceiveMemoryWarningBlock;
+        )
         
         if (didReceiveMemoryWarningBlock)
             didReceiveMemoryWarningBlock(self);
@@ -396,7 +397,7 @@ NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
              
              if ([_lru isObjectCostsOverflow:_costLimit]) { // 总量限制
                  dispatch_async(_concurrentQueue, ^{
-                     [self trimToCost:_costLimit];
+                     [self trimToCost:self->_costLimit];
                  });
              }
              
