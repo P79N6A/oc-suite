@@ -4,7 +4,8 @@
 #import <CommonCrypto/CommonCryptor.h>
 #import <CommonCrypto/CommonDigest.h>
 #import <CommonCrypto/CommonCryptor.h>
-#import "GTMBase64.h"
+#import <GTMBase64/GTMBase64.h>
+//#import "GTMBase64.h"
 
 // ----------------------------------
 // Category source code

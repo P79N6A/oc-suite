@@ -34,14 +34,10 @@ typedef NSDictionary * (^ _NetParameterAppendBlock)(NSString *apiname);
      success:(void (^)(id data))successHandler
      failure:(void (^)(NSError *error))failureHandler;
 
-//- (void)PUT;
-
-//- (void)DELETE;
-
-// MARK: - Override
-
 - (NSDictionary *)defaultHeader;
-//- (NSDictionary *)appendParametersOnApi:(NSString *)api;
+- (NSDictionary *)appendingHeader;
+
+- (NSDictionary *)appendParametersOnApi:(NSString *)api;
 - (NSError *)checkResponseIfHaveError:(NSDictionary *)response;
 - (NSDictionary *)filteredResponse:(NSDictionary *)originResponse;
 

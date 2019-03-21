@@ -8,7 +8,7 @@ target 'startup' do
     
     pod '_Foundation', :path => '../' # pod '_Foundation', :git => 'https://github.com/fallending/oc-suite.git'
     pod '_Building', :path => '../'
-    
+  
     pod '_Tool/NetworkLit', :path => '../'
     pod '_Tool/Network/Reachability', :path => '../'
     pod '_Tool/Cache', :path => '../'
@@ -71,14 +71,11 @@ target 'startup' do
     ######################################
     
     pod 'ReactiveObjC'
-    
     pod 'Masonry'
-    
     pod 'YYModel'
-    
     pod 'SDWebImage', '~> 4.0'
-    
     pod 'AFNetworking', '~> 3.0'
+    pod 'GTMBase64'
     
     # pod 'RealReachability' # 非网络连接状态，而是网络到达状态，比如：Wi-Fi 并 能否连接到www.baidu.com
     

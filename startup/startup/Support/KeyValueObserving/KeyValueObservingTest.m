@@ -6,7 +6,7 @@
 //  Copyright © 2018 7. All rights reserved.
 //
 
-#import <_Support/KeyValueObserving.h>
+#import <_Tool/KeyValueObserving.h>
 #import <_Foundation/_Foundation.h>
 #import "KeyValueObservingTest.h"
 

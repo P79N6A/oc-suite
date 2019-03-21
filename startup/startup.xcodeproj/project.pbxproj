@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6AC7784C22427E680000F5B1 /* ImagingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC7783422427E680000F5B1 /* ImagingViewController.m */; };
+		6AC7784D22427E680000F5B1 /* ImagingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AC7783522427E680000F5B1 /* ImagingViewController.xib */; };
+		6AC7784E22427E680000F5B1 /* NetworkingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC7783A22427E680000F5B1 /* NetworkingViewController.m */; };
+		6AC7784F22427E680000F5B1 /* NetworkingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AC7783B22427E680000F5B1 /* NetworkingViewController.xib */; };
+		6AC7785022427E680000F5B1 /* ExampleRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC7783C22427E680000F5B1 /* ExampleRequest.m */; };
+		6AC7785122427E680000F5B1 /* SingletonExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC7783F22427E680000F5B1 /* SingletonExample.m */; };
+		6AC7785222427E690000F5B1 /* LoggingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC7784122427E680000F5B1 /* LoggingViewController.m */; };
+		6AC7785322427E690000F5B1 /* LoggingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AC7784322427E680000F5B1 /* LoggingViewController.xib */; };
+		6AC7785422427E690000F5B1 /* CacheViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC7784622427E680000F5B1 /* CacheViewController.m */; };
+		6AC7785522427E690000F5B1 /* ExampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AC7784822427E680000F5B1 /* ExampleViewController.xib */; };
+		6AC7785622427E690000F5B1 /* ExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC7784A22427E680000F5B1 /* ExampleViewController.m */; };
+		6AC7785A22427FC00000F5B1 /* ApiClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC7785922427FC00000F5B1 /* ApiClient.m */; };
 		862CAF1A1FF0D94E0059E3A9 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 862CAF191FF0D94E0059E3A9 /* MainViewController.xib */; };
 		862CAF861FF0F7850059E3A9 /* AttributeLabelSampleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 862CAF471FF0F7850059E3A9 /* AttributeLabelSampleVC.m */; };
 		862CAF9D1FF0F7850059E3A9 /* NSMutableAttributedString+TY.m in Sources */ = {isa = PBXBuildFile; fileRef = 862CAF701FF0F7850059E3A9 /* NSMutableAttributedString+TY.m */; };
@@ -212,6 +224,26 @@
 
 /* Begin PBXFileReference section */
 		187BC9D8B69BAE8514205CE2 /* Pods-startup.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-startup.release.xcconfig"; path = "Pods/Target Support Files/Pods-startup/Pods-startup.release.xcconfig"; sourceTree = "<group>"; };
+		6AC7783422427E680000F5B1 /* ImagingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagingViewController.m; sourceTree = "<group>"; };
+		6AC7783522427E680000F5B1 /* ImagingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImagingViewController.xib; sourceTree = "<group>"; };
+		6AC7783622427E680000F5B1 /* ImagingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagingViewController.h; sourceTree = "<group>"; };
+		6AC7783822427E680000F5B1 /* NetworkingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkingViewController.h; sourceTree = "<group>"; };
+		6AC7783922427E680000F5B1 /* ExampleRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleRequest.h; sourceTree = "<group>"; };
+		6AC7783A22427E680000F5B1 /* NetworkingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkingViewController.m; sourceTree = "<group>"; };
+		6AC7783B22427E680000F5B1 /* NetworkingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetworkingViewController.xib; sourceTree = "<group>"; };
+		6AC7783C22427E680000F5B1 /* ExampleRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleRequest.m; sourceTree = "<group>"; };
+		6AC7783E22427E680000F5B1 /* SingletonExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingletonExample.h; sourceTree = "<group>"; };
+		6AC7783F22427E680000F5B1 /* SingletonExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingletonExample.m; sourceTree = "<group>"; };
+		6AC7784122427E680000F5B1 /* LoggingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoggingViewController.m; sourceTree = "<group>"; };
+		6AC7784222427E680000F5B1 /* LoggingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoggingViewController.h; sourceTree = "<group>"; };
+		6AC7784322427E680000F5B1 /* LoggingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoggingViewController.xib; sourceTree = "<group>"; };
+		6AC7784522427E680000F5B1 /* CacheViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CacheViewController.h; sourceTree = "<group>"; };
+		6AC7784622427E680000F5B1 /* CacheViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CacheViewController.m; sourceTree = "<group>"; };
+		6AC7784822427E680000F5B1 /* ExampleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExampleViewController.xib; sourceTree = "<group>"; };
+		6AC7784922427E680000F5B1 /* ExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleViewController.h; sourceTree = "<group>"; };
+		6AC7784A22427E680000F5B1 /* ExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleViewController.m; sourceTree = "<group>"; };
+		6AC7785822427FC00000F5B1 /* ApiClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApiClient.h; sourceTree = "<group>"; };
+		6AC7785922427FC00000F5B1 /* ApiClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApiClient.m; sourceTree = "<group>"; };
 		862CAF191FF0D94E0059E3A9 /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		862CAF381FF0F61D0059E3A9 /* app.attributelabel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = app.attributelabel.xcodeproj; path = app.attributelabel/app.attributelabel.xcodeproj; sourceTree = "<group>"; };
 		862CAF461FF0F7850059E3A9 /* AttributeLabelSampleVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttributeLabelSampleVC.h; sourceTree = "<group>"; };
@@ -466,6 +498,96 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6AAB430222406BEB00953283 /* Module */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Module;
+			sourceTree = "<group>";
+		};
+		6AC7783222427E680000F5B1 /* 例子 */ = {
+			isa = PBXGroup;
+			children = (
+				6AC7783322427E680000F5B1 /* 如何显示网络图片 */,
+				6AC7783722427E680000F5B1 /* 如何数据请求与解析 */,
+				6AC7783D22427E680000F5B1 /* 如何写单例 */,
+				6AC7784022427E680000F5B1 /* 如何打日志 */,
+				6AC7784422427E680000F5B1 /* 如何使用缓存 */,
+				6AC7784722427E680000F5B1 /* 如何写页面 */,
+			);
+			path = "例子";
+			sourceTree = "<group>";
+		};
+		6AC7783322427E680000F5B1 /* 如何显示网络图片 */ = {
+			isa = PBXGroup;
+			children = (
+				6AC7783422427E680000F5B1 /* ImagingViewController.m */,
+				6AC7783522427E680000F5B1 /* ImagingViewController.xib */,
+				6AC7783622427E680000F5B1 /* ImagingViewController.h */,
+			);
+			path = "如何显示网络图片";
+			sourceTree = "<group>";
+		};
+		6AC7783722427E680000F5B1 /* 如何数据请求与解析 */ = {
+			isa = PBXGroup;
+			children = (
+				6AC7785722427F2D0000F5B1 /* 如何统一修改Header */,
+				6AC7783922427E680000F5B1 /* ExampleRequest.h */,
+				6AC7783C22427E680000F5B1 /* ExampleRequest.m */,
+				6AC7783822427E680000F5B1 /* NetworkingViewController.h */,
+				6AC7783A22427E680000F5B1 /* NetworkingViewController.m */,
+				6AC7783B22427E680000F5B1 /* NetworkingViewController.xib */,
+			);
+			path = "如何数据请求与解析";
+			sourceTree = "<group>";
+		};
+		6AC7783D22427E680000F5B1 /* 如何写单例 */ = {
+			isa = PBXGroup;
+			children = (
+				6AC7783E22427E680000F5B1 /* SingletonExample.h */,
+				6AC7783F22427E680000F5B1 /* SingletonExample.m */,
+			);
+			path = "如何写单例";
+			sourceTree = "<group>";
+		};
+		6AC7784022427E680000F5B1 /* 如何打日志 */ = {
+			isa = PBXGroup;
+			children = (
+				6AC7784122427E680000F5B1 /* LoggingViewController.m */,
+				6AC7784222427E680000F5B1 /* LoggingViewController.h */,
+				6AC7784322427E680000F5B1 /* LoggingViewController.xib */,
+			);
+			path = "如何打日志";
+			sourceTree = "<group>";
+		};
+		6AC7784422427E680000F5B1 /* 如何使用缓存 */ = {
+			isa = PBXGroup;
+			children = (
+				6AC7784522427E680000F5B1 /* CacheViewController.h */,
+				6AC7784622427E680000F5B1 /* CacheViewController.m */,
+			);
+			path = "如何使用缓存";
+			sourceTree = "<group>";
+		};
+		6AC7784722427E680000F5B1 /* 如何写页面 */ = {
+			isa = PBXGroup;
+			children = (
+				6AC7784822427E680000F5B1 /* ExampleViewController.xib */,
+				6AC7784922427E680000F5B1 /* ExampleViewController.h */,
+				6AC7784A22427E680000F5B1 /* ExampleViewController.m */,
+			);
+			path = "如何写页面";
+			sourceTree = "<group>";
+		};
+		6AC7785722427F2D0000F5B1 /* 如何统一修改Header */ = {
+			isa = PBXGroup;
+			children = (
+				6AC7785822427FC00000F5B1 /* ApiClient.h */,
+				6AC7785922427FC00000F5B1 /* ApiClient.m */,
+			);
+			path = "如何统一修改Header";
+			sourceTree = "<group>";
+		};
 		862CAF391FF0F61D0059E3A9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -876,6 +998,8 @@
 		86711C6B1FECF8E2004F2DC0 /* startup */ = {
 			isa = PBXGroup;
 			children = (
+				6AC7783222427E680000F5B1 /* 例子 */,
+				6AAB430222406BEB00953283 /* Module */,
 				866974E620F743130094C32B /* Support */,
 				863227CB20EBE8E3002F82D3 /* Tool */,
 				86711C861FECFA89004F2DC0 /* Application */,
@@ -973,7 +1097,6 @@
 				86711C651FECF8E2004F2DC0 /* Sources */,
 				86711C661FECF8E2004F2DC0 /* Frameworks */,
 				86711C671FECF8E2004F2DC0 /* Resources */,
-				F9330850C3397C07BB39CE78 /* [CP] Embed Pods Frameworks */,
 				A9D065C9288BBEDA595B6665 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -1079,8 +1202,10 @@
 				862CB0C51FF110ED0059E3A9 /* ZSSunderline.png in Resources */,
 				862CB0BE1FF110ED0059E3A9 /* ZSSsubscript@2x.png in Resources */,
 				862CAFE11FF0FCB80059E3A9 /* LabelXibViewController.xib in Resources */,
+				6AC7785322427E690000F5B1 /* LoggingViewController.xib in Resources */,
 				863F2C182092B98F005187A3 /* Default-568h@2x.png in Resources */,
 				862CB09F1FF110EC0059E3A9 /* ZSSimageDevice.png in Resources */,
+				6AC7784F22427E680000F5B1 /* NetworkingViewController.xib in Resources */,
 				86711C951FECFA89004F2DC0 /* Assets.xcassets in Resources */,
 				862CB0D01FF110ED0059E3A9 /* 120.png in Resources */,
 				862CB0D21FF110ED0059E3A9 /* 76.png in Resources */,
@@ -1117,6 +1242,7 @@
 				862CB0D51FF110ED0059E3A9 /* JSBeautifier.js in Resources */,
 				862CB0AC1FF110ED0059E3A9 /* ZSSlink@2x.png in Resources */,
 				862CB09C1FF110EC0059E3A9 /* ZSShorizontalrule@2x.png in Resources */,
+				6AC7784D22427E680000F5B1 /* ImagingViewController.xib in Resources */,
 				862CB0B91FF110ED0059E3A9 /* ZSSrightjustify.png in Resources */,
 				862CB0C71FF110ED0059E3A9 /* ZSSundo.png in Resources */,
 				862CB0B31FF110ED0059E3A9 /* ZSSpicker.png in Resources */,
@@ -1145,6 +1271,7 @@
 				862CAFDA1FF0FCB80059E3A9 /* haha.png in Resources */,
 				862CB0D31FF110ED0059E3A9 /* editor.html in Resources */,
 				862CB0A11FF110EC0059E3A9 /* ZSSindent.png in Resources */,
+				6AC7785522427E690000F5B1 /* ExampleViewController.xib in Resources */,
 				862CB0B21FF110ED0059E3A9 /* ZSSparagraph@2x.png in Resources */,
 				862CB0901FF110EC0059E3A9 /* ZSSh1@2x.png in Resources */,
 				862CB0A21FF110EC0059E3A9 /* ZSSindent@2x.png in Resources */,
@@ -1167,13 +1294,98 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-startup/Pods-startup-resources.sh",
+				"${PODS_ROOT}/UMengFeedback/UMFeedback_iOS_2.3.4/UMengFeedback_SDK/zh-Hans.lproj/UMFeedbackLocalizable.strings",
+				"${PODS_ROOT}/UMengFeedback/UMFeedback_iOS_2.3.4/UMengFeedback_SDK/Resources/bubble_min@2x.png",
+				"${PODS_ROOT}/UMengFeedback/UMFeedback_iOS_2.3.4/UMengFeedback_SDK/Resources/cancel@2x.png",
+				"${PODS_ROOT}/UMengFeedback/UMFeedback_iOS_2.3.4/UMengFeedback_SDK/Resources/microphone@2x.png",
+				"${PODS_ROOT}/UMengFeedback/UMFeedback_iOS_2.3.4/UMengFeedback_SDK/Resources/save@2x.png",
+				"${PODS_ROOT}/UMengFeedback/UMFeedback_iOS_2.3.4/UMengFeedback_SDK/Resources/ToolViewInputText@2x.png",
+				"${PODS_ROOT}/UMengFeedback/UMFeedback_iOS_2.3.4/UMengFeedback_SDK/Resources/ToolViewInputTextHL@2x.png",
+				"${PODS_ROOT}/UMengFeedback/UMFeedback_iOS_2.3.4/UMengFeedback_SDK/Resources/ToolViewInputVoice@2x.png",
+				"${PODS_ROOT}/UMengFeedback/UMFeedback_iOS_2.3.4/UMengFeedback_SDK/Resources/ToolViewInputVoiceHL@2x.png",
+				"${PODS_ROOT}/UMengFeedback/UMFeedback_iOS_2.3.4/UMengFeedback_SDK/Resources/umeng_add_photo@2x.png",
+				"${PODS_ROOT}/UMengFeedback/UMFeedback_iOS_2.3.4/UMengFeedback_SDK/Resources/umeng_fb_audio_dialog_cancel@2x.png",
+				"${PODS_ROOT}/UMengFeedback/UMFeedback_iOS_2.3.4/UMengFeedback_SDK/Resources/umeng_fb_audio_dialog_content@2x.png",
+				"${PODS_ROOT}/UMengFeedback/UMFeedback_iOS_2.3.4/UMengFeedback_SDK/Resources/umeng_fb_audio_play_01@2x.png",
+				"${PODS_ROOT}/UMengFeedback/UMFeedback_iOS_2.3.4/UMengFeedback_SDK/Resources/umeng_fb_audio_play_02@2x.png",
+				"${PODS_ROOT}/UMengFeedback/UMFeedback_iOS_2.3.4/UMengFeedback_SDK/Resources/umeng_fb_audio_play_03@2x.png",
+				"${PODS_ROOT}/UMengFeedback/UMFeedback_iOS_2.3.4/UMengFeedback_SDK/Resources/umeng_fb_audio_play_default@2x.png",
+				"${PODS_ROOT}/UMengUShare/UShareSDK/UMSocialSDK/UMSocialSDKPromptResources.bundle",
+				"${PODS_ROOT}/UMengUShare/UShareSDK/SocialLibraries/QQ/QQSDK/TencentOpenApi_IOS_Bundle.bundle",
+				"${PODS_ROOT}/UMengUShare/UShareSDK/SocialLibraries/Sina/SinaSDK/WeiboSDK.bundle",
+				"${PODS_ROOT}/../../_Components/DropDownMenu/DropDownMenu.bundle",
+				"${PODS_ROOT}/../../_Components/FiniteScrollView/ZYBannerView.bundle",
+				"${PODS_ROOT}/../../_Components/ImagePicker/TZImagePickerController.bundle",
+				"${PODS_ROOT}/../../_Components/LocalImageBrowser/Resources/Done.png",
+				"${PODS_ROOT}/../../_Components/LocalImageBrowser/Resources/Done@2x.png",
+				"${PODS_ROOT}/../../_Modules/Application/_AppRater.bundle",
+				"${PODS_ROOT}/../../_Modules/Components/QRCodeReader/Resources/ios_barber@3x.png",
+				"${PODS_ROOT}/../../_Modules/Components/QRCodeReader/Resources/ios_user@3x.png",
+				"${PODS_ROOT}/../../_Modules/Components/QRCodeReader/Resources/QRCodeBottomLeft@2x.png",
+				"${PODS_ROOT}/../../_Modules/Components/QRCodeReader/Resources/QRCodeBottomLeft@3x.png",
+				"${PODS_ROOT}/../../_Modules/Components/QRCodeReader/Resources/QRCodeBottomRight@2x.png",
+				"${PODS_ROOT}/../../_Modules/Components/QRCodeReader/Resources/QRCodeBottomRight@3x.png",
+				"${PODS_ROOT}/../../_Modules/Components/QRCodeReader/Resources/QRCodeLine@2x.png",
+				"${PODS_ROOT}/../../_Modules/Components/QRCodeReader/Resources/QRCodeLine@3x.png",
+				"${PODS_ROOT}/../../_Modules/Components/QRCodeReader/Resources/QRCodeTopLeft@2x.png",
+				"${PODS_ROOT}/../../_Modules/Components/QRCodeReader/Resources/QRCodeTopLeft@3x.png",
+				"${PODS_ROOT}/../../_Modules/Components/QRCodeReader/Resources/QRCodeTopRight@2x.png",
+				"${PODS_ROOT}/../../_Modules/Components/QRCodeReader/Resources/QRCodeTopRight@3x.png",
+				"${PODS_ROOT}/../../_Modules/Components/QRCodeReader/Resources/qrcode_dot@2x.png",
+				"${PODS_ROOT}/../../_Modules/Components/QRCodeReader/Resources/qrcode_dot@3x.png",
+				"${PODS_ROOT}/../../_Modules/Components/WebBrowser/web.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/_Modules/Map.bundle",
+				"${PODS_ROOT}/../../_Modules/Services/Vendor/GDMap3/AMap.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UMFeedbackLocalizable.strings",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/bubble_min@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/cancel@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/microphone@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/save@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ToolViewInputText@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ToolViewInputTextHL@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ToolViewInputVoice@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ToolViewInputVoiceHL@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/umeng_add_photo@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/umeng_fb_audio_dialog_cancel@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/umeng_fb_audio_dialog_content@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/umeng_fb_audio_play_01@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/umeng_fb_audio_play_02@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/umeng_fb_audio_play_03@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/umeng_fb_audio_play_default@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UMSocialSDKPromptResources.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TencentOpenApi_IOS_Bundle.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/WeiboSDK.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/DropDownMenu.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ZYBannerView.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TZImagePickerController.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Done.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Done@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/_AppRater.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ios_barber@3x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ios_user@3x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QRCodeBottomLeft@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QRCodeBottomLeft@3x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QRCodeBottomRight@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QRCodeBottomRight@3x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QRCodeLine@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QRCodeLine@3x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QRCodeTopLeft@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QRCodeTopLeft@3x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QRCodeTopRight@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QRCodeTopRight@3x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/qrcode_dot@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/qrcode_dot@3x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/web.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Map.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AMap.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-startup/Pods-startup-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-startup/Pods-startup-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CE1CFD163E91A3FA025C0A1C /* [CP] Check Pods Manifest.lock */ = {
@@ -1182,28 +1394,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-startup-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		F9330850C3397C07BB39CE78 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-startup/Pods-startup-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1231,6 +1431,7 @@
 				862CB0DA1FF110ED0059E3A9 /* CYRToken.m in Sources */,
 				862CB0E11FF110ED0059E3A9 /* ZSSBarButtonItem.m in Sources */,
 				863227D920EBE931002F82D3 /* DatabaseUsage.m in Sources */,
+				6AC7785122427E680000F5B1 /* SingletonExample.m in Sources */,
 				862CAFD31FF0FCB80059E3A9 /* TExamTextField.m in Sources */,
 				862CAF861FF0F7850059E3A9 /* AttributeLabelSampleVC.m in Sources */,
 				862CAFA51FF0F7850059E3A9 /* TYTextStorage.m in Sources */,
@@ -1255,9 +1456,15 @@
 				862CAFED1FF102390059E3A9 /* AttributeLabelSampleVCLite.m in Sources */,
 				862CB0E01FF110ED0059E3A9 /* HRColorUtil.m in Sources */,
 				862CB0D71FF110ED0059E3A9 /* CYRLayoutManager.m in Sources */,
+				6AC7785022427E680000F5B1 /* ExampleRequest.m in Sources */,
 				862CB0D91FF110ED0059E3A9 /* CYRTextView.m in Sources */,
+				6AC7785422427E690000F5B1 /* CacheViewController.m in Sources */,
 				862CAFE01FF0FCB80059E3A9 /* LabelXibViewController.m in Sources */,
+				6AC7785622427E690000F5B1 /* ExampleViewController.m in Sources */,
 				863F2CA020946637005187A3 /* AppDelegate+Usage.m in Sources */,
+				6AC7785A22427FC00000F5B1 /* ApiClient.m in Sources */,
+				6AC7784C22427E680000F5B1 /* ImagingViewController.m in Sources */,
+				6AC7785222427E690000F5B1 /* LoggingViewController.m in Sources */,
 				862CB0DC1FF110ED0059E3A9 /* HRCgUtil.m in Sources */,
 				86711C8F1FECFA89004F2DC0 /* MainViewController.m in Sources */,
 				862CAFDF1FF0FCB80059E3A9 /* ImageTextViewController.m in Sources */,
@@ -1276,6 +1483,7 @@
 				862CB0DF1FF110ED0059E3A9 /* HRColorPickerViewController.m in Sources */,
 				862CB07C1FF110EC0059E3A9 /* ZSSCustomButtonsViewController.m in Sources */,
 				862CB0E21FF110ED0059E3A9 /* ZSSFontsViewController.m in Sources */,
+				6AC7784E22427E680000F5B1 /* NetworkingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

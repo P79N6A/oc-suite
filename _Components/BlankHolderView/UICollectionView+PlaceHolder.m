@@ -6,9 +6,9 @@
 //  Copyright © 2017 alliance. All rights reserved.
 //
 
-#import "_foundation.h"
+#import "_Foundation.h"
 #import "UICollectionView+PlaceHolder.h"
-#import "UISurePlaceholderView.h"
+#import "BlankholderView.h"
 
 @implementation UICollectionView (PlaceHolder)
 
@@ -57,13 +57,13 @@
 
 - (void)makeDefaultPlaceholderView {
     self.bounds = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
-    UISurePlaceholderView *placeholderView = [[UISurePlaceholderView alloc]initWithFrame:self.bounds];
-    __weak typeof(self) weakSelf = self;
-    [placeholderView setReloadClickBlock:^{
-        if (weakSelf.reloadBlock) {
-            weakSelf.reloadBlock();
-        }
-    }];
+    BlankholderView *placeholderView = [[BlankholderView alloc]initWithFrame:self.bounds];
+//    __weak typeof(self) weakSelf = self;
+//    [placeholderView setReloadClickBlock:^{
+//        if (weakSelf.reloadBlock) {
+//            weakSelf.reloadBlock();
+//        }
+//    }];
     self.placeholderView = placeholderView;
 }
 

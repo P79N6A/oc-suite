@@ -148,7 +148,7 @@
 // MARK: -
 
 - (void)setHostname:(NSString *)hostname {
-    
+    self.host = [[_NetHost alloc] initWithHostName:hostname];
 }
 
 - (NSDictionary *)defaultHeader {
